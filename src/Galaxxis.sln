@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galaxxis.Web", "Galaxxis.Web\Galaxxis.Web.csproj", "{1C4F4DD5-8C23-477C-8B33-ADF63A0A00A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C4F4DD5-8C23-477C-8B33-ADF63A0A00A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C4F4DD5-8C23-477C-8B33-ADF63A0A00A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C4F4DD5-8C23-477C-8B33-ADF63A0A00A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C4F4DD5-8C23-477C-8B33-ADF63A0A00A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {831B4663-AD10-456D-8CB2-0EA8064E4E2C}
+	EndGlobalSection
+EndGlobal

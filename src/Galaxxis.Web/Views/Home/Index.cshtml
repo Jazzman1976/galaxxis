@@ -4,4 +4,25 @@
     ViewBag.Title = "Index";
 }
 
+@model Galaxxis.Web.Models.Home.IndexViewModel 
+
+@{ 
+    Galaxxis.Data.Models.User User = Model.User.Entity;
+}
+
 <h1>Galaxxis</h1>
+
+<table>
+    <tr>
+        <th>UserId</th>
+        <th>UserEmail</th>
+        <th>UserFirstname</th>
+        <th>UserLastname</th>
+    </tr>
+    <tr>
+        <td>@User.UserId</td>
+        <td>@User.UserEmail</td>
+        <td>@User.UserFirstname</td>
+        <td>@User.UserLastname</td>
+    </tr>
+</table>

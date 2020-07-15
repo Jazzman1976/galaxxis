@@ -6,10 +6,6 @@
 
 @model Galaxxis.Web.Models.Home.IndexViewModel 
 
-@{ 
-    Galaxxis.Data.Models.User User = Model.User.Entity;
-}
-
 <h1>Galaxxis</h1>
 
 <table>
@@ -20,9 +16,9 @@
         <th>UserLastname</th>
     </tr>
     <tr>
-        <td>@User.UserId</td>
-        <td>@User.UserEmail</td>
-        <td>@User.UserFirstname</td>
-        <td>@User.UserLastname</td>
+        <td>@Model.User.UserId</td>
+        <td>@Model.User.UserEmail</td>
+        <td>@Model.User.UserFirstname</td>
+        <td>@Model.User.UserLastname</td>
     </tr>
 </table>

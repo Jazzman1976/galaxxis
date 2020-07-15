@@ -10,13 +10,26 @@ namespace Galaxxis.Core.Data
 {
     public class UserInfo
     {
-        public User Entity { get; private set; }
-
         private static readonly GalaxxisContext _dbContext = new GalaxxisContext();
+
+        public int UserId { get; set; }
+        public string UserEmail { get; set; }
+        public string UserFirstname { get; set; }
+        public string UserLastname { get; set; }
 
         public UserInfo(int id)
         {
-            this.Entity = _dbContext.User.FirstOrDefault(user => user.UserId.Equals(id));
+            User entity = _dbContext.User.FirstOrDefault(user => user.UserId.Equals(id));
+
+            if (entity == null)
+            {
+                return;
+            }
+
+            this.UserId = entity.UserId;
+            this.UserEmail = entity.UserEmail;
+            this.UserFirstname = entity.UserFirstname;
+            this.UserLastname = entity.UserLastname;
         }
     }
 }

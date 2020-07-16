@@ -15,6 +15,8 @@ namespace Galaxxis.Data.Models
         {
         }
 
+        public virtual DbSet<Galaxy> Galaxy { get; set; }
+        public virtual DbSet<GalaxyToUniverse> GalaxyToUniverse { get; set; }
         public virtual DbSet<Universe> Universe { get; set; }
         public virtual DbSet<User> User { get; set; }
 
@@ -29,6 +31,30 @@ namespace Galaxxis.Data.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Galaxy>(entity =>
+            {
+                entity.Property(e => e.GalaxyName)
+                    .HasMaxLength(10)
+                    .IsFixedLength();
+            });
+
+            modelBuilder.Entity<GalaxyToUniverse>(entity =>
+            {
+                entity.HasKey(e => new { e.GalaxyId, e.UniverseId });
+
+                entity.HasOne(d => d.Galaxy)
+                    .WithMany(p => p.GalaxyToUniverse)
+                    .HasForeignKey(d => d.GalaxyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GalaxyToUniverse_Galaxy");
+
+                entity.HasOne(d => d.Universe)
+                    .WithMany(p => p.GalaxyToUniverse)
+                    .HasForeignKey(d => d.UniverseId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GalaxyToUniverse_Universe");
+            });
+
             modelBuilder.Entity<Universe>(entity =>
             {
                 entity.Property(e => e.UniverseName).HasMaxLength(50);

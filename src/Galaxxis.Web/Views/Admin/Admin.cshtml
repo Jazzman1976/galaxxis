@@ -1,0 +1,22 @@
+﻿
+@{ 
+    Layout = "_Layout";
+    ViewBag.Title = "Admin";
+}
+
+@model Galaxxis.Web.Models.Admin.AdminViewModel
+
+<h1>Galaxxis</h1>
+
+<h2>Admin</h2>
+
+@using (Html.BeginForm("Index", "Admin", FormMethod.Post)) {
+    <div>
+        @Html.RadioButtonFor(m => m.TickerStatus, "running", new { id = "rbStatusRunning" })
+        @Html.Label("rbStatusRunning", "running")
+        @Html.RadioButtonFor(m => m.TickerStatus, "stopped", new { id = "rbStatusStopped" })
+        @Html.Label("rbStatusStopped","stopped")
+    </div>
+
+    <input type="submit" value="Submit" />
+}

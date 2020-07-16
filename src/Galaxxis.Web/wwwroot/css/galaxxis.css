@@ -1,8 +1,11 @@
-﻿
+﻿* {
+    color: white;
+}
+
 html {
     background-color: darkblue;
 }
 
-h1 { 
+h1, h2 { 
     color: darkviolet;
 }

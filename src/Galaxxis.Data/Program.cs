@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 
 /// <summary>
 /// To update from database open Nuget Manager Console and execute:

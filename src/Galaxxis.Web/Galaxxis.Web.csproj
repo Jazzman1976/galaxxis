@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Galaxxis.Core\Galaxxis.Core.csproj" />
+    <ProjectReference Include="..\Galaxxis.Data\Galaxxis.Data.csproj" />
   </ItemGroup>
 
 </Project>

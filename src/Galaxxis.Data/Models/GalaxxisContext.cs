@@ -2,9 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-/// <summary>
-/// Created database first. https://www.entityframeworktutorial.net/efcore/create-model-for-existing-database-in-ef-core.aspx
-/// </summary>
 namespace Galaxxis.Data.Models
 {
     public partial class GalaxxisContext : DbContext
@@ -18,6 +15,7 @@ namespace Galaxxis.Data.Models
         {
         }
 
+        public virtual DbSet<Universe> Universe { get; set; }
         public virtual DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -31,6 +29,13 @@ namespace Galaxxis.Data.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Universe>(entity =>
+            {
+                entity.Property(e => e.UniverseName).HasMaxLength(50);
+
+                entity.Property(e => e.UniverseTimePerTick).HasDefaultValueSql("((10000000))");
+            });
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.Property(e => e.UserEmail)

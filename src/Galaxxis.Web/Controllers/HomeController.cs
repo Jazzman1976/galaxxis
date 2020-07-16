@@ -10,10 +10,10 @@ namespace Galaxxis.Web.Controllers
     {
         public IActionResult Index()
         {
-            Models.Home.IndexViewModel model 
-                = new Models.Home.IndexViewModel();
+            Models.Home.HomeViewModel model 
+                = new Models.Home.HomeViewModel();
 
-            return View(model);
+            return View("Home", model);
         }
     }
 }

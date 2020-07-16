@@ -1,0 +1,47 @@
+﻿
+@{ 
+    Layout = "_Layout";
+    ViewBag.Title = "Index";
+}
+
+@model Galaxxis.Web.Models.Home.HomeViewModel 
+
+<h1>Galaxxis</h1>
+
+<table style="margin-bottom: 1rem;">
+    <tr>
+        <th>UserId</th>
+        <th>UserEmail</th>
+        <th>UserFirstname</th>
+        <th>UserLastname</th>
+    </tr>
+
+    @if (Model.User != null)
+    {
+    <tr>
+        <td>@Model.User.UserId</td>
+        <td>@Model.User.UserEmail</td>
+        <td>@Model.User.UserFirstname</td>
+        <td>@Model.User.UserLastname</td>
+    </tr>
+    }
+</table>
+
+<table style="margin-bottom: 1rem;">
+    <tr>
+        <th>UniverseId</th>
+        <th>UniverseName</th>
+        <th>UniverseTimePerTick</th>
+        <th>UniverseTicks</th>
+    </tr>
+
+    @if (Model.Universe != null)
+    {
+    <tr>
+        <td>@Model.Universe.UniverseId</td>
+        <td>@Model.Universe.UniverseName</td>
+        <td>@Model.Universe.UniverseTimePerTick</td>
+        <td>@Model.Universe.UniverseTicks</td>
+    </tr>
+    }
+</table>

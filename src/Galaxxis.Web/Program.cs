@@ -15,6 +15,8 @@ namespace Galaxxis.Web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.CaptureStartupErrors(true);
+                    webBuilder.UseSetting("detailedErrors", "true");
                 });
     }
 }

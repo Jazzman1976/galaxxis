@@ -21,6 +21,7 @@ namespace Galaxxis.Data.Models
         public virtual DbSet<MoonToPlanet> MoonToPlanet { get; set; }
         public virtual DbSet<Planet> Planet { get; set; }
         public virtual DbSet<PlanetToSystem> PlanetToSystem { get; set; }
+        public virtual DbSet<PlanetToUser> PlanetToUser { get; set; }
         public virtual DbSet<System> System { get; set; }
         public virtual DbSet<SystemToGalaxy> SystemToGalaxy { get; set; }
         public virtual DbSet<Universe> Universe { get; set; }
@@ -39,9 +40,7 @@ namespace Galaxxis.Data.Models
         {
             modelBuilder.Entity<Galaxy>(entity =>
             {
-                entity.Property(e => e.GalaxyName)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                entity.Property(e => e.GalaxyName).HasMaxLength(50);
             });
 
             modelBuilder.Entity<GalaxyToUniverse>(entity =>
@@ -103,6 +102,23 @@ namespace Galaxxis.Data.Models
                     .HasForeignKey(d => d.SystemId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PlanetToSystem_System");
+            });
+
+            modelBuilder.Entity<PlanetToUser>(entity =>
+            {
+                entity.HasKey(e => new { e.PlanetId, e.UserId });
+
+                entity.HasOne(d => d.Planet)
+                    .WithMany(p => p.PlanetToUser)
+                    .HasForeignKey(d => d.PlanetId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PlanetToUser_Planet");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.PlanetToUser)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PlanetToUser_User");
             });
 
             modelBuilder.Entity<System>(entity =>

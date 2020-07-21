@@ -4,6 +4,7 @@
     ViewBag.Title = "Home";
 }
 
+
 @model Galaxxis.Web.Models.Home.HomeViewModel 
 
 <h1>Galaxxis</h1>
@@ -29,21 +30,26 @@
     }
 </table>
 
-<table style="margin-bottom: 1rem;">
-    <tr>
-        <th>UniverseId</th>
-        <th>UniverseName</th>
-        <th>UniverseTimePerTick</th>
-        <th>UniverseTicks</th>
-    </tr>
+@if(Model.User.PlanetToUser.Any())
+{
+    <table style="margin-bottom: 1rem;">
+        <tr>
+            <th>PlanetId</th>
+            <th>PlanetName</th>
+            <th>PlanetFields</th>
+            <th>SystemName</th>
+            <th>GalaxyName</th>
+        </tr>
 
-    @if (Model.Universe != null)
-    {
-    <tr>
-        <td>@Model.Universe.UniverseId</td>
-        <td>@Model.Universe.UniverseName</td>
-        <td>@Model.Universe.UniverseTimePerTick</td>
-        <td>@Model.Universe.UniverseTicks</td>
-    </tr>
-    }
-</table>
+        @foreach(var p2u in Model.User.PlanetToUser)
+        {
+            <tr>
+                <td>@p2u.Planet.PlanetId</td>
+                <td>@p2u.Planet.PlanetName</td>
+                <td>@p2u.Planet.PlanetFields</td>
+                <td>@p2u.Planet.PlanetToSystem.First().System.SystemName</td>
+                <td>@p2u.Planet.PlanetToSystem.First().System.SystemToGalaxy.First().Galaxy.GalaxyName</td>
+            </tr>
+        }
+    </table>
+}

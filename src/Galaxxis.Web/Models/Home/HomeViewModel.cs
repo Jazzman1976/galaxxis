@@ -1,19 +1,34 @@
-﻿using Galaxxis.Data.Models;
+﻿using Galaxxis.Core.Business;
+using Galaxxis.Core.Business.Provider;
+
+using Galaxxis.Data.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Galaxxis.Web.Models.Home
 {
     public class HomeViewModel
     {
-        private GalaxxisContext _context = new GalaxxisContext();
+        #region Properties ------------------------------------------------------------------------
 
         public User User { get; private set; }
-        public Universe Universe { get; private set; }
+
+        #endregion
+
+
+        #region Constructors ----------------------------------------------------------------------
 
         public HomeViewModel()
         {
-            this.User = _context.User.FirstOrDefault(user => user.UserId.Equals(1));
-            this.Universe = _context.Universe.FirstOrDefault(univ => univ.UniverseId.Equals(1));
+            // create helper objects
+            UserProvider userProvider = new UserProvider();
+
+            // get current user
+            // for now: user with id 1
+            // TODO: Login and use Login User
+            this.User = userProvider.GetUser(1);
         }
+
+        #endregion
     }
 }

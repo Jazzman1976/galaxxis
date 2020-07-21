@@ -9,6 +9,7 @@ namespace Galaxxis.Data.Models
         {
             MoonToPlanet = new HashSet<MoonToPlanet>();
             PlanetToSystem = new HashSet<PlanetToSystem>();
+            PlanetToUser = new HashSet<PlanetToUser>();
         }
 
         public int PlanetId { get; set; }
@@ -17,5 +18,6 @@ namespace Galaxxis.Data.Models
 
         public virtual ICollection<MoonToPlanet> MoonToPlanet { get; set; }
         public virtual ICollection<PlanetToSystem> PlanetToSystem { get; set; }
+        public virtual ICollection<PlanetToUser> PlanetToUser { get; set; }
     }
 }

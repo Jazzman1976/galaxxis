@@ -30,25 +30,46 @@
     }
 </table>
 
-@if(Model.User.PlanetToUser.Any())
+@if(Model.User.Planet.Any())
 {
     <table style="margin-bottom: 1rem;">
         <tr>
             <th>PlanetId</th>
             <th>PlanetName</th>
-            <th>PlanetFields</th>
+            <th>PlanetFields</th>            
             <th>SystemName</th>
             <th>GalaxyName</th>
+            <th>Moons</th>
         </tr>
 
-        @foreach(var p2u in Model.User.PlanetToUser)
+        @foreach(var planet in Model.User.Planet)
         {
             <tr>
-                <td>@p2u.Planet.PlanetId</td>
-                <td>@p2u.Planet.PlanetName</td>
-                <td>@p2u.Planet.PlanetFields</td>
-                <td>@p2u.Planet.PlanetToSystem.First().System.SystemName</td>
-                <td>@p2u.Planet.PlanetToSystem.First().System.SystemToGalaxy.First().Galaxy.GalaxyName</td>
+                <td>@planet.PlanetId</td>
+                <td>@planet.PlanetName</td>
+                <td>@planet.PlanetFields</td>
+                <td>@planet.PlanetSystem?.SystemName</td>
+                <td>@planet.PlanetSystem?.SystemGalaxy?.GalaxyName</td>
+                <td>
+                    @if (planet.Moon.Any())
+                    {
+                    <table>
+                        <tr>
+                            <th>MoonId</th>
+                            <th>MoonName</th>
+                            <th>MoonFields</th>
+                        </tr>
+                        @foreach(var moon in planet.Moon)
+                        {
+                            <tr>
+                                <td>@moon.MoonId</td>
+                                <td>@moon.MoonName</td>
+                                <td>@moon.MoonFields</td>
+                            </tr>
+                        }
+                    </table>
+                    }
+                </td>
             </tr>
         }
     </table>

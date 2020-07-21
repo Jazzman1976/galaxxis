@@ -7,14 +7,14 @@ namespace Galaxxis.Data.Models
     {
         public Galaxy()
         {
-            GalaxyToUniverse = new HashSet<GalaxyToUniverse>();
-            SystemToGalaxy = new HashSet<SystemToGalaxy>();
+            System = new HashSet<System>();
         }
 
         public int GalaxyId { get; set; }
         public string GalaxyName { get; set; }
+        public int GalaxyUniverseId { get; set; }
 
-        public virtual ICollection<GalaxyToUniverse> GalaxyToUniverse { get; set; }
-        public virtual ICollection<SystemToGalaxy> SystemToGalaxy { get; set; }
+        public virtual Universe GalaxyUniverse { get; set; }
+        public virtual ICollection<System> System { get; set; }
     }
 }

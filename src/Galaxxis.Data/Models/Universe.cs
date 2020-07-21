@@ -7,7 +7,7 @@ namespace Galaxxis.Data.Models
     {
         public Universe()
         {
-            GalaxyToUniverse = new HashSet<GalaxyToUniverse>();
+            Galaxy = new HashSet<Galaxy>();
         }
 
         public int UniverseId { get; set; }
@@ -15,6 +15,6 @@ namespace Galaxxis.Data.Models
         public long UniverseTimePerTick { get; set; }
         public long UniverseTicks { get; set; }
 
-        public virtual ICollection<GalaxyToUniverse> GalaxyToUniverse { get; set; }
+        public virtual ICollection<Galaxy> Galaxy { get; set; }
     }
 }

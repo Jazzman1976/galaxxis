@@ -7,17 +7,17 @@ namespace Galaxxis.Data.Models
     {
         public Planet()
         {
-            MoonToPlanet = new HashSet<MoonToPlanet>();
-            PlanetToSystem = new HashSet<PlanetToSystem>();
-            PlanetToUser = new HashSet<PlanetToUser>();
+            Moon = new HashSet<Moon>();
         }
 
         public int PlanetId { get; set; }
         public string PlanetName { get; set; }
         public int PlanetFields { get; set; }
+        public int PlanetSystemId { get; set; }
+        public int PlanetUserId { get; set; }
 
-        public virtual ICollection<MoonToPlanet> MoonToPlanet { get; set; }
-        public virtual ICollection<PlanetToSystem> PlanetToSystem { get; set; }
-        public virtual ICollection<PlanetToUser> PlanetToUser { get; set; }
+        public virtual System PlanetSystem { get; set; }
+        public virtual User PlanetUser { get; set; }
+        public virtual ICollection<Moon> Moon { get; set; }
     }
 }

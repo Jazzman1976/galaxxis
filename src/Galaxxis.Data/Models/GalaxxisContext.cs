@@ -16,14 +16,9 @@ namespace Galaxxis.Data.Models
         }
 
         public virtual DbSet<Galaxy> Galaxy { get; set; }
-        public virtual DbSet<GalaxyToUniverse> GalaxyToUniverse { get; set; }
         public virtual DbSet<Moon> Moon { get; set; }
-        public virtual DbSet<MoonToPlanet> MoonToPlanet { get; set; }
         public virtual DbSet<Planet> Planet { get; set; }
-        public virtual DbSet<PlanetToSystem> PlanetToSystem { get; set; }
-        public virtual DbSet<PlanetToUser> PlanetToUser { get; set; }
         public virtual DbSet<System> System { get; set; }
-        public virtual DbSet<SystemToGalaxy> SystemToGalaxy { get; set; }
         public virtual DbSet<Universe> Universe { get; set; }
         public virtual DbSet<User> User { get; set; }
 
@@ -41,108 +36,55 @@ namespace Galaxxis.Data.Models
             modelBuilder.Entity<Galaxy>(entity =>
             {
                 entity.Property(e => e.GalaxyName).HasMaxLength(50);
-            });
 
-            modelBuilder.Entity<GalaxyToUniverse>(entity =>
-            {
-                entity.HasKey(e => new { e.GalaxyId, e.UniverseId });
-
-                entity.HasOne(d => d.Galaxy)
-                    .WithMany(p => p.GalaxyToUniverse)
-                    .HasForeignKey(d => d.GalaxyId)
+                entity.HasOne(d => d.GalaxyUniverse)
+                    .WithMany(p => p.Galaxy)
+                    .HasForeignKey(d => d.GalaxyUniverseId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_GalaxyToUniverse_Galaxy");
-
-                entity.HasOne(d => d.Universe)
-                    .WithMany(p => p.GalaxyToUniverse)
-                    .HasForeignKey(d => d.UniverseId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_GalaxyToUniverse_Universe");
+                    .HasConstraintName("FK_Galaxy_Universe");
             });
 
             modelBuilder.Entity<Moon>(entity =>
             {
+                entity.Property(e => e.MoonFields).HasDefaultValueSql("((20))");
+
                 entity.Property(e => e.MoonName).HasMaxLength(50);
-            });
 
-            modelBuilder.Entity<MoonToPlanet>(entity =>
-            {
-                entity.HasKey(e => new { e.MoonId, e.PlanetId });
-
-                entity.HasOne(d => d.Moon)
-                    .WithMany(p => p.MoonToPlanet)
-                    .HasForeignKey(d => d.MoonId)
+                entity.HasOne(d => d.MoonPlanet)
+                    .WithMany(p => p.Moon)
+                    .HasForeignKey(d => d.MoonPlanetId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MoonToPlanet_Moon");
-
-                entity.HasOne(d => d.Planet)
-                    .WithMany(p => p.MoonToPlanet)
-                    .HasForeignKey(d => d.PlanetId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MoonToPlanet_Planet");
+                    .HasConstraintName("FK_Moon_Planet");
             });
 
             modelBuilder.Entity<Planet>(entity =>
             {
+                entity.Property(e => e.PlanetFields).HasDefaultValueSql("((150))");
+
                 entity.Property(e => e.PlanetName).HasMaxLength(50);
-            });
 
-            modelBuilder.Entity<PlanetToSystem>(entity =>
-            {
-                entity.HasKey(e => new { e.PlanetId, e.SystemId });
-
-                entity.HasOne(d => d.Planet)
-                    .WithMany(p => p.PlanetToSystem)
-                    .HasForeignKey(d => d.PlanetId)
+                entity.HasOne(d => d.PlanetSystem)
+                    .WithMany(p => p.Planet)
+                    .HasForeignKey(d => d.PlanetSystemId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PlanetToSystem_Planet");
+                    .HasConstraintName("FK_Planet_System");
 
-                entity.HasOne(d => d.System)
-                    .WithMany(p => p.PlanetToSystem)
-                    .HasForeignKey(d => d.SystemId)
+                entity.HasOne(d => d.PlanetUser)
+                    .WithMany(p => p.Planet)
+                    .HasForeignKey(d => d.PlanetUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PlanetToSystem_System");
-            });
-
-            modelBuilder.Entity<PlanetToUser>(entity =>
-            {
-                entity.HasKey(e => new { e.PlanetId, e.UserId });
-
-                entity.HasOne(d => d.Planet)
-                    .WithMany(p => p.PlanetToUser)
-                    .HasForeignKey(d => d.PlanetId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PlanetToUser_Planet");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PlanetToUser)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PlanetToUser_User");
+                    .HasConstraintName("FK_Planet_User");
             });
 
             modelBuilder.Entity<System>(entity =>
             {
-                entity.Property(e => e.SystemName)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
-            });
+                entity.Property(e => e.SystemName).HasMaxLength(50);
 
-            modelBuilder.Entity<SystemToGalaxy>(entity =>
-            {
-                entity.HasKey(e => new { e.SystemId, e.GalaxyId });
-
-                entity.HasOne(d => d.Galaxy)
-                    .WithMany(p => p.SystemToGalaxy)
-                    .HasForeignKey(d => d.GalaxyId)
+                entity.HasOne(d => d.SystemGalaxy)
+                    .WithMany(p => p.System)
+                    .HasForeignKey(d => d.SystemGalaxyId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SystemToGalaxy_Galaxy");
-
-                entity.HasOne(d => d.System)
-                    .WithMany(p => p.SystemToGalaxy)
-                    .HasForeignKey(d => d.SystemId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SystemToGalaxy_System");
+                    .HasConstraintName("FK_System_Galaxy");
             });
 
             modelBuilder.Entity<Universe>(entity =>

@@ -7,7 +7,7 @@ namespace Galaxxis.Data.Models
     {
         public User()
         {
-            PlanetToUser = new HashSet<PlanetToUser>();
+            Planet = new HashSet<Planet>();
         }
 
         public int UserId { get; set; }
@@ -15,6 +15,6 @@ namespace Galaxxis.Data.Models
         public string UserFirstname { get; set; }
         public string UserLastname { get; set; }
 
-        public virtual ICollection<PlanetToUser> PlanetToUser { get; set; }
+        public virtual ICollection<Planet> Planet { get; set; }
     }
 }

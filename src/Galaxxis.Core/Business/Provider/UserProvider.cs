@@ -13,16 +13,20 @@ namespace Galaxxis.Core.Business.Provider
                 return context.User
 
                     // get planets
-                    .Include(user => user.PlanetToUser)
-                    .ThenInclude(p2u => p2u.Planet)
+                    .Include(user => user.Planet)
 
-                    // get systems of planets
-                    .ThenInclude(planet => planet.PlanetToSystem)
-                    .ThenInclude(p2s => p2s.System)
+                    // get moons
+                    .ThenInclude(planet => planet.Moon)
 
-                    // get galaxies of systems
-                    .ThenInclude(system => system.SystemToGalaxy)
-                    .ThenInclude(s2g => s2g.Galaxy)
+                    // get system
+                    .Include(user => user.Planet)
+                    .ThenInclude(planet => planet.PlanetSystem)
+                    
+                    // get galaxy
+                    .ThenInclude(system => system.SystemGalaxy)
+
+                    // get universe
+                    .ThenInclude(galaxy => galaxy.GalaxyUniverse)
 
                     // return user with data
                     .FirstOrDefault(user => user.UserId.Equals(id));

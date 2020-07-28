@@ -1,12 +1,27 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html class="gx-html">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/css/galaxxis.css" />
 </head>
 <body>
+
+<header class="gx-header">
+    <div class="gx-header__right" style="float:right;">
+        @if(User.Identity.IsAuthenticated)
+        {
+            <a class="gx-header__link" href="/account/logout">Logout</a>
+            <a class="gx-header__link" href="/account/logout">Logout</a>
+        }
+        else
+        {
+            <a class="gx-header__link" href="/account/loin">Login</a>
+        }
+    </div>
+    <div style="clear:both;"></div>
+</header>
     
 @RenderBody()
     

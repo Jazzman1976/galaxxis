@@ -1,9 +1,25 @@
-﻿* {
+﻿
+.gx-html {
+    background-color: darkblue;
     color: white;
 }
 
-html {
-    background-color: darkblue;
+.gx-header {
+    border-bottom: 1px solid black;
+    background-color: darkviolet;
+    color: white;
+    padding: 0.5rem 2rem;
+}
+.gx-header::after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+.gx-header__right {
+    float: right;
+}
+.gx-header__link {
+    padding: 0 0.25rem;
 }
 
 h1, h2 { 

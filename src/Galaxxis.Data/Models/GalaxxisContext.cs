@@ -96,6 +96,10 @@ namespace Galaxxis.Data.Models
 
             modelBuilder.Entity<User>(entity =>
             {
+                entity.HasIndex(e => e.UserId)
+                    .HasName("UK_UserEmail")
+                    .IsUnique();
+
                 entity.Property(e => e.UserEmail)
                     .IsRequired()
                     .HasMaxLength(50);

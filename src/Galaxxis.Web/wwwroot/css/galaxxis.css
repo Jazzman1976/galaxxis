@@ -15,13 +15,18 @@
     display: table;
     clear: both;
 }
+.gx-header__left {
+    float: left;
+}
 .gx-header__right {
     float: right;
 }
+.gx-header__text,
 .gx-header__link {
     padding: 0 0.25rem;
+    color: white;
 }
 
-h1, h2 { 
+.gx-h1, .gx-h2 { 
     color: darkviolet;
 }

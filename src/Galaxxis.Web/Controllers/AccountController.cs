@@ -19,14 +19,32 @@ namespace Galaxxis.Web.Controllers
             this.SignInMgr = signInManager;
         }
 
-        public IActionResult Login()
+        public async Task<IActionResult> Login(string returnUrl = null)
         {
-            return new EmptyResult();
+            Microsoft.AspNetCore.Identity.SignInResult result 
+                = await SignInMgr.PasswordSignInAsync("Administrator", "***REMOVED***", true, false);
+            if(result.Succeeded)
+            {
+                if (string.IsNullOrWhiteSpace(returnUrl) || !Url.IsLocalUrl(returnUrl))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return Redirect(returnUrl);
+                }
+            }
+            else
+            {
+                ViewBag.Message = "Login failed: " + result.ToString();
+            }
+            return View();
         }
 
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            return new EmptyResult();
+            await SignInMgr.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> AddAdmin()

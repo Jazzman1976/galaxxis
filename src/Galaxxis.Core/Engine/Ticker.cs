@@ -1,4 +1,5 @@
 ﻿
+using Galaxxis.Core.Business;
 using Galaxxis.Core.Extensions;
 using Galaxxis.Data.Models;
 using System;
@@ -32,7 +33,7 @@ namespace Galaxxis.Core.Engine
                     _instance = new Ticker();
 
                     // init instance
-                    GalaxxisContext context = new GalaxxisContext();
+                    GalaxxisContext context = Context.Instance.Database; //new GalaxxisContext();
                     long timePerTick = context.Universe.First().UniverseTimePerTick;
                     _instance._timer = new Timer(timePerTick);
                     _instance._timer.Elapsed += OnTimedEvent;
@@ -79,7 +80,7 @@ namespace Galaxxis.Core.Engine
             Instance.Stop();
 
             // get context
-            GalaxxisContext context = new GalaxxisContext();
+            GalaxxisContext context = Context.Instance.Database; //new GalaxxisContext();
 
             // TODO:
             // handle all events that occur on this tick

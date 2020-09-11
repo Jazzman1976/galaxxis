@@ -16,36 +16,39 @@ namespace Galaxxis.Core.Business.Provider
         /// <exception cref="UserNotFoundException">If the user is not found by id.</exception>
         public User GetUser(int id)
         {
-            using (GalaxxisContext context = new GalaxxisContext())
+            //using (GalaxxisContext context = new GalaxxisContext())
+            //{
+
+            GalaxxisContext context = Context.Instance.Database;
+
+            User user = context.User
+
+                // get planets
+                .Include(user => user.Planet)
+
+                // get moons
+                .ThenInclude(planet => planet.Moon)
+
+                // get system
+                .Include(user => user.Planet)
+                .ThenInclude(planet => planet.PlanetSystem)
+
+                // get galaxy
+                .ThenInclude(system => system.SystemGalaxy)
+
+                // get universe
+                .ThenInclude(galaxy => galaxy.GalaxyUniverse)
+
+                // return user with data
+                .FirstOrDefault(user => user.UserId.Equals(id));
+
+            if (user == null)
             {
-                User user = context.User
-
-                    // get planets
-                    .Include(user => user.Planet)
-
-                    // get moons
-                    .ThenInclude(planet => planet.Moon)
-
-                    // get system
-                    .Include(user => user.Planet)
-                    .ThenInclude(planet => planet.PlanetSystem)
-                    
-                    // get galaxy
-                    .ThenInclude(system => system.SystemGalaxy)
-
-                    // get universe
-                    .ThenInclude(galaxy => galaxy.GalaxyUniverse)
-
-                    // return user with data
-                    .FirstOrDefault(user => user.UserId.Equals(id));
-
-                if (user == null)
-                {
-                    throw new UserNotFoundException();
-                }
-
-                return user;
+                throw new UserNotFoundException();
             }
+
+            return user;
+            //}
         }
 
         /// <summary>
@@ -56,16 +59,19 @@ namespace Galaxxis.Core.Business.Provider
         /// <exception cref="UserNotFoundException">If the user is not found by email.</exception>
         public User GetUser(string email)
         {
-            using (GalaxxisContext context = new GalaxxisContext())
-            {
-                User user = context.User.FirstOrDefault(u => u.UserEmail.Equals(email));
-                if (user == null)
-                {
-                    throw new UserNotFoundException();
-                }
+            //using (GalaxxisContext context = new GalaxxisContext())
+            //{
 
-                return GetUser(user.UserId);
+            GalaxxisContext context = Context.Instance.Database;
+
+            User user = context.User.FirstOrDefault(u => u.UserEmail.Equals(email));
+            if (user == null)
+            {
+                throw new UserNotFoundException();
             }
+
+            return GetUser(user.UserId);
+            //}
         }
     }
 }

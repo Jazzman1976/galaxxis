@@ -59,9 +59,23 @@ namespace Galaxxis.Data.Models
 
             modelBuilder.Entity<Planet>(entity =>
             {
+                entity.Property(e => e.PlanetAntimatter).HasDefaultValueSql("((175))");
+
+                entity.Property(e => e.PlanetCrystals).HasDefaultValueSql("((175))");
+
+                entity.Property(e => e.PlanetElementium).HasDefaultValueSql("((75))");
+
+                entity.Property(e => e.PlanetEnergy).HasDefaultValueSql("((200))");
+
                 entity.Property(e => e.PlanetFields).HasDefaultValueSql("((150))");
 
+                entity.Property(e => e.PlanetMana).HasDefaultValueSql("((175))");
+
                 entity.Property(e => e.PlanetName).HasMaxLength(50);
+
+                entity.Property(e => e.PlanetOre).HasDefaultValueSql("((200))");
+
+                entity.Property(e => e.PlanetTools).HasDefaultValueSql("((200))");
 
                 entity.HasOne(d => d.PlanetSystem)
                     .WithMany(p => p.Planet)

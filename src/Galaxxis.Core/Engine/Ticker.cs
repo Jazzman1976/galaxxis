@@ -1,7 +1,9 @@
 ﻿
+using Galaxxis.Core.Extensions;
 using Galaxxis.Data.Models;
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Timers;
 
 namespace Galaxxis.Core.Engine
@@ -14,7 +16,7 @@ namespace Galaxxis.Core.Engine
         private static Ticker _instance = null;
 
         private Timer _timer;
-        public string Status;
+        public string Status { get; set; }
 
         #endregion
 
@@ -76,7 +78,16 @@ namespace Galaxxis.Core.Engine
             // stop timer until changes beeing progressed
             Instance.Stop();
 
+            // get context
             GalaxxisContext context = new GalaxxisContext();
+
+            // TODO:
+            // handle all events that occur on this tick
+            // calculate everything, write results to context
+            foreach (Planet planet in context.Planet)
+            {
+                planet.AddTickRessources();
+            }
 
             // save usiverse tick +1
             context.Universe.First().UniverseTicks++;

@@ -6,6 +6,9 @@
 
 @model Galaxxis.Web.Models.Home.HomeViewModel 
 
+<div>Game Ticks: @Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks</div>
+<div style="margin-bottom: 1rem;">Time between Ticks: @Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick</div>
+
 <table style="margin-bottom: 1rem;">
     <tr>
         <th>UserId</th>
@@ -27,6 +30,8 @@
 
 @if(Model.User.Planet.Any())
 {
+    Galaxxis.Data.Models.Planet thePlanet = Model.User.Planet.First();
+
     <table style="margin-bottom: 1rem;">
         <tr>
             <th>PlanetId</th>
@@ -67,5 +72,26 @@
                 </td>
             </tr>
         }
+    </table>
+
+    <table style="margin-bottom: 1rem;">
+        <tr>
+            <th>Ore</th>
+            <th>Energy</th>            
+            <th>Tools</th>
+            <th>Mana</th>
+            <th>Crystals</th>
+            <th>Antimatter</th>
+            <th>Elementium</th>
+        </tr>
+        <tr>
+            <td>@thePlanet.PlanetOre</td>
+            <td>@thePlanet.PlanetEnergy</td>
+            <td>@thePlanet.PlanetTools</td>
+            <td>@thePlanet.PlanetMana</td>
+            <td>@thePlanet.PlanetCrystals</td>
+            <td>@thePlanet.PlanetAntimatter</td>
+            <td>@thePlanet.PlanetElementium</td>
+        </tr>
     </table>
 }

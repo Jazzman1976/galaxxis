@@ -1,6 +1,6 @@
 ﻿using Galaxxis.Core.Business;
 using Galaxxis.Core.Business.Provider;
-
+using Galaxxis.Core.Engine;
 using Galaxxis.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,7 @@ namespace Galaxxis.Web.Models.Home
         #region Properties ------------------------------------------------------------------------
 
         public User User { get; private set; }
+        public Ticker Ticker { get; private set; }
 
         #endregion
 
@@ -27,6 +28,8 @@ namespace Galaxxis.Web.Models.Home
             // for now: user with id 1
             // TODO: Login and use Login User
             this.User = userProvider.GetUser(1);
+
+            this.Ticker = Ticker.Instance;
         }
 
         #endregion

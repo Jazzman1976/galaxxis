@@ -1,91 +1,141 @@
 ﻿using Galaxxis.Core.Engine;
 using Galaxxis.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Galaxxis.Core.Extensions
 {
     public static class PlanetExtensions
     {
-        internal static void AddTickRessources(this Planet planet)
+        internal static void UpdateRessources(this Planet planet)
         {
-            // base income per tick
-            planet.PlanetEnergy += Calculations.GetValuePerTick(50);
-            planet.PlanetOre += Calculations.GetValuePerTick(50);
-            planet.PlanetTools += Calculations.GetValuePerTick(50);
-            planet.PlanetAntimatter += Calculations.GetValuePerTick(30);
-            planet.PlanetCrystals += Calculations.GetValuePerTick(30);
-            planet.PlanetMana += Calculations.GetValuePerTick(30);
-            planet.PlanetElementium += Calculations.GetValuePerTick(10);
+            // ticks gone since last update
+            long ticksGone 
+                = planet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks 
+                - planet.PlanetDataTick;
 
-            // energy income per level
+            // init growthrates
+            GrowthRate
+                growthRateEnergy = new GrowthRate(200, 1, planet.PlanetPowerSupply, 50),
+                growthRateOre = new GrowthRate(200, 1, planet.PlanetOreMine, 50),
+                growthRateTools = new GrowthRate(200, 1, planet.PlanetFactory, 50),
+                growthRateAntimatter = new GrowthRate(175, 1, planet.PlanetNeutronAccelerator, 30),
+                growthRateCrystals = new GrowthRate(175, 1, planet.PlanetCrystalMine, 30),
+                growthRateMana = new GrowthRate(175, 1, planet.PlanetMageAcademy, 30),
+                growthRateElementium = new GrowthRate(75, 1, planet.PlanetElementiumSynthesizer, 10);
+
+            // add base income regardless of level or crafting ressources on stock
+            planet.PlanetEnergy += growthRateEnergy.GetBaseIncomeForTicks(ticksGone);
+            planet.PlanetOre += growthRateOre.GetBaseIncomeForTicks(ticksGone);
+            planet.PlanetTools += growthRateTools.GetBaseIncomeForTicks(ticksGone);
+            planet.PlanetAntimatter += growthRateAntimatter.GetBaseIncomeForTicks(ticksGone);
+            planet.PlanetCrystals += growthRateCrystals.GetBaseIncomeForTicks(ticksGone);
+            planet.PlanetMana += growthRateMana.GetBaseIncomeForTicks(ticksGone);
+            planet.PlanetElementium += growthRateElementium.GetBaseIncomeForTicks(ticksGone);
+
+            // add energy income
             {
-                double costsEnergy = Calculations.GetGrownValuePerTick(0, 2, planet.PlanetPowerSupply);
-                double costsMana = Calculations.GetGrownValuePerTick(5, 2, planet.PlanetPowerSupply);
-                double costsAntimatter = Calculations.GetGrownValuePerTick(5, 2, planet.PlanetPowerSupply);
-                double costsElementium = Calculations.GetGrownValuePerTick(5, 2, planet.PlanetPowerSupply);
-                bool hasEnergy = planet.PlanetEnergy - costsEnergy > 0;
-                bool hasMana = planet.PlanetMana - costsMana > 0;
-                bool hasAntimatter = planet.PlanetAntimatter - costsAntimatter > 0;
-                bool hasElementium = planet.PlanetElementium - costsElementium > 0;
-                if (hasEnergy && hasMana && hasAntimatter && hasElementium)
-                {
-                    // reduce production costs
-                    planet.PlanetEnergy -= costsEnergy;
-                    planet.PlanetMana -= costsMana;
-                    planet.PlanetAntimatter -= costsAntimatter;
-                    planet.PlanetElementium -= costsElementium;
+                GrowthRate
+                    consumptionEnergy = new GrowthRate(0, 2, planet.PlanetPowerSupply),
+                    consumptionMana = new GrowthRate(5, 2, planet.PlanetPowerSupply),
+                    consumptionAntimatter = new GrowthRate(5, 2, planet.PlanetPowerSupply),
+                    consumptionElementium = new GrowthRate(5, 2, planet.PlanetPowerSupply);
 
-                    // add income
-                    planet.PlanetEnergy += Calculations.GetGrownValuePerTick(200, 1, planet.PlanetPowerSupply);
+                double
+                    costsEnergy = consumptionEnergy.GetValuePerTick(),
+                    costsMana = consumptionMana.GetValuePerTick(),
+                    costsAntimatter = consumptionAntimatter.GetValuePerTick(),
+                    costsElementium = consumptionElementium.GetValuePerTick();
+
+                // add income as long as consumption costs could be paid for all ticks gone
+                for (long tickstart = ticksGone; tickstart > 0; tickstart--)
+                {                    
+                    bool hasEnergy = planet.PlanetEnergy - costsEnergy > 0;
+                    bool hasMana = planet.PlanetMana - costsMana > 0;
+                    bool hasAntimatter = planet.PlanetAntimatter - costsAntimatter > 0;
+                    bool hasElementium = planet.PlanetElementium - costsElementium > 0;
+
+                    if (hasEnergy && hasMana && hasAntimatter && hasElementium)
+                    {
+                        // reduce production costs
+                        planet.PlanetEnergy -= costsEnergy;
+                        planet.PlanetMana -= costsMana;
+                        planet.PlanetAntimatter -= costsAntimatter;
+                        planet.PlanetElementium -= costsElementium;
+
+                        // add income
+                        planet.PlanetEnergy += growthRateEnergy.GetValuePerTick();
+                    }
                 }
             }
 
-            // ore income per level
+            // add ore income
             {
-                double costsEnergy = Calculations.GetGrownValuePerTick(5, 2, planet.PlanetOreMine);
-                double costsMana = Calculations.GetGrownValuePerTick(5, 2, planet.PlanetOreMine);
-                double costsAntimatter = Calculations.GetGrownValuePerTick(0, 2, planet.PlanetOreMine);
-                double costsElementium = Calculations.GetGrownValuePerTick(5, 2, planet.PlanetOreMine);
-                bool hasEnergy = planet.PlanetEnergy - costsEnergy > 0;
-                bool hasMana = planet.PlanetMana - costsMana > 0;
-                bool hasAntimatter = planet.PlanetAntimatter - costsAntimatter > 0;
-                bool hasElementium = planet.PlanetElementium - costsElementium > 0;
-                if (hasEnergy && hasMana && hasAntimatter && hasElementium)
-                {
-                    // reduce production costs
-                    planet.PlanetEnergy -= costsEnergy;
-                    planet.PlanetMana -= costsMana;
-                    planet.PlanetAntimatter -= costsAntimatter;
-                    planet.PlanetElementium -= costsElementium;
+                GrowthRate
+                    consumptionEnergy = new GrowthRate(5, 2, planet.PlanetOreMine),
+                    consumptionMana = new GrowthRate(5, 2, planet.PlanetOreMine),
+                    consumptionAntimatter = new GrowthRate(0, 2, planet.PlanetOreMine),
+                    consumptionElementium = new GrowthRate(5, 2, planet.PlanetOreMine);
 
-                    // add income
-                    planet.PlanetOre += Calculations.GetGrownValuePerTick(200, 1, planet.PlanetOreMine);
+                double
+                    costsEnergy = consumptionEnergy.GetValuePerTick(),
+                    costsMana = consumptionMana.GetValuePerTick(),
+                    costsAntimatter = consumptionAntimatter.GetValuePerTick(),
+                    costsElementium = consumptionElementium.GetValuePerTick();
+
+                // add income as long as consumption costs could be paid for all ticks gone
+                for (long tickstart = ticksGone; tickstart > 0; tickstart--)
+                {
+                    bool hasEnergy = planet.PlanetEnergy - costsEnergy > 0;
+                    bool hasMana = planet.PlanetMana - costsMana > 0;
+                    bool hasAntimatter = planet.PlanetAntimatter - costsAntimatter > 0;
+                    bool hasElementium = planet.PlanetElementium - costsElementium > 0;
+
+                    if (hasEnergy && hasMana && hasAntimatter && hasElementium)
+                    {
+                        // reduce production costs
+                        planet.PlanetEnergy -= costsEnergy;
+                        planet.PlanetMana -= costsMana;
+                        planet.PlanetAntimatter -= costsAntimatter;
+                        planet.PlanetElementium -= costsElementium;
+
+                        // add income
+                        planet.PlanetOre += growthRateOre.GetValuePerTick();
+                    }
                 }
             }
 
-            // tools income per level
+            // add tools income
             {
-                double costsEnergy = Calculations.GetGrownValuePerTick(5, 2, planet.PlanetFactory);
-                double costsMana = Calculations.GetGrownValuePerTick(0, 2, planet.PlanetFactory);
-                double costsAntimatter = Calculations.GetGrownValuePerTick(5, 2, planet.PlanetFactory);
-                double costsElementium = Calculations.GetGrownValuePerTick(5, 2, planet.PlanetFactory);
-                bool hasEnergy = planet.PlanetEnergy - costsEnergy > 0;
-                bool hasMana = planet.PlanetMana - costsMana > 0;
-                bool hasAntimatter = planet.PlanetAntimatter - costsAntimatter > 0;
-                bool hasElementium = planet.PlanetElementium - costsElementium > 0;
-                if (hasEnergy && hasMana && hasAntimatter && hasElementium)
-                {
-                    // reduce production costs
-                    planet.PlanetEnergy -= costsEnergy;
-                    planet.PlanetMana -= costsMana;
-                    planet.PlanetAntimatter -= costsAntimatter;
-                    planet.PlanetElementium -= costsElementium;
+                GrowthRate
+                    consumptionEnergy = new GrowthRate(5, 2, planet.PlanetFactory),
+                    consumptionMana = new GrowthRate(0, 2, planet.PlanetFactory),
+                    consumptionAntimatter = new GrowthRate(5, 2, planet.PlanetFactory),
+                    consumptionElementium = new GrowthRate(5, 2, planet.PlanetFactory);
 
-                    // add income
-                    planet.PlanetTools += Calculations.GetGrownValuePerTick(200, 1, planet.PlanetFactory);
+                double
+                    costsEnergy = consumptionEnergy.GetValuePerTick(),
+                    costsMana = consumptionMana.GetValuePerTick(),
+                    costsAntimatter = consumptionAntimatter.GetValuePerTick(),
+                    costsElementium = consumptionElementium.GetValuePerTick();
+
+                // add income as long as consumption costs could be paid for all ticks gone
+                for (long tickstart = ticksGone; tickstart > 0; tickstart--)
+                {
+                    bool hasEnergy = planet.PlanetEnergy - costsEnergy > 0;
+                    bool hasMana = planet.PlanetMana - costsMana > 0;
+                    bool hasAntimatter = planet.PlanetAntimatter - costsAntimatter > 0;
+                    bool hasElementium = planet.PlanetElementium - costsElementium > 0;
+
+                    if (hasEnergy && hasMana && hasAntimatter && hasElementium)
+                    {
+                        // reduce production costs
+                        planet.PlanetEnergy -= costsEnergy;
+                        planet.PlanetMana -= costsMana;
+                        planet.PlanetAntimatter -= costsAntimatter;
+                        planet.PlanetElementium -= costsElementium;
+
+                        // add income
+                        planet.PlanetTools += growthRateTools.GetValuePerTick();
+                    }
                 }
             }
         }

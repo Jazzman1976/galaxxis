@@ -15,6 +15,7 @@ namespace Galaxxis.Data.Models
         public int PlanetFields { get; set; }
         public int PlanetSystemId { get; set; }
         public int PlanetUserId { get; set; }
+        public long PlanetDataTick { get; set; }
         public double PlanetOre { get; set; }
         public double PlanetEnergy { get; set; }
         public double PlanetTools { get; set; }

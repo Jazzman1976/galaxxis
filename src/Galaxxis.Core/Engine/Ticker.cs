@@ -82,16 +82,19 @@ namespace Galaxxis.Core.Engine
             // get context
             GalaxxisContext context = Context.Instance.Database; //new GalaxxisContext();
 
+            // save usiverse tick +1
+            context.Universe.First().UniverseTicks++;
+
             // TODO:
             // handle all events that occur on this tick
             // calculate everything, write results to context
-            foreach (Planet planet in context.Planet)
+            if (context.Universe.First().UniverseTicks % 100 == 0)
             {
-                planet.AddTickRessources();
+                foreach (Planet planet in context.Planet)
+                {
+                    planet.UpdateRessources();
+                }
             }
-
-            // save usiverse tick +1
-            context.Universe.First().UniverseTicks++;
 
             // save changes
             context.SaveChanges();

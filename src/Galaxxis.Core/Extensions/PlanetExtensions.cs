@@ -1,26 +1,67 @@
 ﻿using Galaxxis.Core.Engine;
 using Galaxxis.Data.Models;
+using System.Runtime.CompilerServices;
 
 namespace Galaxxis.Core.Extensions
 {
     public static class PlanetExtensions
     {
+        #region Growth rates ----------------------------------------------------------------------
+
+        internal static GrowthRate GetGrowthRateEnergy(this Planet planet)
+        {
+            return new GrowthRate(200, 1, planet.PlanetPowerSupply, 50);
+        }
+
+        internal static GrowthRate GetGrowthRateOre(this Planet planet)
+        {
+            return new GrowthRate(200, 1, planet.PlanetOreMine, 50);
+        }
+
+        internal static GrowthRate GetGrowthRateTools(this Planet planet)
+        {
+            return new GrowthRate(200, 1, planet.PlanetFactory, 50);
+        }
+
+        internal static GrowthRate GetGrowthRateAntimatter(this Planet planet)
+        {
+            return new GrowthRate(175, 1, planet.PlanetNeutronAccelerator, 30);
+        }
+
+        internal static GrowthRate GetGrowthRateCrystals(this Planet planet)
+        {
+            return new GrowthRate(175, 1, planet.PlanetCrystalMine, 30);
+        }
+
+        internal static GrowthRate GetGrowthRateMana(this Planet planet)
+        {
+            return new GrowthRate(175, 1, planet.PlanetMageAcademy, 30);
+        }
+
+        internal static GrowthRate GetGrowthRateElementium(this Planet planet)
+        {
+            return new GrowthRate(75, 1, planet.PlanetElementiumSynthesizer, 10);
+        }
+
+        #endregion
+
+
         internal static void UpdateRessources(this Planet planet)
         {
             // ticks gone since last update
-            long ticksGone 
-                = planet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks 
+            long ticksGone
+                = planet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks
                 - planet.PlanetDataTick;
 
             // init growthrates
             GrowthRate
-                growthRateEnergy = new GrowthRate(200, 1, planet.PlanetPowerSupply, 50),
-                growthRateOre = new GrowthRate(200, 1, planet.PlanetOreMine, 50),
-                growthRateTools = new GrowthRate(200, 1, planet.PlanetFactory, 50),
-                growthRateAntimatter = new GrowthRate(175, 1, planet.PlanetNeutronAccelerator, 30),
-                growthRateCrystals = new GrowthRate(175, 1, planet.PlanetCrystalMine, 30),
-                growthRateMana = new GrowthRate(175, 1, planet.PlanetMageAcademy, 30),
-                growthRateElementium = new GrowthRate(75, 1, planet.PlanetElementiumSynthesizer, 10);
+                growthRateEnergy = planet.GetGrowthRateEnergy(),
+                growthRateOre = planet.GetGrowthRateOre(),
+                growthRateTools = planet.GetGrowthRateTools(),
+                growthRateAntimatter = planet.GetGrowthRateAntimatter(),
+                growthRateCrystals = planet.GetGrowthRateCrystals(),
+                growthRateMana = planet.GetGrowthRateMana(),
+                growthRateElementium = planet.GetGrowthRateElementium();
 
             // add base income regardless of level or crafting ressources on stock
             planet.PlanetEnergy += growthRateEnergy.GetBaseIncomeForTicks(ticksGone);
@@ -47,7 +88,7 @@ namespace Galaxxis.Core.Extensions
 
                 // add income as long as consumption costs could be paid for all ticks gone
                 for (long tickstart = ticksGone; tickstart > 0; tickstart--)
-                {                    
+                {
                     bool hasEnergy = planet.PlanetEnergy - costsEnergy > 0;
                     bool hasMana = planet.PlanetMana - costsMana > 0;
                     bool hasAntimatter = planet.PlanetAntimatter - costsAntimatter > 0;
@@ -138,6 +179,74 @@ namespace Galaxxis.Core.Extensions
                     }
                 }
             }
+
+            // update data tick
+            planet.PlanetDataTick = planet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks;
         }
+
+
+        #region Ore -------------------------------------------------------------------------------
+
+        public static double GetStockOre(this Planet planet)
+        {
+            // ticks gone since last update
+            long ticksGone
+                = planet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks
+                - planet.PlanetDataTick;
+
+            // return current amount in stock
+            return planet.PlanetOre 
+                + planet.GetGrowthRateOre().GetBaseIncomeForTicks(ticksGone);
+        }
+
+        /// <summary>
+        /// Income in 24 hours
+        /// </summary>
+        public static double GetIncomeOre(this Planet planet)
+        {
+            // init growth rate
+            GrowthRate growthRateOre = planet.GetGrowthRateOre();
+            return growthRateOre.Value + growthRateOre.BaseIncome;
+        }
+
+        public static double GetIncomeOrePerTick(this Planet planet)
+        {
+            // init growth rate
+            GrowthRate growthRateOre = planet.GetGrowthRateOre();
+            return growthRateOre.GetValuePerTick() + growthRateOre.GetBaseIncomePerTick();
+        }
+
+        #endregion
+
+
+        #region Energy ----------------------------------------------------------------------------
+
+        public static double GetStockEnergy(this Planet planet)
+        {
+            // ticks gone since last update
+            long ticksGone
+                = planet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks
+                - planet.PlanetDataTick;
+
+            // return current amount in stock
+            return planet.PlanetEnergy 
+                + planet.GetGrowthRateEnergy().GetBaseIncomeForTicks(ticksGone);
+        }
+
+        public static double GetIncomeEnergy(this Planet planet)
+        {
+            // init growth rate
+            GrowthRate growthRateEnergy = planet.GetGrowthRateEnergy();
+            return growthRateEnergy.Value + growthRateEnergy.BaseIncome;
+        }
+
+        public static double GetIncomeEnergyPerTick(this Planet planet)
+        {
+            // init growth rate
+            GrowthRate growthRateEnergy = planet.GetGrowthRateEnergy();
+            return growthRateEnergy.GetValuePerTick() + growthRateEnergy.GetBaseIncomePerTick();
+        }
+
+        #endregion
     }
 }

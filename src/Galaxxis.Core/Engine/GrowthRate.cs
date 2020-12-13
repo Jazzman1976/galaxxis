@@ -14,10 +14,10 @@ namespace Galaxxis.Core.Engine
         /// <summary>
         /// Grown value in 24 hours without base income
         /// </summary>
-        public double Value => 
-            _level < 1 
+        public double Value =>
+            _level < 1
                 ? 0
-                : _baseValue * (_faktor * (_level - 1) ^ 2 + 1);
+                : _baseValue * (_faktor * Math.Pow(_level - 1, 2) + 1);
 
         /// <summary>
         /// Base income in 24 hours

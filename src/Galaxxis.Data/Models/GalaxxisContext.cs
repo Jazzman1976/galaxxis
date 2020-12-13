@@ -16,6 +16,7 @@ namespace Galaxxis.Data.Models
         }
 
         public virtual DbSet<Galaxy> Galaxy { get; set; }
+        public virtual DbSet<Job> Job { get; set; }
         public virtual DbSet<Moon> Moon { get; set; }
         public virtual DbSet<Planet> Planet { get; set; }
         public virtual DbSet<System> System { get; set; }
@@ -42,6 +43,21 @@ namespace Galaxxis.Data.Models
                     .HasForeignKey(d => d.GalaxyUniverseId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Galaxy_Universe");
+            });
+
+            modelBuilder.Entity<Job>(entity =>
+            {
+                entity.Property(e => e.JobData).HasColumnType("xml");
+
+                entity.Property(e => e.JobEvent)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.JobUniverse)
+                    .WithMany(p => p.Job)
+                    .HasForeignKey(d => d.JobUniverseId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Job_Universe");
             });
 
             modelBuilder.Entity<Moon>(entity =>

@@ -1,4 +1,6 @@
 ﻿
+@using Galaxxis.Core.Extensions;
+
 @{ 
     Layout = "_Layout";
     ViewBag.Title = "Home";
@@ -76,6 +78,7 @@
 
     <table style="margin-bottom: 1rem;">
         <tr>
+            <th></th>
             <th>Ore</th>
             <th>Energy</th>            
             <th>Tools</th>
@@ -85,13 +88,34 @@
             <th>Elementium</th>
         </tr>
         <tr>
-            <td>@thePlanet.PlanetOre</td>
-            <td>@thePlanet.PlanetEnergy</td>
+            <th>Stock</th>
+            <td>@thePlanet.GetStockOre()</td>
+            <td>@thePlanet.GetStockEnergy()</td>
             <td>@thePlanet.PlanetTools</td>
             <td>@thePlanet.PlanetMana</td>
             <td>@thePlanet.PlanetCrystals</td>
             <td>@thePlanet.PlanetAntimatter</td>
             <td>@thePlanet.PlanetElementium</td>
         </tr>
+        <tr>
+            <th>Income</th>
+            <td>@thePlanet.GetIncomeOre()</td>
+            <td>@thePlanet.GetIncomeEnergy()</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Income/Tick</th>
+            <td>@thePlanet.GetIncomeOrePerTick()</td>
+            <td>@thePlanet.GetIncomeEnergyPerTick()</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>        
     </table>
 }

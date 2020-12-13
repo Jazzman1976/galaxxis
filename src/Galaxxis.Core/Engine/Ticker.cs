@@ -5,6 +5,7 @@ using Galaxxis.Data.Models;
 using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Timers;
 
 namespace Galaxxis.Core.Engine
@@ -76,31 +77,16 @@ namespace Galaxxis.Core.Engine
 
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            // stop timer until changes beeing progressed
-            Instance.Stop();
+            // get context and universe
+            GalaxxisContext context = Context.Instance.Database;
+            Universe universe = context.Universe.First();
 
-            // get context
-            GalaxxisContext context = Context.Instance.Database; //new GalaxxisContext();
-
-            // save usiverse tick +1
-            context.Universe.First().UniverseTicks++;
-
-            // TODO:
-            // handle all events that occur on this tick
-            // calculate everything, write results to context
-            if (context.Universe.First().UniverseTicks % 100 == 0)
-            {
-                foreach (Planet planet in context.Planet)
-                {
-                    planet.UpdateRessources();
-                }
-            }
-
-            // save changes
-            context.SaveChanges();
-
-            // continue timer
-            Instance.Start();
+            // raise usiverse ticks +1
+            universe.UniverseTicks++;
+            
+            // run processor
+            // the processor calculates all db stuff and updates the db
+            Processor.Process();
         }
 
         #endregion

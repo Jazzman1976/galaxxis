@@ -1,10 +1,8 @@
 ﻿
 using Galaxxis.Core.Business;
-using Galaxxis.Core.Extensions;
 using Galaxxis.Data.Models;
 using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Timers;
 
@@ -34,8 +32,8 @@ namespace Galaxxis.Core.Engine
                     _instance = new Ticker();
 
                     // init instance
-                    GalaxxisContext context = Context.Instance.Database; //new GalaxxisContext();
-                    long timePerTick = context.Universe.First().UniverseTimePerTick;
+                    long timePerTick
+                        = Context.Instance.Database.Universe.First().UniverseTimePerTick;
                     _instance._timer = new Timer(timePerTick);
                     _instance._timer.Elapsed += OnTimedEvent;
                     _instance._timer.AutoReset = true;
@@ -77,16 +75,34 @@ namespace Galaxxis.Core.Engine
 
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            // get context and universe
-            GalaxxisContext context = Context.Instance.Database;
-            Universe universe = context.Universe.First();
-
             // raise usiverse ticks +1
-            universe.UniverseTicks++;
+            Context.Instance.Database.Universe.First().UniverseTicks++;
+
+            // save changes
+            if (Context.Instance.Database.Universe.First().UniverseTicks % 30 == 0)
+            {
+                // this must not be done async!
+                Processor.Instance.SaveChanges();
+            }
+
+            // sync changes
+            else if (Context.Instance.Database.Universe.First().UniverseTicks % 20 == 0)
+            {
+                // this must not be done async!
+                Processor.Instance.SyncChanges();
+            }
+
+            // process
+            else if (Context.Instance.Database.Universe.First().UniverseTicks % 10 == 0)
+            {
+                // this is done async
+                Processor.Instance.ProcessTask();
+            }
             
-            // run processor
-            // the processor calculates all db stuff and updates the db
-            Processor.Process();
+            //=================================================================
+
+            // run processor (async)
+            
         }
 
         #endregion

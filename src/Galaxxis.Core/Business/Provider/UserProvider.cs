@@ -16,12 +16,7 @@ namespace Galaxxis.Core.Business.Provider
         /// <exception cref="UserNotFoundException">If the user is not found by id.</exception>
         public User GetUser(int id)
         {
-            //using (GalaxxisContext context = new GalaxxisContext())
-            //{
-
-            GalaxxisContext context = Context.Instance.Database;
-
-            User user = context.User
+            User user = Context.Instance.Database.User
 
                 // get planets
                 .Include(user => user.Planet)
@@ -48,7 +43,6 @@ namespace Galaxxis.Core.Business.Provider
             }
 
             return user;
-            //}
         }
 
         /// <summary>

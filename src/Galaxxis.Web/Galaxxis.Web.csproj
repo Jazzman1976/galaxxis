@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Identity\**\*.*" />
+    <None Include="Migrations\**\*.*" />
+    <None Include="Program.cs" />
+    <None Include="Startup.cs" />
+    <None Include="Views\**\*.*" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.6" />
   </ItemGroup>
 

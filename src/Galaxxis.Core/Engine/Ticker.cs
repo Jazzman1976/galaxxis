@@ -1,9 +1,6 @@
-﻿
-using Galaxxis.Core.Business;
-using Galaxxis.Data.Models;
+﻿using Galaxxis.Core.Business;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace Galaxxis.Core.Engine
@@ -35,7 +32,7 @@ namespace Galaxxis.Core.Engine
                     long timePerTick
                         = Context.Instance.Database.Universe.First().UniverseTimePerTick;
                     _instance._timer = new Timer(timePerTick);
-                    _instance._timer.Elapsed += OnTimedEvent;
+                    _instance._timer.Elapsed += OnTickerElapsed;
                     _instance._timer.AutoReset = true;
                     _instance._timer.Enabled = true;
                     _instance.Stop();
@@ -73,7 +70,7 @@ namespace Galaxxis.Core.Engine
 
         #region handler ---------------------------------------------------------------------------
 
-        private static async void OnTimedEvent(Object source, ElapsedEventArgs e)
+        private static void OnTickerElapsed(Object source, ElapsedEventArgs e)
         {
             // raise usiverse ticks +1
             Context.Instance.Database.Universe.First().UniverseTicks++;
@@ -95,14 +92,12 @@ namespace Galaxxis.Core.Engine
             // process
             else if (Context.Instance.Database.Universe.First().UniverseTicks % 10 == 0)
             {
+                #pragma warning disable CS4014
                 // this is done async
                 Processor.Instance.ProcessTask();
+                //Processor.Instance.Process();
+                #pragma warning restore CS4014
             }
-            
-            //=================================================================
-
-            // run processor (async)
-            
         }
 
         #endregion

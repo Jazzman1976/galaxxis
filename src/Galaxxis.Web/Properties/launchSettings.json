@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://galaxxis.com",
+      "applicationUrl": "http://local.galaxxis.com",
       "sslPort": 0
     },
     "iisExpress": {
@@ -30,10 +30,11 @@
     "IIS (DebugWebRoot)": {
       "commandName": "IIS",
       "launchBrowser": true,
-      "launchUrl": "http://galaxxis.com",
+      "launchUrl": "http://local.galaxxis.com",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "ancmHostingModel": "OutOfProcess"
     }
   }
 }

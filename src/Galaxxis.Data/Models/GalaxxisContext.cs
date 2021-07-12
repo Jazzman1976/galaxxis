@@ -27,8 +27,8 @@ namespace Galaxxis.Data.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=HAWK\\SQLEXPRESS;Database=GalaxxisPrivat;User Id=GalaxxisPrivatUser;Password=***REMOVED***;");
+                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=WALL-E;Database=Galaxxis;User Id=GalaxxisUser;Password=***REMOVED***;");
             }
         }
 
@@ -127,7 +127,7 @@ namespace Galaxxis.Data.Models
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasIndex(e => e.UserId)
-                    .HasName("UK_UserEmail")
+                    .HasDatabaseName("UK_UserEmail")
                     .IsUnique();
 
                 entity.Property(e => e.UserEmail)

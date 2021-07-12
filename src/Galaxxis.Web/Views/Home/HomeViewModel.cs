@@ -1,11 +1,8 @@
-﻿using Galaxxis.Core.Business;
-using Galaxxis.Core.Business.Provider;
+﻿using Galaxxis.Core.Business.Provider;
 using Galaxxis.Core.Engine;
 using Galaxxis.Data.Models;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Galaxxis.Web.Models.Home
+namespace Galaxxis.Web.Views.Home
 {
     public class HomeViewModel
     {

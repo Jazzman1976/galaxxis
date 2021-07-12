@@ -138,6 +138,9 @@ namespace Galaxxis.Core.Engine
             Debug.WriteLine("" + DateTime.Now.ToString(_dateFormat) + " : 'Processor Process' finished.");
         }
 
+        /// <summary>
+        /// Sync processed objects to the db context instance
+        /// </summary>
         public void SyncChanges()
         {
             // skip if Process task is still running or no changes were made
@@ -156,9 +159,8 @@ namespace Galaxxis.Core.Engine
             while (this.ProcessedUniverses.Any())
             {
                 // get modified universe
-                Universe modifiedUniverse = null;
                 int key = this.ProcessedUniverses.First().Key;
-                if(!this.ProcessedUniverses.Remove(key, out modifiedUniverse))
+                if (!this.ProcessedUniverses.Remove(key, out Universe modifiedUniverse))
                 { 
                     continue; 
                 }
@@ -179,9 +181,8 @@ namespace Galaxxis.Core.Engine
             while (this.ProcessedPlanets.Any())
             {
                 // get modified planet
-                Planet modifiedPlanet = null;
                 int key = this.ProcessedPlanets.First().Key;
-                if(!this.ProcessedPlanets.Remove(key, out modifiedPlanet))
+                if (!this.ProcessedPlanets.Remove(key, out Planet modifiedPlanet))
                 {
                     continue;
                 }
@@ -222,6 +223,10 @@ namespace Galaxxis.Core.Engine
             Debug.WriteLine("" + DateTime.Now.ToString(_dateFormat) + " : 'Processor SyncChanges' finished.");
         }
 
+        /// <summary>
+        /// Save all changes of the db context instance to the database.
+        /// Skip if currently changes are in progress to the db context instance.
+        /// </summary>
         public void SaveChanges()
         {
             // skip if Process task is still running

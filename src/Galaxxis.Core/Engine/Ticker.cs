@@ -95,7 +95,6 @@ namespace Galaxxis.Core.Engine
                 #pragma warning disable CS4014
                 // this is done async
                 Processor.Instance.ProcessTask();
-                //Processor.Instance.Process();
                 #pragma warning restore CS4014
             }
         }

@@ -8,8 +8,7 @@
 
 @model HomeViewModel 
 
-<div>Game Ticks: @Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks</div>
-<div style="margin-bottom: 1rem;">Time between Ticks: @Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick</div>
+<div style="margin-bottom: 1rem;">Game Ticks: @Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks</div>
 
 <table style="margin-bottom: 1rem;">
     <tr>
@@ -88,30 +87,40 @@
             <th>Elementium</th>
         </tr>
         <tr>
+            <th>Level</th>
+            <td>@thePlanet.PlanetOreMine</td>
+            <td>@thePlanet.PlanetPowerSupply</td>
+            <td>@thePlanet.PlanetFactory</td>
+            <td>@thePlanet.PlanetMageAcademy</td>
+            <td>@thePlanet.PlanetCrystalMine</td>
+            <td>@thePlanet.PlanetNeutronAccelerator</td>
+            <td>@thePlanet.PlanetElementiumSynthesizer</td>
+        </tr>
+        <tr>
             <th>Stock</th>
             <td>@thePlanet.GetStockOre()</td>
             <td>@thePlanet.GetStockEnergy()</td>
-            <td>@thePlanet.PlanetTools</td>
+            <td>@thePlanet.GetStockTools()</td>
             <td>@thePlanet.PlanetMana</td>
             <td>@thePlanet.PlanetCrystals</td>
             <td>@thePlanet.PlanetAntimatter</td>
             <td>@thePlanet.PlanetElementium</td>
         </tr>
         <tr>
-            <th>Income</th>
-            <td>@thePlanet.GetIncomeOre()</td>
-            <td>@thePlanet.GetIncomeEnergy()</td>
-            <td></td>
+            <th>Income/Day (86.400 ticks)</th>
+            <td>@thePlanet.GetIncomeOrePerDay()</td>
+            <td>@thePlanet.GetIncomeEnergyPerDay()</td>
+            <td>@thePlanet.GetIncomeToolsPerDay()</td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <th>Income/Tick</th>
+            <th>Income/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
             <td>@thePlanet.GetIncomeOrePerTick()</td>
             <td>@thePlanet.GetIncomeEnergyPerTick()</td>
-            <td></td>
+            <td>@thePlanet.GetIncomeToolsPerTick()</td>
             <td></td>
             <td></td>
             <td></td>

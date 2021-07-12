@@ -199,20 +199,22 @@ namespace Galaxxis.Core.Extensions
 
         #region Ore -------------------------------------------------------------------------------
 
+        /// <summary>
+        /// Current ore in stock
+        /// </summary>
         public static double GetStockOre(this Planet planet)
         {
-            // ticks gone since last update
             long ticksGone = planet.GetTicksGone();
-
-            // return current amount in stock
-            return planet.PlanetOre 
-                + planet.GetGrowthRateOre().GetBaseIncomeForTicks(ticksGone);
+            GrowthRate growthRateOre = planet.GetGrowthRateOre();
+            return planet.PlanetOre
+                + growthRateOre.GetBaseIncomeForTicks(ticksGone)
+                + growthRateOre.GetValueForTicks(ticksGone);
         }
 
         /// <summary>
         /// Income in 24 hours
         /// </summary>
-        public static double GetIncomeOre(this Planet planet)
+        public static double GetIncomeOrePerDay(this Planet planet)
         {
             // init growth rate
             GrowthRate growthRateOre = planet.GetGrowthRateOre();
@@ -233,15 +235,14 @@ namespace Galaxxis.Core.Extensions
 
         public static double GetStockEnergy(this Planet planet)
         {
-            // ticks gone since last update
             long ticksGone = planet.GetTicksGone();
-
-            // return current amount in stock
-            return planet.PlanetEnergy 
-                + planet.GetGrowthRateEnergy().GetBaseIncomeForTicks(ticksGone);
+            GrowthRate growthRateEnergy = planet.GetGrowthRateEnergy();
+            return planet.PlanetEnergy
+                + growthRateEnergy.GetBaseIncomeForTicks(ticksGone)
+                + growthRateEnergy.GetValueForTicks(ticksGone);
         }
 
-        public static double GetIncomeEnergy(this Planet planet)
+        public static double GetIncomeEnergyPerDay(this Planet planet)
         {
             // init growth rate
             GrowthRate growthRateEnergy = planet.GetGrowthRateEnergy();
@@ -253,6 +254,31 @@ namespace Galaxxis.Core.Extensions
             // init growth rate
             GrowthRate growthRateEnergy = planet.GetGrowthRateEnergy();
             return growthRateEnergy.GetValuePerTick() + growthRateEnergy.GetBaseIncomePerTick();
+        }
+
+        #endregion
+
+        #region Tools -----------------------------------------------------------------------------
+
+        public static double GetStockTools(this Planet planet)
+        {
+            long ticksGone = planet.GetTicksGone();
+            GrowthRate growthRateTools = planet.GetGrowthRateTools();
+            return planet.PlanetTools
+                + growthRateTools.GetBaseIncomeForTicks(ticksGone)
+                + growthRateTools.GetValueForTicks(ticksGone);
+        }
+
+        public static double GetIncomeToolsPerDay(this Planet planet)
+        {
+            GrowthRate growthRateTools = planet.GetGrowthRateTools();
+            return growthRateTools.Value + growthRateTools.BaseIncome;
+        }
+
+        public static double GetIncomeToolsPerTick(this Planet planet)
+        {
+            GrowthRate growthRateTools = planet.GetGrowthRateTools();
+            return growthRateTools.GetValuePerTick() + growthRateTools.GetBaseIncomePerTick();
         }
 
         #endregion

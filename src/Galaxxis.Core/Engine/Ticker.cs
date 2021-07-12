@@ -73,7 +73,7 @@ namespace Galaxxis.Core.Engine
 
         #region handler ---------------------------------------------------------------------------
 
-        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        private static async void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             // raise usiverse ticks +1
             Context.Instance.Database.Universe.First().UniverseTicks++;

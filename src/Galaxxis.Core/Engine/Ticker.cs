@@ -35,7 +35,7 @@ namespace Galaxxis.Core.Engine
                     long timePerTick
                         = Context.Instance.Database.Universe.First().UniverseTimePerTick;
                     _instance._timer = new Timer(timePerTick);
-                    _instance._timer.Elapsed += OnTimedEvent;
+                    _instance._timer.Elapsed += OnTickerElapsed;
                     _instance._timer.AutoReset = true;
                     _instance._timer.Enabled = true;
                     _instance.Stop();
@@ -73,7 +73,7 @@ namespace Galaxxis.Core.Engine
 
         #region handler ---------------------------------------------------------------------------
 
-        private static async void OnTimedEvent(Object source, ElapsedEventArgs e)
+        private static async void OnTickerElapsed(Object source, ElapsedEventArgs e)
         {
             // raise usiverse ticks +1
             Context.Instance.Database.Universe.First().UniverseTicks++;
@@ -96,7 +96,7 @@ namespace Galaxxis.Core.Engine
             else if (Context.Instance.Database.Universe.First().UniverseTicks % 10 == 0)
             {
                 // this is done async
-                Processor.Instance.ProcessTask();
+                await Processor.Instance.ProcessTask();
             }
             
             //=================================================================

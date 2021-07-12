@@ -1,12 +1,12 @@
-﻿
-@using Galaxxis.Core.Extensions;
+﻿@using Galaxxis.Core.Extensions;
+@using Galaxxis.Web.Views.Home
 
 @{ 
     Layout = "_Layout";
     ViewBag.Title = "Home";
 }
 
-@model Galaxxis.Web.Models.Home.HomeViewModel 
+@model HomeViewModel 
 
 <div>Game Ticks: @Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks</div>
 <div style="margin-bottom: 1rem;">Time between Ticks: @Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick</div>

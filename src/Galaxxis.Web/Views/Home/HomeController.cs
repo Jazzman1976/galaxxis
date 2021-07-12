@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Galaxxis.Web.Controllers
+namespace Galaxxis.Web.Views.Home
 {
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
-            Models.Home.HomeViewModel model 
-                = new Models.Home.HomeViewModel();
+            HomeViewModel model 
+                = new HomeViewModel();
 
             return View("Home", model);
         }

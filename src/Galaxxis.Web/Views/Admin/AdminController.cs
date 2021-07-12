@@ -1,12 +1,7 @@
-﻿using Galaxxis.Web.Models.Admin;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Galaxxis.Web.Controllers
+namespace Galaxxis.Web.Views.Admin
 {
     [Authorize]
     public class AdminController : Controller

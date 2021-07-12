@@ -1,10 +1,11 @@
-﻿
+﻿@using Galaxxis.Web.Views.Admin
+
 @{ 
     Layout = "_Layout";
     ViewBag.Title = "Admin";
 }
 
-@model Galaxxis.Web.Models.Admin.AdminViewModel
+@model AdminViewModel
 
 @using (Html.BeginForm("Index", "Admin", FormMethod.Post)) {
     <div>

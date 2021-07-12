@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Galaxxis.Web.Models.Admin
+﻿namespace Galaxxis.Web.Views.Admin
 {
     public class AdminViewModel
     {

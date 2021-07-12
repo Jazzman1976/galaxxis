@@ -1,5 +1,5 @@
 ﻿
-namespace Galaxxis.Web.Identity
+namespace Galaxxis.Web.Code.Identity
 {
     using Microsoft.AspNetCore.Identity;
 

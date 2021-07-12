@@ -1,12 +1,11 @@
-﻿
-namespace Galaxxis.Web.Controllers
-{
-    using Galaxxis.Web.Identity;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Threading.Tasks;
+﻿using Galaxxis.Web.Code.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
+namespace Galaxxis.Web.Views.Account
+{
     public class AccountController : Controller
     {
         private UserManager<AppUser> UserMgr { get; }
@@ -21,9 +20,9 @@ namespace Galaxxis.Web.Controllers
 
         public async Task<IActionResult> Login(string returnUrl = null)
         {
-            Microsoft.AspNetCore.Identity.SignInResult result 
+            Microsoft.AspNetCore.Identity.SignInResult result
                 = await SignInMgr.PasswordSignInAsync("Administrator", "***REMOVED***", true, false);
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 if (string.IsNullOrWhiteSpace(returnUrl) || !Url.IsLocalUrl(returnUrl))
                 {

@@ -75,28 +75,28 @@ namespace Galaxxis.Core.Engine
             // raise usiverse ticks +1
             Context.Instance.Database.Universe.First().UniverseTicks++;
 
-            // save changes
-            if (Context.Instance.Database.Universe.First().UniverseTicks % 30 == 0)
-            {
-                // this must not be done async!
-                Processor.Instance.SaveChanges();
-            }
+            //// save changes
+            //if (Context.Instance.Database.Universe.First().UniverseTicks % 30 == 0)
+            //{
+            //    // this must not be done async!
+            //    Processor.Instance.SaveChanges();
+            //}
 
-            // sync changes
-            else if (Context.Instance.Database.Universe.First().UniverseTicks % 20 == 0)
-            {
-                // this must not be done async!
-                Processor.Instance.SyncChanges();
-            }
+            //// sync changes
+            //else if (Context.Instance.Database.Universe.First().UniverseTicks % 20 == 0)
+            //{
+            //    // this must not be done async!
+            //    Processor.Instance.SyncChanges();
+            //}
 
             // process
-            else if (Context.Instance.Database.Universe.First().UniverseTicks % 10 == 0)
-            {
+            //else if (Context.Instance.Database.Universe.First().UniverseTicks % 10 == 0)
+            //{
                 #pragma warning disable CS4014
                 // this is done async
                 Processor.Instance.ProcessTask();
                 #pragma warning restore CS4014
-            }
+            //}
         }
 
         #endregion

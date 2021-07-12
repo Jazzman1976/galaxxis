@@ -12,4 +12,9 @@ namespace Galaxxis.Core.Exceptions
     {
         public PlanetNotFoundException() : base("Planet not found!") { }
     }
+
+    class EventNotFoundException : Exception
+    {
+        public EventNotFoundException() : base("Event not found!") { }
+    }
 }

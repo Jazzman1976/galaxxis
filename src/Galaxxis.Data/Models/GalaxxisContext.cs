@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
+#nullable disable
+
 namespace Galaxxis.Data.Models
 {
     public partial class GalaxxisContext : DbContext
@@ -15,6 +17,7 @@ namespace Galaxxis.Data.Models
         {
         }
 
+        public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<Galaxy> Galaxy { get; set; }
         public virtual DbSet<Job> Job { get; set; }
         public virtual DbSet<Moon> Moon { get; set; }
@@ -27,13 +30,32 @@ namespace Galaxxis.Data.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=WALL-E;Database=Galaxxis;User Id=GalaxxisUser;Password=***REMOVED***;");
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=Wall-E;Database=Galaxxis;User Id=GalaxxisUser;Password=***REMOVED***;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
+
+            modelBuilder.Entity<Event>(entity =>
+            {
+                entity.HasIndex(e => new { e.EventTick, e.EventLocationType, e.EventLocationId }, "ix_event_target");
+
+                entity.Property(e => e.EventData).HasColumnType("xml");
+
+                entity.Property(e => e.EventLocationType)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.EventName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsFixedLength(true);
+            });
+
             modelBuilder.Entity<Galaxy>(entity =>
             {
                 entity.Property(e => e.GalaxyName).HasMaxLength(50);
@@ -126,8 +148,7 @@ namespace Galaxxis.Data.Models
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasIndex(e => e.UserId)
-                    .HasDatabaseName("UK_UserEmail")
+                entity.HasIndex(e => e.UserId, "UK_UserEmail")
                     .IsUnique();
 
                 entity.Property(e => e.UserEmail)

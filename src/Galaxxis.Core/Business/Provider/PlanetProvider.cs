@@ -1,14 +1,10 @@
-﻿
+﻿using Galaxxis.Core.Exceptions;
+using Galaxxis.Data.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
 namespace Galaxxis.Core.Business.Provider
 {
-    using Galaxxis.Core.Exceptions;
-    using Galaxxis.Data.Models;
-    using Microsoft.EntityFrameworkCore;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     public static class PlanetProvider
     {
         public static Planet GetPlanet(int id)

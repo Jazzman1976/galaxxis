@@ -1,5 +1,7 @@
 ﻿using Galaxxis.Core.Business;
+using Galaxxis.Core.Business.Provider;
 using Galaxxis.Core.Extensions;
+using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
 using System;
 using System.Collections.Concurrent;
@@ -25,7 +27,7 @@ namespace Galaxxis.Core.Engine
 
         private bool IsWorking { get; set; }
 
-        private bool HasChanges { get; set; }
+        //private bool HasChanges { get; set; }
 
         private ConcurrentDictionary<int, Universe> ProcessedUniverses { get; set; }
             = new ConcurrentDictionary<int, Universe>();
@@ -74,69 +76,135 @@ namespace Galaxxis.Core.Engine
             }
 
             // write debug info
-            Debug.WriteLine("" + DateTime.Now.ToString(_dateFormat) + " : Running 'Processor Process'.");
+            // Debug.WriteLine("" + DateTime.Now.ToString(_dateFormat) + " : Running 'Processor Process'.");
 
             // mark processing
             this.IsWorking = true;
 
-            // init new context, modify entities and drop them to dictionaries
-            using (GalaxxisContext asyncContext = new GalaxxisContext())
+            List<Universe> universes = Context.Instance.Database.Universe.ToList();
+            foreach (Universe universe in universes)
             {
-                // get universe
-                Universe universe = asyncContext.Universe.First();
+                DateTime TStart = DateTime.Now;
 
-                // process all ticks until current tick is reached
                 while (universe.UniverseTicksProcessed < universe.UniverseTicks)
                 {
-                    // raise tick + 1
-                    universe.UniverseTicksProcessed++;
+                    // get events
+                    long tick = universe.UniverseTicksProcessed + 1;
+                    List<Event> events = EventProvider.GetEvents(tick);
 
-                    // Process every 120 ticks (2 Minutes)
-                    if (universe.UniverseTicksProcessed % 120 == 0)
+                    // collect tasks
+                    List<Task> eventTasks = new List<Task>();
+                    foreach (Event @event in events)
                     {
-                        foreach (Planet planet in asyncContext.Planet)
+                        switch (Enum.Parse(typeof(EventNameEnum), @event.EventName))
                         {
-                            // Save current ressources to db.
-                            // Ressources could be calculated for each tick instead 
-                            // reading from db. The field 'PlanetDataTick' shows which 
-                            // tick is stored to db.
-                            planet.UpdateRessources();
+                            case EventNameEnum.BuildOreMine:
+                                {
+                                    eventTasks.Add(new Task(() =>
+                                    {
+                                        int planetId = @event.EventLocationId;
+                                        Planet planet = Context.Instance.Database.Planet
+                                            .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                                        planet.PlanetOreMine++;
+                                    }));
+
+                                    Debug.WriteLine(
+                                        ""
+                                        + DateTime.Now.ToString(_dateFormat)
+                                        + $" : {EventNameEnum.BuildOreMine} task added.");
+                                }
+                                break;
                         }
                     }
-                }
 
-                // drop changed universe entitiy
-                Universe[] modifiedUniverses =
-                    asyncContext.ChangeTracker.Entries<Universe>()
-                    .Where(u => u.State == Microsoft.EntityFrameworkCore.EntityState.Modified)
-                    .Select(u => u.Entity)
-                    .ToArray();
-                foreach (Universe modifiedUniverse in modifiedUniverses)
-                {
-                    Instance.ProcessedUniverses[modifiedUniverse.UniverseId] = modifiedUniverse;
-                }
+                    // execute tasks
+                    if (eventTasks.Any())
+                    {
+                        // start tasks
+                        foreach (Task task in eventTasks)
+                        {
+                            task.Start();
+                        }
 
-                // drop changed planet entities
-                Planet[] modifiedPlanets =
-                    asyncContext.ChangeTracker.Entries<Planet>()
-                    .Where(p => p.State == Microsoft.EntityFrameworkCore.EntityState.Modified)
-                    .Select(p => p.Entity)
-                    .ToArray();
-                foreach (Planet modifiedPlanet in modifiedPlanets)
-                {
-                    Instance.ProcessedPlanets[modifiedPlanet.PlanetId] = modifiedPlanet;
+                        // wait until every task has been finished                    
+                        Task.WaitAll(eventTasks.ToArray());
+                    }
+
+                    // raise processed ticks
+                    universe.UniverseTicksProcessed++;
+                    Debug.WriteLine(
+                        ""
+                        + DateTime.Now.ToString(_dateFormat)
+                        + $" : Tick {tick} in universe {universe.UniverseName} processed in "
+                        + $"{new TimeSpan(DateTime.Now.Ticks - TStart.Ticks).Milliseconds} ms.");
                 }
             }
 
-            // mark HasChanges
-            this.HasChanges = true;
+                // init new context, modify entities and drop them to dictionaries
+                /*
+                using (GalaxxisContext asyncContext = new GalaxxisContext())
+                {
+                    // get universe
+                    Universe universe = asyncContext.Universe.First();
 
+                    // process all ticks until current tick is reached
+                    while (universe.UniverseTicksProcessed < universe.UniverseTicks)
+                    {
+                        // raise tick + 1
+                        universe.UniverseTicksProcessed++;
+
+                        // Process every 120 ticks (2 Minutes)
+                        if (universe.UniverseTicksProcessed % 120 == 0)
+                        {
+                            foreach (Planet planet in asyncContext.Planet)
+                            {
+                                // Save current ressources to db.
+                                // Ressources could be calculated for each tick instead 
+                                // reading from db. The field 'PlanetDataTick' shows which 
+                                // tick is stored to db.
+                                planet.UpdateRessources();
+                            }
+                        }
+                    }
+
+                    // drop changed universe entitiy
+                    Universe[] modifiedUniverses =
+                        asyncContext.ChangeTracker.Entries<Universe>()
+                        .Where(u => u.State == Microsoft.EntityFrameworkCore.EntityState.Modified)
+                        .Select(u => u.Entity)
+                        .ToArray();
+                    foreach (Universe modifiedUniverse in modifiedUniverses)
+                    {
+                        Instance.ProcessedUniverses[modifiedUniverse.UniverseId] = modifiedUniverse;
+                    }
+
+                    // drop changed planet entities
+                    Planet[] modifiedPlanets =
+                        asyncContext.ChangeTracker.Entries<Planet>()
+                        .Where(p => p.State == Microsoft.EntityFrameworkCore.EntityState.Modified)
+                        .Select(p => p.Entity)
+                        .ToArray();
+                    foreach (Planet modifiedPlanet in modifiedPlanets)
+                    {
+                        Instance.ProcessedPlanets[modifiedPlanet.PlanetId] = modifiedPlanet;
+                    }
+                }
+                */
+
+                // mark HasChanges
+                //this.HasChanges = true;
+
+                // update database
+                Context.Instance.Database.SaveChanges();
+            
             // mark not processing, unlock processor
             this.IsWorking = false;
 
             // write debug info
-            Debug.WriteLine("" + DateTime.Now.ToString(_dateFormat) + " : 'Processor Process' finished.");
+            // Debug.WriteLine("" + DateTime.Now.ToString(_dateFormat) + " : 'Processor Process' finished.");
         }
+
+        /*
 
         /// <summary>
         /// Sync processed objects to the db context instance
@@ -250,6 +318,8 @@ namespace Galaxxis.Core.Engine
             // write debug info
             Debug.WriteLine("" + DateTime.Now.ToString(_dateFormat) + " : 'Processor SaveChanges' finished.");
         }
+
+        */
 
         #endregion
     }

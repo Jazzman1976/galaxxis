@@ -1,4 +1,4 @@
-﻿using Galaxxis.Core.Business;
+﻿using Galaxxis.Data.Models;
 using System;
 using System.Linq;
 using System.Timers;
@@ -11,14 +11,16 @@ namespace Galaxxis.Core.Engine
 
         // singleton instance
         private static Ticker _instance = null;
-
         private Timer _timer;
-        public string Status { get; set; }
 
         #endregion
 
 
         #region Properties ------------------------------------------------------------------------
+
+        public long Ticks { get; set; }
+
+        public string Status { get; set; }
 
         public static Ticker Instance
         {
@@ -26,16 +28,19 @@ namespace Galaxxis.Core.Engine
             {
                 if (_instance == null)
                 {
-                    _instance = new Ticker();
+                    using (GalaxxisContext context = new GalaxxisContext())
+                    {
+                        // init instance
+                        long timePerTick = context.Universe.First().UniverseTimePerTick;
+                        long ticks = context.Universe.First().UniverseTicks;
 
-                    // init instance
-                    long timePerTick
-                        = Context.Instance.Database.Universe.First().UniverseTimePerTick;
-                    _instance._timer = new Timer(timePerTick);
-                    _instance._timer.Elapsed += OnTickerElapsed;
-                    _instance._timer.AutoReset = true;
-                    _instance._timer.Enabled = true;
-                    _instance.Stop();
+                        _instance = new Ticker(ticks);
+                        _instance._timer = new Timer(timePerTick);
+                        _instance._timer.Elapsed += OnTickerElapsed;
+                        _instance._timer.AutoReset = true;
+                        _instance._timer.Enabled = true;
+                        _instance.Stop();
+                    }
                 }
                 return _instance;
             }
@@ -46,7 +51,10 @@ namespace Galaxxis.Core.Engine
 
         #region constructors ----------------------------------------------------------------------
 
-        private Ticker() { }
+        private Ticker(long tick) 
+        {
+            this.Ticks = tick;
+        }
 
         #endregion
 
@@ -70,33 +78,9 @@ namespace Galaxxis.Core.Engine
 
         #region handler ---------------------------------------------------------------------------
 
-        private static void OnTickerElapsed(Object source, ElapsedEventArgs e)
+        private static void OnTickerElapsed(object source, ElapsedEventArgs e)
         {
-            // raise usiverse ticks +1
-            Context.Instance.Database.Universe.First().UniverseTicks++;
-
-            //// save changes
-            //if (Context.Instance.Database.Universe.First().UniverseTicks % 30 == 0)
-            //{
-            //    // this must not be done async!
-            //    Processor.Instance.SaveChanges();
-            //}
-
-            //// sync changes
-            //else if (Context.Instance.Database.Universe.First().UniverseTicks % 20 == 0)
-            //{
-            //    // this must not be done async!
-            //    Processor.Instance.SyncChanges();
-            //}
-
-            // process
-            //else if (Context.Instance.Database.Universe.First().UniverseTicks % 10 == 0)
-            //{
-                #pragma warning disable CS4014
-                // this is done async
-                Processor.Instance.ProcessTask();
-                #pragma warning restore CS4014
-            //}
+            Processor.Instance.ProcessAsync(Instance.Ticks++);
         }
 
         #endregion

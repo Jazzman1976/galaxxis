@@ -16,7 +16,10 @@ namespace Galaxxis.Core.Business.Provider
         /// <exception cref="UserNotFoundException">If the user is not found by id.</exception>
         public User GetUser(int id)
         {
-            User user = Context.Instance.Database.User
+            User user = null;
+            using (GalaxxisContext context = new GalaxxisContext())
+            {
+                user = context.User
 
                 // get planets
                 .Include(user => user.Planet)
@@ -36,12 +39,11 @@ namespace Galaxxis.Core.Business.Provider
 
                 // return user with data
                 .FirstOrDefault(user => user.UserId.Equals(id));
-
+            }
             if (user == null)
             {
                 throw new UserNotFoundException();
             }
-
             return user;
         }
 
@@ -53,19 +55,16 @@ namespace Galaxxis.Core.Business.Provider
         /// <exception cref="UserNotFoundException">If the user is not found by email.</exception>
         public User GetUser(string email)
         {
-            //using (GalaxxisContext context = new GalaxxisContext())
-            //{
-
-            GalaxxisContext context = Context.Instance.Database;
-
-            User user = context.User.FirstOrDefault(u => u.UserEmail.Equals(email));
+            User user = null;
+            using (GalaxxisContext context = new GalaxxisContext())
+            {
+                user = context.User.FirstOrDefault(u => u.UserEmail.Equals(email));
+            }
             if (user == null)
             {
                 throw new UserNotFoundException();
             }
-
             return GetUser(user.UserId);
-            //}
         }
     }
 }

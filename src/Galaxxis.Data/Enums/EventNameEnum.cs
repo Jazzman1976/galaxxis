@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Galaxxis.Data.Enums
+﻿namespace Galaxxis.Data.Enums
 {
     public enum EventNameEnum
     {
-        BuildOreMine
+        BuildOreMine,
+        BuildPowerSupply,
+        BuildFactory
     }
 }

@@ -9,28 +9,30 @@ namespace Galaxxis.Core.Business.Provider
     {
         public static Planet GetPlanet(int id)
         {
-            Planet planet = Context.Instance.Database.Planet
+            Planet planet = null;
+            using (GalaxxisContext context = new GalaxxisContext())
+            {
+                planet = context.Planet
 
-                // get moons
-                .Include(planet => planet.Moon)
+                    // get moons
+                    .Include(planet => planet.Moon)
 
-                // get system
-                .Include(planet => planet.PlanetSystem)
+                    // get system
+                    .Include(planet => planet.PlanetSystem)
 
-                // get galaxy
-                .ThenInclude(system => system.SystemGalaxy)
+                    // get galaxy
+                    .ThenInclude(system => system.SystemGalaxy)
 
-                // get universe
-                .ThenInclude(galaxy => galaxy.GalaxyUniverse)
+                    // get universe
+                    .ThenInclude(galaxy => galaxy.GalaxyUniverse)
 
-                // return first planet with data
-                .FirstOrDefault(planet => planet.PlanetId.Equals(id));
-
+                    // return first planet with data
+                    .FirstOrDefault(planet => planet.PlanetId.Equals(id));
+            }
             if (planet == null)
             {
                 throw new PlanetNotFoundException();
             }
-
             return planet;
         }
     }

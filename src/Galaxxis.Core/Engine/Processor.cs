@@ -1,5 +1,6 @@
 ﻿using Galaxxis.Core.Business.Provider;
 using Galaxxis.Core.Extensions;
+using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
 using System;
@@ -83,8 +84,10 @@ namespace Galaxxis.Core.Engine
                     long tick = universe.UniverseTicksProcessed + 1;
                     List<Event> events = EventProvider.GetEvents(tick);
 
+                    // iterate events, do action and remove
                     foreach(Event @event in events) {
                         Do_EventAction(@event, context);
+                        context.Event.Remove(@event);
                     }
 
                     // raise processed ticks
@@ -122,6 +125,10 @@ namespace Galaxxis.Core.Engine
                 case EventNameEnum.BuildFactory:
                     Do_BuildFactory(@event, context);
                     break;
+
+                case EventNameEnum.BuildMageAcademy:
+                    Do_BuildMageAcademy(@event, context);
+                    break;
             }
         }
 
@@ -132,6 +139,7 @@ namespace Galaxxis.Core.Engine
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
                 planet.PlanetOreMine++;
                 Debug.WriteLine($"{DateStamp}: Ore Mine build on planet {planet.PlanetId}.");   
             }
@@ -144,6 +152,7 @@ namespace Galaxxis.Core.Engine
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
                 planet.PlanetPowerSupply++;
                 Debug.WriteLine($"{DateStamp}: Power supply build on planet {planet.PlanetId}.");   
             }
@@ -156,8 +165,22 @@ namespace Galaxxis.Core.Engine
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
                 planet.PlanetFactory++;
                 Debug.WriteLine($"{DateStamp}: Factory build on planet {planet.PlanetId}.");
+            }
+        }
+
+        private void Do_BuildMageAcademy(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocationType.Trim() == EventLocationTypeEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet
+                    .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
+                planet.PlanetMageAcademy++;
+                Debug.WriteLine($"{DateStamp}: Mage Academy build on planet {planet.PlanetId}.");
             }
         }
 

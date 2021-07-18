@@ -4,6 +4,7 @@
     {
         BuildOreMine,
         BuildPowerSupply,
-        BuildFactory
+        BuildFactory,
+        BuildMageAcademy
     }
 }

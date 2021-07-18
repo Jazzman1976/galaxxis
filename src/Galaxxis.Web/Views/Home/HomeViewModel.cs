@@ -10,6 +10,7 @@ namespace Galaxxis.Web.Views.Home
 
         public User User { get; private set; }
         public Ticker Ticker { get; private set; }
+        public string Info { get; set; }
 
         #endregion
 

@@ -20,10 +20,14 @@ namespace Galaxxis.Core.Engine
                 : _baseValue * (_faktor * Math.Pow(_level - 1, 2) + 1);
 
         /// <summary>
+        /// Grown value in 24 hours without base income rounded to long integer
+        /// </summary>
+        public long ValueLong => (long)Math.Round(Value, 0);
+
+        /// <summary>
         /// Base income in 24 hours
         /// </summary>
-        public double BaseIncome =>
-            _baseIncome;
+        public double BaseIncome => _baseIncome;
 
         /// <summary>
         /// A growthrate to calculate values which grow over time

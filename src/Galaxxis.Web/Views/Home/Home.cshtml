@@ -1,14 +1,33 @@
-﻿@using Galaxxis.Core.Extensions;
+﻿@using Galaxxis.Core.Extensions.PlanetExtensions;
+@using Galaxxis.Data.Models
 @using Galaxxis.Web.Views.Home
 
-@{ 
+@model HomeViewModel
+
+@{
     Layout = "_Layout";
     ViewBag.Title = "Home";
+
+    // use first as demo planet in this homepage
+    Planet thePlanet = Model.User.Planet.FirstOrDefault();
+
+    // assure planet and user
+    if (thePlanet == null || Model.User == null)
+    {
+        return;
+    }
+
+    // update ressources on planet
+    thePlanet.UpdateRessources();
+
+    // init markup vars
+    double universeTicks = thePlanet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks;
+    double[] oreMineCostsNextLevel = thePlanet.OreMine_GetBuildCosts();
+    double[] mageAcademyCostsNextLevel = thePlanet.MageAcademy_GetBuildCosts();
+
 }
 
-@model HomeViewModel 
-
-<div style="margin-bottom: 1rem;">Game Ticks: @Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks</div>
+<div style="margin-bottom: 1rem;">Game Ticks: @universeTicks</div>
 
 <table style="margin-bottom: 1rem;">
     <tr>
@@ -18,32 +37,25 @@
         <th>UserLastname</th>
     </tr>
 
-    @if (Model.User != null)
-    {
     <tr>
         <td>@Model.User.UserId</td>
         <td>@Model.User.UserEmail</td>
         <td>@Model.User.UserFirstname</td>
         <td>@Model.User.UserLastname</td>
-    </tr>
-    }
+    </tr>    
 </table>
-
-@if(Model.User.Planet.Any())
-{
-    Galaxxis.Data.Models.Planet thePlanet = Model.User.Planet.First();
 
     <table style="margin-bottom: 1rem;">
         <tr>
             <th>PlanetId</th>
             <th>PlanetName</th>
-            <th>PlanetFields</th>            
+            <th>PlanetFields</th>
             <th>SystemName</th>
             <th>GalaxyName</th>
             <th>Moons</th>
         </tr>
 
-        @foreach(var planet in Model.User.Planet)
+        @foreach (var planet in Model.User.Planet)
         {
             <tr>
                 <td>@planet.PlanetId</td>
@@ -54,21 +66,21 @@
                 <td>
                     @if (planet.Moon.Any())
                     {
-                    <table>
-                        <tr>
-                            <th>MoonId</th>
-                            <th>MoonName</th>
-                            <th>MoonFields</th>
-                        </tr>
-                        @foreach(var moon in planet.Moon)
-                        {
+                        <table>
                             <tr>
-                                <td>@moon.MoonId</td>
-                                <td>@moon.MoonName</td>
-                                <td>@moon.MoonFields</td>
+                                <th>MoonId</th>
+                                <th>MoonName</th>
+                                <th>MoonFields</th>
                             </tr>
-                        }
-                    </table>
+                            @foreach (var moon in planet.Moon)
+                            {
+                                <tr>
+                                    <td>@moon.MoonId</td>
+                                    <td>@moon.MoonName</td>
+                                    <td>@moon.MoonFields</td>
+                                </tr>
+                            }
+                        </table>
                     }
                 </td>
             </tr>
@@ -79,7 +91,7 @@
         <tr>
             <th></th>
             <th>Ore</th>
-            <th>Energy</th>            
+            <th>Energy</th>
             <th>Tools</th>
             <th>Mana</th>
             <th>Crystals</th>
@@ -98,9 +110,9 @@
         </tr>
         <tr>
             <th>Stock</th>
-            <td>@thePlanet.GetStockOre()</td>
-            <td>@thePlanet.GetStockEnergy()</td>
-            <td>@thePlanet.GetStockTools()</td>
+            <td>@thePlanet.PlanetOre</td>
+            <td>@thePlanet.PlanetEnergy</td>
+            <td>@thePlanet.PlanetTools</td>
             <td>@thePlanet.PlanetMana</td>
             <td>@thePlanet.PlanetCrystals</td>
             <td>@thePlanet.PlanetAntimatter</td>
@@ -108,23 +120,78 @@
         </tr>
         <tr>
             <th>Income/Day (86.400 ticks)</th>
-            <td>@thePlanet.GetIncomeOrePerDay()</td>
+            <td>@thePlanet.OreMine_GetIncomePerDay()</td>
             <td>@thePlanet.GetIncomeEnergyPerDay()</td>
             <td>@thePlanet.GetIncomeToolsPerDay()</td>
-            <td></td>
+            <td>@thePlanet.MageAcademy_GetIncomePerDay()</td>
             <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <th>Income/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
-            <td>@thePlanet.GetIncomeOrePerTick()</td>
+            <td>@thePlanet.OreMine_GetIncomePerTick()</td>
             <td>@thePlanet.GetIncomeEnergyPerTick()</td>
             <td>@thePlanet.GetIncomeToolsPerTick()</td>
+            <td>@thePlanet.MageAcademy_GetIncomePerTick()</td>
             <td></td>
             <td></td>
             <td></td>
+        </tr>
+        <tr>
+            <th>Costs/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
+            <td>@thePlanet.OreMine_GetCostsPerTick()</td>
+            <td>@thePlanet.GetCostsEnergyPerTick()</td>
+            <td>@thePlanet.GetCostsToolsPerTick()</td>
+            <td>@thePlanet.MageAcademy_GetCostsPerTick()</td>
             <td></td>
-        </tr>        
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Amount/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
+            <td>@(thePlanet.OreMine_GetIncomePerTick() - thePlanet.OreMine_GetCostsPerTick())</td>
+            <td>@(thePlanet.GetIncomeEnergyPerTick() - thePlanet.GetCostsEnergyPerTick())</td>
+            <td>@(thePlanet.GetIncomeToolsPerTick() - thePlanet.GetCostsToolsPerTick())</td>
+            <td>@(thePlanet.MageAcademy_GetIncomePerTick() - thePlanet.MageAcademy_GetCostsPerTick())</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Actions</th>
+            <td>
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@oreMineCostsNextLevel[0]</td></tr>
+                    <tr><th>Mana</th><td>@oreMineCostsNextLevel[1]</td></tr>
+                    <tr><th>Crystal</th><td>@oreMineCostsNextLevel[2]</td></tr>
+                    <tr><th>Ticks</th><td>@oreMineCostsNextLevel[3]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildOreMine" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" />
+                </form>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@mageAcademyCostsNextLevel[0]</td></tr>
+                    <tr><th>Mana</th><td>@mageAcademyCostsNextLevel[1]</td></tr>
+                    <tr><th>Crystal</th><td>@mageAcademyCostsNextLevel[2]</td></tr>
+                    <tr><th>Ticks</th><td>@mageAcademyCostsNextLevel[3]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildMageAcademy" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" />
+                </form>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
     </table>
-}
+    <p>@Model.Info</p>
+

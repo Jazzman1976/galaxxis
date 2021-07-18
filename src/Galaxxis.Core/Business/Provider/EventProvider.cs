@@ -48,7 +48,7 @@ namespace Galaxxis.Core.Business.Provider
             using (GalaxxisContext context = new GalaxxisContext())
             {
                 events = context.Event
-                    .Where(e => e.EventTick.Equals(eventTick))?
+                    .Where(e => e.EventTick <= eventTick)?
                     .ToList()
                     ?? new List<Event>();
             }

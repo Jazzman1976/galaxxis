@@ -1,6 +1,7 @@
 ﻿using Galaxxis.Core.Business.Provider;
 using Galaxxis.Core.Classes.Buildings.Interfaces;
 using Galaxxis.Core.Engine;
+using Galaxxis.Core.Extensions;
 using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
@@ -103,41 +104,14 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                 return false;
             }
 
-            // Add build event to DB
-            long universeTicks;
-            using (GalaxxisContext context = new GalaxxisContext())
-            {
-                // get planet to edit
-                Planet editPlanet = context.Planet
-                    .Include(planet => planet.PlanetSystem)
-                    .ThenInclude(system => system.SystemGalaxy)
-                    .ThenInclude(galaxy => galaxy.GalaxyUniverse)
-                    .First(p => p.PlanetId == _planet.PlanetId);
-
-                // get universe ticks
-                universeTicks = context.Universe
-                    .First(u
-                        => u.UniverseId
-                        == editPlanet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseId)
-                    .UniverseTicks;
-
-                // pay costs                
-                editPlanet.UpdateRessources();
-                editPlanet.PlanetOre -= BuildCosts[0];
-                editPlanet.PlanetMana -= BuildCosts[1];
-                editPlanet.PlanetCrystals -= BuildCosts[2];
-
-                // add event
-                context.Event.Add(
-                    EventProvider.NewEvent(
-                        EventLocationTypeEnum.Planet,
-                        _planet.PlanetId,
-                        eventName,
-                        universeTicks + BuildTimeRate.ValueLong));
-
-                // save
-                context.SaveChanges();
-            }
+            // queue event
+            Processor.Instance.EventQueue
+                .Enqueue(EventProvider.NewEvent(
+                    EventLocationTypeEnum.Planet,
+                    _planet.PlanetId,
+                    eventName,
+                    BuildTimeRate.ValueLong,
+                    BuildCosts.ToValueString()));
 
             // exit
             info = "Construction of the next building level has been started.";

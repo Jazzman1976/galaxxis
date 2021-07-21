@@ -47,11 +47,19 @@ namespace Galaxxis.Core.Business.Provider
             List<Event> events = new List<Event>();
             using (GalaxxisContext context = new GalaxxisContext())
             {
-                events = context.Event
-                    .Where(e => e.EventTick <= eventTick)?
-                    .ToList()
-                    ?? new List<Event>();
+                events = GetEvents(eventTick, context);
             }
+            return events;
+        }
+        public static List<Event> GetEvents(long eventTick, GalaxxisContext context)
+        {
+            List<Event> events = new List<Event>();            
+
+            events = context.Event
+                .Where(e => e.EventTick <= eventTick)?
+                .ToList()
+                ?? new List<Event>();
+            
             return events;
         }
 
@@ -74,14 +82,16 @@ namespace Galaxxis.Core.Business.Provider
             EventLocationTypeEnum type, 
             int locationId, 
             EventNameEnum eventName, 
-            long executionTick)
+            long executionTick,
+            string eventData = "")
         {
             Event @event = new Event
             {
                 EventLocationType = type.ToString(),
                 EventLocationId = locationId,
                 EventTick = executionTick,
-                EventName = eventName.ToString()
+                EventName = eventName.ToString(),
+                EventData = eventData
             };
             return @event;
         }

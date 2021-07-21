@@ -3,6 +3,7 @@ using Galaxxis.Core.Extensions;
 using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,6 +25,7 @@ namespace Galaxxis.Core.Engine
         #region Properties ------------------------------------------------------------------------
 
         public bool IsWorking { get; set; }
+        public Queue<Event> EventQueue { get; set; } = new Queue<Event>();
         private string DateStamp => DateTime.Now.ToString(_dateFormat);
         public static Processor Instance
         {
@@ -80,12 +82,19 @@ namespace Galaxxis.Core.Engine
                     // log time started processing
                     DateTime tStartTick = DateTime.Now;
 
-                    // get events
-                    long tick = universe.UniverseTicksProcessed + 1;
-                    List<Event> events = EventProvider.GetEvents(tick);
+                    // raise tick to be processed
+                    long tick = universe.UniverseTicksProcessed + 1;                    
+
+                    // add new Events to Database
+                    while (EventQueue.Any())
+                    {
+                        Event @event = EventQueue.Dequeue();
+                        Add_EventAction(@event, context, tick);
+                    }
 
                     // iterate events, do action and remove
-                    foreach(Event @event in events) {
+                    List<Event> events = EventProvider.GetEvents(tick, context);
+                    foreach (Event @event in events) {
                         Do_EventAction(@event, context);
                         context.Event.Remove(@event);
                     }
@@ -130,6 +139,42 @@ namespace Galaxxis.Core.Engine
                     Do_BuildMageAcademy(@event, context);
                     break;
             }
+        }
+
+        private void Add_EventAction(Event @event, GalaxxisContext context, long universeTickEventIsAdded)
+        {
+            // events in queue store ticks until it is executed
+            // events in db store exact tick when it is executed
+            // => a queued event has to add the current tick to it's eventTick
+            @event.EventTick += universeTickEventIsAdded;
+
+            // get planet to edit
+            // currently only planet events!
+            Planet editPlanet = context.Planet
+                .Include(planet => planet.PlanetSystem)
+                .ThenInclude(system => system.SystemGalaxy)
+                .ThenInclude(galaxy => galaxy.GalaxyUniverse)
+                .First(p => p.PlanetId == @event.EventLocationId);
+            editPlanet.UpdateRessources();
+
+            string[] eventDataArray;
+            switch (Enum.Parse(typeof(EventNameEnum), @event.EventName))
+            {
+                case EventNameEnum.BuildOreMine:
+                case EventNameEnum.BuildPowerSupply:
+                case EventNameEnum.BuildFactory:
+                case EventNameEnum.BuildMageAcademy:
+                    eventDataArray = @event.EventData.Split('|');
+                    editPlanet.PlanetOre -= double.Parse(eventDataArray[0]);
+                    editPlanet.PlanetMana -= double.Parse(eventDataArray[1]);
+                    editPlanet.PlanetCrystals -= double.Parse(eventDataArray[2]);
+                    break;
+            }
+
+            // add event to db context
+            Debug.WriteLine($"{DateStamp}: Event added: "
+                + $"{@event.EventLocationType}, {@event.EventLocationId}, {@event.EventName}.");
+            context.Event.Add(@event);
         }
 
         private void Do_BuildOreMine(Event @event, GalaxxisContext context)

@@ -1,4 +1,4 @@
-﻿using Galaxxis.Core.Extensions.PlanetExtensions;
+﻿using Galaxxis.Core.Classes.Buildings.PlanetBuildings;
 using Galaxxis.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -18,30 +18,25 @@ namespace Galaxxis.Web.Views.Home
         [HttpPost]
         public IActionResult BuildOreMine(int planetId)
         {
-            HomeViewModel model
-                   = new HomeViewModel();
+            // init view model
+            HomeViewModel model = new HomeViewModel();
 
-            string info = null;
-            Planet planet;            
+            // get planet from database
+            Planet planet;
             using (GalaxxisContext context = new GalaxxisContext())
             {
                 planet = context.Planet.FirstOrDefault(p => p.PlanetId == planetId);
-                if (planet != null)
-                {
-                    planet.UpdateRessources();
-                    
-                    if (planet.OreMine_BuildOreMine(out info))
-                    {
-                        context.SaveChanges();
-                    }
-                }
-                else
-                {
-                    info = "Planet not found!";
-                }
             }
+
+            // build ore mine
+            OreMine oreMine = new OreMine(planet);
+            string info = null;            
+            oreMine.Build(out info);
+
+            // update view model
             model.Info = info;
 
+            // show view
             return View("Home", model);
         }
 
@@ -50,25 +45,19 @@ namespace Galaxxis.Web.Views.Home
         {
             HomeViewModel model = new HomeViewModel();
 
-            string info = null;
+            // get planet from database
             Planet planet;
             using (GalaxxisContext context = new GalaxxisContext())
             {
                 planet = context.Planet.FirstOrDefault(p => p.PlanetId == planetId);
-                if (planet != null)
-                {
-                    planet.UpdateRessources();
-
-                    if (planet.MageAcademy_Build(out info))
-                    {
-                        context.SaveChanges();
-                    }
-                }
-                else
-                {
-                    info = "Planet not found!";
-                }
             }
+
+            // build mage academy
+            MageAcademy mageAcademy = new MageAcademy(planet);
+            string info = null;
+            mageAcademy.Build(out info);
+
+            // update view model
             model.Info = info;
 
             return View("Home", model);

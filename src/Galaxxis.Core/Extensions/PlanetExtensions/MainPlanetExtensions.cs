@@ -1,4 +1,5 @@
 ﻿using Galaxxis.Core.Business.Provider;
+using Galaxxis.Core.Classes.Buildings.PlanetBuildings;
 using Galaxxis.Core.Engine;
 using Galaxxis.Data.Models;
 
@@ -30,6 +31,7 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
 
         #endregion
 
+
         /// <summary>
         /// Get amount of ticks gone since last UpdateRessources
         /// </summary>
@@ -56,14 +58,11 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
             {
                 #region Ore -----------------------------------------------------------------------
 
-                // add ore income
-                double amountOre = planet.OreMine_GetIncomePerTick();
-
-                // substract production costs (currently ore is not consumed anywhere)
-                amountOre -= planet.OreMine_GetCostsPerTick();
+                // init oreMine
+                OreMine oreMine = new OreMine(planet);
 
                 // set calculated stock
-                double stockOre = planet.PlanetOre + amountOre;
+                double stockOre = planet.PlanetOre + oreMine.AmountPerTick;
                 if (stockOre >= 0)
                 {
                     planet.PlanetOre = stockOre;
@@ -106,13 +105,11 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
 
                 #region Mana ----------------------------------------------------------------------
 
-                // add mana income
-                double amountMana = planet.MageAcademy_GetIncomePerTick();
+                // init mageAcademy
+                MageAcademy mageAcademy = new MageAcademy(planet);
 
-                // substruct crafting costs
-                amountMana -= planet.MageAcademy_GetCostsPerTick();
-
-                double stockMana = planet.PlanetMana + amountMana;
+                // set calculated stock
+                double stockMana = planet.PlanetMana + mageAcademy.AmountPerTick;
                 if (stockMana >= 0)
                 {
                     planet.PlanetMana = stockMana;

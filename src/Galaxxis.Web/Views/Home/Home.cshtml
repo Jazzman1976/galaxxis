@@ -1,6 +1,7 @@
-﻿@using Galaxxis.Core.Extensions.PlanetExtensions;
+﻿@using Galaxxis.Core.Extensions.PlanetExtensions
 @using Galaxxis.Data.Models
 @using Galaxxis.Web.Views.Home
+@using Galaxxis.Core.Classes.Buildings.PlanetBuildings
 
 @model HomeViewModel
 
@@ -21,10 +22,11 @@
     thePlanet.UpdateRessources();
 
     // init markup vars
+    OreMine oreMine = new OreMine(thePlanet);
+    MageAcademy mageAcademy = new MageAcademy(thePlanet);
     double universeTicks = thePlanet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks;
-    double[] oreMineCostsNextLevel = thePlanet.OreMine_GetBuildCosts();
-    double[] mageAcademyCostsNextLevel = thePlanet.MageAcademy_GetBuildCosts();
-
+    double[] oreMineCostsNextLevel = oreMine.BuildCosts;
+    double[] mageAcademyCostsNextLevel = mageAcademy.BuildCosts;
 }
 
 <div style="margin-bottom: 1rem;">Game Ticks: @universeTicks</div>
@@ -120,40 +122,40 @@
         </tr>
         <tr>
             <th>Income/Day (86.400 ticks)</th>
-            <td>@thePlanet.OreMine_GetIncomePerDay()</td>
+            <td>@oreMine.IncomePerDay</td>
             <td>@thePlanet.GetIncomeEnergyPerDay()</td>
             <td>@thePlanet.GetIncomeToolsPerDay()</td>
-            <td>@thePlanet.MageAcademy_GetIncomePerDay()</td>
+            <td>@mageAcademy.IncomePerDay</td>
             <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <th>Income/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
-            <td>@thePlanet.OreMine_GetIncomePerTick()</td>
+            <td>@oreMine.IncomePerTick</td>
             <td>@thePlanet.GetIncomeEnergyPerTick()</td>
             <td>@thePlanet.GetIncomeToolsPerTick()</td>
-            <td>@thePlanet.MageAcademy_GetIncomePerTick()</td>
+            <td>@mageAcademy.IncomePerTick</td>
             <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <th>Costs/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
-            <td>@thePlanet.OreMine_GetCostsPerTick()</td>
+            <td>@oreMine.CostsPerTick</td>
             <td>@thePlanet.GetCostsEnergyPerTick()</td>
             <td>@thePlanet.GetCostsToolsPerTick()</td>
-            <td>@thePlanet.MageAcademy_GetCostsPerTick()</td>
+            <td>@mageAcademy.CostsPerTick</td>
             <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <th>Amount/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
-            <td>@(thePlanet.OreMine_GetIncomePerTick() - thePlanet.OreMine_GetCostsPerTick())</td>
+            <td>@oreMine.AmountPerTick</td>
             <td>@(thePlanet.GetIncomeEnergyPerTick() - thePlanet.GetCostsEnergyPerTick())</td>
             <td>@(thePlanet.GetIncomeToolsPerTick() - thePlanet.GetCostsToolsPerTick())</td>
-            <td>@(thePlanet.MageAcademy_GetIncomePerTick() - thePlanet.MageAcademy_GetCostsPerTick())</td>
+            <td>@mageAcademy.AmountPerTick</td>
             <td></td>
             <td></td>
             <td></td>

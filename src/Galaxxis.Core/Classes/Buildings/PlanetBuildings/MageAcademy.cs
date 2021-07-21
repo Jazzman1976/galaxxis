@@ -1,0 +1,52 @@
+﻿using Galaxxis.Core.Classes.Buildings.BaseClasses;
+using Galaxxis.Core.Engine;
+using Galaxxis.Data.Enums;
+using Galaxxis.Data.Models;
+
+namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
+{
+    public class MageAcademy : BasePlanetRessourceBuilding
+    {
+        #region Properties ------------------------------------------------------------------------
+
+        public override GrowthRate RessourceGrowthRate
+            => _ressourceGrowthRate 
+            ??= new GrowthRate(
+                    175, Constants.FACTOR_RESSOURCE_GROWTH, _planet.PlanetMageAcademy, 30);
+
+        public override GrowthRate BuildTimeRate 
+            => _buildTimeRate
+            ??= new GrowthRate(5, Constants.FACTOR_BUILD_TIME, _planet.PlanetMageAcademy + 1);
+
+        public override GrowthRate BuildCostOreRate
+            => _buildCostOreRate
+            ??= new GrowthRate(15, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
+
+        public override GrowthRate BuildCostManaRate
+            => _buildCostManaRate
+            ??= new GrowthRate(15, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
+
+        public override GrowthRate BuildCostCrystalsRate
+            => _buildCostCrystalsRate
+            ??= new GrowthRate(10, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
+
+        #endregion
+
+
+        #region Methods ---------------------------------------------------------------------------
+
+        public override bool Build(out string info)
+        {
+            return base.Build(EventNameEnum.BuildMageAcademy, out info);
+        }
+
+        #endregion
+
+        #region Constructors ----------------------------------------------------------------------
+
+        public MageAcademy(Planet planet) : base(planet)
+        { }
+
+        #endregion
+    }
+}

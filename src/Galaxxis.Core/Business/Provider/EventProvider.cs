@@ -70,24 +70,20 @@ namespace Galaxxis.Core.Business.Provider
             return events;
         }
 
-        public static void AddEvent(
+        public static Event NewEvent(
             EventLocationTypeEnum type, 
             int locationId, 
             EventNameEnum eventName, 
             long executionTick)
         {
-            Event eventToAdd = new Event
+            Event @event = new Event
             {
                 EventLocationType = type.ToString(),
                 EventLocationId = locationId,
                 EventTick = executionTick,
                 EventName = eventName.ToString()
             };
-            using (GalaxxisContext context = new GalaxxisContext())
-            {
-                context.Event.Add(eventToAdd);
-                context.SaveChanges();
-            }
+            return @event;
         }
     }
 }

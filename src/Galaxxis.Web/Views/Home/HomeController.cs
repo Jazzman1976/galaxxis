@@ -62,5 +62,28 @@ namespace Galaxxis.Web.Views.Home
 
             return View("Home", model);
         }
+
+        [HttpPost]
+        public IActionResult BuildPowerSupply(int planetId)
+        {
+            HomeViewModel model = new HomeViewModel();
+
+            // get planet from database
+            Planet planet;
+            using (GalaxxisContext context = new GalaxxisContext())
+            {
+                planet = context.Planet.FirstOrDefault(p => p.PlanetId == planetId);
+            }
+
+            // build mage academy
+            PowerSupply powerSupply = new PowerSupply(planet);
+            string info = null;
+            powerSupply.Build(out info);
+
+            // update view model
+            model.Info = info;
+
+            return View("Home", model);
+        }
     }
 }

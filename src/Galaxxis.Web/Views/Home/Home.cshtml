@@ -24,6 +24,7 @@
     // init markup vars
     OreMine oreMine = new OreMine(thePlanet);
     MageAcademy mageAcademy = new MageAcademy(thePlanet);
+    PowerSupply powerSupply = new PowerSupply(thePlanet);
     double universeTicks = thePlanet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks;
     double[] oreMineCostsNextLevel = oreMine.BuildCosts;
     double[] mageAcademyCostsNextLevel = mageAcademy.BuildCosts;
@@ -123,7 +124,7 @@
         <tr>
             <th>Income/Day (86.400 ticks)</th>
             <td>@oreMine.IncomePerDay</td>
-            <td>@thePlanet.GetIncomeEnergyPerDay()</td>
+            <td>@powerSupply.IncomePerDay</td>
             <td>@thePlanet.GetIncomeToolsPerDay()</td>
             <td>@mageAcademy.IncomePerDay</td>
             <td></td>
@@ -133,7 +134,7 @@
         <tr>
             <th>Income/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
             <td>@oreMine.IncomePerTick</td>
-            <td>@thePlanet.GetIncomeEnergyPerTick()</td>
+            <td>@powerSupply.IncomePerTick</td>
             <td>@thePlanet.GetIncomeToolsPerTick()</td>
             <td>@mageAcademy.IncomePerTick</td>
             <td></td>
@@ -143,7 +144,7 @@
         <tr>
             <th>Costs/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
             <td>@oreMine.CostsPerTick</td>
-            <td>@thePlanet.GetCostsEnergyPerTick()</td>
+            <td>@powerSupply.CostsPerTick</td>
             <td>@thePlanet.GetCostsToolsPerTick()</td>
             <td>@mageAcademy.CostsPerTick</td>
             <td></td>
@@ -153,7 +154,7 @@
         <tr>
             <th>Amount/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
             <td>@oreMine.AmountPerTick</td>
-            <td>@(thePlanet.GetIncomeEnergyPerTick() - thePlanet.GetCostsEnergyPerTick())</td>
+            <td>@powerSupply.AmountPerTick</td>
             <td>@(thePlanet.GetIncomeToolsPerTick() - thePlanet.GetCostsToolsPerTick())</td>
             <td>@mageAcademy.AmountPerTick</td>
             <td></td>
@@ -175,7 +176,19 @@
                     <input type="submit" value="Build" />
                 </form>
             </td>
-            <td></td>
+            <td>
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@powerSupply.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@powerSupply.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@powerSupply.BuildCosts[2]</td></tr>
+                    <tr><th>Ticks</th><td>@powerSupply.BuildCosts[3]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildPowerSupply" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" />
+                </form>
+            </td>
             <td></td>
             <td>
                 <table>

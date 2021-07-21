@@ -72,14 +72,11 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
 
                 #region Energy --------------------------------------------------------------------
 
-                // add energy income
-                double amountEnergy = planet.GetIncomeEnergyPerTick();
-
-                // subscruct production costs
-                amountEnergy -= planet.GetCostsEnergyPerTick();
+                // init powerSupply
+                PowerSupply powerSupply = new PowerSupply(planet);
 
                 // set calculated stock
-                double stockEnergy = planet.PlanetEnergy + amountEnergy;
+                double stockEnergy = planet.PlanetEnergy + powerSupply.AmountPerTick;
                 if (stockEnergy >= 0)
                 {
                     planet.PlanetEnergy = stockEnergy;

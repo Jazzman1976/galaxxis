@@ -35,13 +35,12 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         public abstract GrowthRate BuildCostCrystalsRate { get; }
 
+        public abstract double CostsPerTick { get; }
+
         #endregion
 
 
         #region Public Properties -----------------------------------------------------------------
-
-        public double CostsPerTick 
-            => 0;
 
         public double[] BuildCosts
             => _buildCosts

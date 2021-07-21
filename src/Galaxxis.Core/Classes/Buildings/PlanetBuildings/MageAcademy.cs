@@ -30,6 +30,8 @@ namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
             => _buildCostCrystalsRate
             ??= new GrowthRate(10, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
 
+        public override double CostsPerTick => 0;
+
         #endregion
 
 

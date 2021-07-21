@@ -29,6 +29,8 @@ namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
             => _buildCostCrystalsRate
             ??= new GrowthRate(5, Constants.FACTOR_BUILD_COST, _planet.PlanetOreMine + 1);
 
+        public override double CostsPerTick => 0;
+
         #endregion
 
 
@@ -36,7 +38,7 @@ namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
 
         public override bool Build(out string info)
         {
-            return base.Build(EventNameEnum.BuildOreMine, out info);            
+            return base.Build(EventNameEnum.BuildOreMine, out info);
         }
 
         #endregion

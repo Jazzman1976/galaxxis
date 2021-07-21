@@ -4,6 +4,7 @@ using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.BaseClasses
@@ -106,15 +107,21 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
             long universeTicks;
             using (GalaxxisContext context = new GalaxxisContext())
             {
+                // get planet to edit
+                Planet editPlanet = context.Planet
+                    .Include(planet => planet.PlanetSystem)
+                    .ThenInclude(system => system.SystemGalaxy)
+                    .ThenInclude(galaxy => galaxy.GalaxyUniverse)
+                    .First(p => p.PlanetId == _planet.PlanetId);
+
                 // get universe ticks
                 universeTicks = context.Universe
                     .First(u
                         => u.UniverseId
-                        == _planet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseId)
+                        == editPlanet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseId)
                     .UniverseTicks;
 
-                // pay costs
-                Planet editPlanet = context.Planet.First(p => p.PlanetId == _planet.PlanetId);
+                // pay costs                
                 editPlanet.UpdateRessources();
                 editPlanet.PlanetOre -= BuildCosts[0];
                 editPlanet.PlanetMana -= BuildCosts[1];

@@ -23,7 +23,7 @@ namespace Galaxxis.Core.Engine
 
         #region Properties ------------------------------------------------------------------------
 
-        private bool IsWorking { get; set; }
+        public bool IsWorking { get; set; }
         private string DateStamp => DateTime.Now.ToString(_dateFormat);
         public static Processor Instance
         {

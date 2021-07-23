@@ -1,9 +1,7 @@
-/logs
-
 **/.vs
 **/bin
 **/obj
 **/wwwroot/dist
 
 **/*.user
-**/*.fods#
+**/*.log

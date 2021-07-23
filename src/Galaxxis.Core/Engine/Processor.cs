@@ -162,13 +162,9 @@ namespace Galaxxis.Core.Engine
             editPlanet.UpdateRessources();
 
             string[] eventDataArray;
-            switch (Enum.Parse(typeof(EventNameEnum), @event.EventName))
+            switch (Enum.Parse(typeof(EventTypeEnum), @event.EventType))
             {
-                case EventNameEnum.BuildOreMine:
-                case EventNameEnum.BuildPowerSupply:
-                case EventNameEnum.BuildFactory:
-                case EventNameEnum.BuildMageAcademy:
-                case EventNameEnum.BuildCrystalMine:
+                case EventTypeEnum.Build:
                     // pay build costs
                     eventDataArray = @event.EventData.Split('|');
                     editPlanet.PlanetOre -= double.Parse(eventDataArray[0]);
@@ -180,13 +176,13 @@ namespace Galaxxis.Core.Engine
 
             // add event to db context
             Debug.WriteLine($"{DateStamp}: Event added: "
-                + $"{@event.EventLocationType}, {@event.EventLocationId}, {@event.EventName}.");
+                + $"{@event.EventLocation}, {@event.EventLocationId}, {@event.EventName}.");
             context.Event.Add(@event);
         }
 
         private void Do_BuildOreMine(Event @event, GalaxxisContext context)
         {
-            if (@event.EventLocationType.Trim() == EventLocationEnum.Planet.ToString())
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet
@@ -199,7 +195,7 @@ namespace Galaxxis.Core.Engine
 
         private void Do_BuildPowerSupply(Event @event, GalaxxisContext context)
         {
-            if (@event.EventLocationType.Trim() == EventLocationEnum.Planet.ToString())
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet
@@ -212,7 +208,7 @@ namespace Galaxxis.Core.Engine
 
         private void Do_BuildFactory(Event @event, GalaxxisContext context)
         {
-            if (@event.EventLocationType.Trim() == EventLocationEnum.Planet.ToString())
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet
@@ -225,7 +221,7 @@ namespace Galaxxis.Core.Engine
 
         private void Do_BuildMageAcademy(Event @event, GalaxxisContext context)
         {
-            if (@event.EventLocationType.Trim() == EventLocationEnum.Planet.ToString())
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet
@@ -238,7 +234,7 @@ namespace Galaxxis.Core.Engine
 
         private void Do_BuildCrystalMine(Event @event, GalaxxisContext context)
         {
-            if (@event.EventLocationType.Trim() == EventLocationEnum.Planet.ToString())
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet

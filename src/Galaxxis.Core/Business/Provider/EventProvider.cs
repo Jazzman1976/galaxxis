@@ -24,7 +24,7 @@ namespace Galaxxis.Core.Business.Provider
         }
 
         public static Event GetEvent(
-            long eventTick, int eventLocationId, EventLocationEnum eventLocationType)
+            long eventTick, int eventLocationId, EventLocationEnum eventLocation)
         {
             Event @event = null;
             using (GalaxxisContext context = new GalaxxisContext())
@@ -33,7 +33,7 @@ namespace Galaxxis.Core.Business.Provider
                     .FirstOrDefault(e 
                         => e.EventTick.Equals(eventTick)
                         && e.EventLocationId.Equals(eventLocationId)
-                        && e.EventLocationType.Equals(eventLocationType.ToString()));
+                        && e.EventLocation.Trim().Equals(eventLocation.ToString()));
             }
             if (@event == null)
             {
@@ -63,7 +63,7 @@ namespace Galaxxis.Core.Business.Provider
             return events;
         }
 
-        public static List<Event> GetEvents(int eventLocationId, EventLocationEnum eventLocationType)
+        public static List<Event> GetEvents(int eventLocationId, EventLocationEnum eventLocation)
         {
             List<Event> events = new List<Event>();
             using (GalaxxisContext context = new GalaxxisContext())
@@ -71,27 +71,39 @@ namespace Galaxxis.Core.Business.Provider
                 events = context.Event
                     .Where(e 
                         => e.EventLocationId.Equals(eventLocationId)
-                        && e.EventLocationType.Equals(eventLocationType.ToString()))?
+                        && e.EventLocation.Trim().Equals(eventLocation.ToString()))?
                     .ToList()
                     ?? new List<Event>();
             }
             return events;
         }
 
+        public static List<Event> GetEvents(
+            int eventLocationId, EventLocationEnum eventLocation, EventTypeEnum eventType)
+        {
+            List<Event> events = GetEvents(eventLocationId, eventLocation)
+                .Where(e => e.EventType.Trim().Equals(eventType.ToString()))?
+                .ToList() 
+                ?? new List<Event>();
+            return events;
+        }
+
         public static Event NewEvent(
-            EventLocationEnum type, 
+            EventLocationEnum location, 
             int locationId, 
             EventNameEnum eventName, 
             long executionTick,
+            EventTypeEnum type,
             string eventData = "")
         {
             Event @event = new Event
             {
-                EventLocationType = type.ToString(),
+                EventLocation = location.ToString(),
                 EventLocationId = locationId,
                 EventTick = executionTick,
                 EventName = eventName.ToString(),
-                EventData = eventData
+                EventData = eventData,
+                EventType = type.ToString()
             };
             return @event;
         }

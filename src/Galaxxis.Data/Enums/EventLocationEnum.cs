@@ -2,6 +2,7 @@
 {
     public enum EventLocationEnum
     {
-        Planet
+        Planet,
+        Moon
     }
 }

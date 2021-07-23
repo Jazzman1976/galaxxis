@@ -4,6 +4,7 @@ using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
+using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 {
@@ -60,7 +61,10 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
             => BuildCosts[0] <= _planet.PlanetOre
             && BuildCosts[1] <= _planet.PlanetMana
             && BuildCosts[2] <= _planet.PlanetCrystals
-            && BuildCosts[3] <= _planet.PlanetElementium;
+            && BuildCosts[3] <= _planet.PlanetElementium
+            && !EventProvider
+                .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
+                .Any();
 
         public double IncomePerDay
             => this.RessourceGrowthRate.Value + this.RessourceGrowthRate.BaseIncome;
@@ -117,6 +121,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                     _planet.PlanetId,
                     eventName,
                     BuildTimeRate.ValueLong,
+                    EventTypeEnum.Build,
                     BuildCosts.ToValueString()));
 
             // exit

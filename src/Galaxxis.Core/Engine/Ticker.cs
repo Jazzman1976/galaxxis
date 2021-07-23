@@ -1,6 +1,5 @@
-﻿using Galaxxis.Data.Models;
-using System;
-using System.Linq;
+﻿using Galaxxis.Core.Business.Provider;
+using Galaxxis.Data.Models;
 using System.Timers;
 
 namespace Galaxxis.Core.Engine
@@ -28,19 +27,17 @@ namespace Galaxxis.Core.Engine
             {
                 if (_instance == null)
                 {
-                    using (GalaxxisContext context = new GalaxxisContext())
-                    {
-                        // init instance
-                        long timePerTick = context.Universe.First().UniverseTimePerTick;
-                        long ticks = context.Universe.First().UniverseTicks;
-
-                        _instance = new Ticker(ticks);
-                        _instance._timer = new Timer(timePerTick);
-                        _instance._timer.Elapsed += OnTickerElapsed;
-                        _instance._timer.AutoReset = true;
-                        _instance._timer.Enabled = true;
-                        _instance.Stop();
-                    }
+                    // get universe
+                    // currently only one universe per app and database are supported
+                    Universe universe = UniverseProvider.GetFirstUniverse();
+                    
+                    // init instance
+                    _instance = new Ticker(universe.UniverseTicks);
+                    _instance._timer = new Timer(universe.UniverseTimePerTick);
+                    _instance._timer.Elapsed += OnTickerElapsed;
+                    _instance._timer.AutoReset = true;
+                    _instance._timer.Enabled = true;
+                    _instance.Stop();                    
                 }
                 return _instance;
             }

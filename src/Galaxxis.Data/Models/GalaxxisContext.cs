@@ -30,7 +30,7 @@ namespace Galaxxis.Data.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=Wall-E;Database=Galaxxis;User Id=GalaxxisUser;Password=***REMOVED***;");
             }
         }
@@ -41,16 +41,21 @@ namespace Galaxxis.Data.Models
 
             modelBuilder.Entity<Event>(entity =>
             {
-                entity.HasIndex(e => new { e.EventTick, e.EventLocationType, e.EventLocationId }, "ix_event_target");
+                entity.HasIndex(e => new { e.EventTick, e.EventLocation, e.EventLocationId }, "ix_event_target");
 
                 entity.Property(e => e.EventData).HasColumnType("xml");
 
-                entity.Property(e => e.EventLocationType)
+                entity.Property(e => e.EventLocation)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsFixedLength(true);
 
                 entity.Property(e => e.EventName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.EventType)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsFixedLength(true);

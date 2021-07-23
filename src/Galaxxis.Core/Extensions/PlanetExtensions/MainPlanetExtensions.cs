@@ -1,7 +1,10 @@
 ﻿using Galaxxis.Core.Business.Provider;
 using Galaxxis.Core.Classes.Buildings.PlanetBuildings;
 using Galaxxis.Core.Engine;
+using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Galaxxis.Core.Extensions.PlanetExtensions
 {
@@ -57,6 +60,27 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
                 = thePlanet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks
                 - thePlanet.PlanetDataTick;
             return ticksGone;
+        }
+
+        /// <summary>
+        /// Checks if planet is currently building anything
+        /// </summary>
+        public static bool IsBuilding(this Planet planet)
+        {
+            return EventProvider
+                .GetEvents(
+                    planet.PlanetId,
+                    EventLocationEnum.Planet,
+                    EventTypeEnum.Build)
+                .Any();
+        }
+
+        /// <summary>
+        /// Get all events that are queued.
+        /// </summary>
+        public static List<Event> GetEvents(this Planet planet)
+        {
+            return EventProvider.GetEvents(planet.PlanetId, EventLocationEnum.Planet);
         }
 
         /// <summary>

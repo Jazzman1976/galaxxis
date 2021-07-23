@@ -30,24 +30,28 @@
     double universeTicks = thePlanet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks;
 }
 
-<div style="margin-bottom: 1rem;">Game Ticks: @universeTicks</div>
+<div>Game Ticks: @universeTicks</div>
+<div style="margin-bottom: 1rem;">Building in progress?: @(thePlanet.IsBuilding() ? "yes" : "no")</div>
 
-<table style="margin-bottom: 1rem;">
-    <tr>
-        <th>UserId</th>
-        <th>UserEmail</th>
-        <th>UserFirstname</th>
-        <th>UserLastname</th>
-    </tr>
+<div style="margin-bottom: 1rem;">
+    <table style="margin-bottom: 1rem;">
+        <tr>
+            <th>UserId</th>
+            <th>UserEmail</th>
+            <th>UserFirstname</th>
+            <th>UserLastname</th>
+        </tr>
 
-    <tr>
-        <td>@Model.User.UserId</td>
-        <td>@Model.User.UserEmail</td>
-        <td>@Model.User.UserFirstname</td>
-        <td>@Model.User.UserLastname</td>
-    </tr>    
-</table>
+        <tr>
+            <td>@Model.User.UserId</td>
+            <td>@Model.User.UserEmail</td>
+            <td>@Model.User.UserFirstname</td>
+            <td>@Model.User.UserLastname</td>
+        </tr>
+    </table>
+</div>
 
+<div style="margin-bottom: 1rem;">
     <table style="margin-bottom: 1rem;">
         <tr>
             <th>PlanetId</th>
@@ -89,7 +93,9 @@
             </tr>
         }
     </table>
+</div>
 
+<div style="margin-bottom: 1rem;">
     <table style="margin-bottom: 1rem;">
         <tr>
             <th></th>
@@ -237,5 +243,22 @@
             <td></td>
         </tr>
     </table>
-    <p>@Model.Info</p>
+</div>
 
+<div style="margin-bottom: 1rem;">
+    <table>
+        <tr>
+            <th>Event Tick</th>
+            <th>Event Name</th>
+        </tr>
+    @foreach (Event @event in thePlanet.GetEvents())
+    {
+        <tr>
+            <td>@(@event.EventTick)</td>
+            <td>@(@event.EventName)</td>
+        </tr>
+    }
+    </table>
+</div>
+
+<div style="margin-bottom: 1rem;">@Model.Info</div>

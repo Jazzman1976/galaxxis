@@ -10,11 +10,17 @@ namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
         public override GrowthRate RessourceGrowthRate 
             => _ressourceGrowthRate
             ??= new GrowthRate(
-                    200, Constants.FACTOR_RESSOURCE_GROWTH, _planet.PlanetPowerSupply, 50);
+                    Constants.BASEVALUE_CAT1_GROWTH, 
+                    Constants.FACTOR_RESSOURCE_GROWTH, 
+                    _planet.PlanetPowerSupply, 
+                    Constants.BASEINCOME_CAT1_GROWTH);
 
-        public override GrowthRate BuildTimeRate 
+        public override GrowthRate BuildTimeRate
             => _buildTimeRate
-            ??= new GrowthRate(5, Constants.FACTOR_BUILD_TIME, _planet.PlanetPowerSupply + 1);
+            ??= new GrowthRate(
+                    Constants.BASEVALUE_BUILD_TIME, 
+                    Constants.FACTOR_BUILD_TIME, 
+                    _planet.PlanetPowerSupply + 1);
 
         public override GrowthRate BuildCostOreRate
             => _buildCostOreRate

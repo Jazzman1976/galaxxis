@@ -93,6 +93,13 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         protected bool Build(EventNameEnum eventName, out string info)
         {
             // check conditions
+            if (EventProvider
+                .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
+                .Any())
+            {
+                info = "A build is still in progress!";
+                return false;
+            }
             if (BuildCosts[0] > _planet.PlanetOre)
             {
                 info = "Not enough ore!";

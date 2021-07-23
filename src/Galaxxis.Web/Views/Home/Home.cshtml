@@ -26,6 +26,7 @@
     PowerSupply powerSupply = thePlanet.GetPowerSupply();
     Factory factory = thePlanet.GetFactory();
     CrystalMine crystalMine = thePlanet.GetCrystalMine();
+    NeutronAccelerator neutronAccelerator = thePlanet.GetNeutronAccelerator();
     double universeTicks = Model.Ticker.Ticks;
 }
 
@@ -133,7 +134,7 @@
             <td>@factory.IncomePerDay</td>
             <td>@mageAcademy.IncomePerDay</td>
             <td>@crystalMine.IncomePerDay</td>
-            <td></td>
+            <td>@neutronAccelerator.IncomePerDay</td>
             <td></td>
         </tr>
         <tr>
@@ -143,7 +144,7 @@
             <td>@factory.IncomePerTick</td>
             <td>@mageAcademy.IncomePerTick</td>
             <td>@crystalMine.IncomePerTick</td>
-            <td></td>
+            <td>@neutronAccelerator.IncomePerTick</td>
             <td></td>
         </tr>
         <tr>
@@ -153,7 +154,7 @@
             <td>@factory.CostsPerTick</td>
             <td>@mageAcademy.CostsPerTick</td>
             <td>@crystalMine.CostsPerTick</td>
-            <td></td>
+            <td>@neutronAccelerator.CostsPerTick</td>
             <td></td>
         </tr>
         <tr>
@@ -163,7 +164,7 @@
             <td>@factory.AmountPerTick</td>
             <td>@mageAcademy.AmountPerTick</td>
             <td>@crystalMine.AmountPerTick</td>
-            <td></td>
+            <td>@neutronAccelerator.AmountPerTick</td>
             <td></td>
         </tr>
         <tr>
@@ -238,7 +239,20 @@
                     <input type="submit" value="Build" @(!crystalMine.CanBuild ? "disabled" : "") />
                 </form>
             </td>
-            <td></td>
+            <td class="table-neutron-accelerator">
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@neutronAccelerator.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@neutronAccelerator.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@neutronAccelerator.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@neutronAccelerator.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@neutronAccelerator.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildNeutronAccelerator" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!neutronAccelerator.CanBuild ? "disabled" : "") />
+                </form>
+            </td>
             <td></td>
         </tr>
     </table>

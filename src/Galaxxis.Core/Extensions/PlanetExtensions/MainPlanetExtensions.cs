@@ -51,6 +51,14 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
         }
 
         /// <summary>
+        /// Returns a new NeutronAccelerator instance
+        /// </summary>
+        public static NeutronAccelerator GetNeutronAccelerator(this Planet planet)
+        {
+            return new NeutronAccelerator(planet);
+        }
+
+        /// <summary>
         /// Get amount of ticks gone since last UpdateRessources
         /// </summary>
         public static long GetTicksGone(this Planet planet)
@@ -146,6 +154,18 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
                     if (stock >= 0)
                     {
                         planet.PlanetCrystals = stock;
+                    }
+                }
+                #endregion
+
+                #region Antimatter ----------------------------------------------------------------
+                {
+                    // set calculated stock
+                    double stock 
+                        = planet.PlanetAntimatter + planet.GetNeutronAccelerator().AmountPerTick;
+                    if (stock >= 0)
+                    {
+                        planet.PlanetAntimatter = stock;
                     }
                 }
                 #endregion

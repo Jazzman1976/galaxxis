@@ -2,6 +2,7 @@
 using Galaxxis.Core.Classes.Buildings.PlanetBuildings;
 using Galaxxis.Data.Models;
 using Microsoft.AspNetCore.Mvc;
+using Galaxxis.Core.Extensions.PlanetExtensions;
 
 namespace Galaxxis.Web.Views.Home
 {
@@ -17,11 +18,10 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildOreMine(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId);
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build ore mine
-            OreMine oreMine = new OreMine(planet);       
-            oreMine.Build(out string info);
+            planet.GetOreMine().Build(out string info);
 
             // exit
             return View("Home", new HomeViewModel(info));
@@ -31,11 +31,10 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildMageAcademy(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId);
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build mage academy
-            MageAcademy mageAcademy = new MageAcademy(planet);
-            mageAcademy.Build(out string info);
+            planet.GetMageAcademy().Build(out string info);
 
             // exit
             return View("Home", new HomeViewModel(info));
@@ -45,11 +44,10 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildPowerSupply(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId);
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build mage power supply
-            PowerSupply powerSupply = new PowerSupply(planet);
-            powerSupply.Build(out string info);
+            planet.GetPowerSupply().Build(out string info);
 
             // exit
             return View("Home", new HomeViewModel(info));
@@ -59,11 +57,10 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildFactory(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId);
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build factory
-            Factory factory = new Factory(planet);
-            factory.Build(out string info);
+            planet.GetFactory().Build(out string info);
 
             // exit
             return View("Home", new HomeViewModel(info));
@@ -73,11 +70,23 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildCrystalMine(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId);
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build chrystal mine
-            CrystalMine chrystalMine = new CrystalMine(planet);
-            chrystalMine.Build(out string info);
+            planet.GetCrystalMine().Build(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult BuildNeutronAccelerator(int planetId)
+        {
+            // get planet from database
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+
+            // build Neutron Accelerator
+            planet.GetNeutronAccelerator().Build(out string info);
 
             // exit
             return View("Home", new HomeViewModel(info));

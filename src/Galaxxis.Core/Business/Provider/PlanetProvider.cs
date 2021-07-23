@@ -1,4 +1,5 @@
 ﻿using Galaxxis.Core.Exceptions;
+using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -7,7 +8,7 @@ namespace Galaxxis.Core.Business.Provider
 {
     public static class PlanetProvider
     {
-        public static Planet GetPlanet(int id)
+        public static Planet GetPlanet(int id, bool updateRessources = false)
         {
             Planet planet = null;
             using (GalaxxisContext context = new GalaxxisContext())
@@ -33,6 +34,12 @@ namespace Galaxxis.Core.Business.Provider
             {
                 throw new PlanetNotFoundException();
             }
+
+            if (updateRessources)
+            {
+                planet.UpdateRessources();
+            }
+
             return planet;
         }
     }

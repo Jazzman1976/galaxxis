@@ -114,7 +114,7 @@ namespace Galaxxis.Core.Engine
         }
 
         /// <summary>
-        /// Main definitions of all code to be processed for every possible event
+        /// Main definitions of all code to be processed for every possible event.
         /// </summary>
         private void Do_EventAction(Event @event, GalaxxisContext context)
         {
@@ -139,9 +139,16 @@ namespace Galaxxis.Core.Engine
                 case EventNameEnum.BuildCrystalMine:
                     Do_BuildCrystalMine(@event, context);
                     break;
+
+                case EventNameEnum.BuildNeutronAccelerator:
+                    Do_BuildNeutronAccelerator(@event, context);
+                    break;
             }
         }
 
+        /// <summary>
+        /// Add events to the database to be processed when they hit the execution tick.
+        /// </summary>
         private void Add_EventAction(Event @event, GalaxxisContext context, long universeTickEventIsAdded)
         {
             // events in queue store ticks until it is executed
@@ -199,7 +206,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetPowerSupply++;
-                Debug.WriteLine($"{DateStamp}: Power supply build on planet {planet.PlanetId}.");   
+                Debug.WriteLine($"{DateStamp}: Power Supply build on planet {planet.PlanetId}.");   
             }
         }
 
@@ -238,7 +245,20 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetCrystalMine++;
-                Debug.WriteLine($"{DateStamp}: Chrystal mine build on planet {planet.PlanetId}.");
+                Debug.WriteLine($"{DateStamp}: Chrystal Mine build on planet {planet.PlanetId}.");
+            }
+        }
+
+        private void Do_BuildNeutronAccelerator(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet
+                    .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
+                planet.PlanetNeutronAccelerator++;
+                Debug.WriteLine($"{DateStamp}: Neutron Accelerator build on planet {planet.PlanetId}.");
             }
         }
 

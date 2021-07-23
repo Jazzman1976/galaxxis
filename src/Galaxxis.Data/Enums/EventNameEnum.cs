@@ -6,6 +6,7 @@
         BuildPowerSupply,
         BuildFactory,
         BuildMageAcademy,
-        BuildCrystalMine
+        BuildCrystalMine,
+        BuildNeutronAccelerator
     }
 }

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 {
-    public abstract class BasePlanetRessourceBuilding : IPlanetBuilding
+    public abstract class BaseRessourceBuilding : IBuilding, IRessourceBuilding
     {
         #region Protected Fields ------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         public abstract GrowthRate BuildCostElementiumRate { get; }
 
-        public abstract double CostsPerTick { get; }
+        public abstract double RessourceCostsPerTick { get; }
 
         #endregion
 
@@ -73,7 +73,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
             => this.RessourceGrowthRate.GetValuePerTick() 
             + this.RessourceGrowthRate.GetBaseIncomePerTick();
 
-        public double AmountPerTick => IncomePerTick - CostsPerTick;
+        public double AmountPerTick => IncomePerTick - RessourceCostsPerTick;
 
         #endregion
 
@@ -178,7 +178,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         #region Constructors ----------------------------------------------------------------------
 
-        public BasePlanetRessourceBuilding(Planet planet)
+        public BaseRessourceBuilding(Planet planet)
         {
             _planet = planet;
         }

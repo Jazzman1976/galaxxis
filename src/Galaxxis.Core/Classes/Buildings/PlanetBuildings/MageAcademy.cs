@@ -5,7 +5,7 @@ using Galaxxis.Data.Models;
 
 namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
 {
-    public class MageAcademy : BasePlanetRessourceBuilding
+    public class MageAcademy : BaseRessourceBuilding
     {
         #region Properties ------------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
             => _buildCostElementiumRate
             ??= new GrowthRate(5, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
 
-        public override double CostsPerTick
+        public override double RessourceCostsPerTick
             => _costsPerTick > 0 ? _costsPerTick : (_costsPerTick = GetCostsPerTick(new int[]
             {
                 5, 5, 0,

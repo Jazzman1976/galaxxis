@@ -5,7 +5,7 @@ using Galaxxis.Data.Models;
 
 namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
 {
-    public class PowerSupply : BasePlanetRessourceBuilding
+    public class PowerSupply : BaseRessourceBuilding
     {
         public override GrowthRate RessourceGrowthRate 
             => _ressourceGrowthRate
@@ -43,7 +43,7 @@ namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
             return base.Build(EventNameEnum.BuildPowerSupply, out info);
         }
 
-        public override double CostsPerTick
+        public override double RessourceCostsPerTick
             => _costsPerTick > 0 ? _costsPerTick : (_costsPerTick = GetCostsPerTick(new int[] 
             {
                 5, 0, 5, 

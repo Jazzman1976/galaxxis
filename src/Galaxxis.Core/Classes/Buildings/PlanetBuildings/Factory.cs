@@ -8,7 +8,7 @@ using Galaxxis.Data.Models;
 
 namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
 {
-    public class Factory : BasePlanetRessourceBuilding
+    public class Factory : BaseRessourceBuilding
     {
         #region Properties ------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
             => _buildCostElementiumRate
             ??= new GrowthRate(0, Constants.FACTOR_BUILD_COST, _planet.PlanetFactory + 1);
 
-        public override double CostsPerTick => 0;
+        public override double RessourceCostsPerTick => 0;
 
         #endregion
 

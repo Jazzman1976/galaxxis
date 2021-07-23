@@ -67,43 +67,40 @@ namespace Galaxxis.Core.Engine
             // log time started processing
             DateTime tStartProcessing = DateTime.Now;
 
+            // for debugging purposes
+            //System.Threading.Thread.Sleep(5000);
+
             // process db objects (for now only one universe supported)
             using (GalaxxisContext context = new GalaxxisContext())
             {
                 // get universe
                 Universe universe = context.Universe.First();
 
-                // set current tick
-                universe.UniverseTicks = universeTicks;
-
                 // process all ticks gone until last processed tick
-                while (universe.UniverseTicksProcessed < universe.UniverseTicks)
+                while (universe.UniverseTicks < universeTicks)
                 {
                     // log time started processing
                     DateTime tStartTick = DateTime.Now;
 
                     // raise tick to be processed
-                    long tick = universe.UniverseTicksProcessed + 1;                    
+                    universe.UniverseTicks++;
 
                     // add new Events to Database
                     while (EventQueue.Any())
                     {
                         Event @event = EventQueue.Dequeue();
-                        Add_EventAction(@event, context, tick);
+                        Add_EventAction(@event, context, universe.UniverseTicks);
                     }
 
                     // iterate events, do action and remove
-                    List<Event> events = EventProvider.GetEvents(tick, context);
+                    List<Event> events = EventProvider.GetEvents(universe.UniverseTicks, context);
                     foreach (Event @event in events) {
                         Do_EventAction(@event, context);
                         context.Event.Remove(@event);
                     }
 
-                    // raise processed ticks
-                    universe.UniverseTicksProcessed = tick;
-
                     // write log
-                    Debug.WriteLine($"{DateStamp}: Tick {tick} done in {tStartTick.MsGone()} ms.");
+                    Debug.WriteLine($"{DateStamp}: Tick {universe.UniverseTicks} done in {tStartTick.MsGone()} ms.");
                 }
 
                 // save all changes
@@ -113,7 +110,7 @@ namespace Galaxxis.Core.Engine
             this.IsWorking = false;
 
             // write log
-            Debug.WriteLine($"{DateStamp}: Processing done in {tStartProcessing.MsGone()} ms.");
+            Debug.WriteLine($"{DateStamp}: Processing completely done in {tStartProcessing.MsGone()} ms.");
         }
 
         /// <summary>

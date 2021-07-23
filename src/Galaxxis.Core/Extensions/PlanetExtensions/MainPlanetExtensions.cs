@@ -57,7 +57,7 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
         {
             Planet thePlanet = PlanetProvider.GetPlanet(planet.PlanetId);
             long ticksGone
-                = thePlanet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks
+                = Ticker.Instance.Ticks
                 - thePlanet.PlanetDataTick;
             return ticksGone;
         }

@@ -17,7 +17,6 @@ namespace Galaxxis.Data.Models
         public string UniverseName { get; set; }
         public long UniverseTimePerTick { get; set; }
         public long UniverseTicks { get; set; }
-        public long UniverseTicksProcessed { get; set; }
 
         public virtual ICollection<Galaxy> Galaxy { get; set; }
         public virtual ICollection<Job> Job { get; set; }

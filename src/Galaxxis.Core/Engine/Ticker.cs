@@ -30,14 +30,14 @@ namespace Galaxxis.Core.Engine
                     // get universe
                     // currently only one universe per app and database are supported
                     Universe universe = UniverseProvider.GetFirstUniverse();
-                    
+
                     // init instance
                     _instance = new Ticker(universe.UniverseTicks);
                     _instance._timer = new Timer(universe.UniverseTimePerTick);
                     _instance._timer.Elapsed += OnTickerElapsed;
                     _instance._timer.AutoReset = true;
                     _instance._timer.Enabled = true;
-                    _instance.Stop();                    
+                    _instance.Stop();
                 }
                 return _instance;
             }
@@ -48,7 +48,7 @@ namespace Galaxxis.Core.Engine
 
         #region constructors ----------------------------------------------------------------------
 
-        private Ticker(long tick) 
+        private Ticker(long tick)
         {
             this.Ticks = tick;
         }

@@ -6,3 +6,4 @@
 **/wwwroot/dist
 
 **/*.user
+**/*.fods#

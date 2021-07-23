@@ -24,11 +24,11 @@ namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
 
         public override GrowthRate BuildCostManaRate
             => _buildCostManaRate
-            ??= new GrowthRate(15, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
+            ??= new GrowthRate(10, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
 
         public override GrowthRate BuildCostCrystalsRate
             => _buildCostCrystalsRate
-            ??= new GrowthRate(10, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
+            ??= new GrowthRate(15, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
 
         public override GrowthRate BuildCostElementiumRate
             => _buildCostElementiumRate

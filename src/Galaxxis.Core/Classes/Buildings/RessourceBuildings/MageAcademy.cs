@@ -3,7 +3,7 @@ using Galaxxis.Core.Engine;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
 
-namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
+namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 {
     public class MageAcademy : BaseRessourceBuilding
     {

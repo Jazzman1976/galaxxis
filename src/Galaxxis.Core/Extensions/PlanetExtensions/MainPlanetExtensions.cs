@@ -1,5 +1,5 @@
 ﻿using Galaxxis.Core.Business.Provider;
-using Galaxxis.Core.Classes.Buildings.PlanetBuildings;
+using Galaxxis.Core.Classes.Buildings.RessourceBuildings;
 using Galaxxis.Core.Engine;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;

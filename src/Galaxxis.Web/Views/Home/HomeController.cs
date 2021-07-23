@@ -1,7 +1,7 @@
-﻿using Galaxxis.Core.Classes.Buildings.PlanetBuildings;
+﻿using Galaxxis.Core.Business.Provider;
+using Galaxxis.Core.Classes.Buildings.PlanetBuildings;
 using Galaxxis.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 namespace Galaxxis.Web.Views.Home
 {
@@ -9,81 +9,64 @@ namespace Galaxxis.Web.Views.Home
     {
         public IActionResult Index()
         {
-            HomeViewModel model 
-                = new HomeViewModel();
-
-            return View("Home", model);
+            // exit
+            return View("Home", new HomeViewModel());
         }
 
         [HttpPost]
         public IActionResult BuildOreMine(int planetId)
         {
-            // init view model
-            HomeViewModel model = new HomeViewModel();
-
             // get planet from database
-            Planet planet;
-            using (GalaxxisContext context = new GalaxxisContext())
-            {
-                planet = context.Planet.FirstOrDefault(p => p.PlanetId == planetId);
-            }
+            Planet planet = PlanetProvider.GetPlanet(planetId);
 
             // build ore mine
-            OreMine oreMine = new OreMine(planet);
-            string info = null;            
-            oreMine.Build(out info);
+            OreMine oreMine = new OreMine(planet);       
+            oreMine.Build(out string info);
 
-            // update view model
-            model.Info = info;
-
-            // show view
-            return View("Home", model);
+            // exit
+            return View("Home", new HomeViewModel(info));
         }
 
         [HttpPost]
         public IActionResult BuildMageAcademy(int planetId)
         {
-            HomeViewModel model = new HomeViewModel();
-
             // get planet from database
-            Planet planet;
-            using (GalaxxisContext context = new GalaxxisContext())
-            {
-                planet = context.Planet.FirstOrDefault(p => p.PlanetId == planetId);
-            }
+            Planet planet = PlanetProvider.GetPlanet(planetId);
 
             // build mage academy
             MageAcademy mageAcademy = new MageAcademy(planet);
-            string info = null;
-            mageAcademy.Build(out info);
+            mageAcademy.Build(out string info);
 
-            // update view model
-            model.Info = info;
-
-            return View("Home", model);
+            // exit
+            return View("Home", new HomeViewModel(info));
         }
 
         [HttpPost]
         public IActionResult BuildPowerSupply(int planetId)
         {
-            HomeViewModel model = new HomeViewModel();
-
             // get planet from database
-            Planet planet;
-            using (GalaxxisContext context = new GalaxxisContext())
-            {
-                planet = context.Planet.FirstOrDefault(p => p.PlanetId == planetId);
-            }
+            Planet planet = PlanetProvider.GetPlanet(planetId);
 
-            // build mage academy
+            // build mage power supply
             PowerSupply powerSupply = new PowerSupply(planet);
-            string info = null;
-            powerSupply.Build(out info);
+            powerSupply.Build(out string info);
 
-            // update view model
-            model.Info = info;
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
 
-            return View("Home", model);
+        [HttpPost]
+        public IActionResult BuildFactory(int planetId)
+        {
+            // get planet from database
+            Planet planet = PlanetProvider.GetPlanet(planetId);
+
+            // build factory
+            Factory factory = new Factory(planet);
+            factory.Build(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
         }
     }
 }

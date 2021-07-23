@@ -179,7 +179,7 @@ namespace Galaxxis.Core.Engine
 
         private void Do_BuildOreMine(Event @event, GalaxxisContext context)
         {
-            if (@event.EventLocationType.Trim() == EventLocationTypeEnum.Planet.ToString())
+            if (@event.EventLocationType.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet
@@ -192,7 +192,7 @@ namespace Galaxxis.Core.Engine
 
         private void Do_BuildPowerSupply(Event @event, GalaxxisContext context)
         {
-            if (@event.EventLocationType.Trim() == EventLocationTypeEnum.Planet.ToString())
+            if (@event.EventLocationType.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet
@@ -205,7 +205,7 @@ namespace Galaxxis.Core.Engine
 
         private void Do_BuildFactory(Event @event, GalaxxisContext context)
         {
-            if (@event.EventLocationType.Trim() == EventLocationTypeEnum.Planet.ToString())
+            if (@event.EventLocationType.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet
@@ -218,7 +218,7 @@ namespace Galaxxis.Core.Engine
 
         private void Do_BuildMageAcademy(Event @event, GalaxxisContext context)
         {
-            if (@event.EventLocationType.Trim() == EventLocationTypeEnum.Planet.ToString())
+            if (@event.EventLocationType.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet

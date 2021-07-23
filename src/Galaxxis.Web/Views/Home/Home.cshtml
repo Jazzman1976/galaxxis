@@ -25,9 +25,8 @@
     OreMine oreMine = new OreMine(thePlanet);
     MageAcademy mageAcademy = new MageAcademy(thePlanet);
     PowerSupply powerSupply = new PowerSupply(thePlanet);
+    Factory factory = new Factory(thePlanet);
     double universeTicks = thePlanet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks;
-    double[] oreMineCostsNextLevel = oreMine.BuildCosts;
-    double[] mageAcademyCostsNextLevel = mageAcademy.BuildCosts;
 }
 
 <div style="margin-bottom: 1rem;">Game Ticks: @universeTicks</div>
@@ -166,14 +165,15 @@
             <td>
                 <table>
                     <tr><th colspan="2">Costs next level</th></tr>
-                    <tr><th>Ore</th><td>@oreMineCostsNextLevel[0]</td></tr>
-                    <tr><th>Mana</th><td>@oreMineCostsNextLevel[1]</td></tr>
-                    <tr><th>Crystal</th><td>@oreMineCostsNextLevel[2]</td></tr>
-                    <tr><th>Ticks</th><td>@oreMineCostsNextLevel[3]</td></tr>
+                    <tr><th>Ore</th><td>@oreMine.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@oreMine.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@oreMine.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@oreMine.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@oreMine.BuildCosts[4]</td></tr>
                 </table>
                 <form asp-controller="Home" asp-action="BuildOreMine" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                    <input type="submit" value="Build" />
+                    <input type="submit" value="Build" @(!oreMine.CanBuild ? "disabled" : "") />
                 </form>
             </td>
             <td>
@@ -182,25 +182,40 @@
                     <tr><th>Ore</th><td>@powerSupply.BuildCosts[0]</td></tr>
                     <tr><th>Mana</th><td>@powerSupply.BuildCosts[1]</td></tr>
                     <tr><th>Crystal</th><td>@powerSupply.BuildCosts[2]</td></tr>
-                    <tr><th>Ticks</th><td>@powerSupply.BuildCosts[3]</td></tr>
+                    <tr><th>Elementium</th><td>@powerSupply.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@powerSupply.BuildCosts[4]</td></tr>
                 </table>
                 <form asp-controller="Home" asp-action="BuildPowerSupply" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                    <input type="submit" value="Build" />
+                    <input type="submit" value="Build" @(!powerSupply.CanBuild ? "disabled" : "") />
                 </form>
             </td>
-            <td></td>
             <td>
                 <table>
                     <tr><th colspan="2">Costs next level</th></tr>
-                    <tr><th>Ore</th><td>@mageAcademyCostsNextLevel[0]</td></tr>
-                    <tr><th>Mana</th><td>@mageAcademyCostsNextLevel[1]</td></tr>
-                    <tr><th>Crystal</th><td>@mageAcademyCostsNextLevel[2]</td></tr>
-                    <tr><th>Ticks</th><td>@mageAcademyCostsNextLevel[3]</td></tr>
+                    <tr><th>Ore</th><td>@factory.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@factory.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@factory.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@factory.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@factory.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildFactory" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!factory.CanBuild ? "disabled" : "") />
+                </form>
+            </td>
+            <td>
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@mageAcademy.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@mageAcademy.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@mageAcademy.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@mageAcademy.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@mageAcademy.BuildCosts[4]</td></tr>
                 </table>
                 <form asp-controller="Home" asp-action="BuildMageAcademy" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                    <input type="submit" value="Build" />
+                    <input type="submit" value="Build" @(!mageAcademy.CanBuild ? "disabled" : "") />
                 </form>
             </td>
             <td></td>

@@ -15,7 +15,7 @@ namespace Galaxxis.Core.Engine
         /// Grown value in 24 hours without base income
         /// </summary>
         public double Value =>
-            _level < 1
+            _level < 1 || _baseValue < 1
                 ? 0
                 : _baseValue * (_faktor * Math.Pow(_level - 1, 2) + 1);
 

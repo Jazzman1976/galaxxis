@@ -30,6 +30,11 @@ namespace Galaxxis.Web.Views.Home
             this.Ticker = Ticker.Instance;
         }
 
+        public HomeViewModel(string info) : this()
+        {
+            this.Info = info;
+        }
+
         #endregion
     }
 }

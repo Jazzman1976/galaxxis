@@ -21,6 +21,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         protected GrowthRate _buildCostOreRate;
         protected GrowthRate _buildCostManaRate;
         protected GrowthRate _buildCostCrystalsRate;
+        protected GrowthRate _buildCostElementiumRate;
 
         #endregion
 
@@ -37,6 +38,8 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         public abstract GrowthRate BuildCostCrystalsRate { get; }
 
+        public abstract GrowthRate BuildCostElementiumRate { get; }
+
         public abstract double CostsPerTick { get; }
 
         #endregion
@@ -51,13 +54,15 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                     BuildCostOreRate.Value,
                     BuildCostManaRate.Value,
                     BuildCostCrystalsRate.Value,
+                    BuildCostElementiumRate.Value,
                     BuildTimeRate.Value
-                };        
+                };
 
         public bool CanBuild
             => BuildCosts[0] <= _planet.PlanetOre
             && BuildCosts[1] <= _planet.PlanetMana
-            && BuildCosts[2] <= _planet.PlanetCrystals;
+            && BuildCosts[2] <= _planet.PlanetCrystals
+            && BuildCosts[3] <= _planet.PlanetElementium;
 
         public double IncomePerDay
             => this.RessourceGrowthRate.Value + this.RessourceGrowthRate.BaseIncome;
@@ -74,9 +79,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         #region Methods ---------------------------------------------------------------------------
 
         /// <summary>
-        /// Start construction of the building's next level. <br/>
-        /// Updates ressources! <br/>
-        /// Saves changes to database!
+        /// Start construction of the building's next level.
         /// </summary>
         public abstract bool Build(out string info);
 
@@ -103,11 +106,16 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                 info = "Not enough crystals!";
                 return false;
             }
+            if (BuildCosts[3] > _planet.PlanetElementium)
+            {
+                info = "Not enough elementium!";
+                return false;
+            }
 
             // queue event
             Processor.Instance.EventQueue
                 .Enqueue(EventProvider.NewEvent(
-                    EventLocationTypeEnum.Planet,
+                    EventLocationEnum.Planet,
                     _planet.PlanetId,
                     eventName,
                     BuildTimeRate.ValueLong,

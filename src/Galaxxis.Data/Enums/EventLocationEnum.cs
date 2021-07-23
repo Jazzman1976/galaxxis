@@ -1,6 +1,6 @@
 ﻿namespace Galaxxis.Data.Enums
 {
-    public enum EventLocationTypeEnum
+    public enum EventLocationEnum
     {
         Planet
     }

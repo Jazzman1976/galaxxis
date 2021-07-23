@@ -29,6 +29,10 @@ namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
             => _buildCostCrystalsRate
             ??= new GrowthRate(5, Constants.FACTOR_BUILD_COST, _planet.PlanetOreMine + 1);
 
+        public override GrowthRate BuildCostElementiumRate
+            => _buildCostElementiumRate
+            ??= new GrowthRate(0, Constants.FACTOR_BUILD_COST, _planet.PlanetOreMine + 1);
+
         public override double CostsPerTick => 0;
 
         #endregion

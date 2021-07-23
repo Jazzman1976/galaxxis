@@ -9,6 +9,7 @@ namespace Galaxxis.Core.Classes.Buildings.Interfaces
         public GrowthRate BuildCostOreRate { get; }
         public GrowthRate BuildCostManaRate { get; }
         public GrowthRate BuildCostCrystalsRate { get; }
+        public GrowthRate BuildCostElementiumRate { get; }
         public double IncomePerDay { get; }
         public double IncomePerTick { get; }
         public double AmountPerTick { get; }
@@ -21,7 +22,7 @@ namespace Galaxxis.Core.Classes.Buildings.Interfaces
 
         /// <summary>
         /// Costs of the next building level. 
-        /// 0: ore, 1: mana, 2: crystals, 3: ticks
+        /// 0: ore, 1: mana, 2: crystals, 3: elementium, 4: ticks
         /// </summary>
         public double[] BuildCosts { get; }
 

@@ -24,7 +24,7 @@ namespace Galaxxis.Core.Business.Provider
         }
 
         public static Event GetEvent(
-            long eventTick, int eventLocationId, EventLocationTypeEnum eventLocationType)
+            long eventTick, int eventLocationId, EventLocationEnum eventLocationType)
         {
             Event @event = null;
             using (GalaxxisContext context = new GalaxxisContext())
@@ -63,7 +63,7 @@ namespace Galaxxis.Core.Business.Provider
             return events;
         }
 
-        public static List<Event> GetEvents(int eventLocationId, EventLocationTypeEnum eventLocationType)
+        public static List<Event> GetEvents(int eventLocationId, EventLocationEnum eventLocationType)
         {
             List<Event> events = new List<Event>();
             using (GalaxxisContext context = new GalaxxisContext())
@@ -79,7 +79,7 @@ namespace Galaxxis.Core.Business.Provider
         }
 
         public static Event NewEvent(
-            EventLocationTypeEnum type, 
+            EventLocationEnum type, 
             int locationId, 
             EventNameEnum eventName, 
             long executionTick,

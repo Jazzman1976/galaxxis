@@ -5,6 +5,7 @@
         BuildOreMine,
         BuildPowerSupply,
         BuildFactory,
-        BuildMageAcademy
+        BuildMageAcademy,
+        BuildCrystalMine
     }
 }

@@ -2,11 +2,8 @@
 using Galaxxis.Core.Classes.Buildings.Interfaces;
 using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions;
-using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 {

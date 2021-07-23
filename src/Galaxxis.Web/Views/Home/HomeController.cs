@@ -68,5 +68,19 @@ namespace Galaxxis.Web.Views.Home
             // exit
             return View("Home", new HomeViewModel(info));
         }
+
+        [HttpPost]
+        public IActionResult BuildCrystalMine(int planetId)
+        {
+            // get planet from database
+            Planet planet = PlanetProvider.GetPlanet(planetId);
+
+            // build chrystal mine
+            CrystalMine chrystalMine = new CrystalMine(planet);
+            chrystalMine.Build(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
     }
 }

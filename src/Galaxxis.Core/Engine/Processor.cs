@@ -138,6 +138,10 @@ namespace Galaxxis.Core.Engine
                 case EventNameEnum.BuildMageAcademy:
                     Do_BuildMageAcademy(@event, context);
                     break;
+
+                case EventNameEnum.BuildCrystalMine:
+                    Do_BuildCrystalMine(@event, context);
+                    break;
             }
         }
 
@@ -164,10 +168,13 @@ namespace Galaxxis.Core.Engine
                 case EventNameEnum.BuildPowerSupply:
                 case EventNameEnum.BuildFactory:
                 case EventNameEnum.BuildMageAcademy:
+                case EventNameEnum.BuildCrystalMine:
+                    // pay build costs
                     eventDataArray = @event.EventData.Split('|');
                     editPlanet.PlanetOre -= double.Parse(eventDataArray[0]);
                     editPlanet.PlanetMana -= double.Parse(eventDataArray[1]);
                     editPlanet.PlanetCrystals -= double.Parse(eventDataArray[2]);
+                    editPlanet.PlanetElementium -= double.Parse(eventDataArray[3]);
                     break;
             }
 
@@ -226,6 +233,19 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 planet.PlanetMageAcademy++;
                 Debug.WriteLine($"{DateStamp}: Mage Academy build on planet {planet.PlanetId}.");
+            }
+        }
+
+        private void Do_BuildCrystalMine(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocationType.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet
+                    .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
+                planet.PlanetCrystalMine++;
+                Debug.WriteLine($"{DateStamp}: Chrystal mine build on planet {planet.PlanetId}.");
             }
         }
 

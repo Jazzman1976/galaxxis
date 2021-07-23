@@ -40,6 +40,14 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
         }
 
         /// <summary>
+        /// Returns a new ChrystalMine instance
+        /// </summary>
+        public static CrystalMine GetCrystalMine(this Planet planet)
+        {
+            return new CrystalMine(planet);
+        }
+
+        /// <summary>
         /// Get amount of ticks gone since last UpdateRessources
         /// </summary>
         public static long GetTicksGone(this Planet planet)
@@ -64,46 +72,58 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
             for (long tickstart = ticksGone; tickstart > 0; tickstart--)
             {
                 #region Ore -----------------------------------------------------------------------
-
-                // set calculated stock
-                double stockOre = planet.PlanetOre + planet.GetOreMine().AmountPerTick;
-                if (stockOre >= 0)
                 {
-                    planet.PlanetOre = stockOre;
+                    // set calculated stock
+                    double stock = planet.PlanetOre + planet.GetOreMine().AmountPerTick;
+                    if (stock >= 0)
+                    {
+                        planet.PlanetOre = stock;
+                    }
                 }
-
                 #endregion
 
                 #region Energy --------------------------------------------------------------------
-
-                // set calculated stock
-                double stockEnergy = planet.PlanetEnergy + planet.GetPowerSupply().AmountPerTick;
-                if (stockEnergy >= 0)
                 {
-                    planet.PlanetEnergy = stockEnergy;
+                    // set calculated stock
+                    double stock = planet.PlanetEnergy + planet.GetPowerSupply().AmountPerTick;
+                    if (stock >= 0)
+                    {
+                        planet.PlanetEnergy = stock;
+                    }
                 }
-
                 #endregion
 
                 #region Tools ---------------------------------------------------------------------
-
-                // set calculated stock
-                double stockTools = planet.PlanetTools + planet.GetFactory().AmountPerTick;
-                if (stockTools >= 0)
                 {
-                    planet.PlanetTools = stockTools;
+                    // set calculated stock
+                    double stock = planet.PlanetTools + planet.GetFactory().AmountPerTick;
+                    if (stock >= 0)
+                    {
+                        planet.PlanetTools = stock;
+                    }
                 }
                 #endregion
 
                 #region Mana ----------------------------------------------------------------------
-
-                // set calculated stock
-                double stockMana = planet.PlanetMana + planet.GetMageAcademy().AmountPerTick;
-                if (stockMana >= 0)
                 {
-                    planet.PlanetMana = stockMana;
+                    // set calculated stock
+                    double stock = planet.PlanetMana + planet.GetMageAcademy().AmountPerTick;
+                    if (stock >= 0)
+                    {
+                        planet.PlanetMana = stock;
+                    }
                 }
+                #endregion
 
+                #region Chrystals -----------------------------------------------------------------
+                {
+                    // set calculated stock
+                    double stock = planet.PlanetCrystals + planet.GetCrystalMine().AmountPerTick;
+                    if (stock >= 0)
+                    {
+                        planet.PlanetCrystals = stock;
+                    }
+                }
                 #endregion
 
                 // increase data tick

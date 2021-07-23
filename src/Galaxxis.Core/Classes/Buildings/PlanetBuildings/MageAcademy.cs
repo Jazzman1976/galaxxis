@@ -32,7 +32,7 @@ namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
 
         public override GrowthRate BuildCostElementiumRate
             => _buildCostElementiumRate
-            ??= new GrowthRate(0, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
+            ??= new GrowthRate(5, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
 
         public override double CostsPerTick
             => _costsPerTick > 0 ? _costsPerTick : (_costsPerTick = GetCostsPerTick(new int[]

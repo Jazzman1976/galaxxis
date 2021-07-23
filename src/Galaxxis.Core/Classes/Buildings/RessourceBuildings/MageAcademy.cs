@@ -12,27 +12,37 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public override GrowthRate RessourceGrowthRate
             => _ressourceGrowthRate 
             ??= new GrowthRate(
-                    175, Constants.FACTOR_RESSOURCE_GROWTH, _planet.PlanetMageAcademy, 30);
+                    Constants.BASEVALUE_CAT2_GROWTH, 
+                    Constants.FACTOR_RESSOURCE_GROWTH, 
+                    _planet.PlanetMageAcademy, 
+                    Constants.BASEINCOME_CAT2_GROWTH);
 
         public override GrowthRate BuildTimeRate 
             => _buildTimeRate
-            ??= new GrowthRate(5, Constants.FACTOR_BUILD_TIME, _planet.PlanetMageAcademy + 1);
+            ??= new GrowthRate(
+                Constants.BASEVALUE_BUILD_TIME, 
+                Constants.FACTOR_BUILD_TIME, 
+                _planet.PlanetMageAcademy + 1);
 
         public override GrowthRate BuildCostOreRate
             => _buildCostOreRate
-            ??= new GrowthRate(15, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
+            ??= new GrowthRate(
+                    15, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
 
         public override GrowthRate BuildCostManaRate
             => _buildCostManaRate
-            ??= new GrowthRate(10, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
+            ??= new GrowthRate(
+                    10, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
 
         public override GrowthRate BuildCostCrystalsRate
             => _buildCostCrystalsRate
-            ??= new GrowthRate(15, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
+            ??= new GrowthRate(
+                    15, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
 
         public override GrowthRate BuildCostElementiumRate
             => _buildCostElementiumRate
-            ??= new GrowthRate(5, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
+            ??= new GrowthRate(
+                    5, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
 
         public override double RessourceCostsPerTick
             => _costsPerTick > 0 ? _costsPerTick : (_costsPerTick = GetCostsPerTick(new int[]

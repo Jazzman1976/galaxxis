@@ -59,6 +59,14 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
         }
 
         /// <summary>
+        /// Returns a new ElementiumSynthesizer instance
+        /// </summary>
+        public static ElementiumSynthesizer GetElementiumSynthesizer(this Planet planet)
+        {
+            return new ElementiumSynthesizer(planet);
+        }
+
+        /// <summary>
         /// Get amount of ticks gone since last UpdateRessources
         /// </summary>
         public static long GetTicksGone(this Planet planet)
@@ -166,6 +174,19 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
                     if (stock >= 0)
                     {
                         planet.PlanetAntimatter = stock;
+                    }
+                }
+                #endregion
+
+                #region Elementium ----------------------------------------------------------------
+                {
+                    // set calculated stock
+                    double stock
+                        = planet.PlanetElementium 
+                        + planet.GetElementiumSynthesizer().AmountPerTick;
+                    if (stock >= 0)
+                    {
+                        planet.PlanetElementium = stock;
                     }
                 }
                 #endregion

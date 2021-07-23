@@ -7,6 +7,7 @@
         BuildFactory,
         BuildMageAcademy,
         BuildCrystalMine,
-        BuildNeutronAccelerator
+        BuildNeutronAccelerator,
+        BuildElementiumSynthesizer
     }
 }

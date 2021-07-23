@@ -27,6 +27,7 @@
     Factory factory = thePlanet.GetFactory();
     CrystalMine crystalMine = thePlanet.GetCrystalMine();
     NeutronAccelerator neutronAccelerator = thePlanet.GetNeutronAccelerator();
+    ElementiumSynthesizer elementiumSynthesizer = thePlanet.GetElementiumSynthesizer();
     double universeTicks = Model.Ticker.Ticks;
 }
 
@@ -135,7 +136,7 @@
             <td>@mageAcademy.IncomePerDay</td>
             <td>@crystalMine.IncomePerDay</td>
             <td>@neutronAccelerator.IncomePerDay</td>
-            <td></td>
+            <td>@elementiumSynthesizer.IncomePerDay</td>
         </tr>
         <tr>
             <th>Income/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
@@ -145,7 +146,7 @@
             <td>@mageAcademy.IncomePerTick</td>
             <td>@crystalMine.IncomePerTick</td>
             <td>@neutronAccelerator.IncomePerTick</td>
-            <td></td>
+            <td>@elementiumSynthesizer.IncomePerTick</td>
         </tr>
         <tr>
             <th>Costs/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
@@ -155,7 +156,7 @@
             <td>@mageAcademy.RessourceCostsPerTick</td>
             <td>@crystalMine.RessourceCostsPerTick</td>
             <td>@neutronAccelerator.RessourceCostsPerTick</td>
-            <td></td>
+            <td>@elementiumSynthesizer.RessourceCostsPerTick</td>
         </tr>
         <tr>
             <th>Amount/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
@@ -165,7 +166,7 @@
             <td>@mageAcademy.AmountPerTick</td>
             <td>@crystalMine.AmountPerTick</td>
             <td>@neutronAccelerator.AmountPerTick</td>
-            <td></td>
+            <td>@elementiumSynthesizer.AmountPerTick</td>
         </tr>
         <tr>
             <th>Actions</th>
@@ -253,7 +254,20 @@
                     <input type="submit" value="Build" @(!neutronAccelerator.CanBuild ? "disabled" : "") />
                 </form>
             </td>
-            <td></td>
+            <td class="table-elementium-synthesizer">
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@elementiumSynthesizer.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@elementiumSynthesizer.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@elementiumSynthesizer.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@elementiumSynthesizer.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@elementiumSynthesizer.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildElementiumSynthesizer" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!elementiumSynthesizer.CanBuild ? "disabled" : "") />
+                </form>
+            </td>
         </tr>
     </table>
 </div>

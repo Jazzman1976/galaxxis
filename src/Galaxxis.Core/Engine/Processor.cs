@@ -143,6 +143,10 @@ namespace Galaxxis.Core.Engine
                 case EventNameEnum.BuildNeutronAccelerator:
                     Do_BuildNeutronAccelerator(@event, context);
                     break;
+
+                case EventNameEnum.BuildElementiumSynthesizer:
+                    Do_BuildElementiumSynthesizer(@event, context);
+                    break;
             }
         }
 
@@ -259,6 +263,19 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 planet.PlanetNeutronAccelerator++;
                 Debug.WriteLine($"{DateStamp}: Neutron Accelerator build on planet {planet.PlanetId}.");
+            }
+        }
+
+        private void Do_BuildElementiumSynthesizer(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet
+                    .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
+                planet.PlanetElementiumSynthesizer++;
+                Debug.WriteLine($"{DateStamp}: Elementium Synthesizer build on planet {planet.PlanetId}.");
             }
         }
 

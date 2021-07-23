@@ -14,5 +14,10 @@ namespace Galaxxis.Core.Classes.Buildings.Interfaces
         /// production
         /// </summary>
         public double RessourceCostsPerTick { get; }
+
+        /// <summary>
+        /// Any change caused by planet owner race. Is used to calculate incomes.
+        /// </summary>
+        public double ApplyRaceFactor(double value);
     }
 }

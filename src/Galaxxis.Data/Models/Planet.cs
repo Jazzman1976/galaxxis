@@ -25,13 +25,20 @@ namespace Galaxxis.Data.Models
         public double PlanetCrystals { get; set; }
         public double PlanetAntimatter { get; set; }
         public double PlanetElementium { get; set; }
-        public int PlanetPowerSupply { get; set; }
         public int PlanetOreMine { get; set; }
+        public double PlanetOreMineUsage { get; set; }
+        public int PlanetPowerSupply { get; set; }
+        public double PlanetPowerSupplyUsage { get; set; }
         public int PlanetFactory { get; set; }
-        public int PlanetNeutronAccelerator { get; set; }
-        public int PlanetCrystalMine { get; set; }
+        public double PlanetFactoryUsage { get; set; }
         public int PlanetMageAcademy { get; set; }
+        public double PlanetMageAcademyUsage { get; set; }
+        public int PlanetCrystalMine { get; set; }
+        public double PlanetCrystalMineUsage { get; set; }
+        public int PlanetNeutronAccelerator { get; set; }
+        public double PlanetNeutronAcceleratorUsage { get; set; }
         public int PlanetElementiumSynthesizer { get; set; }
+        public double PlanetElementiumSynthesizerUsage { get; set; }
         public long PlanetCreated { get; set; }
 
         public virtual System PlanetSystem { get; set; }

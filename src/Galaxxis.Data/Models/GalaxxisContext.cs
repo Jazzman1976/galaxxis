@@ -114,7 +114,9 @@ namespace Galaxxis.Data.Models
 
                 entity.Property(e => e.PlanetMana).HasDefaultValueSql("((175))");
 
-                entity.Property(e => e.PlanetName).HasMaxLength(50);
+                entity.Property(e => e.PlanetName)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.PlanetOre).HasDefaultValueSql("((200))");
 
@@ -163,6 +165,11 @@ namespace Galaxxis.Data.Models
                 entity.Property(e => e.UserFirstname).HasMaxLength(50);
 
                 entity.Property(e => e.UserLastname).HasMaxLength(50);
+
+                entity.Property(e => e.UserRace)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsFixedLength(true);
             });
 
             OnModelCreatingPartial(modelBuilder);

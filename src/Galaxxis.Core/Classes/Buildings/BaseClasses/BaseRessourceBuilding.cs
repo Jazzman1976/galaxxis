@@ -13,6 +13,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         #region Protected Fields ------------------------------------------------------------------
 
         protected Planet _planet;
+        protected User _owner;
         protected double[] _buildCosts;
         protected GrowthRate _ressourceGrowthRate;
         protected GrowthRate _buildTimeRate;
@@ -67,22 +68,25 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                 .Any();
 
         public double IncomePerDay
-            => this.RessourceGrowthRate.Value + this.RessourceGrowthRate.BaseIncome;
+            => ApplyRaceFactor(
+                this.RessourceGrowthRate.Value
+                + this.RessourceGrowthRate.BaseIncome);
 
         public double IncomePerTick
-            => this.RessourceGrowthRate.GetValuePerTick() 
-            + this.RessourceGrowthRate.GetBaseIncomePerTick();
+            => ApplyRaceFactor(
+                this.RessourceGrowthRate.GetValuePerTick()
+                + this.RessourceGrowthRate.GetBaseIncomePerTick());
 
         public double AmountPerTick => IncomePerTick - RessourceCostsPerTick;
+
 
         #endregion
 
 
         #region Methods ---------------------------------------------------------------------------
 
-        /// <summary>
-        /// Start construction of the building's next level.
-        /// </summary>
+        public abstract double ApplyRaceFactor(double value);
+
         public abstract bool Build(out string info);
 
         /// <summary>
@@ -181,6 +185,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         public BaseRessourceBuilding(Planet planet)
         {
             _planet = planet;
+            _owner = planet.PlanetUser ?? UserProvider.GetUser(planet.PlanetUserId);
         }
 
         #endregion

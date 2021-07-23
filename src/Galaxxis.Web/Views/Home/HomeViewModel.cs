@@ -19,13 +19,10 @@ namespace Galaxxis.Web.Views.Home
 
         public HomeViewModel()
         {
-            // create helper objects
-            UserProvider userProvider = new UserProvider();
-
             // get current user
             // for now: user with id 1
             // TODO: Login and use Login User
-            this.User = userProvider.GetUser(1);
+            this.User = UserProvider.GetUser(1, true);
 
             this.Ticker = Ticker.Instance;
         }

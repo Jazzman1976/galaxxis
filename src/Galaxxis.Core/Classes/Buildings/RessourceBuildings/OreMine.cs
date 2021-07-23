@@ -2,6 +2,7 @@
 using Galaxxis.Core.Engine;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
+using System;
 
 namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 {
@@ -43,6 +44,18 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public override bool Build(out string info)
         {
             return base.Build(EventNameEnum.BuildOreMine, out info);
+        }
+
+        public override double ApplyRaceFactor(double value)
+        {
+            switch (Enum.Parse(typeof(UserRacesEnum), _owner.UserRace))
+            {
+                case UserRacesEnum.Dwarf:
+                case UserRacesEnum.Goblin:
+                    value *= 1.5;
+                    break;
+            }
+            return value;
         }
 
         #endregion

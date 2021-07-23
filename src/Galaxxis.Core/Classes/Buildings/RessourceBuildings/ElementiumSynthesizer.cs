@@ -70,6 +70,11 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
             return base.Build(EventNameEnum.BuildElementiumSynthesizer, out info);
         }
 
+        public override double ApplyRaceFactor(double value)
+        {
+            return value;
+        }
+
         #endregion
     }
 }

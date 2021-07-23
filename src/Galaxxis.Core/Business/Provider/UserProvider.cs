@@ -6,7 +6,7 @@ namespace Galaxxis.Core.Business.Provider
     using Microsoft.EntityFrameworkCore;
     using System.Linq;
 
-    public class UserProvider
+    public static class UserProvider
     {
         /// <summary>
         /// Get user object by id.
@@ -14,36 +14,37 @@ namespace Galaxxis.Core.Business.Provider
         /// <param name="id"></param>
         /// <returns>User object</returns>
         /// <exception cref="UserNotFoundException">If the user is not found by id.</exception>
-        public User GetUser(int id)
+        public static User GetUser(int id, bool includeData = false)
         {
             User user = null;
             using (GalaxxisContext context = new GalaxxisContext())
             {
-                user = context.User
+                // init query
+                IQueryable<User> query = context.User.Where(u => u.UserId.Equals(id));
 
-                // get planets
-                .Include(user => user.Planet)
+                // add data to query
+                if (includeData)
+                {
+                    query = query
+                        .Include(user => user.Planet)
+                        .ThenInclude(planet => planet.Moon)                   
+                        .Include(user => user.Planet)
+                        .ThenInclude(planet => planet.PlanetSystem)
+                        .ThenInclude(system => system.SystemGalaxy)
+                        .ThenInclude(galaxy => galaxy.GalaxyUniverse);
+                }
 
-                // get moons
-                .ThenInclude(planet => planet.Moon)
-
-                // get system
-                .Include(user => user.Planet)
-                .ThenInclude(planet => planet.PlanetSystem)
-
-                // get galaxy
-                .ThenInclude(system => system.SystemGalaxy)
-
-                // get universe
-                .ThenInclude(galaxy => galaxy.GalaxyUniverse)
-
-                // return user with data
-                .FirstOrDefault(user => user.UserId.Equals(id));
+                // get user
+                user = query.FirstOrDefault();
             }
+
+            // not found exception
             if (user == null)
             {
                 throw new UserNotFoundException();
             }
+
+            // exit
             return user;
         }
 
@@ -53,7 +54,7 @@ namespace Galaxxis.Core.Business.Provider
         /// <param name="email"></param>
         /// <returns>User object</returns>
         /// <exception cref="UserNotFoundException">If the user is not found by email.</exception>
-        public User GetUser(string email)
+        public static User GetUser(string email, bool includeData = false)
         {
             User user = null;
             using (GalaxxisContext context = new GalaxxisContext())
@@ -64,7 +65,7 @@ namespace Galaxxis.Core.Business.Provider
             {
                 throw new UserNotFoundException();
             }
-            return GetUser(user.UserId);
+            return GetUser(user.UserId, includeData);
         }
     }
 }

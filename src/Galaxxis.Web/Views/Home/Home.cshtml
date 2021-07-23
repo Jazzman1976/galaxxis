@@ -22,10 +22,10 @@
     thePlanet.UpdateRessources();
 
     // init markup vars
-    OreMine oreMine = new OreMine(thePlanet);
-    MageAcademy mageAcademy = new MageAcademy(thePlanet);
-    PowerSupply powerSupply = new PowerSupply(thePlanet);
-    Factory factory = new Factory(thePlanet);
+    OreMine oreMine = thePlanet.GetOreMine();
+    MageAcademy mageAcademy = thePlanet.GetMageAcademy();
+    PowerSupply powerSupply = thePlanet.GetPowerSupply();
+    Factory factory = thePlanet.GetFactory();
     double universeTicks = thePlanet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTicks;
 }
 
@@ -124,7 +124,7 @@
             <th>Income/Day (86.400 ticks)</th>
             <td>@oreMine.IncomePerDay</td>
             <td>@powerSupply.IncomePerDay</td>
-            <td>@thePlanet.GetIncomeToolsPerDay()</td>
+            <td>@factory.IncomePerDay</td>
             <td>@mageAcademy.IncomePerDay</td>
             <td></td>
             <td></td>
@@ -134,7 +134,7 @@
             <th>Income/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
             <td>@oreMine.IncomePerTick</td>
             <td>@powerSupply.IncomePerTick</td>
-            <td>@thePlanet.GetIncomeToolsPerTick()</td>
+            <td>@factory.IncomePerTick</td>
             <td>@mageAcademy.IncomePerTick</td>
             <td></td>
             <td></td>
@@ -144,7 +144,7 @@
             <th>Costs/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
             <td>@oreMine.CostsPerTick</td>
             <td>@powerSupply.CostsPerTick</td>
-            <td>@thePlanet.GetCostsToolsPerTick()</td>
+            <td>@factory.CostsPerTick</td>
             <td>@mageAcademy.CostsPerTick</td>
             <td></td>
             <td></td>
@@ -154,7 +154,7 @@
             <th>Amount/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
             <td>@oreMine.AmountPerTick</td>
             <td>@powerSupply.AmountPerTick</td>
-            <td>@(thePlanet.GetIncomeToolsPerTick() - thePlanet.GetCostsToolsPerTick())</td>
+            <td>@factory.AmountPerTick</td>
             <td>@mageAcademy.AmountPerTick</td>
             <td></td>
             <td></td>

@@ -7,30 +7,37 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
 {
     public static class MainPlanetExtensions
     {
-        #region Growth rates ----------------------------------------------------------------------
-
-        internal static GrowthRate GetGrowthRateTools(this Planet planet)
+        /// <summary>
+        /// Returns a new OreMine instance
+        /// </summary>
+        public static OreMine GetOreMine(this Planet planet)
         {
-            return new GrowthRate(200, 1, planet.PlanetFactory, 50);
+            return new OreMine(planet);
         }
 
-        internal static GrowthRate GetGrowthRateAntimatter(this Planet planet)
+        /// <summary>
+        /// Returns a new PowerSupply instance
+        /// </summary>
+        public static PowerSupply GetPowerSupply(this Planet planet)
         {
-            return new GrowthRate(175, 1, planet.PlanetNeutronAccelerator, 30);
+            return new PowerSupply(planet);
         }
 
-        internal static GrowthRate GetGrowthRateCrystals(this Planet planet)
+        /// <summary>
+        /// Returns a new Factory instance
+        /// </summary>
+        public static Factory GetFactory(this Planet planet)
         {
-            return new GrowthRate(175, 1, planet.PlanetCrystalMine, 30);
+            return new Factory(planet);
         }
 
-        internal static GrowthRate GetGrowthRateElementium(this Planet planet)
+        /// <summary>
+        /// Returns a new MageAcademy instance
+        /// </summary>
+        public static MageAcademy GetMageAcademy(this Planet planet)
         {
-            return new GrowthRate(75, 1, planet.PlanetElementiumSynthesizer, 10);
+            return new MageAcademy(planet);
         }
-
-        #endregion
-
 
         /// <summary>
         /// Get amount of ticks gone since last UpdateRessources
@@ -58,11 +65,8 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
             {
                 #region Ore -----------------------------------------------------------------------
 
-                // init oreMine
-                OreMine oreMine = new OreMine(planet);
-
                 // set calculated stock
-                double stockOre = planet.PlanetOre + oreMine.AmountPerTick;
+                double stockOre = planet.PlanetOre + planet.GetOreMine().AmountPerTick;
                 if (stockOre >= 0)
                 {
                     planet.PlanetOre = stockOre;
@@ -72,11 +76,8 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
 
                 #region Energy --------------------------------------------------------------------
 
-                // init powerSupply
-                PowerSupply powerSupply = new PowerSupply(planet);
-
                 // set calculated stock
-                double stockEnergy = planet.PlanetEnergy + powerSupply.AmountPerTick;
+                double stockEnergy = planet.PlanetEnergy + planet.GetPowerSupply().AmountPerTick;
                 if (stockEnergy >= 0)
                 {
                     planet.PlanetEnergy = stockEnergy;
@@ -86,14 +87,8 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
 
                 #region Tools ---------------------------------------------------------------------
 
-                // add tools income
-                double amountTools = planet.GetIncomeToolsPerTick();
-
-                // subscruct production costs
-                amountTools -= planet.GetCostsToolsPerTick();
-
                 // set calculated stock
-                double stockTools = planet.PlanetTools + amountTools;
+                double stockTools = planet.PlanetTools + planet.GetFactory().AmountPerTick;
                 if (stockTools >= 0)
                 {
                     planet.PlanetTools = stockTools;
@@ -102,11 +97,8 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
 
                 #region Mana ----------------------------------------------------------------------
 
-                // init mageAcademy
-                MageAcademy mageAcademy = new MageAcademy(planet);
-
                 // set calculated stock
-                double stockMana = planet.PlanetMana + mageAcademy.AmountPerTick;
+                double stockMana = planet.PlanetMana + planet.GetMageAcademy().AmountPerTick;
                 if (stockMana >= 0)
                 {
                     planet.PlanetMana = stockMana;
@@ -118,33 +110,5 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
                 planet.PlanetDataTick++;
             }
         }
-
-
-        #region Tools -----------------------------------------------------------------------------
-
-        public static double GetIncomeToolsPerDay(this Planet planet)
-        {
-            GrowthRate growthRateTools = planet.GetGrowthRateTools();
-            return growthRateTools.Value + growthRateTools.BaseIncome;
-        }
-
-        public static double GetIncomeToolsPerTick(this Planet planet)
-        {
-            GrowthRate growthRateTools = planet.GetGrowthRateTools();
-            return growthRateTools.GetValuePerTick() + growthRateTools.GetBaseIncomePerTick();
-        }
-
-        /// <summary>
-        /// Amount of tools decreased each tick due to consuption in production
-        /// </summary>
-        public static double GetCostsToolsPerTick(this Planet planet)
-        {
-            // tools are consumed if producing items in item producing buildings
-            // currently items are not implemented
-            // TODO: as soon as items are implemented, add logic here
-            return 0;
-        }
-
-        #endregion
     }
 }

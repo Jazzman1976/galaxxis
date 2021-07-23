@@ -37,33 +37,13 @@ namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
             return base.Build(EventNameEnum.BuildPowerSupply, out info);
         }
 
-        private double _costsPerTick = -1;
-        private double GetCostsPerTick()
-        {
-            GrowthRate
-                decreaseRateOreMine = new GrowthRate(5, 2, _planet.PlanetOreMine),
-                decreaseRateFactory = new GrowthRate(5, 2, _planet.PlanetFactory),
-                decreaseRateNeutronAccelerator
-                    = new GrowthRate(10, 2, _planet.PlanetNeutronAccelerator),
-                decreaseRateCrystalMine = new GrowthRate(5, 2, _planet.PlanetCrystalMine),
-                decreaseRateMageAcademy = new GrowthRate(15, 2, _planet.PlanetMageAcademy),
-                decreaseRateElementiumSynthesizer
-                    = new GrowthRate(15, 2, _planet.PlanetElementiumSynthesizer);
-
-            double energyCostPerTick
-                = decreaseRateOreMine.GetValuePerTick()
-                + decreaseRateFactory.GetValuePerTick()
-                + decreaseRateNeutronAccelerator.GetValuePerTick()
-                + decreaseRateCrystalMine.GetValuePerTick()
-                + decreaseRateMageAcademy.GetValuePerTick()
-                + decreaseRateElementiumSynthesizer.GetValuePerTick();
-
-            return energyCostPerTick;
-        }
         public override double CostsPerTick
-            => _costsPerTick > 0
-                ? _costsPerTick
-                : (_costsPerTick = GetCostsPerTick());
+            => _costsPerTick > 0 ? _costsPerTick : (_costsPerTick = GetCostsPerTick(new int[] 
+            {
+                5, 0, 5, 
+                15, 5, 10,
+                15
+            }));
 
         #region Constructors ----------------------------------------------------------------------
 

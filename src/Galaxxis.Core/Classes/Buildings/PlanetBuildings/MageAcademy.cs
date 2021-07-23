@@ -34,7 +34,21 @@ namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
             => _buildCostElementiumRate
             ??= new GrowthRate(0, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
 
-        public override double CostsPerTick => 0;
+        public override double CostsPerTick
+            => _costsPerTick > 0 ? _costsPerTick : (_costsPerTick = GetCostsPerTick(new int[]
+            {
+                5, 5, 0,
+                5, 10, 15,
+                15
+            }));
+
+        #endregion
+
+
+        #region Constructors ----------------------------------------------------------------------
+
+        public MageAcademy(Planet planet) : base(planet)
+        { }
 
         #endregion
 
@@ -45,13 +59,6 @@ namespace Galaxxis.Core.Classes.Buildings.PlanetBuildings
         {
             return base.Build(EventNameEnum.BuildMageAcademy, out info);
         }
-
-        #endregion
-
-        #region Constructors ----------------------------------------------------------------------
-
-        public MageAcademy(Planet planet) : base(planet)
-        { }
 
         #endregion
     }

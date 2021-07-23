@@ -22,6 +22,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         protected GrowthRate _buildCostManaRate;
         protected GrowthRate _buildCostCrystalsRate;
         protected GrowthRate _buildCostElementiumRate;
+        protected double _costsPerTick = -1;
 
         #endregion
 
@@ -124,6 +125,43 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
             // exit
             info = "Construction of the next building level has been started.";
             return true;
+        }
+
+        /// <summary>
+        /// Get the consumption of this building's ressource by other buildings per tick <br/>
+        /// supplyCosts parameter: <br/>
+        /// 0: ore mine, 1: power supply, 2: factory, <br/>
+        /// 3: mage academy, 4: crystal mine, 5: neutron accelerator, <br/>
+        /// 6: elementium synthesizer
+        /// </summary>
+        protected double GetCostsPerTick(int[] supplyCosts)
+        {
+            GrowthRate
+                decreaseRateOreMine = new GrowthRate(
+                    supplyCosts[0], Constants.FACTOR_SUPPLY_COST, _planet.PlanetOreMine),
+                decreaseRatePowerSupply = new GrowthRate(
+                    supplyCosts[1], Constants.FACTOR_SUPPLY_COST, _planet.PlanetPowerSupply),
+                decreaseRateFactory = new GrowthRate(
+                    supplyCosts[2], Constants.FACTOR_SUPPLY_COST, _planet.PlanetFactory),
+                decreaseRateNeutronAccelerator = new GrowthRate(
+                    supplyCosts[3], Constants.FACTOR_SUPPLY_COST, _planet.PlanetMageAcademy),
+                decreaseRateCrystalMine = new GrowthRate(
+                    supplyCosts[4], Constants.FACTOR_SUPPLY_COST, _planet.PlanetCrystalMine),
+                decreaseRateMageAcademy = new GrowthRate(
+                    supplyCosts[5], Constants.FACTOR_SUPPLY_COST, _planet.PlanetNeutronAccelerator),
+                decreaseRateElementiumSynthesizer = new GrowthRate(
+                    supplyCosts[6], Constants.FACTOR_SUPPLY_COST, _planet.PlanetElementiumSynthesizer);
+
+            double ressourceCostPerTick
+                = decreaseRateOreMine.GetValuePerTick()
+                + decreaseRatePowerSupply.GetValuePerTick()
+                + decreaseRateFactory.GetValuePerTick()
+                + decreaseRateNeutronAccelerator.GetValuePerTick()
+                + decreaseRateCrystalMine.GetValuePerTick()
+                + decreaseRateMageAcademy.GetValuePerTick()
+                + decreaseRateElementiumSynthesizer.GetValuePerTick();
+
+            return ressourceCostPerTick;
         }
 
         #endregion

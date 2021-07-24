@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html class="gx-html">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/galaxxis.css" />
+</head>
+<body>
+
+<header class="gx-header">
+    <div class="gx-header__left">
+        <a class="gx-header__link" href="/">Home</a>
+    </div>
+    <div class="gx-header__right">
+        @if(User.Identity.IsAuthenticated)
+        {
+            <span class="gx-header__text">@User.Identity.Name</span>
+            <a class="gx-header__link" href="/admin">Admin</a>
+            <a class="gx-header__link" href="/account/logout">Logout</a>
+        }
+        else
+        {
+            <a class="gx-header__link" href="/account/login">Login</a>
+        }
+    </div>
+</header>
+    
+<main>
+    <h1 class="gx-h1">Galaxxis</h1>
+
+    <h2 class="gx-h2">@ViewBag.Title</h2>
+
+    @RenderBody()
+</main>
+    
+</body>
+</html>

@@ -1,0 +1,372 @@
+﻿@using Galaxxis.Core.Extensions.PlanetExtensions
+@using Galaxxis.Data.Models
+@using Galaxxis.Core.Classes.Buildings.RessourceBuildings
+
+@model HomeViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Home";
+
+    // use first as demo planet in this homepage
+    Planet thePlanet = Model.User.Planet.FirstOrDefault();
+
+    // assure planet and user
+    if (thePlanet == null || Model.User == null)
+    {
+        return;
+    }
+
+    // update ressources on planet
+    thePlanet.UpdateRessources();
+
+    // init markup vars
+    OreMine oreMine = thePlanet.GetOreMine();
+    MageAcademy mageAcademy = thePlanet.GetMageAcademy();
+    PowerSupply powerSupply = thePlanet.GetPowerSupply();
+    Factory factory = thePlanet.GetFactory();
+    CrystalMine crystalMine = thePlanet.GetCrystalMine();
+    NeutronAccelerator neutronAccelerator = thePlanet.GetNeutronAccelerator();
+    ElementiumSynthesizer elementiumSynthesizer = thePlanet.GetElementiumSynthesizer();
+    double universeTicks = Model.Ticker.Ticks;
+}
+
+<style>
+    table {
+        border-spacing: 0;
+        border-collapse: collapse;
+    }
+    
+    td, th { 
+        font-size: .9rem;        
+        padding: 5px 10px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: blueviolet; }
+
+    th {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    td {
+        vertical-align: top;
+    }
+
+    form + form {
+        margin-top: 10px;
+    }
+</style>
+
+<div>Game Ticks: @universeTicks</div>
+<div style="margin-bottom: 1rem;">Building in progress?: @(thePlanet.IsBuilding() ? "yes" : "no")</div>
+
+<div style="margin-bottom: 1rem;">
+    <table style="margin-bottom: 1rem;">
+        <tr>
+            <th>UserId</th>
+            <th>UserEmail</th>
+            <th>UserFirstname</th>
+            <th>UserLastname</th>
+            <th>Race</th>
+        </tr>
+
+        <tr>
+            <td>@Model.User.UserId</td>
+            <td>@Model.User.UserEmail</td>
+            <td>@Model.User.UserFirstname</td>
+            <td>@Model.User.UserLastname</td>
+            <td>@Model.User.UserRace</td>
+        </tr>
+    </table>
+</div>
+
+<div style="margin-bottom: 1rem;">
+    <table style="margin-bottom: 1rem;">
+        <tr>
+            <th>PlanetId</th>
+            <th>PlanetName</th>
+            <th>PlanetFields</th>
+            <th>SystemName</th>
+            <th>GalaxyName</th>
+            <th>Moons</th>
+        </tr>
+
+        @foreach (var planet in Model.User.Planet)
+        {
+            <tr>
+                <td>@planet.PlanetId</td>
+                <td>@planet.PlanetName</td>
+                <td>@planet.PlanetFields</td>
+                <td>@planet.PlanetSystem?.SystemName</td>
+                <td>@planet.PlanetSystem?.SystemGalaxy?.GalaxyName</td>
+                <td>
+                    @if (planet.Moon.Any())
+                    {
+                        <table>
+                            <tr>
+                                <th>MoonId</th>
+                                <th>MoonName</th>
+                                <th>MoonFields</th>
+                            </tr>
+                            @foreach (var moon in planet.Moon)
+                            {
+                                <tr>
+                                    <td>@moon.MoonId</td>
+                                    <td>@moon.MoonName</td>
+                                    <td>@moon.MoonFields</td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div style="margin-bottom: 1rem;">
+    <table style="margin-bottom: 1rem;">
+        <tr>
+            <th></th>
+            <th>Ore</th>
+            <th>Energy</th>
+            <th>Tools</th>
+            <th>Mana</th>
+            <th>Crystals</th>
+            <th>Antimatter</th>
+            <th>Elementium</th>
+        </tr>
+        <tr>
+            <th>Level</th>
+            <td>@thePlanet.PlanetOreMine</td>
+            <td>@thePlanet.PlanetPowerSupply</td>
+            <td>@thePlanet.PlanetFactory</td>
+            <td>@thePlanet.PlanetMageAcademy</td>
+            <td>@thePlanet.PlanetCrystalMine</td>
+            <td>@thePlanet.PlanetNeutronAccelerator</td>
+            <td>@thePlanet.PlanetElementiumSynthesizer</td>
+        </tr>
+        <tr>
+            <th>Usage in %</th>
+            <td>@thePlanet.PlanetOreMineUsage</td>
+            <td>@thePlanet.PlanetPowerSupplyUsage</td>
+            <td>@thePlanet.PlanetFactoryUsage</td>
+            <td>@thePlanet.PlanetMageAcademyUsage</td>
+            <td>@thePlanet.PlanetCrystalMineUsage</td>
+            <td>@thePlanet.PlanetNeutronAcceleratorUsage</td>
+            <td>@thePlanet.PlanetElementiumSynthesizerUsage</td>
+        </tr>
+        <tr>
+            <th>Stock</th>
+            <td>@thePlanet.PlanetOre</td>
+            <td>@thePlanet.PlanetEnergy</td>
+            <td>@thePlanet.PlanetTools</td>
+            <td>@thePlanet.PlanetMana</td>
+            <td>@thePlanet.PlanetCrystals</td>
+            <td>@thePlanet.PlanetAntimatter</td>
+            <td>@thePlanet.PlanetElementium</td>
+        </tr>
+        <tr>
+            <th>Income/Day (86.400 ticks)</th>
+            <td>@oreMine.IncomePerDay</td>
+            <td>@powerSupply.IncomePerDay</td>
+            <td>@factory.IncomePerDay</td>
+            <td>@mageAcademy.IncomePerDay</td>
+            <td>@crystalMine.IncomePerDay</td>
+            <td>@neutronAccelerator.IncomePerDay</td>
+            <td>@elementiumSynthesizer.IncomePerDay</td>
+        </tr>
+        <tr>
+            <th>Income/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
+            <td>@oreMine.IncomePerTick</td>
+            <td>@powerSupply.IncomePerTick</td>
+            <td>@factory.IncomePerTick</td>
+            <td>@mageAcademy.IncomePerTick</td>
+            <td>@crystalMine.IncomePerTick</td>
+            <td>@neutronAccelerator.IncomePerTick</td>
+            <td>@elementiumSynthesizer.IncomePerTick</td>
+        </tr>
+        <tr>
+            <th>Costs/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
+            <td>@oreMine.RessourceCostsPerTick</td>
+            <td>@powerSupply.RessourceCostsPerTick</td>
+            <td>@factory.RessourceCostsPerTick</td>
+            <td>@mageAcademy.RessourceCostsPerTick</td>
+            <td>@crystalMine.RessourceCostsPerTick</td>
+            <td>@neutronAccelerator.RessourceCostsPerTick</td>
+            <td>@elementiumSynthesizer.RessourceCostsPerTick</td>
+        </tr>
+        <tr>
+            <th>Amount/Tick (@Model.User.Planet.First().PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick ms)</th>
+            <td>@oreMine.AmountPerTick</td>
+            <td>@powerSupply.AmountPerTick</td>
+            <td>@factory.AmountPerTick</td>
+            <td>@mageAcademy.AmountPerTick</td>
+            <td>@crystalMine.AmountPerTick</td>
+            <td>@neutronAccelerator.AmountPerTick</td>
+            <td>@elementiumSynthesizer.AmountPerTick</td>
+        </tr>
+        <tr>
+            <th>Actions</th>
+            <td class="table-ore">
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@oreMine.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@oreMine.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@oreMine.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@oreMine.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@oreMine.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildOreMine" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!oreMine.CanBuild ? "disabled" : "") />
+                </form>
+                <form asp-controller="Home" asp-action="ChangeOreMineUsage">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />                    
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetOreMineUsage * 100)" min="0" max="100" />                    
+                    <br/>
+                    <input type="submit" value="Change Usage" />                    
+                </form>
+            </td>
+            <td class="table-power-supply">
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@powerSupply.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@powerSupply.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@powerSupply.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@powerSupply.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@powerSupply.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildPowerSupply" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!powerSupply.CanBuild ? "disabled" : "") />
+                </form>
+                <form asp-controller="Home" asp-action="ChangePowerSupplyUsage">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />    
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetPowerSupplyUsage * 100)" min="0" max="100" />
+                    <br />
+                    <input type="submit" value="Change Usage" />
+                </form>
+            </td>
+            <td class="table-factory">
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@factory.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@factory.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@factory.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@factory.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@factory.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildFactory" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!factory.CanBuild ? "disabled" : "") />
+                </form>
+                <form asp-controller="Home" asp-action="ChangeFactoryUsage">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetFactoryUsage * 100)" min="0" max="100" />
+                    <br />
+                    <input type="submit" value="Change Usage" />
+                </form>
+            </td>
+            <td class="table-mage-academy">
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@mageAcademy.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@mageAcademy.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@mageAcademy.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@mageAcademy.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@mageAcademy.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildMageAcademy" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!mageAcademy.CanBuild ? "disabled" : "") />
+                </form>
+                <form asp-controller="Home" asp-action="ChangeMageAcademyUsage">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetMageAcademyUsage * 100)" min="0" max="100" />
+                    <br />
+                    <input type="submit" value="Change Usage" />
+                </form>
+            </td>
+            <td class="table-crystals">
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@crystalMine.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@crystalMine.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@crystalMine.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@crystalMine.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@crystalMine.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildCrystalMine" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!crystalMine.CanBuild ? "disabled" : "") />
+                </form>
+                <form asp-controller="Home" asp-action="ChangeCrystalMineUsage">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetCrystalMineUsage * 100)" min="0" max="100" />
+                    <br />
+                    <input type="submit" value="Change Usage" />
+                </form>
+            </td>
+            <td class="table-neutron-accelerator">
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@neutronAccelerator.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@neutronAccelerator.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@neutronAccelerator.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@neutronAccelerator.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@neutronAccelerator.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildNeutronAccelerator" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!neutronAccelerator.CanBuild ? "disabled" : "") />
+                </form>
+                <form asp-controller="Home" asp-action="ChangeNeutronAcceleratorUsage">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetNeutronAcceleratorUsage * 100)" min="0" max="100" />
+                    <br />
+                    <input type="submit" value="Change Usage" />
+                </form>
+            </td>
+            <td class="table-elementium-synthesizer">
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@elementiumSynthesizer.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@elementiumSynthesizer.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@elementiumSynthesizer.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@elementiumSynthesizer.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@elementiumSynthesizer.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildElementiumSynthesizer" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!elementiumSynthesizer.CanBuild ? "disabled" : "") />
+                </form>
+                <form asp-controller="Home" asp-action="ChangeElementiumSynthesizerUsage">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetElementiumSynthesizerUsage * 100)" min="0" max="100" />
+                    <br />
+                    <input type="submit" value="Change Usage" />
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div style="margin-bottom: 1rem;">
+    <table>
+        <tr>
+            <th>Event Tick</th>
+            <th>Event Name</th>
+        </tr>
+    @foreach (Event @event in thePlanet.GetEvents())
+    {
+        <tr>
+            <td>@(@event.EventTick)</td>
+            <td>@(@event.EventName)</td>
+        </tr>
+    }
+    </table>
+</div>
+
+<div style="margin-bottom: 1rem;">@Model.Info</div>

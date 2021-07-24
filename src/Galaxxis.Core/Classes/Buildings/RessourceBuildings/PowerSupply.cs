@@ -8,6 +8,8 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 {
     public class PowerSupply : BaseRessourceBuilding
     {
+        #region Properties ------------------------------------------------------------------------
+
         public override GrowthRate RessourceGrowthRate 
             => _ressourceGrowthRate
             ??= new GrowthRate(
@@ -39,6 +41,21 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
             => _buildCostElementiumRate
             ??= new GrowthRate(0, Constants.FACTOR_BUILD_COST, _planet.PlanetPowerSupply + 1);
 
+        public override double RessourceCostsPerTick
+            => _costsPerTick > 0 ? _costsPerTick : (_costsPerTick = GetCostsPerTick(new int[]
+            {
+                5, 0, 5,
+                15, 5, 10,
+                15
+            }));
+
+        public override double Usage => _planet.PlanetPowerSupplyUsage;
+
+        #endregion
+
+
+        #region Methods ---------------------------------------------------------------------------
+
         public override bool Build(out string info)
         {
             return base.Build(EventNameEnum.BuildPowerSupply, out info);
@@ -58,18 +75,11 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 
         public override bool ChangeUsage(double newValue, out string info)
         {
-            throw new NotImplementedException();
+            return base.ChangeUsage(EventNameEnum.ChangePowerSupplyUsage, newValue, out info);
         }
 
-        public override double RessourceCostsPerTick
-            => _costsPerTick > 0 ? _costsPerTick : (_costsPerTick = GetCostsPerTick(new int[] 
-            {
-                5, 0, 5, 
-                15, 5, 10,
-                15
-            }));
+        #endregion
 
-        public override double Usage => _planet.PlanetPowerSupplyUsage;
 
         #region Constructors ----------------------------------------------------------------------
 

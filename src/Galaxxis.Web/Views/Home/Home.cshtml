@@ -43,6 +43,7 @@
         border-width: 1px; 
         border-style: solid; 
         border-color: blueviolet; }
+
     th {
         text-align: center;
         vertical-align: middle;
@@ -50,6 +51,10 @@
 
     td {
         vertical-align: top;
+    }
+
+    form + form {
+        margin-top: 10px;
     }
 </style>
 
@@ -218,12 +223,10 @@
                     <input type="submit" value="Build" @(!oreMine.CanBuild ? "disabled" : "") />
                 </form>
                 <form asp-controller="Home" asp-action="ChangeOreMineUsage">
-                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                    <label>
-                        <input type="range" name="newValue" value="@(thePlanet.PlanetOreMineUsage * 100)" min="0" max="100" />
-                        <span>Usage</span>
-                    </label>
-                    <input type="submit" value="Change" />
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />                    
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetOreMineUsage * 100)" min="0" max="100" />                    
+                    <br/>
+                    <input type="submit" value="Change Usage" />                    
                 </form>
             </td>
             <td class="table-power-supply">
@@ -238,6 +241,12 @@
                 <form asp-controller="Home" asp-action="BuildPowerSupply" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
                     <input type="submit" value="Build" @(!powerSupply.CanBuild ? "disabled" : "") />
+                </form>
+                <form asp-controller="Home" asp-action="ChangePowerSupplyUsage">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />    
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetPowerSupplyUsage * 100)" min="0" max="100" />
+                    <br />
+                    <input type="submit" value="Change Usage" />
                 </form>
             </td>
             <td class="table-factory">

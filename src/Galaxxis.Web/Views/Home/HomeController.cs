@@ -40,19 +40,6 @@ namespace Galaxxis.Web.Views.Home
         }
 
         [HttpPost]
-        public IActionResult BuildMageAcademy(int planetId)
-        {
-            // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
-
-            // build mage academy
-            planet.GetMageAcademy().Build(out string info);
-
-            // exit
-            return View("Home", new HomeViewModel(info));
-        }
-
-        [HttpPost]
         public IActionResult BuildPowerSupply(int planetId)
         {
             // get planet from database
@@ -60,6 +47,32 @@ namespace Galaxxis.Web.Views.Home
 
             // build mage power supply
             planet.GetPowerSupply().Build(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult ChangePowerSupplyUsage(int planetId, double newValue)
+        {
+            // get planet from database
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+
+            // change ore mine usage
+            planet.GetPowerSupply().ChangeUsage(newValue / 100, out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult BuildMageAcademy(int planetId)
+        {
+            // get planet from database
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+
+            // build mage academy
+            planet.GetMageAcademy().Build(out string info);
 
             // exit
             return View("Home", new HomeViewModel(info));

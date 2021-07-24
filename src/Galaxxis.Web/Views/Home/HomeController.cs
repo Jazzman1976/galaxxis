@@ -105,6 +105,19 @@ namespace Galaxxis.Web.Views.Home
         }
 
         [HttpPost]
+        public IActionResult ChangeMageAcademyUsage(int planetId, double newValue)
+        {
+            // get planet from database
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+
+            // change ore mine usage
+            planet.GetMageAcademy().ChangeUsage(newValue / 100, out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
         public IActionResult BuildCrystalMine(int planetId)
         {
             // get planet from database

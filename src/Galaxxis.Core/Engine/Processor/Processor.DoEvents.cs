@@ -64,7 +64,11 @@ namespace Galaxxis.Core.Engine
                     Do_ChangeFactoryUsage(@event, context);
                     break;
 
-                #endregion
+                case EventNameEnum.ChangeMageAcademyUsage:
+                    Do_ChangeMageAcademyUsage(@event, context);
+                    break;
+
+                    #endregion
             }
         }
 
@@ -208,6 +212,20 @@ namespace Galaxxis.Core.Engine
                 planet.PlanetFactoryUsage = newValue;
                 Debug.WriteLine(
                     $"{DateStamp}: Power Supply usage changed on planet {planet.PlanetId}.");
+            }
+        }
+
+        private void Do_ChangeMageAcademyUsage(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
+                double newValue = double.Parse(@event.EventData);
+                planet.PlanetMageAcademyUsage = newValue;
+                Debug.WriteLine(
+                    $"{DateStamp}: Mage Academy usage changed on planet {planet.PlanetId}.");
             }
         }
 

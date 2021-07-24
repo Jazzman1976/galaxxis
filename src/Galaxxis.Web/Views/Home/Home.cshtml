@@ -282,6 +282,12 @@
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
                     <input type="submit" value="Build" @(!mageAcademy.CanBuild ? "disabled" : "") />
                 </form>
+                <form asp-controller="Home" asp-action="ChangeMageAcademyUsage">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetMageAcademyUsage * 100)" min="0" max="100" />
+                    <br />
+                    <input type="submit" value="Change Usage" />
+                </form>
             </td>
             <td class="table-crystals">
                 <table>

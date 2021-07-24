@@ -3,6 +3,7 @@
     public enum EventTypeEnum
     {
         Build,
-        Move
+        Move,
+        Change
     }
 }

@@ -31,6 +31,28 @@
     double universeTicks = Model.Ticker.Ticks;
 }
 
+<style>
+    table {
+        border-spacing: 0;
+        border-collapse: collapse;
+    }
+    
+    td, th { 
+        font-size: .9rem;        
+        padding: 5px 10px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: blueviolet; }
+    th {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    td {
+        vertical-align: top;
+    }
+</style>
+
 <div>Game Ticks: @universeTicks</div>
 <div style="margin-bottom: 1rem;">Building in progress?: @(thePlanet.IsBuilding() ? "yes" : "no")</div>
 
@@ -121,6 +143,16 @@
             <td>@thePlanet.PlanetElementiumSynthesizer</td>
         </tr>
         <tr>
+            <th>Usage in %</th>
+            <td>@thePlanet.PlanetOreMineUsage</td>
+            <td>@thePlanet.PlanetPowerSupplyUsage</td>
+            <td>@thePlanet.PlanetFactoryUsage</td>
+            <td>@thePlanet.PlanetMageAcademyUsage</td>
+            <td>@thePlanet.PlanetCrystalMineUsage</td>
+            <td>@thePlanet.PlanetNeutronAcceleratorUsage</td>
+            <td>@thePlanet.PlanetElementiumSynthesizerUsage</td>
+        </tr>
+        <tr>
             <th>Stock</th>
             <td>@thePlanet.PlanetOre</td>
             <td>@thePlanet.PlanetEnergy</td>
@@ -184,6 +216,14 @@
                 <form asp-controller="Home" asp-action="BuildOreMine" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
                     <input type="submit" value="Build" @(!oreMine.CanBuild ? "disabled" : "") />
+                </form>
+                <form asp-controller="Home" asp-action="ChangeOreMineUsage">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <label>
+                        <input type="range" name="newValue" value="@(thePlanet.PlanetOreMineUsage * 100)" min="0" max="100" />
+                        <span>Usage</span>
+                    </label>
+                    <input type="submit" value="Change" />
                 </form>
             </td>
             <td class="table-power-supply">

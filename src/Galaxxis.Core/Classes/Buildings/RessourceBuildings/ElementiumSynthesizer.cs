@@ -52,6 +52,8 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
                 0
             }));
 
+        public override double Usage => _planet.PlanetElementiumSynthesizerUsage;
+
         #endregion
 
 
@@ -73,6 +75,11 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public override double ApplyRaceFactor(double value)
         {
             return value;
+        }
+
+        public override bool ChangeUsage(double newValue, out string info)
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion

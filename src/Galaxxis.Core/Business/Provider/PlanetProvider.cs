@@ -8,6 +8,10 @@ namespace Galaxxis.Core.Business.Provider
 {
     public static class PlanetProvider
     {
+        /// <summary>
+        /// Get a planet instance
+        /// </summary>
+        /// <param name="updateRessources">default: false</param>
         public static Planet GetPlanet(int id, bool updateRessources = false)
         {
             Planet planet = null;

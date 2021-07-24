@@ -2,6 +2,7 @@
 using Galaxxis.Core.Classes.Buildings.Interfaces;
 using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions;
+using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
 using System.Linq;
@@ -42,6 +43,8 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         public abstract double RessourceCostsPerTick { get; }
 
+        public abstract double Usage { get; }
+
         #endregion
 
 
@@ -69,16 +72,16 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         public double IncomePerDay
             => ApplyRaceFactor(
-                this.RessourceGrowthRate.Value
-                + this.RessourceGrowthRate.BaseIncome);
+                this.RessourceGrowthRate.Value + this.RessourceGrowthRate.BaseIncome)
+            * Usage;
 
         public double IncomePerTick
             => ApplyRaceFactor(
                 this.RessourceGrowthRate.GetValuePerTick()
-                + this.RessourceGrowthRate.GetBaseIncomePerTick());
+                + this.RessourceGrowthRate.GetBaseIncomePerTick())
+            * Usage;
 
         public double AmountPerTick => IncomePerTick - RessourceCostsPerTick;
-
 
         #endregion
 
@@ -89,10 +92,11 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         public abstract bool Build(out string info);
 
+        public abstract bool ChangeUsage(double newValue, out string info);
+
         /// <summary>
         /// Use this in the Build method of derived classes to build the next building level 
-        /// using the correct event.
-        /// name.
+        /// using the correct event name.
         /// </summary>
         protected bool Build(EventNameEnum eventName, out string info)
         {
@@ -141,6 +145,34 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         }
 
         /// <summary>
+        /// Use this in the ChangeUsage method of derived classes to change the building's usage
+        /// using the correct event name.
+        /// </summary>
+        protected bool ChangeUsage(EventNameEnum eventName, double newValue, out string info)
+        {
+            // check conditions
+            if (newValue < 0 || newValue > 1)
+            {
+                info = "The new value has to be between 0 and 1!";
+                return false;
+            }
+
+            // queue event
+            Processor.Instance.EventQueue
+                .Enqueue(EventProvider.NewEvent(
+                    EventLocationEnum.Planet,
+                    _planet.PlanetId,
+                    eventName,
+                    1,
+                    EventTypeEnum.Change,
+                    newValue.ToString()));
+
+            // exit
+            info = "Usage of the building has been changed.";
+            return true;
+        }
+
+        /// <summary>
         /// Get the consumption of this building's ressource by other buildings per tick <br/>
         /// supplyCosts parameter: <br/>
         /// 0: ore mine, 1: power supply, 2: factory, <br/>
@@ -166,13 +198,15 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                     supplyCosts[6], Constants.FACTOR_SUPPLY_COST, _planet.PlanetElementiumSynthesizer);
 
             double ressourceCostPerTick
-                = decreaseRateOreMine.GetValuePerTick()
-                + decreaseRatePowerSupply.GetValuePerTick()
-                + decreaseRateFactory.GetValuePerTick()
-                + decreaseRateNeutronAccelerator.GetValuePerTick()
-                + decreaseRateCrystalMine.GetValuePerTick()
-                + decreaseRateMageAcademy.GetValuePerTick()
-                + decreaseRateElementiumSynthesizer.GetValuePerTick();
+                = decreaseRateOreMine.GetValuePerTick() * _planet.GetOreMine().Usage
+                + decreaseRatePowerSupply.GetValuePerTick() * _planet.GetPowerSupply().Usage
+                + decreaseRateFactory.GetValuePerTick() * _planet.GetFactory().Usage
+                + decreaseRateNeutronAccelerator.GetValuePerTick() 
+                    * _planet.GetNeutronAccelerator().Usage
+                + decreaseRateCrystalMine.GetValuePerTick() * _planet.GetCrystalMine().Usage
+                + decreaseRateMageAcademy.GetValuePerTick() * _planet.GetMageAcademy().Usage
+                + decreaseRateElementiumSynthesizer.GetValuePerTick() 
+                    * _planet.GetElementiumSynthesizer().Usage;
 
             return ressourceCostPerTick;
         }

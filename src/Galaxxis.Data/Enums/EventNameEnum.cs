@@ -8,6 +8,14 @@
         BuildMageAcademy,
         BuildCrystalMine,
         BuildNeutronAccelerator,
-        BuildElementiumSynthesizer
+        BuildElementiumSynthesizer,
+
+        ChangeOreMineUsage,
+        ChangePowerSupplyUsage,
+        ChangeFactoryUsage,
+        ChangeMageAcademyUsage,
+        ChangeCrystalMineUsage,
+        ChangeNeutronAcceleratorUsage,
+        ChangeElementiumSynthesizerUsage
     }
 }

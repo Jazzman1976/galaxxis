@@ -10,6 +10,11 @@ namespace Galaxxis.Core.Classes.Buildings.Interfaces
         public double AmountPerTick { get; }
 
         /// <summary>
+        /// Usage of the ressource building in %
+        /// </summary>
+        public double Usage { get; }
+
+        /// <summary>
         /// Amount of ressource decreased each tick due to consuption in other building's 
         /// production
         /// </summary>
@@ -19,5 +24,10 @@ namespace Galaxxis.Core.Classes.Buildings.Interfaces
         /// Any change caused by planet owner race. Is used to calculate incomes.
         /// </summary>
         public double ApplyRaceFactor(double value);
+
+        /// <summary>
+        /// Scale down or up the usage of this ressource building.
+        /// </summary>
+        public bool ChangeUsage(double newValue, out string info);
     }
 }

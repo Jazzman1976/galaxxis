@@ -147,6 +147,10 @@ namespace Galaxxis.Core.Engine
                 case EventNameEnum.BuildElementiumSynthesizer:
                     Do_BuildElementiumSynthesizer(@event, context);
                     break;
+
+                case EventNameEnum.ChangeOreMineUsage:
+                    Do_ChangeOreMineUsage(@event, context);
+                    break;
             }
         }
 
@@ -169,11 +173,11 @@ namespace Galaxxis.Core.Engine
                 .First(p => p.PlanetId == @event.EventLocationId);
             editPlanet.UpdateRessources();
 
+            // pay build costs
             string[] eventDataArray;
             switch (Enum.Parse(typeof(EventTypeEnum), @event.EventType))
             {
-                case EventTypeEnum.Build:
-                    // pay build costs
+                case EventTypeEnum.Build:                    
                     eventDataArray = @event.EventData.Split('|');
                     editPlanet.PlanetOre -= double.Parse(eventDataArray[0]);
                     editPlanet.PlanetMana -= double.Parse(eventDataArray[1]);
@@ -276,6 +280,20 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 planet.PlanetElementiumSynthesizer++;
                 Debug.WriteLine($"{DateStamp}: Elementium Synthesizer build on planet {planet.PlanetId}.");
+            }
+        }
+
+        private void Do_ChangeOreMineUsage(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet
+                    .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
+                double newValue = double.Parse(@event.EventData);
+                planet.PlanetOreMineUsage = newValue;
+                Debug.WriteLine($"{DateStamp}: Ore Mine usage changed on planet {planet.PlanetId}.");
             }
         }
 

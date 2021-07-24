@@ -53,6 +53,8 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
                 15
             }));
 
+        public override double Usage => _planet.PlanetNeutronAcceleratorUsage;
+
         #endregion
 
 
@@ -78,6 +80,11 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
                     break;
             }
             return value;
+        }
+
+        public override bool ChangeUsage(double newValue, out string info)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

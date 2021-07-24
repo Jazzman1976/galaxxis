@@ -56,6 +56,11 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
             return value;
         }
 
+        public override bool ChangeUsage(double newValue, out string info)
+        {
+            throw new NotImplementedException();
+        }
+
         public override double RessourceCostsPerTick
             => _costsPerTick > 0 ? _costsPerTick : (_costsPerTick = GetCostsPerTick(new int[] 
             {
@@ -63,6 +68,8 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
                 15, 5, 10,
                 15
             }));
+
+        public override double Usage => _planet.PlanetPowerSupplyUsage;
 
         #region Constructors ----------------------------------------------------------------------
 

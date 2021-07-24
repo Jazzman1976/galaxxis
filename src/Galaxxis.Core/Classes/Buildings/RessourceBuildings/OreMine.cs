@@ -36,6 +36,8 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 
         public override double RessourceCostsPerTick => 0;
 
+        public override double Usage => _planet.PlanetOreMineUsage;
+
         #endregion
 
 
@@ -56,6 +58,11 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
                     break;
             }
             return value;
+        }
+
+        public override bool ChangeUsage(double newValue, out string info)
+        {
+            return base.ChangeUsage(EventNameEnum.ChangeOreMineUsage, newValue, out info);
         }
 
         #endregion

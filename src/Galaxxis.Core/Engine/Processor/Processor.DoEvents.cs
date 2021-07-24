@@ -60,6 +60,10 @@ namespace Galaxxis.Core.Engine
                     Do_ChangePowerSupplyUsage(@event, context);
                     break;
 
+                case EventNameEnum.ChangeFactoryUsage:
+                    Do_ChangeFactoryUsage(@event, context);
+                    break;
+
                 #endregion
             }
         }
@@ -188,6 +192,20 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetPowerSupplyUsage = newValue;
+                Debug.WriteLine(
+                    $"{DateStamp}: Power Supply usage changed on planet {planet.PlanetId}.");
+            }
+        }
+
+        private void Do_ChangeFactoryUsage(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
+                double newValue = double.Parse(@event.EventData);
+                planet.PlanetFactoryUsage = newValue;
                 Debug.WriteLine(
                     $"{DateStamp}: Power Supply usage changed on planet {planet.PlanetId}.");
             }

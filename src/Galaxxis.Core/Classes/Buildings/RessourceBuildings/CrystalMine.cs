@@ -75,7 +75,7 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 
         public override bool ChangeUsage(double newValue, out string info)
         {
-            throw new NotImplementedException();
+            return base.ChangeUsage(EventNameEnum.ChangeCrystalMineUsage, newValue, out info);
         }
 
         #endregion

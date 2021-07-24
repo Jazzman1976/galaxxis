@@ -79,7 +79,8 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 
         public override bool ChangeUsage(double newValue, out string info)
         {
-            throw new System.NotImplementedException();
+            return base.ChangeUsage(
+                EventNameEnum.ChangeElementiumSynthesizerUsage, newValue, out info);
         }
 
         #endregion

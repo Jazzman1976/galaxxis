@@ -68,6 +68,18 @@ namespace Galaxxis.Core.Engine
                     Do_ChangeMageAcademyUsage(@event, context);
                     break;
 
+                case EventNameEnum.ChangeCrystalMineUsage:
+                    Do_ChangeCrystalMineUsage(@event, context);
+                    break;
+
+                case EventNameEnum.ChangeNeutronAcceleratorUsage:
+                    Do_ChangeNeutronAcceleratorUsage(@event, context);
+                    break;
+
+                case EventNameEnum.ChangeElementiumSynthesizerUsage:
+                    Do_ChangeElementiumSynthesizerUsage(@event, context);
+                    break;
+
                     #endregion
             }
         }
@@ -226,6 +238,48 @@ namespace Galaxxis.Core.Engine
                 planet.PlanetMageAcademyUsage = newValue;
                 Debug.WriteLine(
                     $"{DateStamp}: Mage Academy usage changed on planet {planet.PlanetId}.");
+            }
+        }
+
+        private void Do_ChangeCrystalMineUsage(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
+                double newValue = double.Parse(@event.EventData);
+                planet.PlanetCrystalMineUsage = newValue;
+                Debug.WriteLine(
+                    $"{DateStamp}: Crystal Mine usage changed on planet {planet.PlanetId}.");
+            }
+        }
+
+        private void Do_ChangeNeutronAcceleratorUsage(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
+                double newValue = double.Parse(@event.EventData);
+                planet.PlanetNeutronAcceleratorUsage = newValue;
+                Debug.WriteLine(
+                    $"{DateStamp}: Neutron Accelerator usage changed on planet {planet.PlanetId}.");
+            }
+        }
+
+        private void Do_ChangeElementiumSynthesizerUsage(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
+                double newValue = double.Parse(@event.EventData);
+                planet.PlanetElementiumSynthesizerUsage = newValue;
+                Debug.WriteLine(
+                    $"{DateStamp}: Elementium Synthesizer usage changed on planet {planet.PlanetId}.");
             }
         }
 

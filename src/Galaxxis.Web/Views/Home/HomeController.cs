@@ -131,6 +131,19 @@ namespace Galaxxis.Web.Views.Home
         }
 
         [HttpPost]
+        public IActionResult ChangeCrystalMineUsage(int planetId, double newValue)
+        {
+            // get planet from database
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+
+            // change ore mine usage
+            planet.GetCrystalMine().ChangeUsage(newValue / 100, out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
         public IActionResult BuildNeutronAccelerator(int planetId)
         {
             // get planet from database
@@ -144,6 +157,19 @@ namespace Galaxxis.Web.Views.Home
         }
 
         [HttpPost]
+        public IActionResult ChangeNeutronAcceleratorUsage(int planetId, double newValue)
+        {
+            // get planet from database
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+
+            // change ore mine usage
+            planet.GetNeutronAccelerator().ChangeUsage(newValue / 100, out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
         public IActionResult BuildElementiumSynthesizer(int planetId)
         {
             // get planet from database
@@ -151,6 +177,19 @@ namespace Galaxxis.Web.Views.Home
 
             // build Elementium Synthesizer
             planet.GetElementiumSynthesizer().Build(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult ChangeElementiumSynthesizerUsage(int planetId, double newValue)
+        {
+            // get planet from database
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+
+            // change ore mine usage
+            planet.GetElementiumSynthesizer().ChangeUsage(newValue / 100, out string info);
 
             // exit
             return View("Home", new HomeViewModel(info));

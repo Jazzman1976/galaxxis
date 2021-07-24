@@ -302,6 +302,12 @@
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
                     <input type="submit" value="Build" @(!crystalMine.CanBuild ? "disabled" : "") />
                 </form>
+                <form asp-controller="Home" asp-action="ChangeCrystalMineUsage">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetCrystalMineUsage * 100)" min="0" max="100" />
+                    <br />
+                    <input type="submit" value="Change Usage" />
+                </form>
             </td>
             <td class="table-neutron-accelerator">
                 <table>
@@ -316,6 +322,12 @@
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
                     <input type="submit" value="Build" @(!neutronAccelerator.CanBuild ? "disabled" : "") />
                 </form>
+                <form asp-controller="Home" asp-action="ChangeNeutronAcceleratorUsage">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetNeutronAcceleratorUsage * 100)" min="0" max="100" />
+                    <br />
+                    <input type="submit" value="Change Usage" />
+                </form>
             </td>
             <td class="table-elementium-synthesizer">
                 <table>
@@ -329,6 +341,12 @@
                 <form asp-controller="Home" asp-action="BuildElementiumSynthesizer" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
                     <input type="submit" value="Build" @(!elementiumSynthesizer.CanBuild ? "disabled" : "") />
+                </form>
+                <form asp-controller="Home" asp-action="ChangeElementiumSynthesizerUsage">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetElementiumSynthesizerUsage * 100)" min="0" max="100" />
+                    <br />
+                    <input type="submit" value="Change Usage" />
                 </form>
             </td>
         </tr>

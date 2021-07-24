@@ -67,19 +67,25 @@ namespace Galaxxis.Core.Engine
                         context.Event.Remove(@event);
                     }
 
+                    // save changes the tick has made
+                    context.SaveChanges();
+
                     // write log
-                    Debug.WriteLine($"{DateStamp}: Tick {universe.UniverseTicks} done in {tStartTick.MsGone()} ms.");
+                    Debug.WriteLine($"{DateStamp}: Tick {universe.UniverseTicks} done in " 
+                        + $"{tStartTick.MsGone()} ms.");
                 }
 
                 // save all changes
-                context.SaveChanges();
+                //context.SaveChanges();
             }
+
             // mark not processing, unlock processor
             this.IsWorking = false;
 
             // write log
-            Debug.WriteLine($"{DateStamp}: Processing completely done in {tStartProcessing.MsGone()} ms.");
+            Debug.WriteLine($"{DateStamp}: Processing completely done in " 
+                + $"{tStartProcessing.MsGone()} ms.");
+            Debug.WriteLine("");
         }
-
     }
 }

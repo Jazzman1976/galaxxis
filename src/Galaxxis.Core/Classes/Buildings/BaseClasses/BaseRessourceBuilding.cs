@@ -180,7 +180,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                     EventLocationEnum.Planet,
                     _planet.PlanetId,
                     eventName,
-                    1,
+                    0,
                     EventTypeEnum.Change,
                     newValue.ToString()));
 

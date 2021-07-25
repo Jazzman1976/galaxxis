@@ -10,6 +10,22 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
 {
     public static class RessourceBuildings
     {
+        /// <summary>
+        /// Removes all resource buildings from their dictionaries. 
+        /// All data is updated with new data if accessed.
+        /// </summary>
+        /// <param name="planet"></param>
+        public static void RemoveRessourceBuildings(this Planet planet)
+        {
+            planet.RemoveCrystalMine();
+            planet.RemoveElementiumSynthesizer();
+            planet.RemoveFactory();
+            planet.RemoveMageAcademy();
+            planet.RemoveNeutronAccelerator();
+            planet.RemoveOreMine();
+            planet.RemovePowerSupply();
+        }
+
         #region Ore Mine --------------------------------------------------------------------------
 
         /// <summary>

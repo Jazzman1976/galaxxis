@@ -98,7 +98,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetOreMine++;
-                planet.RemoveOreMine();
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine($"{DateStamp}: Ore Mine build on planet {planet.PlanetId}.");
             }
         }
@@ -112,7 +112,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetPowerSupply++;
-                planet.RemovePowerSupply();
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine($"{DateStamp}: Power Supply build on planet {planet.PlanetId}.");
             }
         }
@@ -126,7 +126,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetFactory++;
-                planet.RemoveFactory();
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine($"{DateStamp}: Factory build on planet {planet.PlanetId}.");
             }
         }
@@ -140,7 +140,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetMageAcademy++;
-                planet.RemoveMageAcademy();
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine($"{DateStamp}: Mage Academy build on planet {planet.PlanetId}.");
             }
         }
@@ -154,7 +154,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetCrystalMine++;
-                planet.RemoveCrystalMine();
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine($"{DateStamp}: Chrystal Mine build on planet {planet.PlanetId}.");
             }
         }
@@ -168,7 +168,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetNeutronAccelerator++;
-                planet.RemoveNeutronAccelerator();
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine($"{DateStamp}: Neutron Accelerator build on planet {planet.PlanetId}.");
             }
         }
@@ -182,7 +182,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetElementiumSynthesizer++;
-                planet.RemoveElementiumSynthesizer();
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine($"{DateStamp}: Elementium Synthesizer build on planet {planet.PlanetId}.");
             }
         }
@@ -201,6 +201,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetOreMineUsage = newValue;
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine(
                     $"{DateStamp}: Ore Mine usage changed on planet {planet.PlanetId}.");
             }
@@ -215,6 +216,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetPowerSupplyUsage = newValue;
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine(
                     $"{DateStamp}: Power Supply usage changed on planet {planet.PlanetId}.");
             }
@@ -229,6 +231,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetFactoryUsage = newValue;
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine(
                     $"{DateStamp}: Power Supply usage changed on planet {planet.PlanetId}.");
             }
@@ -243,6 +246,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetMageAcademyUsage = newValue;
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine(
                     $"{DateStamp}: Mage Academy usage changed on planet {planet.PlanetId}.");
             }
@@ -257,6 +261,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetCrystalMineUsage = newValue;
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine(
                     $"{DateStamp}: Crystal Mine usage changed on planet {planet.PlanetId}.");
             }
@@ -271,6 +276,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetNeutronAcceleratorUsage = newValue;
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine(
                     $"{DateStamp}: Neutron Accelerator usage changed on planet {planet.PlanetId}.");
             }
@@ -285,6 +291,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetElementiumSynthesizerUsage = newValue;
+                planet.RemoveRessourceBuildings();
                 Debug.WriteLine(
                     $"{DateStamp}: Elementium Synthesizer usage changed on planet {planet.PlanetId}.");
             }

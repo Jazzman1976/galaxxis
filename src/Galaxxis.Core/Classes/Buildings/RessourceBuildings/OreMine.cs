@@ -71,7 +71,11 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         #region Constructors ----------------------------------------------------------------------
 
         public OreMine(Planet planet) : base(planet)
-        { }
+        {
+            System.Diagnostics.Debug.WriteLine(
+                $"{DateTime.Now.ToString(_timeFormat)}: "
+                + "A new Ore Mine object has been created.");
+        }
 
         #endregion
     }

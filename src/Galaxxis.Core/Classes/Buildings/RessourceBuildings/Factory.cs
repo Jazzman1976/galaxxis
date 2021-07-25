@@ -44,7 +44,11 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         #region Constructors ----------------------------------------------------------------------
 
         public Factory(Planet planet) : base(planet)
-        { }
+        {
+            System.Diagnostics.Debug.WriteLine(
+                $"{DateTime.Now.ToString(_timeFormat)}: "
+                + "A new Factory object has been created.");
+        }
 
         #endregion
 

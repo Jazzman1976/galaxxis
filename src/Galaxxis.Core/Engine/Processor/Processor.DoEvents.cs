@@ -98,6 +98,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetOreMine++;
+                planet.RemoveOreMine();
                 Debug.WriteLine($"{DateStamp}: Ore Mine build on planet {planet.PlanetId}.");
             }
         }
@@ -111,6 +112,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetPowerSupply++;
+                planet.RemovePowerSupply();
                 Debug.WriteLine($"{DateStamp}: Power Supply build on planet {planet.PlanetId}.");
             }
         }
@@ -124,6 +126,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetFactory++;
+                planet.RemoveFactory();
                 Debug.WriteLine($"{DateStamp}: Factory build on planet {planet.PlanetId}.");
             }
         }
@@ -137,6 +140,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetMageAcademy++;
+                planet.RemoveMageAcademy();
                 Debug.WriteLine($"{DateStamp}: Mage Academy build on planet {planet.PlanetId}.");
             }
         }
@@ -150,6 +154,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetCrystalMine++;
+                planet.RemoveCrystalMine();
                 Debug.WriteLine($"{DateStamp}: Chrystal Mine build on planet {planet.PlanetId}.");
             }
         }
@@ -163,6 +168,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetNeutronAccelerator++;
+                planet.RemoveNeutronAccelerator();
                 Debug.WriteLine($"{DateStamp}: Neutron Accelerator build on planet {planet.PlanetId}.");
             }
         }
@@ -176,6 +182,7 @@ namespace Galaxxis.Core.Engine
                     .FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetElementiumSynthesizer++;
+                planet.RemoveElementiumSynthesizer();
                 Debug.WriteLine($"{DateStamp}: Elementium Synthesizer build on planet {planet.PlanetId}.");
             }
         }

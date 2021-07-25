@@ -16,6 +16,8 @@
         ChangeMageAcademyUsage,
         ChangeCrystalMineUsage,
         ChangeNeutronAcceleratorUsage,
-        ChangeElementiumSynthesizerUsage
+        ChangeElementiumSynthesizerUsage,
+
+        ProduceShip
     }
 }

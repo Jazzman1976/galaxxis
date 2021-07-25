@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Galaxxis.Data\Galaxxis.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Classes\Buildings\SpecialBuildings\" />
+  </ItemGroup>
+
 </Project>

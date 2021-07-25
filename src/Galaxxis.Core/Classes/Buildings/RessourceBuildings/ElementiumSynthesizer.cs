@@ -2,6 +2,7 @@
 using Galaxxis.Core.Engine;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
+using System;
 
 namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 {
@@ -45,12 +46,23 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
                     10, Constants.FACTOR_BUILD_COST, _planet.PlanetElementiumSynthesizer + 1);
 
         public override double RessourceCostsPerTick
-            => _costsPerTick > 0 ? _costsPerTick : (_costsPerTick = GetCostsPerTick(new int[]
-            {
-                5, 5, 5,
-                5, 5, 5,
-                0
-            }));
+        { 
+            get
+            { 
+                if (_costsPerTick == null)
+                {
+                    _costsPerTick = GetCostsPerTick(new int[]
+                    {
+                        5, 5, 5,
+                        5, 5, 5,
+                        0,
+                        5, 10, 15,
+                        25, 15, 15
+                    });
+                }
+                return _costsPerTick ?? 0;
+            }
+        }
 
         public override double Usage => _planet.PlanetElementiumSynthesizerUsage;
 
@@ -60,7 +72,11 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         #region Constructors ----------------------------------------------------------------------
 
         public ElementiumSynthesizer(Planet planet) : base(planet)
-        { }
+        {
+            System.Diagnostics.Debug.WriteLine(
+                $"{DateTime.Now.ToString(_timeFormat)}: "
+                + "A new Elementium Synthesizer object has been created.");
+        }
 
         #endregion
 

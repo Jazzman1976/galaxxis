@@ -46,12 +46,23 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
                     5, Constants.FACTOR_BUILD_COST, _planet.PlanetMageAcademy + 1);
 
         public override double RessourceCostsPerTick
-            => _costsPerTick > 0 ? _costsPerTick : (_costsPerTick = GetCostsPerTick(new int[]
+        {
+            get
             {
-                5, 5, 0,
-                5, 10, 15,
-                15
-            }));
+                if (_costsPerTick == null)
+                {
+                    _costsPerTick = GetCostsPerTick(new int[]
+                    {
+                        5, 5, 0,
+                        5, 10, 15,
+                        15,
+                        10, 20, 25,
+                        15, 10, 20
+                    });
+                }
+                return _costsPerTick ?? 0;
+            }
+        }
 
         public override double Usage => _planet.PlanetMageAcademyUsage;
 
@@ -61,7 +72,11 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         #region Constructors ----------------------------------------------------------------------
 
         public MageAcademy(Planet planet) : base(planet)
-        { }
+        {
+            System.Diagnostics.Debug.WriteLine(
+                $"{DateTime.Now.ToString(_timeFormat)}: "
+                + "A new Mage Academy object has been created.");
+        }
 
         #endregion
 

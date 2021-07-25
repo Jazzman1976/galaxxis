@@ -5,6 +5,9 @@ using Galaxxis.Core.Extensions;
 using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.BaseClasses
@@ -16,13 +19,17 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         protected Planet _planet;
         protected User _owner;
         protected double[] _buildCosts;
+        protected bool? _canBuild;
         protected GrowthRate _ressourceGrowthRate;
         protected GrowthRate _buildTimeRate;
         protected GrowthRate _buildCostOreRate;
         protected GrowthRate _buildCostManaRate;
         protected GrowthRate _buildCostCrystalsRate;
         protected GrowthRate _buildCostElementiumRate;
-        protected double _costsPerTick = -1;
+        protected double _incomePerDay = -1;
+        protected double _incomePerTick = -1;
+        protected double? _costsPerTick;
+        protected string _timeFormat = "HH.mm.ss.fffffff";
 
         #endregion
 
@@ -62,24 +69,34 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                 };
 
         public bool CanBuild
-            => BuildCosts[0] <= _planet.PlanetOre
-            && BuildCosts[1] <= _planet.PlanetMana
-            && BuildCosts[2] <= _planet.PlanetCrystals
-            && BuildCosts[3] <= _planet.PlanetElementium
-            && !EventProvider
-                .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
-                .Any();
+        {
+            get
+            {
+                if (_canBuild == null)
+                {
+                    _canBuild = BuildCosts[0] <= _planet.PlanetOre
+                        && BuildCosts[1] <= _planet.PlanetMana
+                        && BuildCosts[2] <= _planet.PlanetCrystals
+                        && BuildCosts[3] <= _planet.PlanetElementium
+                        && !EventProvider
+                            .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
+                            .Any();
+                }
+                return _canBuild == true;
+            }
+        }
 
-        public double IncomePerDay
-            => ApplyRaceFactor(
-                this.RessourceGrowthRate.Value + this.RessourceGrowthRate.BaseIncome)
-            * Usage;
+        public double IncomePerDay => _incomePerDay < 0 
+            ? (_incomePerDay = ApplyRaceFactor(
+                this.RessourceGrowthRate.Value + this.RessourceGrowthRate.BaseIncome) * Usage) 
+            : _incomePerDay;
 
-        public double IncomePerTick
-            => ApplyRaceFactor(
+        public double IncomePerTick => _incomePerTick < 0
+            ? (_incomePerTick = ApplyRaceFactor(
                 this.RessourceGrowthRate.GetValuePerTick()
                 + this.RessourceGrowthRate.GetBaseIncomePerTick())
-            * Usage;
+                * Usage)
+            : _incomePerTick;
 
         public double AmountPerTick => IncomePerTick - RessourceCostsPerTick;
 
@@ -175,12 +192,19 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         /// <summary>
         /// Get the consumption of this building's ressource by other buildings per tick <br/>
         /// supplyCosts parameter: <br/>
+        /// <br/>
         /// 0: ore mine, 1: power supply, 2: factory, <br/>
         /// 3: mage academy, 4: crystal mine, 5: neutron accelerator, <br/>
-        /// 6: elementium synthesizer
+        /// 6: elementium synthesizer <br/>
+        /// <br />
+        /// 7: war forge, 8: technology center, 9: high tech laboratory <br/>
+        /// <br/>
+        /// 10: research laboratory, 11: shipyard, 12: defense facility
         /// </summary>
         protected double GetCostsPerTick(int[] supplyCosts)
         {
+            DateTime tStartTime = DateTime.Now;
+
             GrowthRate
                 decreaseRateOreMine = new GrowthRate(
                     supplyCosts[0], Constants.FACTOR_SUPPLY_COST, _planet.PlanetOreMine),
@@ -195,21 +219,45 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                 decreaseRateMageAcademy = new GrowthRate(
                     supplyCosts[5], Constants.FACTOR_SUPPLY_COST, _planet.PlanetNeutronAccelerator),
                 decreaseRateElementiumSynthesizer = new GrowthRate(
-                    supplyCosts[6], Constants.FACTOR_SUPPLY_COST, _planet.PlanetElementiumSynthesizer);
+                    supplyCosts[6], Constants.FACTOR_SUPPLY_COST, _planet.PlanetElementiumSynthesizer),
+
+                decreaseRateShipyard = new GrowthRate(
+                    supplyCosts[11], Constants.FACTOR_SUPPLY_COST, _planet.PlanetShipyard);
 
             double ressourceCostPerTick
                 = decreaseRateOreMine.GetValuePerTick() * _planet.GetOreMine().Usage
                 + decreaseRatePowerSupply.GetValuePerTick() * _planet.GetPowerSupply().Usage
                 + decreaseRateFactory.GetValuePerTick() * _planet.GetFactory().Usage
-                + decreaseRateNeutronAccelerator.GetValuePerTick() 
+                + decreaseRateNeutronAccelerator.GetValuePerTick()
                     * _planet.GetNeutronAccelerator().Usage
                 + decreaseRateCrystalMine.GetValuePerTick() * _planet.GetCrystalMine().Usage
                 + decreaseRateMageAcademy.GetValuePerTick() * _planet.GetMageAcademy().Usage
-                + decreaseRateElementiumSynthesizer.GetValuePerTick() 
+                + decreaseRateElementiumSynthesizer.GetValuePerTick()
                     * _planet.GetElementiumSynthesizer().Usage;
+
+
+            List<Event> events = EventProvider
+                .GetEvents(_planet.PlanetId, EventLocationEnum.Planet);
+
+            Debug.WriteLine($"{DateStamp}: GetCostsPerTick events loaded in "
+                        + $"{tStartTime.MsGone()} ms.");
+
+            if (events
+                .Any(e
+                    => Enum.Parse(typeof(EventTypeEnum), e.EventType) is EventTypeEnum.Produce
+                    && Enum.Parse(typeof(EventNameEnum), e.EventName)
+                        is EventNameEnum.ProduceShip))
+            {
+                ressourceCostPerTick += decreaseRateShipyard.GetValuePerTick();
+            }
+
+            Debug.WriteLine($"{DateStamp}: GetCostsPerTick events checked in "
+                        + $"{tStartTime.MsGone()} ms.");
 
             return ressourceCostPerTick;
         }
+
+        private string DateStamp => DateTime.Now.ToString("HH.mm.ss.fffffff");
 
         #endregion
 

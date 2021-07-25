@@ -42,12 +42,23 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
             ??= new GrowthRate(0, Constants.FACTOR_BUILD_COST, _planet.PlanetPowerSupply + 1);
 
         public override double RessourceCostsPerTick
-            => _costsPerTick > 0 ? _costsPerTick : (_costsPerTick = GetCostsPerTick(new int[]
+        {
+            get
             {
-                5, 0, 5,
-                15, 5, 10,
-                15
-            }));
+                if (_costsPerTick == null)
+                {
+                    _costsPerTick = GetCostsPerTick(new int[]
+                    {
+                        5, 0, 5,
+                        15, 5, 10,
+                        15,
+                        15, 20, 20,
+                        15, 15, 15
+                    });
+                }
+                return _costsPerTick ?? 0;
+            }
+        }
 
         public override double Usage => _planet.PlanetPowerSupplyUsage;
 
@@ -84,7 +95,11 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         #region Constructors ----------------------------------------------------------------------
 
         public PowerSupply(Planet planet) : base(planet)
-        { }
+        {
+            System.Diagnostics.Debug.WriteLine(
+                $"{DateTime.Now.ToString(_timeFormat)}: "
+                + "A new Power Supply object has been created.");
+        }
 
         #endregion
     }

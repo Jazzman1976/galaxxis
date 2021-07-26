@@ -40,6 +40,7 @@ namespace Galaxxis.Data.Models
         public int PlanetElementiumSynthesizer { get; set; }
         public double PlanetElementiumSynthesizerUsage { get; set; }
         public long PlanetCreated { get; set; }
+        public int PlanetShipyard { get; set; }
 
         public virtual System PlanetSystem { get; set; }
         public virtual User PlanetUser { get; set; }

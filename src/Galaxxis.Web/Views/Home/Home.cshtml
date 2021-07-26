@@ -1,6 +1,7 @@
 ﻿@using Galaxxis.Core.Extensions.PlanetExtensions
 @using Galaxxis.Data.Models
 @using Galaxxis.Core.Classes.Buildings.RessourceBuildings
+@using Galaxxis.Core.Classes.Buildings.ProducingBuildings
 
 @model HomeViewModel
 
@@ -19,6 +20,7 @@
 
     // update ressources on planet
     thePlanet.UpdateRessources();
+    thePlanet.ClearCache();
 
     // init markup vars
     OreMine oreMine = thePlanet.GetOreMine();
@@ -28,6 +30,7 @@
     CrystalMine crystalMine = thePlanet.GetCrystalMine();
     NeutronAccelerator neutronAccelerator = thePlanet.GetNeutronAccelerator();
     ElementiumSynthesizer elementiumSynthesizer = thePlanet.GetElementiumSynthesizer();
+    Shipyard shipyard = thePlanet.GetShipyard();
     double universeTicks = Model.Ticker.Ticks;
 }
 
@@ -38,7 +41,7 @@
     }
     
     td, th { 
-        font-size: .9rem;        
+        font-size: .8rem;        
         padding: 5px 10px; 
         border-width: 1px; 
         border-style: solid; 
@@ -61,8 +64,8 @@
 <div>Game Ticks: @universeTicks</div>
 <div style="margin-bottom: 1rem;">Building in progress?: @(thePlanet.IsBuilding() ? "yes" : "no")</div>
 
-<div style="margin-bottom: 1rem;">
-    <table style="margin-bottom: 1rem;">
+<div id="user-panel" style="margin-bottom: 1rem;">
+    <table>
         <tr>
             <th>UserId</th>
             <th>UserEmail</th>
@@ -81,8 +84,8 @@
     </table>
 </div>
 
-<div style="margin-bottom: 1rem;">
-    <table style="margin-bottom: 1rem;">
+<div id="planet-panel" style="margin-bottom: 1rem;">
+    <table>
         <tr>
             <th>PlanetId</th>
             <th>PlanetName</th>
@@ -125,8 +128,8 @@
     </table>
 </div>
 
-<div style="margin-bottom: 1rem;">
-    <table style="margin-bottom: 1rem;">
+<div id="ressources-panel" style="margin-bottom: 1rem;">
+    <table>
         <tr>
             <th></th>
             <th>Ore</th>
@@ -206,6 +209,65 @@
             <td>@crystalMine.AmountPerTick</td>
             <td>@neutronAccelerator.AmountPerTick</td>
             <td>@elementiumSynthesizer.AmountPerTick</td>
+        </tr>
+        <tr>
+            <th>Consuming/Tick</th>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@oreMine.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@oreMine.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@oreMine.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@oreMine.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@powerSupply.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@powerSupply.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@powerSupply.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@powerSupply.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@factory.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@factory.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@factory.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@factory.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@mageAcademy.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@mageAcademy.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@mageAcademy.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@mageAcademy.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@crystalMine.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@crystalMine.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@crystalMine.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@crystalMine.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@neutronAccelerator.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@neutronAccelerator.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@neutronAccelerator.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@neutronAccelerator.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@elementiumSynthesizer.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@elementiumSynthesizer.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@elementiumSynthesizer.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@elementiumSynthesizer.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
         </tr>
         <tr>
             <th>Actions</th>
@@ -353,20 +415,53 @@
     </table>
 </div>
 
-<div style="margin-bottom: 1rem;">
+<div id="producing-panel" style="margin-bottom: 1rem;">
+    <table>
+        <tr>
+            <th></th>
+            <th>Shipyard</th>
+        </tr>
+        <tr>
+            <th>Level</th>
+            <td>@thePlanet.PlanetShipyard</td>
+        </tr>
+        <tr>
+            <th>Actions</th>
+            <td>
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@shipyard.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@shipyard.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@shipyard.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@shipyard.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@shipyard.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildShipyard" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!shipyard.CanBuild ? "disabled" : "") />
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="events-panel" style="margin-bottom: 1rem;">
     <table>
         <tr>
             <th>Event Tick</th>
             <th>Event Name</th>
         </tr>
-    @foreach (Event @event in thePlanet.GetEvents())
-    {
-        <tr>
-            <td>@(@event.EventTick)</td>
-            <td>@(@event.EventName)</td>
-        </tr>
-    }
+        @foreach (Event @event in thePlanet.GetEvents())
+        {
+            <tr>
+                <td>@(@event.EventTick)</td>
+                <td>@(@event.EventName)</td>
+                <td>@(@event.EventData)</td>
+            </tr>
+        }
     </table>
 </div>
 
-<div style="margin-bottom: 1rem;">@Model.Info</div>
+<div id="info-panel" style="margin-bottom: 1rem;">
+    @Model.Info
+</div>

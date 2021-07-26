@@ -22,6 +22,7 @@ namespace Galaxxis.Data.Models
         public virtual DbSet<Job> Job { get; set; }
         public virtual DbSet<Moon> Moon { get; set; }
         public virtual DbSet<Planet> Planet { get; set; }
+        public virtual DbSet<Ship> Ship { get; set; }
         public virtual DbSet<System> System { get; set; }
         public virtual DbSet<Universe> Universe { get; set; }
         public virtual DbSet<User> User { get; set; }
@@ -133,6 +134,21 @@ namespace Galaxxis.Data.Models
                     .HasForeignKey(d => d.PlanetUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Planet_User");
+            });
+
+            modelBuilder.Entity<Ship>(entity =>
+            {
+                entity.Property(e => e.ShipId).ValueGeneratedNever();
+
+                entity.Property(e => e.ShipType)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.ShipUser)
+                    .WithMany(p => p.Ship)
+                    .HasForeignKey(d => d.ShipUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Ship_User");
             });
 
             modelBuilder.Entity<System>(entity =>

@@ -194,5 +194,18 @@ namespace Galaxxis.Web.Views.Home
             // exit
             return View("Home", new HomeViewModel(info));
         }
+
+        [HttpPost]
+        public IActionResult BuildShipyard(int planetId)
+        {
+            // get planet from database
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+
+            // build Elementium Synthesizer
+            planet.GetShipyard().Build(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
     }
 }

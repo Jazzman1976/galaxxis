@@ -9,6 +9,7 @@
         BuildCrystalMine,
         BuildNeutronAccelerator,
         BuildElementiumSynthesizer,
+        BuildShipyard,
 
         ChangeOreMineUsage,
         ChangePowerSupplyUsage,
@@ -16,6 +17,8 @@
         ChangeMageAcademyUsage,
         ChangeCrystalMineUsage,
         ChangeNeutronAcceleratorUsage,
-        ChangeElementiumSynthesizerUsage
+        ChangeElementiumSynthesizerUsage,
+
+        ProduceShip
     }
 }

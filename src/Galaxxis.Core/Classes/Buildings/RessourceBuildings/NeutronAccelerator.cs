@@ -1,5 +1,7 @@
 ﻿using Galaxxis.Core.Classes.Buildings.BaseClasses;
+using Galaxxis.Core.Classes.Buildings.Enums;
 using Galaxxis.Core.Engine;
+using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
 using System;
@@ -13,47 +15,96 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public override GrowthRate RessourceGrowthRate
             => _ressourceGrowthRate
             ??= new GrowthRate(
-                    Constants.BASEVALUE_CAT2_GROWTH,
-                    Constants.FACTOR_RESSOURCE_GROWTH,
+                    Constants.BASEVALUE_CAT2_RESSOURCE,
+                    Constants.FACTOR_RESSOURCES,
                     _planet.PlanetNeutronAccelerator,
-                    Constants.BASEINCOME_CAT2_GROWTH);
+                    Constants.BASEINCOME_CAT2_RESSOURCE);
 
         public override GrowthRate BuildTimeRate
             => _buildTimeRate
             ??= new GrowthRate(
-                    Constants.BASEVALUE_BUILD_TIME,
+                    Constants.BASEVALUE_VERY_MUCH,
                     Constants.FACTOR_BUILD_TIME,
                     _planet.PlanetNeutronAccelerator + 1);
 
         public override GrowthRate BuildCostOreRate
             => _buildCostOreRate
             ??= new GrowthRate(
-                    20, Constants.FACTOR_BUILD_COST, _planet.PlanetNeutronAccelerator + 1);
+                    Constants.BASEVALUE_MUCH, 
+                    Constants.FACTOR_BUILD, 
+                    _planet.PlanetNeutronAccelerator + 1);
 
         public override GrowthRate BuildCostManaRate
             => _buildCostManaRate
             ??= new GrowthRate(
-                    10, Constants.FACTOR_BUILD_COST, _planet.PlanetNeutronAccelerator + 1);
+                    Constants.BASEVALUE_FEW, 
+                    Constants.FACTOR_BUILD, 
+                    _planet.PlanetNeutronAccelerator + 1);
 
         public override GrowthRate BuildCostCrystalsRate
             => _buildCostCrystalsRate
             ??= new GrowthRate(
-                    10, Constants.FACTOR_BUILD_COST, _planet.PlanetNeutronAccelerator + 1);
+                    Constants.BASEVALUE_FEW, 
+                    Constants.FACTOR_BUILD, 
+                    _planet.PlanetNeutronAccelerator + 1);
 
         public override GrowthRate BuildCostElementiumRate
             => _buildCostElementiumRate
             ??= new GrowthRate(
-                    5, Constants.FACTOR_BUILD_COST, _planet.PlanetNeutronAccelerator + 1);
+                    Constants.BASEVALUE_VERY_FEW, 
+                    Constants.FACTOR_BUILD, 
+                    _planet.PlanetNeutronAccelerator + 1);
 
         public override double RessourceCostsPerTick
-            => _costsPerTick > 0 ? _costsPerTick : (_costsPerTick = GetCostsPerTick(new int[]
+        {
+            get
             {
-                0, 5, 5,
-                10, 15, 5,
-                15
-            }));
+                return _planet.GetOreMine().ConsupmtionAntimatter.GetValuePerTick()
+                    * _planet.PlanetOreMineUsage
+                + _planet.GetPowerSupply().ConsupmtionAntimatter.GetValuePerTick()
+                    * _planet.PlanetPowerSupplyUsage
+                + _planet.GetFactory().ConsupmtionAntimatter.GetValuePerTick()
+                    * _planet.PlanetFactoryUsage
+                + _planet.GetMageAcademy().ConsupmtionAntimatter.GetValuePerTick()
+                    * _planet.PlanetMageAcademyUsage
+                + _planet.GetCrystalMine().ConsupmtionAntimatter.GetValuePerTick()
+                    * _planet.PlanetCrystalMineUsage
+                + _planet.GetNeutronAccelerator().ConsupmtionAntimatter.GetValuePerTick()
+                    * _planet.PlanetNeutronAcceleratorUsage
+                + _planet.GetElementiumSynthesizer().ConsupmtionAntimatter.GetValuePerTick()
+                    * _planet.PlanetElementiumSynthesizerUsage;
+            }
+        }
 
         public override double Usage => _planet.PlanetNeutronAcceleratorUsage;
+
+        public override GrowthRate ConsumptionEnergyRate
+            => _consumptionEnergyRate
+            ??= new GrowthRate(
+                    Constants.BASEVALUE_FEW,
+                    Constants.FACTOR_SUPPLY,
+                    _planet.PlanetNeutronAccelerator);
+
+        public override GrowthRate ConsumptionManaRate
+            => _consumptionManaRate
+            ??= new GrowthRate(
+                    Constants.BASEVALUE_NORMAL,
+                    Constants.FACTOR_SUPPLY,
+                    _planet.PlanetNeutronAccelerator);
+
+        public override GrowthRate ConsupmtionAntimatter
+            => _consupmtionAntimatter
+            ??= new GrowthRate(
+                    Constants.BASEVALUE_VERY_FEW,
+                    Constants.FACTOR_SUPPLY,
+                    _planet.PlanetNeutronAccelerator);
+
+        public override GrowthRate ConsumptionElementium
+            => _consumptionElementium
+            ??= new GrowthRate(
+                    Constants.BASEVALUE_VERY_FEW,
+                    Constants.FACTOR_SUPPLY,
+                    _planet.PlanetNeutronAccelerator);
 
         #endregion
 
@@ -94,7 +145,11 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         #region Constructors ----------------------------------------------------------------------
 
         public NeutronAccelerator(Planet planet) : base(planet)
-        { }
+        {
+            System.Diagnostics.Debug.WriteLine(
+                $"{DateTime.Now.ToString(_timeFormat)}: "
+                + "A new Neutron Accelerator object has been created.");
+        }
 
         #endregion
     }

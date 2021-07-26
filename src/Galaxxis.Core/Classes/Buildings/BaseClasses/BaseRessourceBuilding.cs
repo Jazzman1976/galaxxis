@@ -1,28 +1,40 @@
 ﻿using Galaxxis.Core.Business.Provider;
+using Galaxxis.Core.Classes.Buildings.Enums;
 using Galaxxis.Core.Classes.Buildings.Interfaces;
 using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions;
 using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 {
-    public abstract class BaseRessourceBuilding : IBuilding, IRessourceBuilding
+    public abstract class BaseRessourceBuilding : IBuilding, IRessourceBuilding, IConsumingBuilding
     {
         #region Protected Fields ------------------------------------------------------------------
 
         protected Planet _planet;
         protected User _owner;
         protected double[] _buildCosts;
+        protected bool? _canBuild;
         protected GrowthRate _ressourceGrowthRate;
         protected GrowthRate _buildTimeRate;
         protected GrowthRate _buildCostOreRate;
         protected GrowthRate _buildCostManaRate;
         protected GrowthRate _buildCostCrystalsRate;
         protected GrowthRate _buildCostElementiumRate;
-        protected double _costsPerTick = -1;
+        protected double _incomePerDay = -1;
+        protected double _incomePerTick = -1;
+        protected double? _costsPerTick;
+        protected string _timeFormat = "HH.mm.ss.fffffff";
+        protected GrowthRate _consumptionEnergyRate;
+        protected GrowthRate _consumptionManaRate;
+        protected GrowthRate _consupmtionAntimatter;
+        protected GrowthRate _consumptionElementium;
 
         #endregion
 
@@ -45,6 +57,18 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         public abstract double Usage { get; }
 
+        // IConsumingBuilding
+
+        public abstract GrowthRate ConsumptionEnergyRate { get; }
+
+        public abstract GrowthRate ConsumptionManaRate { get; }
+
+        public abstract GrowthRate ConsupmtionAntimatter { get; }
+
+        public abstract GrowthRate ConsumptionElementium { get; }
+
+        public EnumConsumingType ConsumingType => EnumConsumingType.continuous;
+
         #endregion
 
 
@@ -62,24 +86,34 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                 };
 
         public bool CanBuild
-            => BuildCosts[0] <= _planet.PlanetOre
-            && BuildCosts[1] <= _planet.PlanetMana
-            && BuildCosts[2] <= _planet.PlanetCrystals
-            && BuildCosts[3] <= _planet.PlanetElementium
-            && !EventProvider
-                .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
-                .Any();
+        {
+            get
+            {
+                if (_canBuild == null)
+                {
+                    _canBuild = BuildCosts[0] <= _planet.PlanetOre
+                        && BuildCosts[1] <= _planet.PlanetMana
+                        && BuildCosts[2] <= _planet.PlanetCrystals
+                        && BuildCosts[3] <= _planet.PlanetElementium
+                        && !EventProvider
+                            .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
+                            .Any();
+                }
+                return _canBuild == true;
+            }
+        }
 
-        public double IncomePerDay
-            => ApplyRaceFactor(
-                this.RessourceGrowthRate.Value + this.RessourceGrowthRate.BaseIncome)
-            * Usage;
+        public double IncomePerDay => _incomePerDay < 0 
+            ? (_incomePerDay = ApplyRaceFactor(
+                this.RessourceGrowthRate.Value + this.RessourceGrowthRate.BaseIncome) * Usage) 
+            : _incomePerDay;
 
-        public double IncomePerTick
-            => ApplyRaceFactor(
+        public double IncomePerTick => _incomePerTick < 0
+            ? (_incomePerTick = ApplyRaceFactor(
                 this.RessourceGrowthRate.GetValuePerTick()
                 + this.RessourceGrowthRate.GetBaseIncomePerTick())
-            * Usage;
+                * Usage)
+            : _incomePerTick;
 
         public double AmountPerTick => IncomePerTick - RessourceCostsPerTick;
 
@@ -163,7 +197,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                     EventLocationEnum.Planet,
                     _planet.PlanetId,
                     eventName,
-                    1,
+                    0,
                     EventTypeEnum.Change,
                     newValue.ToString()));
 
@@ -172,44 +206,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
             return true;
         }
 
-        /// <summary>
-        /// Get the consumption of this building's ressource by other buildings per tick <br/>
-        /// supplyCosts parameter: <br/>
-        /// 0: ore mine, 1: power supply, 2: factory, <br/>
-        /// 3: mage academy, 4: crystal mine, 5: neutron accelerator, <br/>
-        /// 6: elementium synthesizer
-        /// </summary>
-        protected double GetCostsPerTick(int[] supplyCosts)
-        {
-            GrowthRate
-                decreaseRateOreMine = new GrowthRate(
-                    supplyCosts[0], Constants.FACTOR_SUPPLY_COST, _planet.PlanetOreMine),
-                decreaseRatePowerSupply = new GrowthRate(
-                    supplyCosts[1], Constants.FACTOR_SUPPLY_COST, _planet.PlanetPowerSupply),
-                decreaseRateFactory = new GrowthRate(
-                    supplyCosts[2], Constants.FACTOR_SUPPLY_COST, _planet.PlanetFactory),
-                decreaseRateNeutronAccelerator = new GrowthRate(
-                    supplyCosts[3], Constants.FACTOR_SUPPLY_COST, _planet.PlanetMageAcademy),
-                decreaseRateCrystalMine = new GrowthRate(
-                    supplyCosts[4], Constants.FACTOR_SUPPLY_COST, _planet.PlanetCrystalMine),
-                decreaseRateMageAcademy = new GrowthRate(
-                    supplyCosts[5], Constants.FACTOR_SUPPLY_COST, _planet.PlanetNeutronAccelerator),
-                decreaseRateElementiumSynthesizer = new GrowthRate(
-                    supplyCosts[6], Constants.FACTOR_SUPPLY_COST, _planet.PlanetElementiumSynthesizer);
-
-            double ressourceCostPerTick
-                = decreaseRateOreMine.GetValuePerTick() * _planet.GetOreMine().Usage
-                + decreaseRatePowerSupply.GetValuePerTick() * _planet.GetPowerSupply().Usage
-                + decreaseRateFactory.GetValuePerTick() * _planet.GetFactory().Usage
-                + decreaseRateNeutronAccelerator.GetValuePerTick() 
-                    * _planet.GetNeutronAccelerator().Usage
-                + decreaseRateCrystalMine.GetValuePerTick() * _planet.GetCrystalMine().Usage
-                + decreaseRateMageAcademy.GetValuePerTick() * _planet.GetMageAcademy().Usage
-                + decreaseRateElementiumSynthesizer.GetValuePerTick() 
-                    * _planet.GetElementiumSynthesizer().Usage;
-
-            return ressourceCostPerTick;
-        }
+        private string DateStamp => DateTime.Now.ToString("HH.mm.ss.fffffff");
 
         #endregion
 

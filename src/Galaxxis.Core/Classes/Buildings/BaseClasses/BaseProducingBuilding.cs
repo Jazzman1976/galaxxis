@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 {
-    public abstract class BaseSpecialBuilding : IBuilding
+    public abstract class BaseProducingBuilding : IBuilding, IProducingBuilding
     {
         protected Planet _planet;
         protected User _owner;
@@ -43,6 +43,8 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
             && !EventProvider
                 .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
                 .Any();
+
+        public bool IsProducing => throw new System.NotImplementedException();
 
         public abstract bool Build(out string info);
     }

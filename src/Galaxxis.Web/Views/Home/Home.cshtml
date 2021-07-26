@@ -38,7 +38,7 @@
     }
     
     td, th { 
-        font-size: .9rem;        
+        font-size: .8rem;        
         padding: 5px 10px; 
         border-width: 1px; 
         border-style: solid; 
@@ -206,6 +206,65 @@
             <td>@crystalMine.AmountPerTick</td>
             <td>@neutronAccelerator.AmountPerTick</td>
             <td>@elementiumSynthesizer.AmountPerTick</td>
+        </tr>
+        <tr>
+            <th>Consuming/Tick</th>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@oreMine.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@oreMine.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@oreMine.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@oreMine.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@powerSupply.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@powerSupply.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@powerSupply.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@powerSupply.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@factory.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@factory.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@factory.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@factory.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@mageAcademy.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@mageAcademy.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@mageAcademy.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@mageAcademy.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@crystalMine.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@crystalMine.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@crystalMine.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@crystalMine.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@neutronAccelerator.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@neutronAccelerator.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@neutronAccelerator.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@neutronAccelerator.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@elementiumSynthesizer.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@elementiumSynthesizer.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@elementiumSynthesizer.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@elementiumSynthesizer.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
         </tr>
         <tr>
             <th>Actions</th>

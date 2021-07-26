@@ -1,5 +1,7 @@
 ﻿using Galaxxis.Core.Classes.Buildings.BaseClasses;
+using Galaxxis.Core.Classes.Buildings.Enums;
 using Galaxxis.Core.Engine;
+using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
 using System;
@@ -13,54 +15,98 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public override GrowthRate RessourceGrowthRate 
             => _ressourceGrowthRate
             ??= new GrowthRate(
-                    Constants.BASEVALUE_CAT1_GROWTH, 
-                    Constants.FACTOR_RESSOURCE_GROWTH, 
+                    Constants.BASEVALUE_CAT1_RESSOURCE, 
+                    Constants.FACTOR_RESSOURCES, 
                     _planet.PlanetPowerSupply, 
-                    Constants.BASEINCOME_CAT1_GROWTH);
+                    Constants.BASEINCOME_CAT1_RESSOURCE);
 
         public override GrowthRate BuildTimeRate
             => _buildTimeRate
             ??= new GrowthRate(
-                    Constants.BASEVALUE_BUILD_TIME, 
+                    Constants.BASEVALUE_VERY_MUCH, 
                     Constants.FACTOR_BUILD_TIME, 
                     _planet.PlanetPowerSupply + 1);
 
         public override GrowthRate BuildCostOreRate
             => _buildCostOreRate
-            ??= new GrowthRate(15, Constants.FACTOR_BUILD_COST, _planet.PlanetPowerSupply + 1);
+            ??= new GrowthRate(
+                    Constants.BASEVALUE_NORMAL, 
+                    Constants.FACTOR_BUILD, 
+                    _planet.PlanetPowerSupply + 1);
 
         public override GrowthRate BuildCostManaRate 
             => _buildCostManaRate
-            ??= new GrowthRate(5, Constants.FACTOR_BUILD_COST, _planet.PlanetPowerSupply + 1);
+            ??= new GrowthRate(
+                    Constants.BASEVALUE_VERY_FEW, 
+                    Constants.FACTOR_BUILD, 
+                    _planet.PlanetPowerSupply + 1);
 
         public override GrowthRate BuildCostCrystalsRate
             => _buildCostCrystalsRate
-            ??= new GrowthRate(5, Constants.FACTOR_BUILD_COST, _planet.PlanetPowerSupply + 1);
+            ??= new GrowthRate(
+                    Constants.BASEVALUE_VERY_FEW, 
+                    Constants.FACTOR_BUILD, 
+                    _planet.PlanetPowerSupply + 1);
 
         public override GrowthRate BuildCostElementiumRate
             => _buildCostElementiumRate
-            ??= new GrowthRate(0, Constants.FACTOR_BUILD_COST, _planet.PlanetPowerSupply + 1);
+            ??= new GrowthRate(
+                    0, 
+                    Constants.FACTOR_BUILD, 
+                    _planet.PlanetPowerSupply + 1);
 
         public override double RessourceCostsPerTick
         {
             get
             {
-                if (_costsPerTick == null)
-                {
-                    _costsPerTick = GetCostsPerTick(new int[]
-                    {
-                        5, 0, 5,
-                        15, 5, 10,
-                        15,
-                        15, 20, 20,
-                        15, 15, 15
-                    });
-                }
-                return _costsPerTick ?? 0;
+                return _planet.GetOreMine().ConsumptionEnergyRate.GetValuePerTick()
+                    * _planet.PlanetOreMineUsage
+                + _planet.GetPowerSupply().ConsumptionEnergyRate.GetValuePerTick()
+                    * _planet.PlanetPowerSupplyUsage
+                + _planet.GetFactory().ConsumptionEnergyRate.GetValuePerTick()
+                    * _planet.PlanetFactoryUsage
+                + _planet.GetMageAcademy().ConsumptionEnergyRate.GetValuePerTick()
+                    * _planet.PlanetMageAcademyUsage
+                + _planet.GetCrystalMine().ConsumptionEnergyRate.GetValuePerTick()
+                    * _planet.PlanetCrystalMineUsage
+                + _planet.GetNeutronAccelerator().ConsumptionEnergyRate.GetValuePerTick()
+                    * _planet.PlanetNeutronAcceleratorUsage
+                + _planet.GetElementiumSynthesizer().ConsumptionEnergyRate.GetValuePerTick()
+                    * _planet.PlanetElementiumSynthesizerUsage;
             }
         }
 
         public override double Usage => _planet.PlanetPowerSupplyUsage;
+
+        public override GrowthRate ConsumptionEnergyRate
+            => _consumptionEnergyRate
+            ??= new GrowthRate(
+                    0,
+                    Constants.FACTOR_SUPPLY,
+                    _planet.PlanetPowerSupply);
+
+        public override GrowthRate ConsumptionManaRate
+            => _consumptionManaRate
+            ??= new GrowthRate(
+                    Constants.BASEVALUE_VERY_FEW,
+                    Constants.FACTOR_SUPPLY,
+                    _planet.PlanetPowerSupply);
+
+        public override GrowthRate ConsupmtionAntimatter
+            => _consupmtionAntimatter
+            ??= new GrowthRate(
+                    Constants.BASEVALUE_VERY_FEW,
+                    Constants.FACTOR_SUPPLY,
+                    _planet.PlanetPowerSupply);
+
+        public override GrowthRate ConsumptionElementium
+            => _consumptionElementium
+            ??= new GrowthRate(
+                    Constants.BASEVALUE_VERY_FEW,
+                    Constants.FACTOR_SUPPLY,
+                    _planet.PlanetPowerSupply);
+
+        public override EnumConsumingType ConsumingType => EnumConsumingType.continuous;
 
         #endregion
 

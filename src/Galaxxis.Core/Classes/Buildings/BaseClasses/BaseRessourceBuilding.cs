@@ -1,4 +1,5 @@
 ﻿using Galaxxis.Core.Business.Provider;
+using Galaxxis.Core.Classes.Buildings.Enums;
 using Galaxxis.Core.Classes.Buildings.Interfaces;
 using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions;
@@ -12,7 +13,7 @@ using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 {
-    public abstract class BaseRessourceBuilding : IBuilding, IRessourceBuilding
+    public abstract class BaseRessourceBuilding : IBuilding, IRessourceBuilding, IConsumingBuilding
     {
         #region Protected Fields ------------------------------------------------------------------
 
@@ -30,6 +31,10 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         protected double _incomePerTick = -1;
         protected double? _costsPerTick;
         protected string _timeFormat = "HH.mm.ss.fffffff";
+        protected GrowthRate _consumptionEnergyRate;
+        protected GrowthRate _consumptionManaRate;
+        protected GrowthRate _consupmtionAntimatter;
+        protected GrowthRate _consumptionElementium;
 
         #endregion
 
@@ -51,6 +56,18 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         public abstract double RessourceCostsPerTick { get; }
 
         public abstract double Usage { get; }
+
+        // IConsumingBuilding
+
+        public abstract GrowthRate ConsumptionEnergyRate { get; }
+
+        public abstract GrowthRate ConsumptionManaRate { get; }
+
+        public abstract GrowthRate ConsupmtionAntimatter { get; }
+
+        public abstract GrowthRate ConsumptionElementium { get; }
+
+        public abstract EnumConsumingType ConsumingType { get; }
 
         #endregion
 
@@ -187,74 +204,6 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
             // exit
             info = "Usage of the building has been changed.";
             return true;
-        }
-
-        /// <summary>
-        /// Get the consumption of this building's ressource by other buildings per tick <br/>
-        /// supplyCosts parameter: <br/>
-        /// <br/>
-        /// 0: ore mine, 1: power supply, 2: factory, <br/>
-        /// 3: mage academy, 4: crystal mine, 5: neutron accelerator, <br/>
-        /// 6: elementium synthesizer <br/>
-        /// <br />
-        /// 7: war forge, 8: technology center, 9: high tech laboratory <br/>
-        /// <br/>
-        /// 10: research laboratory, 11: shipyard, 12: defense facility
-        /// </summary>
-        protected double GetCostsPerTick(int[] supplyCosts)
-        {
-            DateTime tStartTime = DateTime.Now;
-
-            GrowthRate
-                decreaseRateOreMine = new GrowthRate(
-                    supplyCosts[0], Constants.FACTOR_SUPPLY_COST, _planet.PlanetOreMine),
-                decreaseRatePowerSupply = new GrowthRate(
-                    supplyCosts[1], Constants.FACTOR_SUPPLY_COST, _planet.PlanetPowerSupply),
-                decreaseRateFactory = new GrowthRate(
-                    supplyCosts[2], Constants.FACTOR_SUPPLY_COST, _planet.PlanetFactory),
-                decreaseRateNeutronAccelerator = new GrowthRate(
-                    supplyCosts[3], Constants.FACTOR_SUPPLY_COST, _planet.PlanetMageAcademy),
-                decreaseRateCrystalMine = new GrowthRate(
-                    supplyCosts[4], Constants.FACTOR_SUPPLY_COST, _planet.PlanetCrystalMine),
-                decreaseRateMageAcademy = new GrowthRate(
-                    supplyCosts[5], Constants.FACTOR_SUPPLY_COST, _planet.PlanetNeutronAccelerator),
-                decreaseRateElementiumSynthesizer = new GrowthRate(
-                    supplyCosts[6], Constants.FACTOR_SUPPLY_COST, _planet.PlanetElementiumSynthesizer),
-
-                decreaseRateShipyard = new GrowthRate(
-                    supplyCosts[11], Constants.FACTOR_SUPPLY_COST, _planet.PlanetShipyard);
-
-            double ressourceCostPerTick
-                = decreaseRateOreMine.GetValuePerTick() * _planet.GetOreMine().Usage
-                + decreaseRatePowerSupply.GetValuePerTick() * _planet.GetPowerSupply().Usage
-                + decreaseRateFactory.GetValuePerTick() * _planet.GetFactory().Usage
-                + decreaseRateNeutronAccelerator.GetValuePerTick()
-                    * _planet.GetNeutronAccelerator().Usage
-                + decreaseRateCrystalMine.GetValuePerTick() * _planet.GetCrystalMine().Usage
-                + decreaseRateMageAcademy.GetValuePerTick() * _planet.GetMageAcademy().Usage
-                + decreaseRateElementiumSynthesizer.GetValuePerTick()
-                    * _planet.GetElementiumSynthesizer().Usage;
-
-
-            List<Event> events = EventProvider
-                .GetEvents(_planet.PlanetId, EventLocationEnum.Planet);
-
-            Debug.WriteLine($"{DateStamp}: GetCostsPerTick events loaded in "
-                        + $"{tStartTime.MsGone()} ms.");
-
-            if (events
-                .Any(e
-                    => Enum.Parse(typeof(EventTypeEnum), e.EventType) is EventTypeEnum.Produce
-                    && Enum.Parse(typeof(EventNameEnum), e.EventName)
-                        is EventNameEnum.ProduceShip))
-            {
-                ressourceCostPerTick += decreaseRateShipyard.GetValuePerTick();
-            }
-
-            Debug.WriteLine($"{DateStamp}: GetCostsPerTick events checked in "
-                        + $"{tStartTime.MsGone()} ms.");
-
-            return ressourceCostPerTick;
         }
 
         private string DateStamp => DateTime.Now.ToString("HH.mm.ss.fffffff");

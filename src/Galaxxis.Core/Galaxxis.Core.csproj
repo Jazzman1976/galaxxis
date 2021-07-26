@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Galaxxis.Data\Galaxxis.Data.csproj" />
+    <ProjectCapability Include="DynamicDependentFile" />
+    <ProjectCapability Include="DynamicFileNesting" />
   </ItemGroup>
 
 </Project>

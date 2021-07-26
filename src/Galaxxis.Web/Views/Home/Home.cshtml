@@ -20,6 +20,7 @@
 
     // update ressources on planet
     thePlanet.UpdateRessources();
+    thePlanet.ClearCache();
 
     // init markup vars
     OreMine oreMine = thePlanet.GetOreMine();
@@ -455,6 +456,7 @@
             <tr>
                 <td>@(@event.EventTick)</td>
                 <td>@(@event.EventName)</td>
+                <td>@(@event.EventData)</td>
             </tr>
         }
     </table>

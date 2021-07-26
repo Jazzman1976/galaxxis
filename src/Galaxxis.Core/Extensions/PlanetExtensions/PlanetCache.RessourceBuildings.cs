@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Galaxxis.Core.Extensions.PlanetExtensions
 {
-    public static class RessourceBuildings
+    public static partial class PlanetCache
     {
         /// <summary>
         /// Removes all resource buildings from their dictionaries. 

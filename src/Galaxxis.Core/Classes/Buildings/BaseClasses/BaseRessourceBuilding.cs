@@ -67,7 +67,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         public abstract GrowthRate ConsumptionElementium { get; }
 
-        public abstract EnumConsumingType ConsumingType { get; }
+        public EnumConsumingType ConsumingType => EnumConsumingType.continuous;
 
         #endregion
 

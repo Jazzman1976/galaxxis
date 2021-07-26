@@ -1,6 +1,7 @@
 ﻿@using Galaxxis.Core.Extensions.PlanetExtensions
 @using Galaxxis.Data.Models
 @using Galaxxis.Core.Classes.Buildings.RessourceBuildings
+@using Galaxxis.Core.Classes.Buildings.ProducingBuildings
 
 @model HomeViewModel
 
@@ -28,6 +29,7 @@
     CrystalMine crystalMine = thePlanet.GetCrystalMine();
     NeutronAccelerator neutronAccelerator = thePlanet.GetNeutronAccelerator();
     ElementiumSynthesizer elementiumSynthesizer = thePlanet.GetElementiumSynthesizer();
+    Shipyard shipyard = thePlanet.GetShipyard();
     double universeTicks = Model.Ticker.Ticks;
 }
 
@@ -61,8 +63,8 @@
 <div>Game Ticks: @universeTicks</div>
 <div style="margin-bottom: 1rem;">Building in progress?: @(thePlanet.IsBuilding() ? "yes" : "no")</div>
 
-<div style="margin-bottom: 1rem;">
-    <table style="margin-bottom: 1rem;">
+<div id="user-panel" style="margin-bottom: 1rem;">
+    <table>
         <tr>
             <th>UserId</th>
             <th>UserEmail</th>
@@ -81,8 +83,8 @@
     </table>
 </div>
 
-<div style="margin-bottom: 1rem;">
-    <table style="margin-bottom: 1rem;">
+<div id="planet-panel" style="margin-bottom: 1rem;">
+    <table>
         <tr>
             <th>PlanetId</th>
             <th>PlanetName</th>
@@ -125,8 +127,8 @@
     </table>
 </div>
 
-<div style="margin-bottom: 1rem;">
-    <table style="margin-bottom: 1rem;">
+<div id="ressources-panel" style="margin-bottom: 1rem;">
+    <table>
         <tr>
             <th></th>
             <th>Ore</th>
@@ -412,20 +414,52 @@
     </table>
 </div>
 
-<div style="margin-bottom: 1rem;">
+<div id="producing-panel" style="margin-bottom: 1rem;">
+    <table>
+        <tr>
+            <th></th>
+            <th>Shipyard</th>
+        </tr>
+        <tr>
+            <th>Level</th>
+            <td>@thePlanet.PlanetShipyard</td>
+        </tr>
+        <tr>
+            <th>Actions</th>
+            <td>
+                <table>
+                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th>Ore</th><td>@shipyard.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@shipyard.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@shipyard.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@shipyard.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@shipyard.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildShipyard" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!shipyard.CanBuild ? "disabled" : "") />
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="events-panel" style="margin-bottom: 1rem;">
     <table>
         <tr>
             <th>Event Tick</th>
             <th>Event Name</th>
         </tr>
-    @foreach (Event @event in thePlanet.GetEvents())
-    {
-        <tr>
-            <td>@(@event.EventTick)</td>
-            <td>@(@event.EventName)</td>
-        </tr>
-    }
+        @foreach (Event @event in thePlanet.GetEvents())
+        {
+            <tr>
+                <td>@(@event.EventTick)</td>
+                <td>@(@event.EventName)</td>
+            </tr>
+        }
     </table>
 </div>
 
-<div style="margin-bottom: 1rem;">@Model.Info</div>
+<div id="info-panel" style="margin-bottom: 1rem;">
+    @Model.Info
+</div>

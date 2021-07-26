@@ -106,8 +106,6 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
                 Constants.FACTOR_SUPPLY,
                 _planet.PlanetElementiumSynthesizer);
 
-        public override EnumConsumingType ConsumingType => throw new NotImplementedException();
-
         #endregion
 
 

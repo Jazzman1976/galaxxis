@@ -106,8 +106,6 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
                     Constants.FACTOR_SUPPLY,
                     _planet.PlanetNeutronAccelerator);
 
-        public override EnumConsumingType ConsumingType => EnumConsumingType.continuous;
-
         #endregion
 
 

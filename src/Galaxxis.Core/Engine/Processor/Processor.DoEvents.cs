@@ -48,6 +48,10 @@ namespace Galaxxis.Core.Engine
                     Do_BuildElementiumSynthesizer(@event, context);
                     break;
 
+                case EventNameEnum.BuildShipyard:
+                    Do_BuildShipyard(@event, context);
+                    break;
+
                 #endregion
 
                 #region Change event actions ------------------------------------------------------
@@ -94,11 +98,10 @@ namespace Galaxxis.Core.Engine
             if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
-                Planet planet = context.Planet
-                    .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetOreMine++;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine($"{DateStamp}: Ore Mine build on planet {planet.PlanetId}.");
             }
         }
@@ -108,11 +111,10 @@ namespace Galaxxis.Core.Engine
             if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
-                Planet planet = context.Planet
-                    .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetPowerSupply++;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine($"{DateStamp}: Power Supply build on planet {planet.PlanetId}.");
             }
         }
@@ -122,11 +124,10 @@ namespace Galaxxis.Core.Engine
             if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
-                Planet planet = context.Planet
-                    .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetFactory++;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine($"{DateStamp}: Factory build on planet {planet.PlanetId}.");
             }
         }
@@ -136,11 +137,10 @@ namespace Galaxxis.Core.Engine
             if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
-                Planet planet = context.Planet
-                    .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetMageAcademy++;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine($"{DateStamp}: Mage Academy build on planet {planet.PlanetId}.");
             }
         }
@@ -150,11 +150,10 @@ namespace Galaxxis.Core.Engine
             if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
-                Planet planet = context.Planet
-                    .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetCrystalMine++;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine($"{DateStamp}: Chrystal Mine build on planet {planet.PlanetId}.");
             }
         }
@@ -164,11 +163,10 @@ namespace Galaxxis.Core.Engine
             if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
-                Planet planet = context.Planet
-                    .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetNeutronAccelerator++;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine($"{DateStamp}: Neutron Accelerator build on planet {planet.PlanetId}.");
             }
         }
@@ -178,12 +176,24 @@ namespace Galaxxis.Core.Engine
             if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 int planetId = @event.EventLocationId;
-                Planet planet = context.Planet
-                    .FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
                 planet.PlanetElementiumSynthesizer++;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine($"{DateStamp}: Elementium Synthesizer build on planet {planet.PlanetId}.");
+            }
+        }
+
+        private void Do_BuildShipyard(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
+                planet.PlanetShipyard++;
+                planet.ClearCache();
+                Debug.WriteLine($"{DateStamp}: Shipyard build on planet {planet.PlanetId}.");
             }
         }
 
@@ -201,7 +211,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetOreMineUsage = newValue;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Ore Mine usage changed on planet {planet.PlanetId}.");
             }
@@ -216,7 +226,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetPowerSupplyUsage = newValue;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Power Supply usage changed on planet {planet.PlanetId}.");
             }
@@ -231,7 +241,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetFactoryUsage = newValue;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Power Supply usage changed on planet {planet.PlanetId}.");
             }
@@ -246,7 +256,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetMageAcademyUsage = newValue;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Mage Academy usage changed on planet {planet.PlanetId}.");
             }
@@ -261,7 +271,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetCrystalMineUsage = newValue;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Crystal Mine usage changed on planet {planet.PlanetId}.");
             }
@@ -276,7 +286,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetNeutronAcceleratorUsage = newValue;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Neutron Accelerator usage changed on planet {planet.PlanetId}.");
             }
@@ -291,7 +301,7 @@ namespace Galaxxis.Core.Engine
                 planet.UpdateRessources();
                 double newValue = double.Parse(@event.EventData);
                 planet.PlanetElementiumSynthesizerUsage = newValue;
-                planet.RemoveRessourceBuildings();
+                planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Elementium Synthesizer usage changed on planet {planet.PlanetId}.");
             }

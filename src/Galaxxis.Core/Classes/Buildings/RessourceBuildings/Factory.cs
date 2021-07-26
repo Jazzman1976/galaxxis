@@ -86,8 +86,6 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
                     Constants.FACTOR_SUPPLY,
                     _planet.PlanetFactory);
 
-        public override EnumConsumingType ConsumingType => EnumConsumingType.continuous;
-
         #endregion
 
 

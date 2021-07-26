@@ -87,8 +87,6 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
                     Constants.FACTOR_SUPPLY,
                     _planet.PlanetCrystalMine);
 
-        public override EnumConsumingType ConsumingType => EnumConsumingType.continuous;
-
         #endregion
 
 

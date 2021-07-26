@@ -1,7 +1,7 @@
 ﻿using Galaxxis.Core.Business.Provider;
+using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Galaxxis.Core.Extensions.PlanetExtensions;
 
 namespace Galaxxis.Web.Views.Home
 {

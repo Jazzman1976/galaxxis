@@ -39,8 +39,10 @@ namespace Galaxxis.Data.Models
         public double PlanetNeutronAcceleratorUsage { get; set; }
         public int PlanetElementiumSynthesizer { get; set; }
         public double PlanetElementiumSynthesizerUsage { get; set; }
-        public long PlanetCreated { get; set; }
         public int PlanetShipyard { get; set; }
+        public int PlanetCoordinateX { get; set; }
+        public int PlanetCoordinateY { get; set; }
+        public int PlanetCoordinateZ { get; set; }
 
         public virtual System PlanetSystem { get; set; }
         public virtual User PlanetUser { get; set; }

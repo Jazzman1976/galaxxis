@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="assets/styles/main.css">
+    </head>
+    <body>
+        <div id="content">
+            <div id="layer-background"></div>
+            <div id="layer-foreground"></div>
+            <div id="layer-inferface-background"></div>
+            <div id="layer-interface">      
+                <main>      
+                    <h1>Planet: Erde</h1>
+                    <ul>
+                        <li>
+                            <a href="#">Baumenü</a>
+                        </li>
+                        <li>
+                            <a href="index.html">Zurück zum Index</a>
+                        </li>
+                    </ul>
+
+                    <div>                        
+                        <a href="interface_005.html" class="button-link">&lt;&lt;</a>
+                        <span>Zurück zum System</span>
+                    </div>
+
+                    <!-- #region Befehle -->
+                    <div>
+                        <h2>Befehle</h2>
+                        
+                        <div class="befehl-panel">
+                            <fieldset>
+                                <legend>Flottenkommando</legend>
+                                
+                                <div class="two-col-panel">
+                                    <div class="selection">
+                                        <div class="location-selection location-selection--block">
+                                            <label for="galaxie">Galaxie:</label>
+                                            <button class="location-selection__prev" data-for="galaxie">&lt;</button>
+                                            <div class="select-wrapper">
+                                                <select id="galaxie">
+                                                    <option selected>Andromeda</option>
+                                                    <option>Barnards</option>
+                                                    <option>Cetus</option>
+                                                    <option>Draco</option>
+                                                    <option>Eridanus</option>
+                                                    <option>Fornax</option>
+                                                </select>
+                                            </div>
+                                            <button class="location-selection__next" data-for="galaxie">&gt;</button>
+                                        </div>
+                                    
+                                        <div class="location-selection location-selection--block">
+                                            <label for="quadrant">Quadrant:</label>
+                                            <button class="location-selection__prev" data-for="quadrant">&lt;</button>
+                                            <div class="select-wrapper">
+                                                <select id="quadrant">
+                                                    <option selected>Alpha</option>
+                                                    <option>Betha</option>
+                                                    <option>Gamma</option>
+                                                    <option>Delta</option>
+                                                    <option>Epsilon</option>
+                                                    <option>Zeta</option>
+                                                    <option>Eta</option>
+                                                    <option>Thetan</option>
+                                                    <option>Iota</option>
+                                                    <option>Kappa</option>
+                                                </select>
+                                            </div>
+                                            <button class="location-selection__next" data-for="quadrant">&gt;</button>
+                                        </div>
+
+                                        <div class="location-selection location-selection--block">
+                                            <label for="system">System:</label>
+                                            <button class="location-selection__prev" data-for="system">&lt;</button>
+                                            <div class="select-wrapper">
+                                                <select id="system">
+                                                    <option selected>Dagoba</option>
+                                                    <option>Hooth</option>
+                                                </select>
+                                            </div>
+                                            <button class="location-selection__next" data-for="system">&gt;</button>                                        
+                                        </div> 
+
+                                        <div class="location-selection location-selection--block">
+                                            <label for="planet">Planet:</label>
+                                            <button class="location-selection__prev" data-for="planet">&lt;</button>
+                                            <div class="select-wrapper">
+                                                <select id="planet">
+                                                    <option selected>Dagoba</option>
+                                                    <option>Gasplanet I</option>
+                                                    <option>Gasplanet II</option>
+                                                    <option>Eisplanet I</option>
+                                                    <option>Planet I</option>
+                                                </select>
+                                            </div>
+                                            <button class="location-selection__next" data-for="planet">&gt;</button>
+                                        </div>
+
+                                        <div class="location-selection location-selection--block">
+                                            <label for="kommando">Kommando:</label>
+                                            <button class="location-selection__prev" data-for="kommando">&lt;</button>
+                                            <div class="select-wrapper">
+                                                <select id="kommando">
+                                                    <option selected>Stationieren</option>
+                                                    <option>Transport</option>
+                                                    <option>Angreifen</option>
+                                                    <option>Spionieren</option>                                                
+                                                </select>
+                                            </div>
+                                            <button class="location-selection__next" data-for="kommando">&gt;</button>
+                                        </div>
+
+                                        <a href="#" class="button-link button-link--selection">==&gt; Go &lt;==</a>
+                                    </div>
+
+                                    <div>
+                                        <i>
+                                            <b>Stationieren:</b><br />
+                                            Sende eine Flotte zu einem anderen Planeten. 
+                                            Alle Waren und Güter werden auf diesem Planet deponiert.
+                                            Die Flotte wird dort stationiert.<br />
+                                            <hr />
+                                            <b>Transport:</b><br />
+                                            Sende eine Flotte zu einem anderen Planeten. 
+                                            Alle Waren und Güter werden auf diesem Planet deponiert.
+                                            Die Flotte kehrt danach zu dir zurück.<br />
+                                            <hr />
+                                            <b>Angreifen:</b><br />
+                                            Greife einen anderen Planeten an.
+                                            Die Verteidigung des Planeten sowie dort stationierte,                                             
+                                            feindliche Flotten werden bekämpft.
+                                            Bei Erfolg werden Waren und Güter geraubt und verladen.
+                                            Gekaperte Schiffe werden in deine Flotte aufgenommen.
+                                            Die Flotte kehrt danach zu dir zurück.<br />
+                                            <hr />
+                                            <b>Spionieren:</b><br />
+                                            Informationen in Sensorreichweite zu diesem Planeten werden gesammelt.
+                                            Feindliche Flotten werden bekämpft.
+                                            Die Flotte kehrt danach zu dir zurück.
+                                        </i>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <!-- #endregion -->
+                
+                    <!-- #region Uhr -->
+                    <div>
+                        <span>
+                            Flotte X erreicht Planet XY in 
+                        </span>
+                        <span class="clock" 
+                            data-stunden="2" 
+                            data-minuten="30" 
+                            data-sekunden="15">
+                        </span>
+                    </div>
+
+                    <div>
+                        <span>
+                            Bauphase X abgeschlossen in
+                        </span>
+                        <span class="clock" 
+                            data-stunden="48" 
+                            data-minuten="0" 
+                            data-sekunden="10">
+                        </span>
+                    </div>
+                    <!-- #endregion -->
+
+
+                </main>    
+            </div>
+        </div>
+        <script src="assets/scripts/perfect-scrollbar.js"></script>
+        <script src="assets/scripts/main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "galaxxis-dummy",
+  "version": "1.0.0",
+  "description": "ideas and examples",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://git.grunow-it.de/galaxxis/galaxxis.git"
+  },
+  "keywords": [
+    "dummy"
+  ],
+  "author": "Elmar Hoefinghoff",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "6.0.0",
+    "gulp-concat": "2.6.1",
+    "gulp-copy": "^1.1.0",
+    "gulp-rename": "1.4.0",
+    "gulp-sass": "^5.0.0",
+    "gulp-sourcemaps": "2.6.5",
+    "gulp-uglify-es": "1.0.4",
+    "node-sass": "^6.0.1",
+    "perfect-scrollbar": "1.4.0"
+  },
+  "browserslist": [
+    "last 4 versions"
+  ]
+}

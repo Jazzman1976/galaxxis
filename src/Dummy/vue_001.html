@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">        
+        <title>Vue_001</title>
+        <script src="assets/scripts/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{ message }}
+        </div>
+        <div id="app2">
+            <ol>
+                <li v-for="todo in todos">
+                    {{ todo.text }}
+                </li>
+            </ol>
+        </div>
+        <script>
+            let app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello Vue!'
+                }
+            });
+            let app2 = new Vue({
+                el: '#app2',
+                data: {
+                    todos: [
+                        { text: 'Text 1'},
+                        { text: 'Text 2'},
+                        { text: 'Text 3'}
+                    ]
+                }
+            });
+        </script>
+    </body>
+</html>

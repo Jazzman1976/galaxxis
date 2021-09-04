@@ -1,6 +1,7 @@
 ﻿using Galaxxis.Core.Business.Provider;
 using Galaxxis.Core.Classes.Buildings.BaseClasses;
 using Galaxxis.Core.Engine;
+using Galaxxis.Core.Extensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
 using System;
@@ -48,7 +49,7 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
         public override bool IsProducing
             => !EventProvider
                 .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Produce)
-                .Any(e => e.EventName.Trim().Equals(EventNameEnum.ProduceShip));
+                .Any();
 
         public override GrowthRate ConsumptionEnergyRate
             => _consumptionEnergyRate
@@ -81,6 +82,58 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
         public override bool Build(out string info)
         {
             return base.Build(EventNameEnum.BuildShipyard, out info);
+        }
+
+        public bool ProduceShipExplorer(out string info)
+        {
+            if (EventProvider
+                .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Produce)
+                .Any())
+            {
+                info = "Producing is still in progress!";
+                return false;
+            }
+
+            double[] produceCosts = new double[] 
+            {
+                500,
+                _owner.IsOffensive() ? 750 : 1500,
+                _owner.IsOffensive() ? 1500 : 750,
+                250
+            };
+
+            if (produceCosts[0] > _planet.PlanetTools)
+            {
+                info = "Not enough tools!";
+                return false;
+            }
+            if (produceCosts[1] > _planet.PlanetCrystals)
+            {
+                info = "Not enough crystals!";
+                return false;
+            }
+            if (produceCosts[2] > _planet.PlanetAntimatter)
+            {
+                info = "Not enough antimatter!";
+                return false;
+            }
+            if (produceCosts[3] > _planet.PlanetElementium)
+            {
+                info = "Not enough elementium!";
+                return false;
+            }
+
+            Processor.Instance.EventQueue
+                .Enqueue(EventProvider.NewEvent(
+                    EventLocationEnum.Planet,
+                    _planet.PlanetId,
+                    EventNameEnum.ProduceShipExplorer,
+                    100,
+                    EventTypeEnum.Produce,
+                    produceCosts.ToValueString()));
+
+            info = "Producing of a new explorer ship has been started.";
+            return true;
         }
 
         public Shipyard(Planet planet) : base(planet) 

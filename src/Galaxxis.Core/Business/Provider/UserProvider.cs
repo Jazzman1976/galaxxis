@@ -27,11 +27,12 @@ namespace Galaxxis.Core.Business.Provider
                 {
                     query = query
                         .Include(user => user.Planet)
-                        .ThenInclude(planet => planet.Moon)                   
+                        .ThenInclude(planet => planet.Moon)
                         .Include(user => user.Planet)
                         .ThenInclude(planet => planet.PlanetSystem)
                         .ThenInclude(system => system.SystemGalaxy)
-                        .ThenInclude(galaxy => galaxy.GalaxyUniverse);
+                        .ThenInclude(galaxy => galaxy.GalaxyUniverse)
+                        .Include(user => user.Ship);
                 }
 
                 // get user

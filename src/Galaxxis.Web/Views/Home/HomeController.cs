@@ -207,5 +207,18 @@ namespace Galaxxis.Web.Views.Home
             // exit
             return View("Home", new HomeViewModel(info));
         }
+
+        [HttpPost]
+        public IActionResult ProduceShipExplorer(int planetId, int userId)
+        {
+            // get entities from database
+            Planet planet = PlanetProvider.GetPlanet(planetId);
+
+            // produce ship: explorer
+            planet.GetShipyard().ProduceShipExplorer(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
     }
 }

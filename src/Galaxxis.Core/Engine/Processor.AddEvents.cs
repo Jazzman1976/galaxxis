@@ -30,14 +30,20 @@ namespace Galaxxis.Core.Engine
             editPlanet.UpdateRessources();
 
             // pay build costs
-            string[] eventDataArray;
+            string[] eventDataArray = @event.EventData.Split('|');
             switch (Enum.Parse(typeof(EventTypeEnum), @event.EventType))
             {
                 case EventTypeEnum.Build:
-                    eventDataArray = @event.EventData.Split('|');
                     editPlanet.PlanetOre -= double.Parse(eventDataArray[0]);
                     editPlanet.PlanetMana -= double.Parse(eventDataArray[1]);
                     editPlanet.PlanetCrystals -= double.Parse(eventDataArray[2]);
+                    editPlanet.PlanetElementium -= double.Parse(eventDataArray[3]);
+                    break;
+
+                case EventTypeEnum.Produce:
+                    editPlanet.PlanetTools -= double.Parse(eventDataArray[0]);
+                    editPlanet.PlanetCrystals -= double.Parse(eventDataArray[1]);
+                    editPlanet.PlanetAntimatter -= double.Parse(eventDataArray[2]);
                     editPlanet.PlanetElementium -= double.Parse(eventDataArray[3]);
                     break;
             }

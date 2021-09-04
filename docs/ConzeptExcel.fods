@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:rpt="http://openoffice.org/2005/report" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:css3t="http://www.w3.org/TR/css3-text/" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" office:version="1.3" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:generator>LibreOffice/7.1.4.2$Windows_X86_64 LibreOffice_project/a529a4fab45b75fefc5b6226684193eb000654f6</meta:generator><dc:date>2021-07-26T11:24:32.554000000</dc:date><meta:editing-duration>PT7H11M58S</meta:editing-duration><meta:editing-cycles>35</meta:editing-cycles><meta:document-statistic meta:table-count="3" meta:cell-count="1903" meta:object-count="1"/></office:meta>
+ <office:meta><meta:generator>LibreOffice/7.1.4.2$Windows_X86_64 LibreOffice_project/a529a4fab45b75fefc5b6226684193eb000654f6</meta:generator><dc:date>2021-08-01T19:51:37.544000000</dc:date><meta:editing-duration>PT9H50M7S</meta:editing-duration><meta:editing-cycles>39</meta:editing-cycles><meta:document-statistic meta:table-count="3" meta:cell-count="1903" meta:object-count="1"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">451</config:config-item>
@@ -13,8 +13,8 @@
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="Kosten und Erträge">
-       <config:config-item config:name="CursorPositionX" config:type="int">5</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">26</config:config-item>
+       <config:config-item config:name="CursorPositionX" config:type="int">7</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">137</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
@@ -23,7 +23,7 @@
        <config:config-item config:name="PositionLeft" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionRight" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionTop" config:type="int">0</config:config-item>
-       <config:config-item config:name="PositionBottom" config:type="int">0</config:config-item>
+       <config:config-item config:name="PositionBottom" config:type="int">87</config:config-item>
        <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
        <config:config-item config:name="ZoomValue" config:type="int">100</config:config-item>
        <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -483,28 +483,18 @@
    <style:paragraph-properties fo:text-align="start" css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="bold"/>
   </style:style>
-  <style:style style:name="ce130" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N10">
-   <style:table-cell-properties fo:border-bottom="1.76pt solid #000000" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:background-color="transparent" fo:border-left="1.76pt solid #000000" fo:border-right="none" fo:border-top="0.74pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
+  <style:style style:name="ce72" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:border-bottom="0.06pt solid #000000" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:background-color="transparent" fo:border-left="2.01pt solid #000000" fo:border-right="2.01pt solid #000000" fo:border-top="2.01pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
    <style:paragraph-properties fo:text-align="start" css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
   </style:style>
-  <style:style style:name="ce142" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N10">
-   <style:table-cell-properties fo:border-bottom="0.74pt solid #000000" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:background-color="transparent" fo:border-left="1.76pt solid #000000" fo:border-right="1.76pt solid #000000" fo:border-top="0.74pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
+  <style:style style:name="ce73" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N10">
+   <style:table-cell-properties fo:border-bottom="2.01pt solid #000000" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:background-color="transparent" fo:border-left="2.01pt solid #000000" fo:border-right="2.01pt solid #000000" fo:border-top="0.06pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
    <style:paragraph-properties fo:text-align="start" css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
   </style:style>
-  <style:style style:name="ce143" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N10">
-   <style:table-cell-properties fo:border-bottom="1.76pt solid #000000" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:background-color="transparent" fo:border-left="1.76pt solid #000000" fo:border-right="1.76pt solid #000000" fo:border-top="0.74pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
-   <style:paragraph-properties fo:text-align="start" css3t:text-justify="auto"/>
-   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
-  </style:style>
-  <style:style style:name="ce144" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N10">
-   <style:table-cell-properties fo:border-bottom="none" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:background-color="transparent" fo:border-left="1.76pt solid #000000" fo:border-right="1.76pt solid #000000" fo:border-top="0.74pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
-   <style:paragraph-properties fo:text-align="start" css3t:text-justify="auto"/>
-   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
-  </style:style>
-  <style:style style:name="ce34" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N10">
-   <style:table-cell-properties fo:border-bottom="1.76pt solid #000000" fo:background-color="#daeef3" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:border-left="0.74pt solid #000000" fo:border-right="1.76pt solid #000000" fo:border-top="0.74pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
+  <style:style style:name="ce75" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N10">
+   <style:table-cell-properties fo:background-color="#daeef3" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:border="0.06pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
    <style:paragraph-properties fo:text-align="center" css3t:text-justify="auto"/>
    <style:text-properties fo:color="#ff0000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="bold"/>
   </style:style>
@@ -688,20 +678,11 @@
    <style:paragraph-properties css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="bold"/>
   </style:style>
-  <style:style style:name="ce58" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:border-bottom="0.74pt solid #000000" fo:background-color="#fcd5b4" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:border-left="1.76pt solid #000000" fo:border-right="0.74pt solid #000000" fo:border-top="none" style:vertical-align="automatic" loext:vertical-justify="auto"/>
-   <style:paragraph-properties css3t:text-justify="auto"/>
-   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
+  <style:style style:name="ce141" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:border-bottom="0.06pt solid #000000" fo:border-left="0.06pt solid #000000" fo:border-right="0.06pt solid #000000" fo:border-top="2.01pt solid #000000"/>
   </style:style>
-  <style:style style:name="ce207" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N0">
-   <style:table-cell-properties fo:border-bottom="1.76pt solid #000000" fo:background-color="#fcd5b4" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:border-left="1.76pt solid #000000" fo:border-right="0.74pt solid #000000" fo:border-top="0.74pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
-   <style:paragraph-properties css3t:text-justify="auto"/>
-   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
-  </style:style>
-  <style:style style:name="ce208" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N0">
-   <style:table-cell-properties fo:border-bottom="0.74pt solid #000000" fo:background-color="#fcd5b4" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:border-left="1.76pt solid #000000" fo:border-right="0.74pt solid #000000" fo:border-top="1.76pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
-   <style:paragraph-properties css3t:text-justify="auto"/>
-   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
+  <style:style style:name="ce145" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:border-bottom="2.01pt solid #000000" fo:border-left="0.06pt solid #000000" fo:border-right="0.06pt solid #000000" fo:border-top="0.06pt solid #000000"/>
   </style:style>
   <style:style style:name="ce61" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:border-bottom="1.76pt solid #000000" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:border-left="0.74pt solid #000000" fo:border-right="0.74pt solid #000000" fo:border-top="0.74pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
@@ -821,8 +802,13 @@
    <style:paragraph-properties css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="bold"/>
   </style:style>
-  <style:style style:name="ce392" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:border-bottom="0.74pt solid #000000" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:background-color="transparent" fo:border-left="0.74pt solid #000000" fo:border-right="0.74pt solid #000000" fo:border-top="none" style:vertical-align="automatic" loext:vertical-justify="auto"/>
+  <style:style style:name="ce339" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:border-bottom="0.06pt solid #000000" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:background-color="transparent" fo:border-left="0.06pt solid #000000" fo:border-right="0.06pt solid #000000" fo:border-top="2.01pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
+   <style:paragraph-properties css3t:text-justify="auto"/>
+   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="ce342" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:border-bottom="2.01pt solid #000000" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:background-color="transparent" fo:border-left="0.06pt solid #000000" fo:border-right="0.06pt solid #000000" fo:border-top="0.06pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
    <style:paragraph-properties css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
   </style:style>
@@ -864,6 +850,16 @@
   <style:style style:name="ce401" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:border-bottom="1.76pt solid #000000" fo:background-color="#ccc0da" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:border-left="0.74pt solid #000000" fo:border-right="0.74pt solid #000000" fo:border-top="0.74pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
    <style:paragraph-properties fo:text-align="center" css3t:text-justify="auto"/>
+   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="ce180" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:border-bottom="0.06pt solid #000000" fo:background-color="#ccc0da" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:border-left="0.06pt solid #000000" fo:border-right="0.06pt solid #000000" fo:border-top="2.01pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
+   <style:paragraph-properties css3t:text-justify="auto"/>
+   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="ce181" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N0">
+   <style:table-cell-properties fo:border-bottom="2.01pt solid #000000" fo:background-color="#ccc0da" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:border-left="0.06pt solid #000000" fo:border-right="0.06pt solid #000000" fo:border-top="0.06pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
+   <style:paragraph-properties css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
   </style:style>
   <style:style style:name="ce367" style:family="table-cell" style:parent-style-name="Default">
@@ -911,21 +907,6 @@
    <style:paragraph-properties fo:text-align="center" css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
   </style:style>
-  <style:style style:name="ce85" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:border-bottom="0.74pt solid #000000" fo:background-color="#fcd5b4" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:border-left="0.74pt solid #000000" fo:border-right="0.74pt solid #000000" fo:border-top="none" style:vertical-align="automatic" loext:vertical-justify="auto"/>
-   <style:paragraph-properties css3t:text-justify="auto"/>
-   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
-  </style:style>
-  <style:style style:name="ce289" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N0">
-   <style:table-cell-properties fo:border-bottom="1.76pt solid #000000" fo:background-color="#fcd5b4" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:border-left="0.74pt solid #000000" fo:border-right="0.74pt solid #000000" fo:border-top="0.74pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
-   <style:paragraph-properties css3t:text-justify="auto"/>
-   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
-  </style:style>
-  <style:style style:name="ce290" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N0">
-   <style:table-cell-properties fo:border-bottom="0.74pt solid #000000" fo:background-color="#fcd5b4" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:border-left="0.74pt solid #000000" fo:border-right="0.74pt solid #000000" fo:border-top="1.76pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
-   <style:paragraph-properties css3t:text-justify="auto"/>
-   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
-  </style:style>
   <style:style style:name="ce309" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:background-color="#ffffff" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:border="0.06pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
    <style:paragraph-properties fo:text-align="center" css3t:text-justify="auto"/>
@@ -949,6 +930,11 @@
   <style:style style:name="ce391" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:border-bottom="none" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:background-color="transparent" fo:border-left="0.74pt solid #000000" fo:border-right="0.74pt solid #000000" fo:border-top="0.74pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
    <style:paragraph-properties fo:text-align="center" css3t:text-justify="auto"/>
+   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="ce392" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:border-bottom="0.74pt solid #000000" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:background-color="transparent" fo:border-left="0.74pt solid #000000" fo:border-right="0.74pt solid #000000" fo:border-top="none" style:vertical-align="automatic" loext:vertical-justify="auto"/>
+   <style:paragraph-properties css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
   </style:style>
   <style:style style:name="ce90" style:family="table-cell" style:parent-style-name="Default">
@@ -1106,18 +1092,13 @@
    <style:paragraph-properties css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="bold"/>
   </style:style>
-  <style:style style:name="ce103" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:border-bottom="0.74pt solid #000000" fo:background-color="#fcd5b4" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:border-left="0.74pt solid #000000" fo:border-right="1.76pt solid #000000" fo:border-top="none" style:vertical-align="automatic" loext:vertical-justify="auto"/>
+  <style:style style:name="ce258" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:border-bottom="0.06pt solid #000000" fo:background-color="#ccc0da" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:border-left="0.06pt solid #000000" fo:border-right="2.01pt solid #000000" fo:border-top="2.01pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
    <style:paragraph-properties css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
   </style:style>
-  <style:style style:name="ce397" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N0">
-   <style:table-cell-properties fo:border-bottom="1.76pt solid #000000" fo:background-color="#fcd5b4" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:border-left="0.74pt solid #000000" fo:border-right="1.76pt solid #000000" fo:border-top="0.74pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
-   <style:paragraph-properties css3t:text-justify="auto"/>
-   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
-  </style:style>
-  <style:style style:name="ce398" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N0">
-   <style:table-cell-properties fo:border-bottom="0.74pt solid #000000" fo:background-color="#fcd5b4" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:border-left="0.74pt solid #000000" fo:border-right="1.76pt solid #000000" fo:border-top="1.76pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
+  <style:style style:name="ce259" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N0">
+   <style:table-cell-properties fo:border-bottom="2.01pt solid #000000" fo:background-color="#ccc0da" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:border-left="0.06pt solid #000000" fo:border-right="2.01pt solid #000000" fo:border-top="0.06pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
    <style:paragraph-properties css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
   </style:style>
@@ -1131,11 +1112,6 @@
    <style:paragraph-properties fo:text-align="start" css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
   </style:style>
-  <style:style style:name="ce339" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:border-bottom="0.06pt solid #000000" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:background-color="transparent" fo:border-left="0.06pt solid #000000" fo:border-right="0.06pt solid #000000" fo:border-top="2.01pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
-   <style:paragraph-properties css3t:text-justify="auto"/>
-   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
-  </style:style>
   <style:style style:name="ce340" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:background-color="transparent" fo:border="0.06pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
    <style:paragraph-properties fo:text-align="start" css3t:text-justify="auto"/>
@@ -1143,11 +1119,6 @@
   </style:style>
   <style:style style:name="ce341" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:background-color="transparent" fo:border="0.06pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
-   <style:paragraph-properties css3t:text-justify="auto"/>
-   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
-  </style:style>
-  <style:style style:name="ce342" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:border-bottom="2.01pt solid #000000" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="value-type" style:repeat-content="false" fo:background-color="transparent" fo:border-left="0.06pt solid #000000" fo:border-right="0.06pt solid #000000" fo:border-top="0.06pt solid #000000" style:vertical-align="automatic" loext:vertical-justify="auto"/>
    <style:paragraph-properties css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
   </style:style>
@@ -1483,6 +1454,11 @@
    <style:paragraph-properties fo:text-align="center" css3t:text-justify="auto"/>
    <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
   </style:style>
+  <style:style style:name="ce34" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N10">
+   <style:table-cell-properties fo:border-bottom="1.76pt solid #000000" fo:background-color="#daeef3" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:border-left="0.74pt solid #000000" fo:border-right="1.76pt solid #000000" fo:border-top="0.74pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
+   <style:paragraph-properties fo:text-align="center" css3t:text-justify="auto"/>
+   <style:text-properties fo:color="#ff0000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="bold"/>
+  </style:style>
   <style:style style:name="ce502" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:border-bottom="none" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" style:text-align-source="fix" style:repeat-content="false" fo:background-color="transparent" fo:border-left="0.74pt solid #000000" fo:border-right="none" fo:border-top="0.74pt solid #000000" style:vertical-align="bottom" loext:vertical-justify="auto"/>
    <style:paragraph-properties fo:text-align="center" css3t:text-justify="auto"/>
@@ -1762,7 +1738,7 @@
      <text:p><text:sheet-name>???</text:sheet-name><text:s/>(<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2021-07-26">00.00.0000</text:date>, <text:time style:data-style-name="N2" text:time-value="08:28:20.916000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2021-08-01">00.00.0000</text:date>, <text:time style:data-style-name="N2" text:time-value="17:14:39.286000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -4531,7 +4507,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce29" office:value-type="string" calcext:value-type="string" table:number-columns-spanned="1" table:number-rows-spanned="2">
-      <text:p>Schiffe</text:p>
+      <text:p>Schiffe (Schiffswerft)</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce81" office:value-type="string" calcext:value-type="string" table:number-columns-spanned="7" table:number-rows-spanned="1">
       <text:p>Baukosten</text:p>
@@ -4613,22 +4589,23 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce93" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Aufklärer Offensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce58" table:formula="of:=[.H124]*3" office:value-type="float" office:value="750" calcext:value-type="float">
-      <text:p>750</text:p>
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H124]*3" office:value-type="float" office:value="450" calcext:value-type="float">
+      <text:p>450</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce392" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce85" table:formula="of:=[.B124]" office:value-type="float" office:value="750" calcext:value-type="float">
-      <text:p>750</text:p>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D124]" office:value-type="float" office:value="450" calcext:value-type="float">
+      <text:p>450</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce85" table:formula="of:=[.B124]*2" office:value-type="float" office:value="1500" calcext:value-type="float">
-      <text:p>1500</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D124]*2" office:value-type="float" office:value="900" calcext:value-type="float">
+      <text:p>900</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce392"/>
-     <table:table-cell table:style-name="ce103" table:formula="of:=[.L124]*5" office:value-type="float" office:value="250" calcext:value-type="float">
-      <text:p>250</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="150" calcext:value-type="float">
+      <text:p>150</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce240" office:value-type="float" office:value="2" calcext:value-type="float">
       <text:p>2</text:p>
@@ -4668,22 +4645,23 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce130" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Aufklärer Defensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H125]*3" office:value-type="float" office:value="750" calcext:value-type="float">
-      <text:p>750</text:p>
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H125]*3" office:value-type="float" office:value="450" calcext:value-type="float">
+      <text:p>450</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B125]*2" office:value-type="float" office:value="1500" calcext:value-type="float">
-      <text:p>1500</text:p>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D125]*2" office:value-type="float" office:value="900" calcext:value-type="float">
+      <text:p>900</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B125]" office:value-type="float" office:value="750" calcext:value-type="float">
-      <text:p>750</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D125]" office:value-type="float" office:value="450" calcext:value-type="float">
+      <text:p>450</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L125]*5" office:value-type="float" office:value="250" calcext:value-type="float">
-      <text:p>250</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="150" calcext:value-type="float">
+      <text:p>150</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce254" office:value-type="float" office:value="1" calcext:value-type="float">
       <text:p>1</text:p>
@@ -4723,22 +4701,23 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce93" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Frachter Offensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H126]*3" office:value-type="float" office:value="1200" calcext:value-type="float">
-      <text:p>1200</text:p>
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H126]*3" office:value-type="float" office:value="1050" calcext:value-type="float">
+      <text:p>1050</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B126]" office:value-type="float" office:value="1200" calcext:value-type="float">
-      <text:p>1200</text:p>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D126]" office:value-type="float" office:value="1050" calcext:value-type="float">
+      <text:p>1050</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B126]*2" office:value-type="float" office:value="2400" calcext:value-type="float">
-      <text:p>2400</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D126]*2" office:value-type="float" office:value="2100" calcext:value-type="float">
+      <text:p>2100</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L126]*5" office:value-type="float" office:value="400" calcext:value-type="float">
-      <text:p>400</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="350" calcext:value-type="float">
+      <text:p>350</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368" office:value-type="float" office:value="2" calcext:value-type="float">
       <text:p>2</text:p>
@@ -4778,22 +4757,23 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce130" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Frachter Defensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H127]*3" office:value-type="float" office:value="1200" calcext:value-type="float">
-      <text:p>1200</text:p>
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H127]*3" office:value-type="float" office:value="1050" calcext:value-type="float">
+      <text:p>1050</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B127]*2" office:value-type="float" office:value="2400" calcext:value-type="float">
-      <text:p>2400</text:p>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D127]*2" office:value-type="float" office:value="2100" calcext:value-type="float">
+      <text:p>2100</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B127]" office:value-type="float" office:value="1200" calcext:value-type="float">
-      <text:p>1200</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D127]" office:value-type="float" office:value="1050" calcext:value-type="float">
+      <text:p>1050</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L127]*5" office:value-type="float" office:value="400" calcext:value-type="float">
-      <text:p>400</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="350" calcext:value-type="float">
+      <text:p>350</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce369" office:value-type="float" office:value="1" calcext:value-type="float">
       <text:p>1</text:p>
@@ -4833,21 +4813,22 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce142" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Jäger Offensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H128]*3" office:value-type="float" office:value="2100" calcext:value-type="float">
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H128]*3" office:value-type="float" office:value="2100" calcext:value-type="float">
       <text:p>2100</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B128]" office:value-type="float" office:value="2100" calcext:value-type="float">
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D128]" office:value-type="float" office:value="2100" calcext:value-type="float">
       <text:p>2100</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B128]*2" office:value-type="float" office:value="4200" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D128]*2" office:value-type="float" office:value="4200" calcext:value-type="float">
       <text:p>4200</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L128]*5" office:value-type="float" office:value="700" calcext:value-type="float">
+     <table:table-cell table:style-name="ce258" table:formula="of:=[.L128]*5" office:value-type="float" office:value="700" calcext:value-type="float">
       <text:p>700</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368" office:value-type="float" office:value="3" calcext:value-type="float">
@@ -4888,21 +4869,22 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce143" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Jäger Defensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H129]*3" office:value-type="float" office:value="2100" calcext:value-type="float">
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H129]*3" office:value-type="float" office:value="2100" calcext:value-type="float">
       <text:p>2100</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B129]*2" office:value-type="float" office:value="4200" calcext:value-type="float">
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D129]*2" office:value-type="float" office:value="4200" calcext:value-type="float">
       <text:p>4200</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B129]" office:value-type="float" office:value="2100" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D129]" office:value-type="float" office:value="2100" calcext:value-type="float">
       <text:p>2100</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L129]*5" office:value-type="float" office:value="700" calcext:value-type="float">
+     <table:table-cell table:style-name="ce259" table:formula="of:=[.L129]*5" office:value-type="float" office:value="700" calcext:value-type="float">
       <text:p>700</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce369" office:value-type="float" office:value="2" calcext:value-type="float">
@@ -4943,21 +4925,22 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce142" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Kreuzer Offensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H130]*3" office:value-type="float" office:value="3000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H130]*3" office:value-type="float" office:value="3000" calcext:value-type="float">
       <text:p>3000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B130]" office:value-type="float" office:value="3000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D130]" office:value-type="float" office:value="3000" calcext:value-type="float">
       <text:p>3000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B130]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D130]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
       <text:p>6000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L130]*5" office:value-type="float" office:value="1000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce258" table:formula="of:=[.L130]*5" office:value-type="float" office:value="1000" calcext:value-type="float">
       <text:p>1000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368" office:value-type="float" office:value="5" calcext:value-type="float">
@@ -4998,21 +4981,22 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce144" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Kreuzer Defensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H131]*3" office:value-type="float" office:value="3000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H131]*3" office:value-type="float" office:value="3000" calcext:value-type="float">
       <text:p>3000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B131]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D131]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
       <text:p>6000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B131]" office:value-type="float" office:value="3000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D131]" office:value-type="float" office:value="3000" calcext:value-type="float">
       <text:p>3000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L131]*5" office:value-type="float" office:value="1000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce259" table:formula="of:=[.L131]*5" office:value-type="float" office:value="1000" calcext:value-type="float">
       <text:p>1000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce439" office:value-type="float" office:value="4" calcext:value-type="float">
@@ -5053,21 +5037,22 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce79" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Schlachtschiff Offensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H132]*3" office:value-type="float" office:value="4500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H132]*3" office:value-type="float" office:value="4500" calcext:value-type="float">
       <text:p>4500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B132]" office:value-type="float" office:value="4500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D132]" office:value-type="float" office:value="4500" calcext:value-type="float">
       <text:p>4500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B132]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D132]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
       <text:p>9000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L132]*5" office:value-type="float" office:value="1500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce258" table:formula="of:=[.L132]*5" office:value-type="float" office:value="1500" calcext:value-type="float">
       <text:p>1500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="8" calcext:value-type="float">
@@ -5108,21 +5093,22 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce143" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Schlachtschiff Defensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H133]*3" office:value-type="float" office:value="4500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H133]*3" office:value-type="float" office:value="4500" calcext:value-type="float">
       <text:p>4500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B133]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D133]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
       <text:p>9000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B133]" office:value-type="float" office:value="4500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D133]" office:value-type="float" office:value="4500" calcext:value-type="float">
       <text:p>4500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L133]*5" office:value-type="float" office:value="1500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce259" table:formula="of:=[.L133]*5" office:value-type="float" office:value="1500" calcext:value-type="float">
       <text:p>1500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="5" calcext:value-type="float">
@@ -5163,21 +5149,22 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce79" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Sternenzerstörer Offensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H134]*3" office:value-type="float" office:value="6750" calcext:value-type="float">
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H134]*3" office:value-type="float" office:value="6750" calcext:value-type="float">
       <text:p>6750</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B134]" office:value-type="float" office:value="6750" calcext:value-type="float">
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D134]" office:value-type="float" office:value="6750" calcext:value-type="float">
       <text:p>6750</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B134]*2" office:value-type="float" office:value="13500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D134]*2" office:value-type="float" office:value="13500" calcext:value-type="float">
       <text:p>13500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L134]*5" office:value-type="float" office:value="2250" calcext:value-type="float">
+     <table:table-cell table:style-name="ce258" table:formula="of:=[.L134]*5" office:value-type="float" office:value="2250" calcext:value-type="float">
       <text:p>2250</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="11" calcext:value-type="float">
@@ -5218,21 +5205,22 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce143" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Sternenzerstörer Defensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H135]*3" office:value-type="float" office:value="6750" calcext:value-type="float">
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H135]*3" office:value-type="float" office:value="6750" calcext:value-type="float">
       <text:p>6750</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B135]*2" office:value-type="float" office:value="13500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D135]*2" office:value-type="float" office:value="13500" calcext:value-type="float">
       <text:p>13500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B135]" office:value-type="float" office:value="6750" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D135]" office:value-type="float" office:value="6750" calcext:value-type="float">
       <text:p>6750</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L135]*5" office:value-type="float" office:value="2250" calcext:value-type="float">
+     <table:table-cell table:style-name="ce259" table:formula="of:=[.L135]*5" office:value-type="float" office:value="2250" calcext:value-type="float">
       <text:p>2250</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="7" calcext:value-type="float">
@@ -5273,21 +5261,22 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce79" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Kampfstern Offensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H136]*3" office:value-type="float" office:value="9600" calcext:value-type="float">
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H136]*3" office:value-type="float" office:value="9600" calcext:value-type="float">
       <text:p>9600</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B136]" office:value-type="float" office:value="9600" calcext:value-type="float">
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D136]" office:value-type="float" office:value="9600" calcext:value-type="float">
       <text:p>9600</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B136]*2" office:value-type="float" office:value="19200" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D136]*2" office:value-type="float" office:value="19200" calcext:value-type="float">
       <text:p>19200</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L136]*5" office:value-type="float" office:value="3200" calcext:value-type="float">
+     <table:table-cell table:style-name="ce258" table:formula="of:=[.L136]*5" office:value-type="float" office:value="3200" calcext:value-type="float">
       <text:p>3200</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="15" calcext:value-type="float">
@@ -5328,21 +5317,22 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce143" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Kampfstern Defensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H137]*3" office:value-type="float" office:value="9600" calcext:value-type="float">
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H137]*3" office:value-type="float" office:value="9600" calcext:value-type="float">
       <text:p>9600</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B137]*2" office:value-type="float" office:value="19200" calcext:value-type="float">
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D137]*2" office:value-type="float" office:value="19200" calcext:value-type="float">
       <text:p>19200</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B137]" office:value-type="float" office:value="9600" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D137]" office:value-type="float" office:value="9600" calcext:value-type="float">
       <text:p>9600</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L137]*5" office:value-type="float" office:value="3200" calcext:value-type="float">
+     <table:table-cell table:style-name="ce259" table:formula="of:=[.L137]*5" office:value-type="float" office:value="3200" calcext:value-type="float">
       <text:p>3200</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="9" calcext:value-type="float">
@@ -5383,22 +5373,23 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce79" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Raumstation Offensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H138]*3" office:value-type="float" office:value="10500" calcext:value-type="float">
-      <text:p>10500</text:p>
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H138]*3" office:value-type="float" office:value="11400" calcext:value-type="float">
+      <text:p>11400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B138]" office:value-type="float" office:value="10500" calcext:value-type="float">
-      <text:p>10500</text:p>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D138]" office:value-type="float" office:value="11400" calcext:value-type="float">
+      <text:p>11400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B138]*2" office:value-type="float" office:value="21000" calcext:value-type="float">
-      <text:p>21000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D138]*2" office:value-type="float" office:value="22800" calcext:value-type="float">
+      <text:p>22800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L138]*5" office:value-type="float" office:value="3500" calcext:value-type="float">
-      <text:p>3500</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="3800" calcext:value-type="float">
+      <text:p>3800</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="19" calcext:value-type="float">
       <text:p>19</text:p>
@@ -5438,22 +5429,23 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce143" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Raumstation Defensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H139]*3" office:value-type="float" office:value="10500" calcext:value-type="float">
-      <text:p>10500</text:p>
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H139]*3" office:value-type="float" office:value="11400" calcext:value-type="float">
+      <text:p>11400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B139]*2" office:value-type="float" office:value="21000" calcext:value-type="float">
-      <text:p>21000</text:p>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D139]*2" office:value-type="float" office:value="22800" calcext:value-type="float">
+      <text:p>22800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B139]" office:value-type="float" office:value="10500" calcext:value-type="float">
-      <text:p>10500</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D139]" office:value-type="float" office:value="11400" calcext:value-type="float">
+      <text:p>11400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L139]*5" office:value-type="float" office:value="3500" calcext:value-type="float">
-      <text:p>3500</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="3800" calcext:value-type="float">
+      <text:p>3800</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="12" calcext:value-type="float">
       <text:p>12</text:p>
@@ -5499,13 +5491,13 @@
      <table:table-cell table:number-columns-repeated="14"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce34" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce75" office:value-type="string" calcext:value-type="string">
       <text:p>100 Schiffe + 10%</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
      <table:table-cell table:style-name="Default" table:number-columns-repeated="3"/>
      <table:table-cell table:number-columns-repeated="7"/>
-     <table:table-cell table:style-name="ce34" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce75" office:value-type="string" calcext:value-type="string">
       <text:p>Elementium</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
@@ -5518,13 +5510,13 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce34" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce75" office:value-type="string" calcext:value-type="string">
       <text:p>pro Spieler Level</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
      <table:table-cell table:style-name="Default" table:number-columns-repeated="3"/>
      <table:table-cell table:number-columns-repeated="7"/>
-     <table:table-cell table:style-name="ce34" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce75" office:value-type="string" calcext:value-type="string">
       <text:p>pro Distanzeinheit</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="6"/>
@@ -5545,7 +5537,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce29" office:value-type="string" calcext:value-type="string" table:number-columns-spanned="1" table:number-rows-spanned="2">
-      <text:p>Verteidigung</text:p>
+      <text:p>Verteidigung (Verteidigungsanlage)</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce81" office:value-type="string" calcext:value-type="string" table:number-columns-spanned="7" table:number-rows-spanned="1">
       <text:p>Baukosten</text:p>
@@ -5621,21 +5613,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce93" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Kleines Manuelles Geschütz Offensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce58" table:formula="of:=[.H148]*2" office:value-type="float" office:value="500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H148]*2" office:value-type="float" office:value="500" calcext:value-type="float">
       <text:p>500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce392" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce85" table:formula="of:=[.B148]" office:value-type="float" office:value="500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D148]" office:value-type="float" office:value="500" calcext:value-type="float">
       <text:p>500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce85" table:formula="of:=[.B148]*2" office:value-type="float" office:value="1000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D148]*2" office:value-type="float" office:value="1000" calcext:value-type="float">
       <text:p>1000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce392"/>
-     <table:table-cell table:style-name="ce103" table:formula="of:=[.L148]*5" office:value-type="float" office:value="250" calcext:value-type="float">
+     <table:table-cell table:style-name="ce258" table:formula="of:=[.L148]*5" office:value-type="float" office:value="250" calcext:value-type="float">
       <text:p>250</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce240" office:value-type="float" office:value="2" calcext:value-type="float">
@@ -5669,21 +5662,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce130" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Kleines Manuelles Geschütz Defensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H149]*2" office:value-type="float" office:value="500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H149]*2" office:value-type="float" office:value="500" calcext:value-type="float">
       <text:p>500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B149]*2" office:value-type="float" office:value="1000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D149]*2" office:value-type="float" office:value="1000" calcext:value-type="float">
       <text:p>1000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B149]" office:value-type="float" office:value="500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D149]" office:value-type="float" office:value="500" calcext:value-type="float">
       <text:p>500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L149]*5" office:value-type="float" office:value="250" calcext:value-type="float">
+     <table:table-cell table:style-name="ce259" table:formula="of:=[.L149]*5" office:value-type="float" office:value="250" calcext:value-type="float">
       <text:p>250</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce254" office:value-type="float" office:value="1" calcext:value-type="float">
@@ -5717,21 +5711,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce93" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Großes Manuelles Geschütz Offensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H150]*2" office:value-type="float" office:value="800" calcext:value-type="float">
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H150]*2" office:value-type="float" office:value="800" calcext:value-type="float">
       <text:p>800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B150]" office:value-type="float" office:value="800" calcext:value-type="float">
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D150]" office:value-type="float" office:value="800" calcext:value-type="float">
       <text:p>800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B150]*2" office:value-type="float" office:value="1600" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D150]*2" office:value-type="float" office:value="1600" calcext:value-type="float">
       <text:p>1600</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L150]*5" office:value-type="float" office:value="400" calcext:value-type="float">
+     <table:table-cell table:style-name="ce258" table:formula="of:=[.L150]*5" office:value-type="float" office:value="400" calcext:value-type="float">
       <text:p>400</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368" office:value-type="float" office:value="2" calcext:value-type="float">
@@ -5765,21 +5760,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce130" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Großes Manuelles Geschütz Defensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H151]*2" office:value-type="float" office:value="800" calcext:value-type="float">
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H151]*2" office:value-type="float" office:value="800" calcext:value-type="float">
       <text:p>800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B151]*2" office:value-type="float" office:value="1600" calcext:value-type="float">
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D151]*2" office:value-type="float" office:value="1600" calcext:value-type="float">
       <text:p>1600</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B151]" office:value-type="float" office:value="800" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D151]" office:value-type="float" office:value="800" calcext:value-type="float">
       <text:p>800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L151]*5" office:value-type="float" office:value="400" calcext:value-type="float">
+     <table:table-cell table:style-name="ce259" table:formula="of:=[.L151]*5" office:value-type="float" office:value="400" calcext:value-type="float">
       <text:p>400</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce369" office:value-type="float" office:value="1" calcext:value-type="float">
@@ -5813,21 +5809,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce142" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Kleines Automatisches Geschütz Off.</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H152]*2" office:value-type="float" office:value="1400" calcext:value-type="float">
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H152]*2" office:value-type="float" office:value="1400" calcext:value-type="float">
       <text:p>1400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B152]" office:value-type="float" office:value="1400" calcext:value-type="float">
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D152]" office:value-type="float" office:value="1400" calcext:value-type="float">
       <text:p>1400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B152]*2" office:value-type="float" office:value="2800" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D152]*2" office:value-type="float" office:value="2800" calcext:value-type="float">
       <text:p>2800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L152]*5" office:value-type="float" office:value="700" calcext:value-type="float">
+     <table:table-cell table:style-name="ce258" table:formula="of:=[.L152]*5" office:value-type="float" office:value="700" calcext:value-type="float">
       <text:p>700</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368" office:value-type="float" office:value="3" calcext:value-type="float">
@@ -5861,21 +5858,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce143" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Kleines Automatisches Geschütz Def.</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H153]*2" office:value-type="float" office:value="1400" calcext:value-type="float">
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H153]*2" office:value-type="float" office:value="1400" calcext:value-type="float">
       <text:p>1400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B153]*2" office:value-type="float" office:value="2800" calcext:value-type="float">
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D153]*2" office:value-type="float" office:value="2800" calcext:value-type="float">
       <text:p>2800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B153]" office:value-type="float" office:value="1400" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D153]" office:value-type="float" office:value="1400" calcext:value-type="float">
       <text:p>1400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L153]*5" office:value-type="float" office:value="700" calcext:value-type="float">
+     <table:table-cell table:style-name="ce259" table:formula="of:=[.L153]*5" office:value-type="float" office:value="700" calcext:value-type="float">
       <text:p>700</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce369" office:value-type="float" office:value="2" calcext:value-type="float">
@@ -5909,21 +5907,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce142" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Großes Automatisches Geschütz Off.</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H154]*2" office:value-type="float" office:value="2000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H154]*2" office:value-type="float" office:value="2000" calcext:value-type="float">
       <text:p>2000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B154]" office:value-type="float" office:value="2000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D154]" office:value-type="float" office:value="2000" calcext:value-type="float">
       <text:p>2000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B154]*2" office:value-type="float" office:value="4000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D154]*2" office:value-type="float" office:value="4000" calcext:value-type="float">
       <text:p>4000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L154]*5" office:value-type="float" office:value="1000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce258" table:formula="of:=[.L154]*5" office:value-type="float" office:value="1000" calcext:value-type="float">
       <text:p>1000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368" office:value-type="float" office:value="5" calcext:value-type="float">
@@ -5957,21 +5956,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce144" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Großes Automatisches Geschütz Def.</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H155]*2" office:value-type="float" office:value="2000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H155]*2" office:value-type="float" office:value="2000" calcext:value-type="float">
       <text:p>2000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B155]*2" office:value-type="float" office:value="4000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D155]*2" office:value-type="float" office:value="4000" calcext:value-type="float">
       <text:p>4000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B155]" office:value-type="float" office:value="2000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D155]" office:value-type="float" office:value="2000" calcext:value-type="float">
       <text:p>2000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L155]*5" office:value-type="float" office:value="1000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce259" table:formula="of:=[.L155]*5" office:value-type="float" office:value="1000" calcext:value-type="float">
       <text:p>1000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce439" office:value-type="float" office:value="4" calcext:value-type="float">
@@ -6005,21 +6005,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce79" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Kleines Computergestütztes Geschütz Off.</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H156]*2" office:value-type="float" office:value="3000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H156]*2" office:value-type="float" office:value="3000" calcext:value-type="float">
       <text:p>3000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B156]" office:value-type="float" office:value="3000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D156]" office:value-type="float" office:value="3000" calcext:value-type="float">
       <text:p>3000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B156]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D156]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
       <text:p>6000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L156]*5" office:value-type="float" office:value="1500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce258" table:formula="of:=[.L156]*5" office:value-type="float" office:value="1500" calcext:value-type="float">
       <text:p>1500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="8" calcext:value-type="float">
@@ -6053,21 +6054,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce143" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Kleines Computergestütztes Geschütz Def.</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H157]*2" office:value-type="float" office:value="3000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H157]*2" office:value-type="float" office:value="3000" calcext:value-type="float">
       <text:p>3000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B157]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D157]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
       <text:p>6000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B157]" office:value-type="float" office:value="3000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D157]" office:value-type="float" office:value="3000" calcext:value-type="float">
       <text:p>3000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L157]*5" office:value-type="float" office:value="1500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce259" table:formula="of:=[.L157]*5" office:value-type="float" office:value="1500" calcext:value-type="float">
       <text:p>1500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="5" calcext:value-type="float">
@@ -6101,21 +6103,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce79" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Großes Computergestütztes Geschütz Off.</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H158]*2" office:value-type="float" office:value="4500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H158]*2" office:value-type="float" office:value="4500" calcext:value-type="float">
       <text:p>4500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B158]" office:value-type="float" office:value="4500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D158]" office:value-type="float" office:value="4500" calcext:value-type="float">
       <text:p>4500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B158]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D158]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
       <text:p>9000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L158]*5" office:value-type="float" office:value="2250" calcext:value-type="float">
+     <table:table-cell table:style-name="ce258" table:formula="of:=[.L158]*5" office:value-type="float" office:value="2250" calcext:value-type="float">
       <text:p>2250</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="11" calcext:value-type="float">
@@ -6149,21 +6152,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce143" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Großes Computergestütztes Geschütz Def.</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H159]*2" office:value-type="float" office:value="4500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H159]*2" office:value-type="float" office:value="4500" calcext:value-type="float">
       <text:p>4500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B159]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D159]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
       <text:p>9000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B159]" office:value-type="float" office:value="4500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D159]" office:value-type="float" office:value="4500" calcext:value-type="float">
       <text:p>4500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L159]*5" office:value-type="float" office:value="2250" calcext:value-type="float">
+     <table:table-cell table:style-name="ce259" table:formula="of:=[.L159]*5" office:value-type="float" office:value="2250" calcext:value-type="float">
       <text:p>2250</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="7" calcext:value-type="float">
@@ -6197,21 +6201,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce79" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Gefechtsturm Offensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H160]*2" office:value-type="float" office:value="6400" calcext:value-type="float">
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H160]*2" office:value-type="float" office:value="6400" calcext:value-type="float">
       <text:p>6400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B160]" office:value-type="float" office:value="6400" calcext:value-type="float">
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D160]" office:value-type="float" office:value="6400" calcext:value-type="float">
       <text:p>6400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B160]*2" office:value-type="float" office:value="12800" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D160]*2" office:value-type="float" office:value="12800" calcext:value-type="float">
       <text:p>12800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L160]*5" office:value-type="float" office:value="3200" calcext:value-type="float">
+     <table:table-cell table:style-name="ce258" table:formula="of:=[.L160]*5" office:value-type="float" office:value="3200" calcext:value-type="float">
       <text:p>3200</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="15" calcext:value-type="float">
@@ -6245,21 +6250,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce143" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Gefechtsturm Defensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H161]*2" office:value-type="float" office:value="6400" calcext:value-type="float">
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H161]*2" office:value-type="float" office:value="6400" calcext:value-type="float">
       <text:p>6400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B161]*2" office:value-type="float" office:value="12800" calcext:value-type="float">
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D161]*2" office:value-type="float" office:value="12800" calcext:value-type="float">
       <text:p>12800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B161]" office:value-type="float" office:value="6400" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D161]" office:value-type="float" office:value="6400" calcext:value-type="float">
       <text:p>6400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L161]*5" office:value-type="float" office:value="3200" calcext:value-type="float">
+     <table:table-cell table:style-name="ce259" table:formula="of:=[.L161]*5" office:value-type="float" office:value="3200" calcext:value-type="float">
       <text:p>3200</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="9" calcext:value-type="float">
@@ -6293,21 +6299,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce79" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce72" office:value-type="string" calcext:value-type="string">
       <text:p>Gefechtsstation Offensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce208" table:formula="of:=[.H162]*2" office:value-type="float" office:value="7000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce141"/>
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H162]*2" office:value-type="float" office:value="7000" calcext:value-type="float">
       <text:p>7000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B162]" office:value-type="float" office:value="7000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce339"/>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D162]" office:value-type="float" office:value="7000" calcext:value-type="float">
       <text:p>7000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce290" table:formula="of:=[.B162]*2" office:value-type="float" office:value="14000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D162]*2" office:value-type="float" office:value="14000" calcext:value-type="float">
       <text:p>14000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce331"/>
-     <table:table-cell table:style-name="ce398" table:formula="of:=[.L162]*5" office:value-type="float" office:value="3500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce258" table:formula="of:=[.L162]*5" office:value-type="float" office:value="3500" calcext:value-type="float">
       <text:p>3500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="19" calcext:value-type="float">
@@ -6341,21 +6348,22 @@
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce143" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce73" office:value-type="string" calcext:value-type="string">
       <text:p>Gefechtsstation Defensiv</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce207" table:formula="of:=[.H163]*2" office:value-type="float" office:value="7000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce145"/>
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H163]*2" office:value-type="float" office:value="7000" calcext:value-type="float">
       <text:p>7000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B163]*2" office:value-type="float" office:value="14000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce342"/>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D163]*2" office:value-type="float" office:value="14000" calcext:value-type="float">
       <text:p>14000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce289" table:formula="of:=[.B163]" office:value-type="float" office:value="7000" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D163]" office:value-type="float" office:value="7000" calcext:value-type="float">
       <text:p>7000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce333"/>
-     <table:table-cell table:style-name="ce397" table:formula="of:=[.L163]*5" office:value-type="float" office:value="3500" calcext:value-type="float">
+     <table:table-cell table:style-name="ce259" table:formula="of:=[.L163]*5" office:value-type="float" office:value="3500" calcext:value-type="float">
       <text:p>3500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="12" calcext:value-type="float">
@@ -6395,7 +6403,7 @@
      <table:table-cell table:number-columns-repeated="14"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce34" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce75" office:value-type="string" calcext:value-type="string">
       <text:p>Geschütze nehmen Bauplätze</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
@@ -6410,7 +6418,7 @@
      <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce34" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce75" office:value-type="string" calcext:value-type="string">
       <text:p>des Planeten in Anspruch</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>

@@ -89,13 +89,21 @@ namespace Galaxxis.Data.Models
             {
                 entity.Property(e => e.PlanetAntimatter).HasDefaultValueSql("((175))");
 
+                entity.Property(e => e.PlanetCrystalMineUsage).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.PlanetCrystals).HasDefaultValueSql("((175))");
 
                 entity.Property(e => e.PlanetElementium).HasDefaultValueSql("((75))");
 
+                entity.Property(e => e.PlanetElementiumSynthesizerUsage).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.PlanetEnergy).HasDefaultValueSql("((200))");
 
+                entity.Property(e => e.PlanetFactoryUsage).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.PlanetFields).HasDefaultValueSql("((150))");
+
+                entity.Property(e => e.PlanetMageAcademyUsage).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.PlanetMana).HasDefaultValueSql("((175))");
 
@@ -103,7 +111,13 @@ namespace Galaxxis.Data.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
+                entity.Property(e => e.PlanetNeutronAcceleratorUsage).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.PlanetOre).HasDefaultValueSql("((200))");
+
+                entity.Property(e => e.PlanetOreMineUsage).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.PlanetPowerSupplyUsage).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.PlanetTools).HasDefaultValueSql("((200))");
 

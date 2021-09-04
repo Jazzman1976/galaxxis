@@ -1,4 +1,5 @@
-﻿using Galaxxis.Core.Extensions.PlanetExtensions;
+﻿using Galaxxis.Core.Extensions;
+using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
 using System;
@@ -84,7 +85,11 @@ namespace Galaxxis.Core.Engine
                     Do_ChangeElementiumSynthesizerUsage(@event, context);
                     break;
 
-                    #endregion
+                #endregion
+
+                case EventNameEnum.ProduceShipExplorer:
+                    Do_ProduceShipExplorer(@event, context);
+                    break;
             }
         }
 
@@ -308,5 +313,24 @@ namespace Galaxxis.Core.Engine
         }
 
         #endregion
+
+        private void Do_ProduceShipExplorer(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                User user = context.User.FirstOrDefault(u => u.UserId.Equals(planet.PlanetUserId));
+                planet.UpdateRessources();
+                context.Ship.Add(new Ship
+                {
+                    ShipUserId = planet.PlanetUserId,
+                    ShipPlanetId = planetId,
+                    ShipType = user.IsDefensive() 
+                        ? ShipTypeEnum.ExplorerDef.ToString() 
+                        : ShipTypeEnum.ExplorerOff.ToString()
+                });
+            }
+        }
     }
 }

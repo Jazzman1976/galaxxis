@@ -19,6 +19,13 @@
         ChangeNeutronAcceleratorUsage,
         ChangeElementiumSynthesizerUsage,
 
-        ProduceShip
+        ProduceShipExplorer,
+        ProduceShipCarrier,
+        ProduceShipFighter,
+        ProduceShipCruiser,
+        ProduceShipBattleship,
+        ProduceShipDestroyer,
+        ProduceShipBattlestar,
+        ProduceShipBattlestation,
     }
 }

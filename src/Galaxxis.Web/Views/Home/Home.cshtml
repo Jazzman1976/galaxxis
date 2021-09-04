@@ -1,4 +1,5 @@
 ﻿@using Galaxxis.Core.Extensions.PlanetExtensions
+@using Galaxxis.Core.Extensions
 @using Galaxxis.Data.Models
 @using Galaxxis.Core.Classes.Buildings.RessourceBuildings
 @using Galaxxis.Core.Classes.Buildings.ProducingBuildings
@@ -32,6 +33,7 @@
     ElementiumSynthesizer elementiumSynthesizer = thePlanet.GetElementiumSynthesizer();
     Shipyard shipyard = thePlanet.GetShipyard();
     double universeTicks = Model.Ticker.Ticks;
+    List<Ship> planetShips = Model.User.Ship.Where(ship => ship.ShipPlanetId.Equals(thePlanet.PlanetId)).ToList();
 }
 
 <style>
@@ -39,13 +41,14 @@
         border-spacing: 0;
         border-collapse: collapse;
     }
-    
-    td, th { 
-        font-size: .8rem;        
-        padding: 5px 10px; 
-        border-width: 1px; 
-        border-style: solid; 
-        border-color: blueviolet; }
+
+    td, th {
+        font-size: .8rem;
+        padding: 5px 10px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: blueviolet;
+    }
 
     th {
         text-align: center;
@@ -285,10 +288,10 @@
                     <input type="submit" value="Build" @(!oreMine.CanBuild ? "disabled" : "") />
                 </form>
                 <form asp-controller="Home" asp-action="ChangeOreMineUsage">
-                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />                    
-                    <input type="range" name="newValue" value="@(thePlanet.PlanetOreMineUsage * 100)" min="0" max="100" />                    
-                    <br/>
-                    <input type="submit" value="Change Usage" />                    
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetOreMineUsage * 100)" min="0" max="100" />
+                    <br />
+                    <input type="submit" value="Change Usage" />
                 </form>
             </td>
             <td class="table-power-supply">
@@ -305,7 +308,7 @@
                     <input type="submit" value="Build" @(!powerSupply.CanBuild ? "disabled" : "") />
                 </form>
                 <form asp-controller="Home" asp-action="ChangePowerSupplyUsage">
-                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />    
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
                     <input type="range" name="newValue" value="@(thePlanet.PlanetPowerSupplyUsage * 100)" min="0" max="100" />
                     <br />
                     <input type="submit" value="Change Usage" />
@@ -440,8 +443,34 @@
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
                     <input type="submit" value="Build" @(!shipyard.CanBuild ? "disabled" : "") />
                 </form>
+                <table>
+                    <tr><th>Tools</th><td>750</td></tr>
+                    <tr><th>Crystals</th><td>@(Model.User.IsOffensive() ? "750" : "1500")</td></tr>
+                    <tr><th>Antimatter</th><td>@(Model.User.IsOffensive() ? "1500" : "750")</td></tr>
+                    <tr><th>Elementium</th><td>250</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="ProduceShipExplorer" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Produce Explorer" />
+                </form>
             </td>
         </tr>
+    </table>
+</div>
+
+<div id="fleet-panel" style="margin-bottom: 1rem;">
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Stats</th>
+        </tr>
+        @foreach(Ship ship in planetShips)
+        {
+            <tr>
+                <td>@ship.ShipType</td>
+                <td>no mods</td>
+            </tr>
+        }
     </table>
 </div>
 

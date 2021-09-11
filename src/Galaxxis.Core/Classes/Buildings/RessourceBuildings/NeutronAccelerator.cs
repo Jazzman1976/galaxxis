@@ -95,7 +95,7 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public override GrowthRate ConsupmtionAntimatter
             => _consupmtionAntimatter
             ??= new GrowthRate(
-                    Constants.BASEVALUE_VERY_FEW,
+                    0,
                     Constants.FACTOR_SUPPLY,
                     _planet.PlanetNeutronAccelerator);
 

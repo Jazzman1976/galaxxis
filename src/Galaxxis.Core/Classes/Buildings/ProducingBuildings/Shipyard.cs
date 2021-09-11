@@ -96,10 +96,10 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
 
             double[] produceCosts = new double[] 
             {
-                500,
-                _owner.IsOffensive() ? 750 : 1500,
-                _owner.IsOffensive() ? 1500 : 750,
-                250
+                225,
+                _owner.IsOffensive() ? 225 : 450,
+                _owner.IsOffensive() ? 450 : 225,
+                75
             };
 
             if (produceCosts[0] > _planet.PlanetTools)

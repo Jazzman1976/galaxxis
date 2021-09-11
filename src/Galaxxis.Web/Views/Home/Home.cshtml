@@ -444,10 +444,10 @@
                     <input type="submit" value="Build" @(!shipyard.CanBuild ? "disabled" : "") />
                 </form>
                 <table>
-                    <tr><th>Tools</th><td>750</td></tr>
-                    <tr><th>Crystals</th><td>@(Model.User.IsOffensive() ? "750" : "1500")</td></tr>
-                    <tr><th>Antimatter</th><td>@(Model.User.IsOffensive() ? "1500" : "750")</td></tr>
-                    <tr><th>Elementium</th><td>250</td></tr>
+                    <tr><th>Tools</th><td>225</td></tr>
+                    <tr><th>Crystals</th><td>@(Model.User.IsOffensive() ? "225" : "450")</td></tr>
+                    <tr><th>Antimatter</th><td>@(Model.User.IsOffensive() ? "450" : "225")</td></tr>
+                    <tr><th>Elementium</th><td>75</td></tr>
                 </table>
                 <form asp-controller="Home" asp-action="ProduceShipExplorer" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />

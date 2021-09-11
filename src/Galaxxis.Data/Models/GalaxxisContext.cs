@@ -136,8 +136,6 @@ namespace Galaxxis.Data.Models
 
             modelBuilder.Entity<Ship>(entity =>
             {
-                entity.Property(e => e.ShipId).ValueGeneratedNever();
-
                 entity.Property(e => e.ShipType)
                     .IsRequired()
                     .HasMaxLength(50);

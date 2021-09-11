@@ -88,14 +88,14 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public override GrowthRate ConsumptionManaRate
             => _consumptionManaRate
             ??= new GrowthRate(
-                    Constants.BASEVALUE_VERY_FEW,
+                    0,
                     Constants.FACTOR_SUPPLY,
                     _planet.PlanetMageAcademy);
 
         public override GrowthRate ConsupmtionAntimatter
             => _consupmtionAntimatter
             ??= new GrowthRate(
-                    Constants.BASEVALUE_FEW,
+                    Constants.BASEVALUE_NORMAL,
                     Constants.FACTOR_SUPPLY,
                     _planet.PlanetMageAcademy);
 

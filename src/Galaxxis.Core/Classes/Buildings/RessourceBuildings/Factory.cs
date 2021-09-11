@@ -68,7 +68,7 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public override GrowthRate ConsumptionManaRate
             => _consumptionManaRate
             ??= new GrowthRate(
-                    0,
+                    Constants.BASEVALUE_VERY_FEW,
                     Constants.FACTOR_SUPPLY,
                     _planet.PlanetFactory);
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:rpt="http://openoffice.org/2005/report" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:css3t="http://www.w3.org/TR/css3-text/" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" office:version="1.3" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:generator>LibreOffice/7.1.4.2$Windows_X86_64 LibreOffice_project/a529a4fab45b75fefc5b6226684193eb000654f6</meta:generator><dc:date>2021-08-01T19:51:37.544000000</dc:date><meta:editing-duration>PT9H50M7S</meta:editing-duration><meta:editing-cycles>39</meta:editing-cycles><meta:document-statistic meta:table-count="3" meta:cell-count="1903" meta:object-count="1"/></office:meta>
+ <office:meta><meta:generator>LibreOffice/7.1.4.2$Windows_X86_64 LibreOffice_project/a529a4fab45b75fefc5b6226684193eb000654f6</meta:generator><dc:date>2021-09-07T20:24:15.676000000</dc:date><meta:editing-duration>PT10H4M50S</meta:editing-duration><meta:editing-cycles>42</meta:editing-cycles><meta:document-statistic meta:table-count="3" meta:cell-count="1903" meta:object-count="1"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">451</config:config-item>
@@ -13,8 +13,8 @@
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="Kosten und Erträge">
-       <config:config-item config:name="CursorPositionX" config:type="int">7</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">137</config:config-item>
+       <config:config-item config:name="CursorPositionX" config:type="int">8</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">3</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
@@ -23,7 +23,7 @@
        <config:config-item config:name="PositionLeft" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionRight" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionTop" config:type="int">0</config:config-item>
-       <config:config-item config:name="PositionBottom" config:type="int">87</config:config-item>
+       <config:config-item config:name="PositionBottom" config:type="int">0</config:config-item>
        <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
        <config:config-item config:name="ZoomValue" config:type="int">100</config:config-item>
        <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -1738,7 +1738,7 @@
      <text:p><text:sheet-name>???</text:sheet-name><text:s/>(<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2021-08-01">00.00.0000</text:date>, <text:time style:data-style-name="N2" text:time-value="17:14:39.286000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2021-09-07">00.00.0000</text:date>, <text:time style:data-style-name="N2" text:time-value="20:09:31.053000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -1910,8 +1910,8 @@
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>Stufe X für Kalkulation</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce40" office:value-type="float" office:value="8" calcext:value-type="float">
-      <text:p>8</text:p>
+     <table:table-cell table:style-name="ce40" office:value-type="float" office:value="20" calcext:value-type="float">
+      <text:p>20</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce64" office:value-type="string" calcext:value-type="string" table:number-columns-spanned="6" table:number-rows-spanned="1">
       <text:p>Ausgehend davon, dass alle Gebäude die gleiche Stufe haben</text:p>
@@ -1981,16 +1981,16 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce247" table:formula="of:=[.B11]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:style-name="ce247" table:formula="of:=[.B11]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell/>
-     <table:table-cell table:formula="of:=[.E11]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:formula="of:=[.E11]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F11]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="985" calcext:value-type="float">
-      <text:p>985</text:p>
+     <table:table-cell table:formula="of:=[.F11]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7225" calcext:value-type="float">
+      <text:p>7225</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell table:style-name="ce322" table:formula="of:=[.H11]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="0" calcext:value-type="float">
@@ -1999,8 +1999,8 @@
      <table:table-cell table:style-name="ce344" office:value-type="string" calcext:value-type="string">
       <text:p>auf Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.J11]*(1*([.$B$8]-1)^2+1)+[.K11]" office:value-type="float" office:value="10050" calcext:value-type="float">
-      <text:p>10050</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.J11]*(1*([.$B$8]-1)^2+1)+[.K11]" office:value-type="float" office:value="72450" calcext:value-type="float">
+      <text:p>72450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce76"/>
      <table:table-cell table:number-columns-repeated="9"/>
@@ -2034,19 +2034,19 @@
       <text:p>Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce248"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.C13]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.C13]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.E13]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.E13]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce69"/>
      <table:table-cell table:style-name="ce337" table:formula="of:=[.G13]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="0" calcext:value-type="float">
       <text:p>0</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce323" table:formula="of:=[.H13]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce323" table:formula="of:=[.H13]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce343"/>
      <table:table-cell table:style-name="ce38"/>
@@ -2083,15 +2083,15 @@
      <table:table-cell table:style-name="ce19" office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce243" table:formula="of:=[.B15]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:style-name="ce243" table:formula="of:=[.B15]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce276" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce302" table:formula="of:=[.E15]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="985" calcext:value-type="float">
-      <text:p>985</text:p>
+     <table:table-cell table:style-name="ce302" table:formula="of:=[.E15]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7225" calcext:value-type="float">
+      <text:p>7225</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce302" table:formula="of:=[.F15]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="985" calcext:value-type="float">
-      <text:p>985</text:p>
+     <table:table-cell table:style-name="ce302" table:formula="of:=[.F15]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7225" calcext:value-type="float">
+      <text:p>7225</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce276"/>
      <table:table-cell table:style-name="ce319" table:formula="of:=[.H15]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="0" calcext:value-type="float">
@@ -2100,8 +2100,8 @@
      <table:table-cell table:style-name="ce340" office:value-type="string" calcext:value-type="string">
       <text:p>auf Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce358" table:formula="of:=[.J15]*(1*([.$B$8]-1)^2+1)+[.K15]" office:value-type="float" office:value="10050" calcext:value-type="float">
-      <text:p>10050</text:p>
+     <table:table-cell table:style-name="ce358" table:formula="of:=[.J15]*(1*([.$B$8]-1)^2+1)+[.K15]" office:value-type="float" office:value="72450" calcext:value-type="float">
+      <text:p>72450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce374"/>
      <table:table-cell table:number-columns-repeated="9"/>
@@ -2139,15 +2139,15 @@
       <text:p>0</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce294"/>
-     <table:table-cell table:style-name="ce278" table:formula="of:=[.E17]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce278" table:formula="of:=[.E17]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce310"/>
-     <table:table-cell table:style-name="ce278" table:formula="of:=[.G17]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce278" table:formula="of:=[.G17]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce321" table:formula="of:=[.H17]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce321" table:formula="of:=[.H17]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
      <table:table-cell table:style-name="ce294"/>
@@ -2187,16 +2187,16 @@
      <table:table-cell table:style-name="ce47" office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce247" table:formula="of:=[.B19]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:style-name="ce247" table:formula="of:=[.B19]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell/>
-     <table:table-cell table:formula="of:=[.E19]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="985" calcext:value-type="float">
-      <text:p>985</text:p>
+     <table:table-cell table:formula="of:=[.E19]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7225" calcext:value-type="float">
+      <text:p>7225</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F19]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:formula="of:=[.F19]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce391"/>
      <table:table-cell table:style-name="ce322" table:formula="of:=[.H19]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="0" calcext:value-type="float">
@@ -2205,8 +2205,8 @@
      <table:table-cell table:style-name="ce344" office:value-type="string" calcext:value-type="string">
       <text:p>auf Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.J19]*(1*([.$B$8]-1)^2+1)+[.K19]" office:value-type="float" office:value="10050" calcext:value-type="float">
-      <text:p>10050</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.J19]*(1*([.$B$8]-1)^2+1)+[.K19]" office:value-type="float" office:value="72450" calcext:value-type="float">
+      <text:p>72450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce378"/>
      <table:table-cell table:number-columns-repeated="9"/>
@@ -2220,8 +2220,8 @@
       <text:p>5</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce337" office:value-type="float" office:value="0" calcext:value-type="float">
-      <text:p>0</text:p>
+     <table:table-cell table:style-name="ce337" office:value-type="float" office:value="5" calcext:value-type="float">
+      <text:p>5</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce69"/>
      <table:table-cell table:style-name="ce337" office:value-type="float" office:value="5" calcext:value-type="float">
@@ -2240,19 +2240,19 @@
       <text:p>Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce250"/>
-     <table:table-cell table:style-name="ce281" table:formula="of:=[.C21]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce281" table:formula="of:=[.C21]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce295"/>
-     <table:table-cell table:style-name="ce281" table:formula="of:=[.E21]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="0" calcext:value-type="float">
-      <text:p>0</text:p>
+     <table:table-cell table:style-name="ce281" table:formula="of:=[.E21]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce311"/>
-     <table:table-cell table:style-name="ce281" table:formula="of:=[.G21]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce281" table:formula="of:=[.G21]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce325" table:formula="of:=[.H21]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce325" table:formula="of:=[.H21]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce346"/>
      <table:table-cell table:style-name="ce361"/>
@@ -2293,26 +2293,26 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce247" table:formula="of:=[.B23]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:style-name="ce247" table:formula="of:=[.B23]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell/>
-     <table:table-cell table:formula="of:=[.E23]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:formula="of:=[.E23]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F23]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:formula="of:=[.F23]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce322" table:formula="of:=[.H23]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="985" calcext:value-type="float">
-      <text:p>985</text:p>
+     <table:table-cell table:style-name="ce322" table:formula="of:=[.H23]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7225" calcext:value-type="float">
+      <text:p>7225</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce344" office:value-type="string" calcext:value-type="string">
       <text:p>auf Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.J23]*(1*([.$B$8]-1)^2+1)+[.K23]" office:value-type="float" office:value="8780" calcext:value-type="float">
-      <text:p>8780</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.J23]*(1*([.$B$8]-1)^2+1)+[.K23]" office:value-type="float" office:value="63380" calcext:value-type="float">
+      <text:p>63380</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce384"/>
      <table:table-cell table:number-columns-repeated="9"/>
@@ -2326,12 +2326,12 @@
       <text:p>15</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce337" office:value-type="float" office:value="5" calcext:value-type="float">
-      <text:p>5</text:p>
+     <table:table-cell table:style-name="ce337" office:value-type="float" office:value="0" calcext:value-type="float">
+      <text:p>0</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce69"/>
-     <table:table-cell table:style-name="ce337" office:value-type="float" office:value="10" calcext:value-type="float">
-      <text:p>10</text:p>
+     <table:table-cell table:style-name="ce337" office:value-type="float" office:value="15" calcext:value-type="float">
+      <text:p>15</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce323" office:value-type="float" office:value="5" calcext:value-type="float">
       <text:p>5</text:p>
@@ -2346,19 +2346,19 @@
       <text:p>Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce253"/>
-     <table:table-cell table:style-name="ce353" table:formula="of:=[.C25]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce353" table:formula="of:=[.C25]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce63"/>
-     <table:table-cell table:style-name="ce353" table:formula="of:=[.E25]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce353" table:formula="of:=[.E25]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="0" calcext:value-type="float">
+      <text:p>0</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce88"/>
-     <table:table-cell table:style-name="ce353" table:formula="of:=[.G25]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="990" calcext:value-type="float">
-      <text:p>990</text:p>
+     <table:table-cell table:style-name="ce353" table:formula="of:=[.G25]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce327" table:formula="of:=[.H25]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce327" table:formula="of:=[.H25]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce349"/>
      <table:table-cell table:style-name="ce123"/>
@@ -2398,26 +2398,26 @@
      <table:table-cell table:style-name="ce47" office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce247" table:formula="of:=[.B27]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:style-name="ce247" table:formula="of:=[.B27]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell/>
-     <table:table-cell table:formula="of:=[.E27]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:formula="of:=[.E27]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F27]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:formula="of:=[.F27]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce322" table:formula="of:=[.H27]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="985" calcext:value-type="float">
-      <text:p>985</text:p>
+     <table:table-cell table:style-name="ce322" table:formula="of:=[.H27]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7225" calcext:value-type="float">
+      <text:p>7225</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce344" office:value-type="string" calcext:value-type="string">
       <text:p>auf Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.J27]*(1*([.$B$8]-1)^2+1)+[.K27]" office:value-type="float" office:value="8780" calcext:value-type="float">
-      <text:p>8780</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.J27]*(1*([.$B$8]-1)^2+1)+[.K27]" office:value-type="float" office:value="63380" calcext:value-type="float">
+      <text:p>63380</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce381"/>
      <table:table-cell table:number-columns-repeated="9"/>
@@ -2451,19 +2451,19 @@
       <text:p>Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce250"/>
-     <table:table-cell table:style-name="ce281" table:formula="of:=[.C29]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce281" table:formula="of:=[.C29]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce295"/>
-     <table:table-cell table:style-name="ce281" table:formula="of:=[.E29]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="990" calcext:value-type="float">
-      <text:p>990</text:p>
+     <table:table-cell table:style-name="ce281" table:formula="of:=[.E29]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7230" calcext:value-type="float">
+      <text:p>7230</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce311"/>
-     <table:table-cell table:style-name="ce281" table:formula="of:=[.G29]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce281" table:formula="of:=[.G29]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce325" table:formula="of:=[.H29]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce325" table:formula="of:=[.H29]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce346"/>
      <table:table-cell table:style-name="ce364"/>
@@ -2500,26 +2500,26 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce247" table:formula="of:=[.B31]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:style-name="ce247" table:formula="of:=[.B31]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell/>
-     <table:table-cell table:formula="of:=[.E31]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:formula="of:=[.E31]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F31]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:formula="of:=[.F31]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce322" table:formula="of:=[.H31]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="985" calcext:value-type="float">
-      <text:p>985</text:p>
+     <table:table-cell table:style-name="ce322" table:formula="of:=[.H31]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7225" calcext:value-type="float">
+      <text:p>7225</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce344" office:value-type="string" calcext:value-type="string">
       <text:p>auf Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.J31]*(1*([.$B$8]-1)^2+1)+[.K31]" office:value-type="float" office:value="8780" calcext:value-type="float">
-      <text:p>8780</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.J31]*(1*([.$B$8]-1)^2+1)+[.K31]" office:value-type="float" office:value="63380" calcext:value-type="float">
+      <text:p>63380</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce76"/>
      <table:table-cell table:number-columns-repeated="9"/>
@@ -2537,8 +2537,8 @@
       <text:p>15</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce69"/>
-     <table:table-cell table:style-name="ce337" office:value-type="float" office:value="5" calcext:value-type="float">
-      <text:p>5</text:p>
+     <table:table-cell table:style-name="ce337" office:value-type="float" office:value="0" calcext:value-type="float">
+      <text:p>0</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce323" office:value-type="float" office:value="5" calcext:value-type="float">
       <text:p>5</text:p>
@@ -2553,19 +2553,19 @@
       <text:p>Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce248"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.C33]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="990" calcext:value-type="float">
-      <text:p>990</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.C33]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7230" calcext:value-type="float">
+      <text:p>7230</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.E33]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.E33]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce69"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.G33]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.G33]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="0" calcext:value-type="float">
+      <text:p>0</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce323" table:formula="of:=[.H33]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce323" table:formula="of:=[.H33]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce343"/>
      <table:table-cell table:style-name="ce38"/>
@@ -2602,26 +2602,26 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce247" table:formula="of:=[.B35]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="4925" calcext:value-type="float">
-      <text:p>4925</text:p>
+     <table:table-cell table:style-name="ce247" table:formula="of:=[.B35]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="36125" calcext:value-type="float">
+      <text:p>36125</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell/>
-     <table:table-cell table:formula="of:=[.E35]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:formula="of:=[.E35]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F35]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:formula="of:=[.F35]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce322" table:formula="of:=[.H35]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:style-name="ce322" table:formula="of:=[.H35]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce344" office:value-type="string" calcext:value-type="string">
       <text:p>auf Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.J35]*(1*([.$B$8]-1)^2+1)+[.K35]" office:value-type="float" office:value="3760" calcext:value-type="float">
-      <text:p>3760</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.J35]*(1*([.$B$8]-1)^2+1)+[.K35]" office:value-type="float" office:value="27160" calcext:value-type="float">
+      <text:p>27160</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce384"/>
      <table:table-cell table:number-columns-repeated="9"/>
@@ -2655,16 +2655,16 @@
       <text:p>Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce250"/>
-     <table:table-cell table:style-name="ce281" table:formula="of:=[.C37]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce281" table:formula="of:=[.C37]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce295"/>
-     <table:table-cell table:style-name="ce281" table:formula="of:=[.E37]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce281" table:formula="of:=[.E37]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce311"/>
-     <table:table-cell table:style-name="ce281" table:formula="of:=[.G37]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce281" table:formula="of:=[.G37]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce325" table:formula="of:=[.H37]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="0" calcext:value-type="float">
       <text:p>0</text:p>
@@ -2731,19 +2731,19 @@
       <text:p>Gesamt Ertrag bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce38"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.J16]" office:value-type="float" office:value="10050" calcext:value-type="float">
-      <text:p>10050</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.J16]" office:value-type="float" office:value="72450" calcext:value-type="float">
+      <text:p>72450</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.J24]" office:value-type="float" office:value="8780" calcext:value-type="float">
-      <text:p>8780</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.J24]" office:value-type="float" office:value="63380" calcext:value-type="float">
+      <text:p>63380</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.J32]" office:value-type="float" office:value="8780" calcext:value-type="float">
-      <text:p>8780</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.J32]" office:value-type="float" office:value="63380" calcext:value-type="float">
+      <text:p>63380</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce408" table:formula="of:=[.J36]" office:value-type="float" office:value="3760" calcext:value-type="float">
-      <text:p>3760</text:p>
+     <table:table-cell table:style-name="ce408" table:formula="of:=[.J36]" office:value-type="float" office:value="27160" calcext:value-type="float">
+      <text:p>27160</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="12"/>
     </table:table-row>
@@ -2752,19 +2752,19 @@
       <text:p>Gesamt Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce38"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.C38]+[.C26]+[.C30]+[.C34]+[.C22]+[.C14]+[.C18]" office:value-type="float" office:value="5445" calcext:value-type="float">
-      <text:p>5445</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.C38]+[.C26]+[.C30]+[.C34]+[.C22]+[.C14]+[.C18]" office:value-type="float" office:value="39765" calcext:value-type="float">
+      <text:p>39765</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.E38]+[.E26]+[.E30]+[.E34]+[.E22]+[.E14]+[.E18]" office:value-type="float" office:value="5445" calcext:value-type="float">
-      <text:p>5445</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.E38]+[.E26]+[.E30]+[.E34]+[.E22]+[.E14]+[.E18]" office:value-type="float" office:value="39765" calcext:value-type="float">
+      <text:p>39765</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.G38]+[.G26]+[.G30]+[.G34]+[.G22]+[.G14]+[.G18]" office:value-type="float" office:value="5445" calcext:value-type="float">
-      <text:p>5445</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.G38]+[.G26]+[.G30]+[.G34]+[.G22]+[.G14]+[.G18]" office:value-type="float" office:value="39765" calcext:value-type="float">
+      <text:p>39765</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce323" table:formula="of:=[.H38]+[.H26]+[.H30]+[.H34]+[.H22]+[.H14]+[.H18]" office:value-type="float" office:value="2970" calcext:value-type="float">
-      <text:p>2970</text:p>
+     <table:table-cell table:style-name="ce323" table:formula="of:=[.H38]+[.H26]+[.H30]+[.H34]+[.H22]+[.H14]+[.H18]" office:value-type="float" office:value="21690" calcext:value-type="float">
+      <text:p>21690</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="12"/>
     </table:table-row>
@@ -2773,19 +2773,19 @@
       <text:p>Billanz pro 24h bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce271"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.C42]-[.C43]" office:value-type="float" office:value="4605" calcext:value-type="float">
-      <text:p>4605</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.C42]-[.C43]" office:value-type="float" office:value="32685" calcext:value-type="float">
+      <text:p>32685</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.E42]-[.E43]" office:value-type="float" office:value="3335" calcext:value-type="float">
-      <text:p>3335</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.E42]-[.E43]" office:value-type="float" office:value="23615" calcext:value-type="float">
+      <text:p>23615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.G42]-[.G43]" office:value-type="float" office:value="3335" calcext:value-type="float">
-      <text:p>3335</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.G42]-[.G43]" office:value-type="float" office:value="23615" calcext:value-type="float">
+      <text:p>23615</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce408" table:formula="of:=[.H42]-[.H43]" office:value-type="float" office:value="790" calcext:value-type="float">
-      <text:p>790</text:p>
+     <table:table-cell table:style-name="ce408" table:formula="of:=[.H42]-[.H43]" office:value-type="float" office:value="5470" calcext:value-type="float">
+      <text:p>5470</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="12"/>
     </table:table-row>
@@ -2794,19 +2794,19 @@
       <text:p>Verhältnis</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce241"/>
-     <table:table-cell table:style-name="ce69" table:formula="of:=[.C42]/[.C43]" office:value-type="float" office:value="1.84573002754821" calcext:value-type="float">
-      <text:p>1,84573002754821</text:p>
+     <table:table-cell table:style-name="ce69" table:formula="of:=[.C42]/[.C43]" office:value-type="float" office:value="1.82195397963033" calcext:value-type="float">
+      <text:p>1,82195397963033</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce299"/>
-     <table:table-cell table:style-name="ce69" table:formula="of:=[.E42]/[.E43]" office:value-type="float" office:value="1.61248852157943" calcext:value-type="float">
-      <text:p>1,61248852157943</text:p>
+     <table:table-cell table:style-name="ce69" table:formula="of:=[.E42]/[.E43]" office:value-type="float" office:value="1.59386395071042" calcext:value-type="float">
+      <text:p>1,59386395071042</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce299"/>
-     <table:table-cell table:style-name="ce69" table:formula="of:=[.G42]/[.G43]" office:value-type="float" office:value="1.61248852157943" calcext:value-type="float">
-      <text:p>1,61248852157943</text:p>
+     <table:table-cell table:style-name="ce69" table:formula="of:=[.G42]/[.G43]" office:value-type="float" office:value="1.59386395071042" calcext:value-type="float">
+      <text:p>1,59386395071042</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce409" table:formula="of:=[.H42]/[.H43]" office:value-type="float" office:value="1.26599326599327" calcext:value-type="float">
-      <text:p>1,26599326599327</text:p>
+     <table:table-cell table:style-name="ce409" table:formula="of:=[.H42]/[.H43]" office:value-type="float" office:value="1.25218994928539" calcext:value-type="float">
+      <text:p>1,25218994928539</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="12"/>
     </table:table-row>
@@ -2899,19 +2899,19 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce43" table:formula="of:=[.B50]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:style-name="ce43" table:formula="of:=[.B50]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332" table:number-columns-repeated="2"/>
-     <table:table-cell table:formula="of:=[.E50]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:formula="of:=[.E50]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F50]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:formula="of:=[.F50]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332"/>
-     <table:table-cell table:style-name="ce99" table:formula="of:=[.H50]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="985" calcext:value-type="float">
-      <text:p>985</text:p>
+     <table:table-cell table:style-name="ce99" table:formula="of:=[.H50]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7225" calcext:value-type="float">
+      <text:p>7225</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368"/>
      <table:table-cell table:style-name="ce241"/>
@@ -2951,19 +2951,19 @@
       <text:p>Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce55"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.C52]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.C52]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.E52]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="990" calcext:value-type="float">
-      <text:p>990</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.E52]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7230" calcext:value-type="float">
+      <text:p>7230</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce69"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.G52]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="990" calcext:value-type="float">
-      <text:p>990</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.G52]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7230" calcext:value-type="float">
+      <text:p>7230</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce457" table:formula="of:=[.H52]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="495" calcext:value-type="float">
-      <text:p>495</text:p>
+     <table:table-cell table:style-name="ce457" table:formula="of:=[.H52]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3615" calcext:value-type="float">
+      <text:p>3615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368"/>
      <table:table-cell table:style-name="ce241"/>
@@ -3103,19 +3103,19 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce43" table:formula="of:=[.B57]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:style-name="ce43" table:formula="of:=[.B57]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332" table:number-columns-repeated="2"/>
-     <table:table-cell table:formula="of:=[.E57]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:formula="of:=[.E57]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F57]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:formula="of:=[.F57]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332"/>
-     <table:table-cell table:style-name="ce99" table:formula="of:=[.H57]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:style-name="ce99" table:formula="of:=[.H57]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368"/>
      <table:table-cell table:style-name="ce241"/>
@@ -3155,19 +3155,19 @@
       <text:p>Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce55"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.C59]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1980" calcext:value-type="float">
-      <text:p>1980</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.C59]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14460" calcext:value-type="float">
+      <text:p>14460</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.E59]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1980" calcext:value-type="float">
-      <text:p>1980</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.E59]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14460" calcext:value-type="float">
+      <text:p>14460</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce69"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.G59]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1980" calcext:value-type="float">
-      <text:p>1980</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.G59]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14460" calcext:value-type="float">
+      <text:p>14460</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce457" table:formula="of:=[.H59]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="990" calcext:value-type="float">
-      <text:p>990</text:p>
+     <table:table-cell table:style-name="ce457" table:formula="of:=[.H59]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7230" calcext:value-type="float">
+      <text:p>7230</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368"/>
      <table:table-cell table:style-name="ce241"/>
@@ -3307,19 +3307,19 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce43" table:formula="of:=[.B64]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="4925" calcext:value-type="float">
-      <text:p>4925</text:p>
+     <table:table-cell table:style-name="ce43" table:formula="of:=[.B64]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="36125" calcext:value-type="float">
+      <text:p>36125</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332" table:number-columns-repeated="2"/>
-     <table:table-cell table:formula="of:=[.E64]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:formula="of:=[.E64]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F64]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:formula="of:=[.F64]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332"/>
-     <table:table-cell table:style-name="ce99" table:formula="of:=[.H64]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:style-name="ce99" table:formula="of:=[.H64]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368"/>
      <table:table-cell table:style-name="ce241"/>
@@ -3359,19 +3359,19 @@
       <text:p>Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce55"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.C66]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1980" calcext:value-type="float">
-      <text:p>1980</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.C66]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14460" calcext:value-type="float">
+      <text:p>14460</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.E66]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2475" calcext:value-type="float">
-      <text:p>2475</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.E66]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="18075" calcext:value-type="float">
+      <text:p>18075</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce69"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.G66]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2475" calcext:value-type="float">
-      <text:p>2475</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.G66]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="18075" calcext:value-type="float">
+      <text:p>18075</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce457" table:formula="of:=[.H66]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce457" table:formula="of:=[.H66]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368"/>
      <table:table-cell table:style-name="ce241"/>
@@ -3523,19 +3523,19 @@
       <text:p>Gesamt Ertrag bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce38"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.$J$16]" office:value-type="float" office:value="10050" calcext:value-type="float">
-      <text:p>10050</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.$J$16]" office:value-type="float" office:value="72450" calcext:value-type="float">
+      <text:p>72450</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.$J$24]" office:value-type="float" office:value="8780" calcext:value-type="float">
-      <text:p>8780</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.$J$24]" office:value-type="float" office:value="63380" calcext:value-type="float">
+      <text:p>63380</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.$J$32]" office:value-type="float" office:value="8780" calcext:value-type="float">
-      <text:p>8780</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.$J$32]" office:value-type="float" office:value="63380" calcext:value-type="float">
+      <text:p>63380</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce408" table:formula="of:=[.$J$36]" office:value-type="float" office:value="3760" calcext:value-type="float">
-      <text:p>3760</text:p>
+     <table:table-cell table:style-name="ce408" table:formula="of:=[.$J$36]" office:value-type="float" office:value="27160" calcext:value-type="float">
+      <text:p>27160</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="12"/>
     </table:table-row>
@@ -3544,19 +3544,19 @@
       <text:p>Gesamt Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce38"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.C67]+[.C60]+[.C53]" office:value-type="float" office:value="5445" calcext:value-type="float">
-      <text:p>5445</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.C67]+[.C60]+[.C53]" office:value-type="float" office:value="39765" calcext:value-type="float">
+      <text:p>39765</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.E67]+[.E60]+[.E53]" office:value-type="float" office:value="5445" calcext:value-type="float">
-      <text:p>5445</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.E67]+[.E60]+[.E53]" office:value-type="float" office:value="39765" calcext:value-type="float">
+      <text:p>39765</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.G67]+[.G60]+[.G53]" office:value-type="float" office:value="5445" calcext:value-type="float">
-      <text:p>5445</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.G67]+[.G60]+[.G53]" office:value-type="float" office:value="39765" calcext:value-type="float">
+      <text:p>39765</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce323" table:formula="of:=[.H67]+[.H60]+[.H53]" office:value-type="float" office:value="2970" calcext:value-type="float">
-      <text:p>2970</text:p>
+     <table:table-cell table:style-name="ce323" table:formula="of:=[.H67]+[.H60]+[.H53]" office:value-type="float" office:value="21690" calcext:value-type="float">
+      <text:p>21690</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="12"/>
     </table:table-row>
@@ -3565,19 +3565,19 @@
       <text:p>Billanz pro 24h bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce271"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.C73]-[.C74]" office:value-type="float" office:value="4605" calcext:value-type="float">
-      <text:p>4605</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.C73]-[.C74]" office:value-type="float" office:value="32685" calcext:value-type="float">
+      <text:p>32685</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.E73]-[.E74]" office:value-type="float" office:value="3335" calcext:value-type="float">
-      <text:p>3335</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.E73]-[.E74]" office:value-type="float" office:value="23615" calcext:value-type="float">
+      <text:p>23615</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.G73]-[.G74]" office:value-type="float" office:value="3335" calcext:value-type="float">
-      <text:p>3335</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.G73]-[.G74]" office:value-type="float" office:value="23615" calcext:value-type="float">
+      <text:p>23615</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce408" table:formula="of:=[.H73]-[.H74]" office:value-type="float" office:value="790" calcext:value-type="float">
-      <text:p>790</text:p>
+     <table:table-cell table:style-name="ce408" table:formula="of:=[.H73]-[.H74]" office:value-type="float" office:value="5470" calcext:value-type="float">
+      <text:p>5470</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="12"/>
     </table:table-row>
@@ -3586,19 +3586,19 @@
       <text:p>Verhältnis</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce241"/>
-     <table:table-cell table:style-name="ce69" table:formula="of:=[.C73]/[.C74]" office:value-type="float" office:value="1.84573002754821" calcext:value-type="float">
-      <text:p>1,84573002754821</text:p>
+     <table:table-cell table:style-name="ce69" table:formula="of:=[.C73]/[.C74]" office:value-type="float" office:value="1.82195397963033" calcext:value-type="float">
+      <text:p>1,82195397963033</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce299"/>
-     <table:table-cell table:style-name="ce69" table:formula="of:=[.E73]/[.E74]" office:value-type="float" office:value="1.61248852157943" calcext:value-type="float">
-      <text:p>1,61248852157943</text:p>
+     <table:table-cell table:style-name="ce69" table:formula="of:=[.E73]/[.E74]" office:value-type="float" office:value="1.59386395071042" calcext:value-type="float">
+      <text:p>1,59386395071042</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce299"/>
-     <table:table-cell table:style-name="ce69" table:formula="of:=[.G73]/[.G74]" office:value-type="float" office:value="1.61248852157943" calcext:value-type="float">
-      <text:p>1,61248852157943</text:p>
+     <table:table-cell table:style-name="ce69" table:formula="of:=[.G73]/[.G74]" office:value-type="float" office:value="1.59386395071042" calcext:value-type="float">
+      <text:p>1,59386395071042</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce409" table:formula="of:=[.H73]/[.H74]" office:value-type="float" office:value="1.26599326599327" calcext:value-type="float">
-      <text:p>1,26599326599327</text:p>
+     <table:table-cell table:style-name="ce409" table:formula="of:=[.H73]/[.H74]" office:value-type="float" office:value="1.25218994928539" calcext:value-type="float">
+      <text:p>1,25218994928539</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="12"/>
     </table:table-row>
@@ -3661,19 +3661,19 @@
       <text:p>Gesamt Ertrag bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce38"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.$J$16]" office:value-type="float" office:value="10050" calcext:value-type="float">
-      <text:p>10050</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.$J$16]" office:value-type="float" office:value="72450" calcext:value-type="float">
+      <text:p>72450</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.$J$24]" office:value-type="float" office:value="8780" calcext:value-type="float">
-      <text:p>8780</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.$J$24]" office:value-type="float" office:value="63380" calcext:value-type="float">
+      <text:p>63380</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.$J$32]" office:value-type="float" office:value="8780" calcext:value-type="float">
-      <text:p>8780</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.$J$32]" office:value-type="float" office:value="63380" calcext:value-type="float">
+      <text:p>63380</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce408" table:formula="of:=[.$J$36]" office:value-type="float" office:value="3760" calcext:value-type="float">
-      <text:p>3760</text:p>
+     <table:table-cell table:style-name="ce408" table:formula="of:=[.$J$36]" office:value-type="float" office:value="27160" calcext:value-type="float">
+      <text:p>27160</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="12"/>
     </table:table-row>
@@ -3682,19 +3682,19 @@
       <text:p>Gesamt Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce38"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.C74]+[.C43]" office:value-type="float" office:value="10890" calcext:value-type="float">
-      <text:p>10890</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.C74]+[.C43]" office:value-type="float" office:value="79530" calcext:value-type="float">
+      <text:p>79530</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.E74]+[.E43]" office:value-type="float" office:value="10890" calcext:value-type="float">
-      <text:p>10890</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.E74]+[.E43]" office:value-type="float" office:value="79530" calcext:value-type="float">
+      <text:p>79530</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.G74]+[.G43]" office:value-type="float" office:value="10890" calcext:value-type="float">
-      <text:p>10890</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.G74]+[.G43]" office:value-type="float" office:value="79530" calcext:value-type="float">
+      <text:p>79530</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce323" table:formula="of:=[.H74]+[.H43]" office:value-type="float" office:value="5940" calcext:value-type="float">
-      <text:p>5940</text:p>
+     <table:table-cell table:style-name="ce323" table:formula="of:=[.H74]+[.H43]" office:value-type="float" office:value="43380" calcext:value-type="float">
+      <text:p>43380</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="12"/>
     </table:table-row>
@@ -3703,19 +3703,19 @@
       <text:p>Billanz pro 24h bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce271"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.C80]-[.C81]" office:value-type="float" office:value="-840" calcext:value-type="float">
-      <text:p>-840</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.C80]-[.C81]" office:value-type="float" office:value="-7080" calcext:value-type="float">
+      <text:p>-7080</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.E80]-[.E81]" office:value-type="float" office:value="-2110" calcext:value-type="float">
-      <text:p>-2110</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.E80]-[.E81]" office:value-type="float" office:value="-16150" calcext:value-type="float">
+      <text:p>-16150</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332"/>
-     <table:table-cell table:style-name="ce359" table:formula="of:=[.G80]-[.G81]" office:value-type="float" office:value="-2110" calcext:value-type="float">
-      <text:p>-2110</text:p>
+     <table:table-cell table:style-name="ce359" table:formula="of:=[.G80]-[.G81]" office:value-type="float" office:value="-16150" calcext:value-type="float">
+      <text:p>-16150</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce408" table:formula="of:=[.H80]-[.H81]" office:value-type="float" office:value="-2180" calcext:value-type="float">
-      <text:p>-2180</text:p>
+     <table:table-cell table:style-name="ce408" table:formula="of:=[.H80]-[.H81]" office:value-type="float" office:value="-16220" calcext:value-type="float">
+      <text:p>-16220</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="12"/>
     </table:table-row>
@@ -3724,19 +3724,19 @@
       <text:p>Verhältnis</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce241"/>
-     <table:table-cell table:style-name="ce69" table:formula="of:=[.C80]/[.C81]" office:value-type="float" office:value="0.922865013774105" calcext:value-type="float">
-      <text:p>0,922865013774105</text:p>
+     <table:table-cell table:style-name="ce69" table:formula="of:=[.C80]/[.C81]" office:value-type="float" office:value="0.910976989815164" calcext:value-type="float">
+      <text:p>0,910976989815164</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce299"/>
-     <table:table-cell table:style-name="ce69" table:formula="of:=[.E80]/[.E81]" office:value-type="float" office:value="0.806244260789715" calcext:value-type="float">
-      <text:p>0,806244260789715</text:p>
+     <table:table-cell table:style-name="ce69" table:formula="of:=[.E80]/[.E81]" office:value-type="float" office:value="0.796931975355212" calcext:value-type="float">
+      <text:p>0,796931975355212</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce299"/>
-     <table:table-cell table:style-name="ce69" table:formula="of:=[.G80]/[.G81]" office:value-type="float" office:value="0.806244260789715" calcext:value-type="float">
-      <text:p>0,806244260789715</text:p>
+     <table:table-cell table:style-name="ce69" table:formula="of:=[.G80]/[.G81]" office:value-type="float" office:value="0.796931975355212" calcext:value-type="float">
+      <text:p>0,796931975355212</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce409" table:formula="of:=[.H80]/[.H81]" office:value-type="float" office:value="0.632996632996633" calcext:value-type="float">
-      <text:p>0,632996632996633</text:p>
+     <table:table-cell table:style-name="ce409" table:formula="of:=[.H80]/[.H81]" office:value-type="float" office:value="0.626094974642693" calcext:value-type="float">
+      <text:p>0,626094974642693</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="12"/>
     </table:table-row>
@@ -3809,20 +3809,20 @@
      <table:table-cell table:style-name="ce95" office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce293" table:formula="of:=[.B88]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:style-name="ce293" table:formula="of:=[.B88]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell/>
-     <table:table-cell table:formula="of:=[.E88]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="985" calcext:value-type="float">
-      <text:p>985</text:p>
+     <table:table-cell table:formula="of:=[.E88]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7225" calcext:value-type="float">
+      <text:p>7225</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F88]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:formula="of:=[.F88]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332"/>
-     <table:table-cell table:style-name="ce99" table:formula="of:=[.H88]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="985" calcext:value-type="float">
-      <text:p>985</text:p>
+     <table:table-cell table:style-name="ce99" table:formula="of:=[.H88]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7225" calcext:value-type="float">
+      <text:p>7225</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3"/>
      <table:table-cell table:number-columns-repeated="11"/>
@@ -3899,20 +3899,20 @@
      <table:table-cell table:style-name="ce95" office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce293" table:formula="of:=[.B92]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:style-name="ce293" table:formula="of:=[.B92]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell/>
-     <table:table-cell table:formula="of:=[.E92]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:formula="of:=[.E92]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F92]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="985" calcext:value-type="float">
-      <text:p>985</text:p>
+     <table:table-cell table:formula="of:=[.F92]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7225" calcext:value-type="float">
+      <text:p>7225</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce99" table:formula="of:=[.H92]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="985" calcext:value-type="float">
-      <text:p>985</text:p>
+     <table:table-cell table:style-name="ce99" table:formula="of:=[.H92]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7225" calcext:value-type="float">
+      <text:p>7225</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3"/>
      <table:table-cell table:number-columns-repeated="11"/>
@@ -3944,19 +3944,19 @@
       <text:p>Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce48"/>
-     <table:table-cell table:style-name="ce353" table:formula="of:=[.C94]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce353" table:formula="of:=[.C94]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce63"/>
-     <table:table-cell table:style-name="ce353" table:formula="of:=[.E94]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce353" table:formula="of:=[.E94]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce63"/>
-     <table:table-cell table:style-name="ce353" table:formula="of:=[.G94]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce353" table:formula="of:=[.G94]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce467" table:formula="of:=[.H94]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2475" calcext:value-type="float">
-      <text:p>2475</text:p>
+     <table:table-cell table:style-name="ce467" table:formula="of:=[.H94]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="18075" calcext:value-type="float">
+      <text:p>18075</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce4"/>
      <table:table-cell table:number-columns-repeated="11"/>
@@ -3988,20 +3988,20 @@
      <table:table-cell table:style-name="ce95" office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce293" table:formula="of:=[.B96]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:style-name="ce293" table:formula="of:=[.B96]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell table:style-name="ce299"/>
-     <table:table-cell table:formula="of:=[.E96]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:formula="of:=[.E96]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F96]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:formula="of:=[.F96]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332"/>
-     <table:table-cell table:style-name="ce99" table:formula="of:=[.H96]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:style-name="ce99" table:formula="of:=[.H96]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3"/>
      <table:table-cell table:number-columns-repeated="11"/>
@@ -4033,19 +4033,19 @@
       <text:p>Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce46"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.C98]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.C98]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce299"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.E98]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="990" calcext:value-type="float">
-      <text:p>990</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.E98]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7230" calcext:value-type="float">
+      <text:p>7230</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce337" table:formula="of:=[.G98]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1980" calcext:value-type="float">
-      <text:p>1980</text:p>
+     <table:table-cell table:style-name="ce337" table:formula="of:=[.G98]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14460" calcext:value-type="float">
+      <text:p>14460</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce457" table:formula="of:=[.H98]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce457" table:formula="of:=[.H98]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3"/>
      <table:table-cell table:number-columns-repeated="11"/>
@@ -4078,20 +4078,20 @@
      <table:table-cell table:style-name="ce95" office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce293" table:formula="of:=[.B100]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:style-name="ce293" table:formula="of:=[.B100]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell table:style-name="ce299"/>
-     <table:table-cell table:formula="of:=[.E100]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:formula="of:=[.E100]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F100]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:formula="of:=[.F100]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce99" table:formula="of:=[.H100]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1970" calcext:value-type="float">
-      <text:p>1970</text:p>
+     <table:table-cell table:style-name="ce99" table:formula="of:=[.H100]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14450" calcext:value-type="float">
+      <text:p>14450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3"/>
      <table:table-cell table:number-columns-repeated="11"/>
@@ -4123,19 +4123,19 @@
       <text:p>Verbrauch bei Stufe X</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce48"/>
-     <table:table-cell table:style-name="ce353" table:formula="of:=[.C102]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce353" table:formula="of:=[.C102]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce300"/>
-     <table:table-cell table:style-name="ce353" table:formula="of:=[.E102]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1980" calcext:value-type="float">
-      <text:p>1980</text:p>
+     <table:table-cell table:style-name="ce353" table:formula="of:=[.E102]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="14460" calcext:value-type="float">
+      <text:p>14460</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce63"/>
-     <table:table-cell table:style-name="ce353" table:formula="of:=[.G102]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="990" calcext:value-type="float">
-      <text:p>990</text:p>
+     <table:table-cell table:style-name="ce353" table:formula="of:=[.G102]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="7230" calcext:value-type="float">
+      <text:p>7230</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce467" table:formula="of:=[.H102]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="1485" calcext:value-type="float">
-      <text:p>1485</text:p>
+     <table:table-cell table:style-name="ce467" table:formula="of:=[.H102]*(2*([.$B$8]-1)^2+1)" office:value-type="float" office:value="10845" calcext:value-type="float">
+      <text:p>10845</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce4"/>
      <table:table-cell table:number-columns-repeated="11"/>
@@ -4167,20 +4167,20 @@
      <table:table-cell table:style-name="ce95" office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce293" table:formula="of:=[.B104]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:style-name="ce293" table:formula="of:=[.B104]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell table:style-name="ce299"/>
-     <table:table-cell table:formula="of:=[.E104]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:formula="of:=[.E104]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F104]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:formula="of:=[.F104]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332"/>
-     <table:table-cell table:style-name="ce99" table:formula="of:=[.H104]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:style-name="ce99" table:formula="of:=[.H104]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3"/>
      <table:table-cell table:number-columns-repeated="11"/>
@@ -4257,20 +4257,20 @@
      <table:table-cell table:style-name="ce95" office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce293" table:formula="of:=[.B108]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:style-name="ce293" table:formula="of:=[.B108]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell table:style-name="ce299"/>
-     <table:table-cell table:formula="of:=[.E108]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:formula="of:=[.E108]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F108]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:formula="of:=[.F108]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce99" table:formula="of:=[.H108]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="2955" calcext:value-type="float">
-      <text:p>2955</text:p>
+     <table:table-cell table:style-name="ce99" table:formula="of:=[.H108]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="21675" calcext:value-type="float">
+      <text:p>21675</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3"/>
      <table:table-cell table:number-columns-repeated="11"/>
@@ -4347,20 +4347,20 @@
      <table:table-cell table:style-name="ce95" office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce293" table:formula="of:=[.B112]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="4925" calcext:value-type="float">
-      <text:p>4925</text:p>
+     <table:table-cell table:style-name="ce293" table:formula="of:=[.B112]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="36125" calcext:value-type="float">
+      <text:p>36125</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell table:style-name="ce299"/>
-     <table:table-cell table:formula="of:=[.E112]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:formula="of:=[.E112]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F112]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="4925" calcext:value-type="float">
-      <text:p>4925</text:p>
+     <table:table-cell table:formula="of:=[.F112]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="36125" calcext:value-type="float">
+      <text:p>36125</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce332"/>
-     <table:table-cell table:style-name="ce99" table:formula="of:=[.H112]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:style-name="ce99" table:formula="of:=[.H112]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3"/>
      <table:table-cell table:number-columns-repeated="11"/>
@@ -4437,20 +4437,20 @@
      <table:table-cell table:style-name="ce95" office:value-type="string" calcext:value-type="string">
       <text:p>Kosten bei Stufe X</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce293" table:formula="of:=[.B116]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="4925" calcext:value-type="float">
-      <text:p>4925</text:p>
+     <table:table-cell table:style-name="ce293" table:formula="of:=[.B116]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="36125" calcext:value-type="float">
+      <text:p>36125</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
      <table:table-cell/>
-     <table:table-cell table:formula="of:=[.E116]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="4925" calcext:value-type="float">
-      <text:p>4925</text:p>
+     <table:table-cell table:formula="of:=[.E116]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="36125" calcext:value-type="float">
+      <text:p>36125</text:p>
      </table:table-cell>
-     <table:table-cell table:formula="of:=[.F116]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:formula="of:=[.F116]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce40"/>
-     <table:table-cell table:style-name="ce99" table:formula="of:=[.H116]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="3940" calcext:value-type="float">
-      <text:p>3940</text:p>
+     <table:table-cell table:style-name="ce99" table:formula="of:=[.H116]*(4*([.$B$8]-1)^2+1)" office:value-type="float" office:value="28900" calcext:value-type="float">
+      <text:p>28900</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3"/>
      <table:table-cell table:number-columns-repeated="11"/>
@@ -4594,18 +4594,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H124]*3" office:value-type="float" office:value="450" calcext:value-type="float">
-      <text:p>450</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H124]*3" office:value-type="float" office:value="225" calcext:value-type="float">
+      <text:p>225</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D124]" office:value-type="float" office:value="450" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D124]" office:value-type="float" office:value="225" calcext:value-type="float">
+      <text:p>225</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D124]*2" office:value-type="float" office:value="450" calcext:value-type="float">
       <text:p>450</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D124]*2" office:value-type="float" office:value="900" calcext:value-type="float">
-      <text:p>900</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="150" calcext:value-type="float">
-      <text:p>150</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="75" calcext:value-type="float">
+      <text:p>75</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce240" office:value-type="float" office:value="2" calcext:value-type="float">
       <text:p>2</text:p>
@@ -4650,18 +4650,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H125]*3" office:value-type="float" office:value="450" calcext:value-type="float">
-      <text:p>450</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H125]*3" office:value-type="float" office:value="225" calcext:value-type="float">
+      <text:p>225</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D125]*2" office:value-type="float" office:value="900" calcext:value-type="float">
-      <text:p>900</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D125]" office:value-type="float" office:value="450" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D125]*2" office:value-type="float" office:value="450" calcext:value-type="float">
       <text:p>450</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="150" calcext:value-type="float">
-      <text:p>150</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D125]" office:value-type="float" office:value="225" calcext:value-type="float">
+      <text:p>225</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="75" calcext:value-type="float">
+      <text:p>75</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce254" office:value-type="float" office:value="1" calcext:value-type="float">
       <text:p>1</text:p>
@@ -4706,18 +4706,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H126]*3" office:value-type="float" office:value="1050" calcext:value-type="float">
-      <text:p>1050</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H126]*3" office:value-type="float" office:value="450" calcext:value-type="float">
+      <text:p>450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D126]" office:value-type="float" office:value="1050" calcext:value-type="float">
-      <text:p>1050</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D126]" office:value-type="float" office:value="450" calcext:value-type="float">
+      <text:p>450</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D126]*2" office:value-type="float" office:value="2100" calcext:value-type="float">
-      <text:p>2100</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D126]*2" office:value-type="float" office:value="900" calcext:value-type="float">
+      <text:p>900</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="350" calcext:value-type="float">
-      <text:p>350</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="150" calcext:value-type="float">
+      <text:p>150</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368" office:value-type="float" office:value="2" calcext:value-type="float">
       <text:p>2</text:p>
@@ -4762,18 +4762,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H127]*3" office:value-type="float" office:value="1050" calcext:value-type="float">
-      <text:p>1050</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H127]*3" office:value-type="float" office:value="450" calcext:value-type="float">
+      <text:p>450</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D127]*2" office:value-type="float" office:value="2100" calcext:value-type="float">
-      <text:p>2100</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D127]*2" office:value-type="float" office:value="900" calcext:value-type="float">
+      <text:p>900</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D127]" office:value-type="float" office:value="1050" calcext:value-type="float">
-      <text:p>1050</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D127]" office:value-type="float" office:value="450" calcext:value-type="float">
+      <text:p>450</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="350" calcext:value-type="float">
-      <text:p>350</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="150" calcext:value-type="float">
+      <text:p>150</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce369" office:value-type="float" office:value="1" calcext:value-type="float">
       <text:p>1</text:p>
@@ -4818,18 +4818,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H128]*3" office:value-type="float" office:value="2100" calcext:value-type="float">
-      <text:p>2100</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H128]*3" office:value-type="float" office:value="900" calcext:value-type="float">
+      <text:p>900</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D128]" office:value-type="float" office:value="2100" calcext:value-type="float">
-      <text:p>2100</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D128]" office:value-type="float" office:value="900" calcext:value-type="float">
+      <text:p>900</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D128]*2" office:value-type="float" office:value="4200" calcext:value-type="float">
-      <text:p>4200</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D128]*2" office:value-type="float" office:value="1800" calcext:value-type="float">
+      <text:p>1800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" table:formula="of:=[.L128]*5" office:value-type="float" office:value="700" calcext:value-type="float">
-      <text:p>700</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="300" calcext:value-type="float">
+      <text:p>300</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368" office:value-type="float" office:value="3" calcext:value-type="float">
       <text:p>3</text:p>
@@ -4874,18 +4874,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H129]*3" office:value-type="float" office:value="2100" calcext:value-type="float">
-      <text:p>2100</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H129]*3" office:value-type="float" office:value="900" calcext:value-type="float">
+      <text:p>900</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D129]*2" office:value-type="float" office:value="4200" calcext:value-type="float">
-      <text:p>4200</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D129]*2" office:value-type="float" office:value="1800" calcext:value-type="float">
+      <text:p>1800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D129]" office:value-type="float" office:value="2100" calcext:value-type="float">
-      <text:p>2100</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D129]" office:value-type="float" office:value="900" calcext:value-type="float">
+      <text:p>900</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" table:formula="of:=[.L129]*5" office:value-type="float" office:value="700" calcext:value-type="float">
-      <text:p>700</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="300" calcext:value-type="float">
+      <text:p>300</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce369" office:value-type="float" office:value="2" calcext:value-type="float">
       <text:p>2</text:p>
@@ -4930,18 +4930,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H130]*3" office:value-type="float" office:value="3000" calcext:value-type="float">
-      <text:p>3000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H130]*3" office:value-type="float" office:value="1800" calcext:value-type="float">
+      <text:p>1800</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D130]" office:value-type="float" office:value="3000" calcext:value-type="float">
-      <text:p>3000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D130]" office:value-type="float" office:value="1800" calcext:value-type="float">
+      <text:p>1800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D130]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
-      <text:p>6000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D130]*2" office:value-type="float" office:value="3600" calcext:value-type="float">
+      <text:p>3600</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" table:formula="of:=[.L130]*5" office:value-type="float" office:value="1000" calcext:value-type="float">
-      <text:p>1000</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="600" calcext:value-type="float">
+      <text:p>600</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368" office:value-type="float" office:value="5" calcext:value-type="float">
       <text:p>5</text:p>
@@ -4986,18 +4986,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H131]*3" office:value-type="float" office:value="3000" calcext:value-type="float">
-      <text:p>3000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H131]*3" office:value-type="float" office:value="1800" calcext:value-type="float">
+      <text:p>1800</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D131]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
-      <text:p>6000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D131]*2" office:value-type="float" office:value="3600" calcext:value-type="float">
+      <text:p>3600</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D131]" office:value-type="float" office:value="3000" calcext:value-type="float">
-      <text:p>3000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D131]" office:value-type="float" office:value="1800" calcext:value-type="float">
+      <text:p>1800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" table:formula="of:=[.L131]*5" office:value-type="float" office:value="1000" calcext:value-type="float">
-      <text:p>1000</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="600" calcext:value-type="float">
+      <text:p>600</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce439" office:value-type="float" office:value="4" calcext:value-type="float">
       <text:p>4</text:p>
@@ -5042,18 +5042,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H132]*3" office:value-type="float" office:value="4500" calcext:value-type="float">
-      <text:p>4500</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H132]*3" office:value-type="float" office:value="3000" calcext:value-type="float">
+      <text:p>3000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D132]" office:value-type="float" office:value="4500" calcext:value-type="float">
-      <text:p>4500</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D132]" office:value-type="float" office:value="3000" calcext:value-type="float">
+      <text:p>3000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D132]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
-      <text:p>9000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D132]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
+      <text:p>6000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" table:formula="of:=[.L132]*5" office:value-type="float" office:value="1500" calcext:value-type="float">
-      <text:p>1500</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="1000" calcext:value-type="float">
+      <text:p>1000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="8" calcext:value-type="float">
       <text:p>8</text:p>
@@ -5098,18 +5098,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H133]*3" office:value-type="float" office:value="4500" calcext:value-type="float">
-      <text:p>4500</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H133]*3" office:value-type="float" office:value="3000" calcext:value-type="float">
+      <text:p>3000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D133]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
-      <text:p>9000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D133]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
+      <text:p>6000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D133]" office:value-type="float" office:value="4500" calcext:value-type="float">
-      <text:p>4500</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D133]" office:value-type="float" office:value="3000" calcext:value-type="float">
+      <text:p>3000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" table:formula="of:=[.L133]*5" office:value-type="float" office:value="1500" calcext:value-type="float">
-      <text:p>1500</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="1000" calcext:value-type="float">
+      <text:p>1000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="5" calcext:value-type="float">
       <text:p>5</text:p>
@@ -5154,18 +5154,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H134]*3" office:value-type="float" office:value="6750" calcext:value-type="float">
-      <text:p>6750</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H134]*3" office:value-type="float" office:value="4500" calcext:value-type="float">
+      <text:p>4500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D134]" office:value-type="float" office:value="6750" calcext:value-type="float">
-      <text:p>6750</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D134]" office:value-type="float" office:value="4500" calcext:value-type="float">
+      <text:p>4500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D134]*2" office:value-type="float" office:value="13500" calcext:value-type="float">
-      <text:p>13500</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D134]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
+      <text:p>9000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" table:formula="of:=[.L134]*5" office:value-type="float" office:value="2250" calcext:value-type="float">
-      <text:p>2250</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="1500" calcext:value-type="float">
+      <text:p>1500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="11" calcext:value-type="float">
       <text:p>11</text:p>
@@ -5210,18 +5210,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H135]*3" office:value-type="float" office:value="6750" calcext:value-type="float">
-      <text:p>6750</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H135]*3" office:value-type="float" office:value="4500" calcext:value-type="float">
+      <text:p>4500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D135]*2" office:value-type="float" office:value="13500" calcext:value-type="float">
-      <text:p>13500</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D135]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
+      <text:p>9000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D135]" office:value-type="float" office:value="6750" calcext:value-type="float">
-      <text:p>6750</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D135]" office:value-type="float" office:value="4500" calcext:value-type="float">
+      <text:p>4500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" table:formula="of:=[.L135]*5" office:value-type="float" office:value="2250" calcext:value-type="float">
-      <text:p>2250</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="1500" calcext:value-type="float">
+      <text:p>1500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="7" calcext:value-type="float">
       <text:p>7</text:p>
@@ -5266,18 +5266,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H136]*3" office:value-type="float" office:value="9600" calcext:value-type="float">
-      <text:p>9600</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H136]*3" office:value-type="float" office:value="9000" calcext:value-type="float">
+      <text:p>9000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D136]" office:value-type="float" office:value="9600" calcext:value-type="float">
-      <text:p>9600</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D136]" office:value-type="float" office:value="9000" calcext:value-type="float">
+      <text:p>9000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D136]*2" office:value-type="float" office:value="19200" calcext:value-type="float">
-      <text:p>19200</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D136]*2" office:value-type="float" office:value="18000" calcext:value-type="float">
+      <text:p>18000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" table:formula="of:=[.L136]*5" office:value-type="float" office:value="3200" calcext:value-type="float">
-      <text:p>3200</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="3000" calcext:value-type="float">
+      <text:p>3000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="15" calcext:value-type="float">
       <text:p>15</text:p>
@@ -5322,18 +5322,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H137]*3" office:value-type="float" office:value="9600" calcext:value-type="float">
-      <text:p>9600</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H137]*3" office:value-type="float" office:value="9000" calcext:value-type="float">
+      <text:p>9000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D137]*2" office:value-type="float" office:value="19200" calcext:value-type="float">
-      <text:p>19200</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D137]*2" office:value-type="float" office:value="18000" calcext:value-type="float">
+      <text:p>18000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D137]" office:value-type="float" office:value="9600" calcext:value-type="float">
-      <text:p>9600</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D137]" office:value-type="float" office:value="9000" calcext:value-type="float">
+      <text:p>9000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" table:formula="of:=[.L137]*5" office:value-type="float" office:value="3200" calcext:value-type="float">
-      <text:p>3200</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="3000" calcext:value-type="float">
+      <text:p>3000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="9" calcext:value-type="float">
       <text:p>9</text:p>
@@ -5378,18 +5378,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H138]*3" office:value-type="float" office:value="11400" calcext:value-type="float">
-      <text:p>11400</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H138]*3" office:value-type="float" office:value="15000" calcext:value-type="float">
+      <text:p>15000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D138]" office:value-type="float" office:value="11400" calcext:value-type="float">
-      <text:p>11400</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D138]" office:value-type="float" office:value="15000" calcext:value-type="float">
+      <text:p>15000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D138]*2" office:value-type="float" office:value="22800" calcext:value-type="float">
-      <text:p>22800</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D138]*2" office:value-type="float" office:value="30000" calcext:value-type="float">
+      <text:p>30000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="3800" calcext:value-type="float">
-      <text:p>3800</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="5000" calcext:value-type="float">
+      <text:p>5000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="19" calcext:value-type="float">
       <text:p>19</text:p>
@@ -5434,18 +5434,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H139]*3" office:value-type="float" office:value="11400" calcext:value-type="float">
-      <text:p>11400</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H139]*3" office:value-type="float" office:value="15000" calcext:value-type="float">
+      <text:p>15000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D139]*2" office:value-type="float" office:value="22800" calcext:value-type="float">
-      <text:p>22800</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D139]*2" office:value-type="float" office:value="30000" calcext:value-type="float">
+      <text:p>30000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D139]" office:value-type="float" office:value="11400" calcext:value-type="float">
-      <text:p>11400</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D139]" office:value-type="float" office:value="15000" calcext:value-type="float">
+      <text:p>15000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="3800" calcext:value-type="float">
-      <text:p>3800</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="5000" calcext:value-type="float">
+      <text:p>5000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="12" calcext:value-type="float">
       <text:p>12</text:p>
@@ -5618,18 +5618,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H148]*2" office:value-type="float" office:value="500" calcext:value-type="float">
-      <text:p>500</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H148]*2" office:value-type="float" office:value="100" calcext:value-type="float">
+      <text:p>100</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D148]" office:value-type="float" office:value="500" calcext:value-type="float">
-      <text:p>500</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D148]" office:value-type="float" office:value="100" calcext:value-type="float">
+      <text:p>100</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D148]*2" office:value-type="float" office:value="1000" calcext:value-type="float">
-      <text:p>1000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D148]*2" office:value-type="float" office:value="200" calcext:value-type="float">
+      <text:p>200</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" table:formula="of:=[.L148]*5" office:value-type="float" office:value="250" calcext:value-type="float">
-      <text:p>250</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="50" calcext:value-type="float">
+      <text:p>50</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce240" office:value-type="float" office:value="2" calcext:value-type="float">
       <text:p>2</text:p>
@@ -5667,18 +5667,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H149]*2" office:value-type="float" office:value="500" calcext:value-type="float">
-      <text:p>500</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H149]*2" office:value-type="float" office:value="100" calcext:value-type="float">
+      <text:p>100</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D149]*2" office:value-type="float" office:value="1000" calcext:value-type="float">
-      <text:p>1000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D149]*2" office:value-type="float" office:value="200" calcext:value-type="float">
+      <text:p>200</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D149]" office:value-type="float" office:value="500" calcext:value-type="float">
-      <text:p>500</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D149]" office:value-type="float" office:value="100" calcext:value-type="float">
+      <text:p>100</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" table:formula="of:=[.L149]*5" office:value-type="float" office:value="250" calcext:value-type="float">
-      <text:p>250</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="50" calcext:value-type="float">
+      <text:p>50</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce254" office:value-type="float" office:value="1" calcext:value-type="float">
       <text:p>1</text:p>
@@ -5716,18 +5716,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H150]*2" office:value-type="float" office:value="800" calcext:value-type="float">
-      <text:p>800</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H150]*2" office:value-type="float" office:value="200" calcext:value-type="float">
+      <text:p>200</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D150]" office:value-type="float" office:value="800" calcext:value-type="float">
-      <text:p>800</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D150]" office:value-type="float" office:value="200" calcext:value-type="float">
+      <text:p>200</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D150]*2" office:value-type="float" office:value="1600" calcext:value-type="float">
-      <text:p>1600</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce258" table:formula="of:=[.L150]*5" office:value-type="float" office:value="400" calcext:value-type="float">
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D150]*2" office:value-type="float" office:value="400" calcext:value-type="float">
       <text:p>400</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="100" calcext:value-type="float">
+      <text:p>100</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368" office:value-type="float" office:value="2" calcext:value-type="float">
       <text:p>2</text:p>
@@ -5765,18 +5765,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H151]*2" office:value-type="float" office:value="800" calcext:value-type="float">
-      <text:p>800</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H151]*2" office:value-type="float" office:value="200" calcext:value-type="float">
+      <text:p>200</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D151]*2" office:value-type="float" office:value="1600" calcext:value-type="float">
-      <text:p>1600</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D151]" office:value-type="float" office:value="800" calcext:value-type="float">
-      <text:p>800</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce259" table:formula="of:=[.L151]*5" office:value-type="float" office:value="400" calcext:value-type="float">
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D151]*2" office:value-type="float" office:value="400" calcext:value-type="float">
       <text:p>400</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D151]" office:value-type="float" office:value="200" calcext:value-type="float">
+      <text:p>200</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="100" calcext:value-type="float">
+      <text:p>100</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce369" office:value-type="float" office:value="1" calcext:value-type="float">
       <text:p>1</text:p>
@@ -5814,18 +5814,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H152]*2" office:value-type="float" office:value="1400" calcext:value-type="float">
-      <text:p>1400</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H152]*2" office:value-type="float" office:value="400" calcext:value-type="float">
+      <text:p>400</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D152]" office:value-type="float" office:value="1400" calcext:value-type="float">
-      <text:p>1400</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D152]" office:value-type="float" office:value="400" calcext:value-type="float">
+      <text:p>400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D152]*2" office:value-type="float" office:value="2800" calcext:value-type="float">
-      <text:p>2800</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D152]*2" office:value-type="float" office:value="800" calcext:value-type="float">
+      <text:p>800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" table:formula="of:=[.L152]*5" office:value-type="float" office:value="700" calcext:value-type="float">
-      <text:p>700</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="200" calcext:value-type="float">
+      <text:p>200</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368" office:value-type="float" office:value="3" calcext:value-type="float">
       <text:p>3</text:p>
@@ -5863,18 +5863,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H153]*2" office:value-type="float" office:value="1400" calcext:value-type="float">
-      <text:p>1400</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H153]*2" office:value-type="float" office:value="400" calcext:value-type="float">
+      <text:p>400</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D153]*2" office:value-type="float" office:value="2800" calcext:value-type="float">
-      <text:p>2800</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D153]*2" office:value-type="float" office:value="800" calcext:value-type="float">
+      <text:p>800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D153]" office:value-type="float" office:value="1400" calcext:value-type="float">
-      <text:p>1400</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D153]" office:value-type="float" office:value="400" calcext:value-type="float">
+      <text:p>400</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" table:formula="of:=[.L153]*5" office:value-type="float" office:value="700" calcext:value-type="float">
-      <text:p>700</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="200" calcext:value-type="float">
+      <text:p>200</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce369" office:value-type="float" office:value="2" calcext:value-type="float">
       <text:p>2</text:p>
@@ -5912,18 +5912,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H154]*2" office:value-type="float" office:value="2000" calcext:value-type="float">
-      <text:p>2000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H154]*2" office:value-type="float" office:value="800" calcext:value-type="float">
+      <text:p>800</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D154]" office:value-type="float" office:value="2000" calcext:value-type="float">
-      <text:p>2000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D154]" office:value-type="float" office:value="800" calcext:value-type="float">
+      <text:p>800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D154]*2" office:value-type="float" office:value="4000" calcext:value-type="float">
-      <text:p>4000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D154]*2" office:value-type="float" office:value="1600" calcext:value-type="float">
+      <text:p>1600</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" table:formula="of:=[.L154]*5" office:value-type="float" office:value="1000" calcext:value-type="float">
-      <text:p>1000</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="400" calcext:value-type="float">
+      <text:p>400</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce368" office:value-type="float" office:value="5" calcext:value-type="float">
       <text:p>5</text:p>
@@ -5961,18 +5961,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H155]*2" office:value-type="float" office:value="2000" calcext:value-type="float">
-      <text:p>2000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H155]*2" office:value-type="float" office:value="800" calcext:value-type="float">
+      <text:p>800</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D155]*2" office:value-type="float" office:value="4000" calcext:value-type="float">
-      <text:p>4000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D155]*2" office:value-type="float" office:value="1600" calcext:value-type="float">
+      <text:p>1600</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D155]" office:value-type="float" office:value="2000" calcext:value-type="float">
-      <text:p>2000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D155]" office:value-type="float" office:value="800" calcext:value-type="float">
+      <text:p>800</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" table:formula="of:=[.L155]*5" office:value-type="float" office:value="1000" calcext:value-type="float">
-      <text:p>1000</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="400" calcext:value-type="float">
+      <text:p>400</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce439" office:value-type="float" office:value="4" calcext:value-type="float">
       <text:p>4</text:p>
@@ -6010,18 +6010,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H156]*2" office:value-type="float" office:value="3000" calcext:value-type="float">
-      <text:p>3000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H156]*2" office:value-type="float" office:value="1600" calcext:value-type="float">
+      <text:p>1600</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D156]" office:value-type="float" office:value="3000" calcext:value-type="float">
-      <text:p>3000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D156]" office:value-type="float" office:value="1600" calcext:value-type="float">
+      <text:p>1600</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D156]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
-      <text:p>6000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D156]*2" office:value-type="float" office:value="3200" calcext:value-type="float">
+      <text:p>3200</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" table:formula="of:=[.L156]*5" office:value-type="float" office:value="1500" calcext:value-type="float">
-      <text:p>1500</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="800" calcext:value-type="float">
+      <text:p>800</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="8" calcext:value-type="float">
       <text:p>8</text:p>
@@ -6059,18 +6059,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H157]*2" office:value-type="float" office:value="3000" calcext:value-type="float">
-      <text:p>3000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H157]*2" office:value-type="float" office:value="1600" calcext:value-type="float">
+      <text:p>1600</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D157]*2" office:value-type="float" office:value="6000" calcext:value-type="float">
-      <text:p>6000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D157]*2" office:value-type="float" office:value="3200" calcext:value-type="float">
+      <text:p>3200</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D157]" office:value-type="float" office:value="3000" calcext:value-type="float">
-      <text:p>3000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D157]" office:value-type="float" office:value="1600" calcext:value-type="float">
+      <text:p>1600</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" table:formula="of:=[.L157]*5" office:value-type="float" office:value="1500" calcext:value-type="float">
-      <text:p>1500</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="800" calcext:value-type="float">
+      <text:p>800</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="5" calcext:value-type="float">
       <text:p>5</text:p>
@@ -6108,18 +6108,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H158]*2" office:value-type="float" office:value="4500" calcext:value-type="float">
-      <text:p>4500</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H158]*2" office:value-type="float" office:value="2500" calcext:value-type="float">
+      <text:p>2500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D158]" office:value-type="float" office:value="4500" calcext:value-type="float">
-      <text:p>4500</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D158]" office:value-type="float" office:value="2500" calcext:value-type="float">
+      <text:p>2500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D158]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
-      <text:p>9000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D158]*2" office:value-type="float" office:value="5000" calcext:value-type="float">
+      <text:p>5000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" table:formula="of:=[.L158]*5" office:value-type="float" office:value="2250" calcext:value-type="float">
-      <text:p>2250</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="1250" calcext:value-type="float">
+      <text:p>1250</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="11" calcext:value-type="float">
       <text:p>11</text:p>
@@ -6157,18 +6157,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H159]*2" office:value-type="float" office:value="4500" calcext:value-type="float">
-      <text:p>4500</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H159]*2" office:value-type="float" office:value="2500" calcext:value-type="float">
+      <text:p>2500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D159]*2" office:value-type="float" office:value="9000" calcext:value-type="float">
-      <text:p>9000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D159]*2" office:value-type="float" office:value="5000" calcext:value-type="float">
+      <text:p>5000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D159]" office:value-type="float" office:value="4500" calcext:value-type="float">
-      <text:p>4500</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D159]" office:value-type="float" office:value="2500" calcext:value-type="float">
+      <text:p>2500</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" table:formula="of:=[.L159]*5" office:value-type="float" office:value="2250" calcext:value-type="float">
-      <text:p>2250</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="1250" calcext:value-type="float">
+      <text:p>1250</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="7" calcext:value-type="float">
       <text:p>7</text:p>
@@ -6206,18 +6206,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H160]*2" office:value-type="float" office:value="6400" calcext:value-type="float">
-      <text:p>6400</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H160]*2" office:value-type="float" office:value="5000" calcext:value-type="float">
+      <text:p>5000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D160]" office:value-type="float" office:value="6400" calcext:value-type="float">
-      <text:p>6400</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D160]" office:value-type="float" office:value="5000" calcext:value-type="float">
+      <text:p>5000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D160]*2" office:value-type="float" office:value="12800" calcext:value-type="float">
-      <text:p>12800</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D160]*2" office:value-type="float" office:value="10000" calcext:value-type="float">
+      <text:p>10000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" table:formula="of:=[.L160]*5" office:value-type="float" office:value="3200" calcext:value-type="float">
-      <text:p>3200</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="2500" calcext:value-type="float">
+      <text:p>2500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="15" calcext:value-type="float">
       <text:p>15</text:p>
@@ -6255,18 +6255,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H161]*2" office:value-type="float" office:value="6400" calcext:value-type="float">
-      <text:p>6400</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H161]*2" office:value-type="float" office:value="5000" calcext:value-type="float">
+      <text:p>5000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D161]*2" office:value-type="float" office:value="12800" calcext:value-type="float">
-      <text:p>12800</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D161]*2" office:value-type="float" office:value="10000" calcext:value-type="float">
+      <text:p>10000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D161]" office:value-type="float" office:value="6400" calcext:value-type="float">
-      <text:p>6400</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D161]" office:value-type="float" office:value="5000" calcext:value-type="float">
+      <text:p>5000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" table:formula="of:=[.L161]*5" office:value-type="float" office:value="3200" calcext:value-type="float">
-      <text:p>3200</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="2500" calcext:value-type="float">
+      <text:p>2500</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="9" calcext:value-type="float">
       <text:p>9</text:p>
@@ -6304,18 +6304,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce141"/>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.H162]*2" office:value-type="float" office:value="7000" calcext:value-type="float">
-      <text:p>7000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.H162]*2" office:value-type="float" office:value="8000" calcext:value-type="float">
+      <text:p>8000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce339"/>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D162]" office:value-type="float" office:value="7000" calcext:value-type="float">
-      <text:p>7000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D162]" office:value-type="float" office:value="8000" calcext:value-type="float">
+      <text:p>8000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce180" table:formula="of:=[.D162]*2" office:value-type="float" office:value="14000" calcext:value-type="float">
-      <text:p>14000</text:p>
+     <table:table-cell table:style-name="ce180" table:formula="of:=[.D162]*2" office:value-type="float" office:value="16000" calcext:value-type="float">
+      <text:p>16000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce258" table:formula="of:=[.L162]*5" office:value-type="float" office:value="3500" calcext:value-type="float">
-      <text:p>3500</text:p>
+     <table:table-cell table:style-name="ce258" office:value-type="float" office:value="4000" calcext:value-type="float">
+      <text:p>4000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce424" office:value-type="float" office:value="19" calcext:value-type="float">
       <text:p>19</text:p>
@@ -6353,18 +6353,18 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce145"/>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.H163]*2" office:value-type="float" office:value="7000" calcext:value-type="float">
-      <text:p>7000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.H163]*2" office:value-type="float" office:value="8000" calcext:value-type="float">
+      <text:p>8000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce342"/>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D163]*2" office:value-type="float" office:value="14000" calcext:value-type="float">
-      <text:p>14000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D163]*2" office:value-type="float" office:value="16000" calcext:value-type="float">
+      <text:p>16000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce181" table:formula="of:=[.D163]" office:value-type="float" office:value="7000" calcext:value-type="float">
-      <text:p>7000</text:p>
+     <table:table-cell table:style-name="ce181" table:formula="of:=[.D163]" office:value-type="float" office:value="8000" calcext:value-type="float">
+      <text:p>8000</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce259" table:formula="of:=[.L163]*5" office:value-type="float" office:value="3500" calcext:value-type="float">
-      <text:p>3500</text:p>
+     <table:table-cell table:style-name="ce259" office:value-type="float" office:value="4000" calcext:value-type="float">
+      <text:p>4000</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce425" office:value-type="float" office:value="12" calcext:value-type="float">
       <text:p>12</text:p>

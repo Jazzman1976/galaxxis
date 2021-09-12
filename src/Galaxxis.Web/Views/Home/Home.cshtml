@@ -3,6 +3,8 @@
 @using Galaxxis.Data.Models
 @using Galaxxis.Core.Classes.Buildings.RessourceBuildings
 @using Galaxxis.Core.Classes.Buildings.ProducingBuildings
+@using Galaxxis.Core.Business.Helper;
+@using Galaxxis.Core.Business.Provider;
 
 @model HomeViewModel
 
@@ -11,7 +13,8 @@
     ViewBag.Title = "Home";
 
     // use first as demo planet in this homepage
-    Planet thePlanet = Model.User.Planet.FirstOrDefault();
+    Planet thePlanet = Model.User.Planet.First();
+    Data.Models.System theSystem = SystemProvider.GetSystem(thePlanet.PlanetSystemId);
 
     // assure planet and user
     if (thePlanet == null || Model.User == null)
@@ -464,7 +467,7 @@
             <th>Type</th>
             <th>Stats</th>
         </tr>
-        @foreach(Ship ship in planetShips)
+        @foreach (Ship ship in planetShips)
         {
             <tr>
                 <td>@ship.ShipType</td>
@@ -493,4 +496,27 @@
 
 <div id="info-panel" style="margin-bottom: 1rem;">
     @Model.Info
+</div>
+
+<div id="system-panel" style="margin-bottom: 1rem;">
+    <table>
+        <tr>
+            <th>Planet</th>
+            <th>X Coord</th>
+            <th>Y Coord</th>
+            <th>Z Coord</th>
+            <th>Distance</th>
+        </tr>
+
+        @foreach (Planet aPlanet in theSystem.Planet)
+        {
+            <tr>
+                <td>@aPlanet.PlanetName</td>
+                <td>@aPlanet.PlanetCoordinateX</td>
+                <td>@aPlanet.PlanetCoordinateY</td>
+                <td>@aPlanet.PlanetCoordinateZ</td>
+                <td>@(DistanceHelper.GetDistance(thePlanet, aPlanet))</td>
+            </tr>
+        }
+    </table>
 </div>

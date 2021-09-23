@@ -2,6 +2,8 @@
 using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Galaxxis.Web.Views.Home
 {
@@ -218,6 +220,23 @@ namespace Galaxxis.Web.Views.Home
             planet.GetShipyard().ProduceShipExplorer(out string info);
 
             // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult Attack(int planetId, int userId, int planetIdTarget)
+        {
+            // get entities from database
+            Planet planet = PlanetProvider.GetPlanet(planetId);
+            User user = UserProvider.GetUser(userId, true);
+
+            // get fleet
+            List<Ship> planetShips = user.Ship.Where(ship => ship.ShipPlanetId.Equals(planetId)).ToList();
+
+            // add event
+            string info = planet.Attack(planetShips, planetIdTarget);
+
+            // show view
             return View("Home", new HomeViewModel(info));
         }
     }

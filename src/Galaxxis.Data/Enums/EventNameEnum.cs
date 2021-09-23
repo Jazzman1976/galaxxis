@@ -27,5 +27,7 @@
         ProduceShipDestroyer,
         ProduceShipBattlestar,
         ProduceShipBattlestation,
+
+        Attack
     }
 }

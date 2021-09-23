@@ -2,21 +2,13 @@
 {
     public enum ShipTypeEnum
     {
-        ExplorerOff,
-        ExplorerDef,
-        CarrierOff,
-        CarrierDef,
-        FighterOff,
-        FighterDef,
-        CruiserOff,
-        CruiserDef,
-        BattleshipOff,
-        BattleshipDef,
-        DestroyerOff,
-        DestroyerDef,
-        BattlestarOff,
-        BattlestarDef,
-        BattlestationOff,
-        BattlestationDef
+        Explorer,
+        Carrier,
+        Fighter,
+        Cruiser,
+        Battleship,
+        Destroyer,
+        Battlestar,
+        Battlestation
     }
 }

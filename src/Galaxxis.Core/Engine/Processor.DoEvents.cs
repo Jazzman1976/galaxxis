@@ -326,10 +326,11 @@ namespace Galaxxis.Core.Engine
                 {
                     ShipUserId = planet.PlanetUserId,
                     ShipPlanetId = planetId,
-                    ShipType = user.IsDefensive() 
-                        ? ShipTypeEnum.ExplorerDef.ToString() 
-                        : ShipTypeEnum.ExplorerOff.ToString()
-                });
+                    ShipType = ShipTypeEnum.Explorer.ToString(),
+                    ShipTactical = user.IsDefensive()
+                        ? TacticalEnum.Defensive.ToString()
+                        : TacticalEnum.Offensive.ToString()
+                }); ;
             }
         }
     }

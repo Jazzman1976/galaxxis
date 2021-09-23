@@ -11,6 +11,7 @@ namespace Galaxxis.Data.Models
         public int ShipUserId { get; set; }
         public int ShipPlanetId { get; set; }
         public string ShipType { get; set; }
+        public string ShipTactical { get; set; }
 
         public virtual User ShipUser { get; set; }
     }

@@ -465,12 +465,14 @@
     <table>
         <tr>
             <th>Type</th>
+            <th>Tactical</th>
             <th>Stats</th>
         </tr>
         @foreach (Ship ship in planetShips)
         {
             <tr>
                 <td>@ship.ShipType</td>
+                <td>@ship.ShipTactical</td>
                 <td>no mods</td>
             </tr>
         }

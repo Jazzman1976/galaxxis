@@ -424,18 +424,14 @@
 <div id="producing-panel" style="margin-bottom: 1rem;">
     <table>
         <tr>
-            <th></th>
-            <th>Shipyard</th>
+            <th>Shipyard (Level: @thePlanet.PlanetShipyard)</th>
+            <th colspan="2">Produce</th>
         </tr>
+        
         <tr>
-            <th>Level</th>
-            <td>@thePlanet.PlanetShipyard</td>
-        </tr>
-        <tr>
-            <th>Actions</th>
             <td>
                 <table>
-                    <tr><th colspan="2">Costs next level</th></tr>
+                    <tr><th colspan="2">Upgrade to next level</th></tr>
                     <tr><th>Ore</th><td>@shipyard.BuildCosts[0]</td></tr>
                     <tr><th>Mana</th><td>@shipyard.BuildCosts[1]</td></tr>
                     <tr><th>Crystal</th><td>@shipyard.BuildCosts[2]</td></tr>
@@ -446,7 +442,11 @@
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
                     <input type="submit" value="Build" @(!shipyard.CanBuild ? "disabled" : "") />
                 </form>
+            </td>
+
+            <td>
                 <table>
+                    <tr><th colspan="2">Produce Explorer</th></tr>
                     <tr><th>Tools</th><td>225</td></tr>
                     <tr><th>Crystals</th><td>@(Model.User.IsOffensive() ? "225" : "450")</td></tr>
                     <tr><th>Antimatter</th><td>@(Model.User.IsOffensive() ? "450" : "225")</td></tr>
@@ -455,6 +455,20 @@
                 <form asp-controller="Home" asp-action="ProduceShipExplorer" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
                     <input type="submit" value="Produce Explorer" />
+                </form>
+            </td>
+
+            <td>
+                <table>
+                    <tr><th colspan="2">Produce Carrier</th></tr>
+                    <tr><th>Tools</th><td>450</td></tr>
+                    <tr><th>Crystals</th><td>@(Model.User.IsOffensive() ? "450" : "900")</td></tr>
+                    <tr><th>Antimatter</th><td>@(Model.User.IsOffensive() ? "900" : "450")</td></tr>
+                    <tr><th>Elementium</th><td>150</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="ProduceShipCarrier" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Produce Carrier" />
                 </form>
             </td>
         </tr>
@@ -466,14 +480,14 @@
         <tr>
             <th>Type</th>
             <th>Tactical</th>
-            <th>Stats</th>
+            <th>Storage capacity</th>
         </tr>
         @foreach (Ship ship in planetShips)
         {
             <tr>
                 <td>@ship.ShipType</td>
                 <td>@ship.ShipTactical</td>
-                <td>no mods</td>
+                <td>@ship.ShipStorageCapacity</td>
             </tr>
         }
     </table>

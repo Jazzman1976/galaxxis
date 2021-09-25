@@ -136,6 +136,58 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
             return true;
         }
 
+        public bool ProduceShipCarrier(out string info)
+        {
+            if (EventProvider
+                .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Produce)
+                .Any())
+            {
+                info = "Producing is still in progress!";
+                return false;
+            }
+
+            double[] produceCosts = new double[]
+            {
+                450,
+                _owner.IsOffensive() ? 450 : 900,
+                _owner.IsOffensive() ? 900 : 450,
+                150
+            };
+
+            if (produceCosts[0] > _planet.PlanetTools)
+            {
+                info = "Not enough tools!";
+                return false;
+            }
+            if (produceCosts[1] > _planet.PlanetCrystals)
+            {
+                info = "Not enough crystals!";
+                return false;
+            }
+            if (produceCosts[2] > _planet.PlanetAntimatter)
+            {
+                info = "Not enough antimatter!";
+                return false;
+            }
+            if (produceCosts[3] > _planet.PlanetElementium)
+            {
+                info = "Not enough elementium!";
+                return false;
+            }
+
+            Processor.Instance.EventQueue
+                .Enqueue(EventProvider.NewEvent(
+                    EventLocationEnum.Planet,
+                    _planet.PlanetId,
+                    EventNameEnum.ProduceShipCarrier,
+                    100,
+                    EventTypeEnum.Produce,
+                    produceCosts.ToValueString()));
+
+            info = "Producing of a new carrier ship has been started.";
+            return true;
+        }
+
         public Shipyard(Planet planet) : base(planet) 
         {
             System.Diagnostics.Debug.WriteLine(

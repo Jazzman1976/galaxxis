@@ -224,6 +224,19 @@ namespace Galaxxis.Web.Views.Home
         }
 
         [HttpPost]
+        public IActionResult ProduceShipCarrier(int planetId, int userId)
+        {
+            // get entities from database
+            Planet planet = PlanetProvider.GetPlanet(planetId);
+
+            // produce ship: explorer
+            planet.GetShipyard().ProduceShipCarrier(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
         public IActionResult Attack(int planetId, int userId, int planetIdTarget)
         {
             // get entities from database

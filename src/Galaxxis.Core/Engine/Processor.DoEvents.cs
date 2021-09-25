@@ -90,6 +90,10 @@ namespace Galaxxis.Core.Engine
                 case EventNameEnum.ProduceShipExplorer:
                     Do_ProduceShipExplorer(@event, context);
                     break;
+
+                case EventNameEnum.ProduceShipCarrier:
+                    Do_ProduceShipCarrier(@event, context);
+                    break;
             }
         }
 
@@ -327,9 +331,53 @@ namespace Galaxxis.Core.Engine
                     ShipUserId = planet.PlanetUserId,
                     ShipPlanetId = planetId,
                     ShipType = ShipTypeEnum.Explorer.ToString(),
-                    ShipTactical = user.IsDefensive()
-                        ? TacticalEnum.Defensive.ToString()
-                        : TacticalEnum.Offensive.ToString()
+                    ShipTactical = user.IsOffensive()
+                        ? TacticalEnum.Offensive.ToString()
+                        : TacticalEnum.Defensive.ToString(),
+                    ShipWeaponSlots = user.IsOffensive() ? 2 : 1,
+                    ShipArmorSlots = user.IsOffensive() ? 1 : 2,
+                    ShipItemSlots = 2,
+                    ShipStructurePoints = 50,
+                    ShipDriveStrength = 1000,
+                    ShipPowerConsumption = 1,
+                    ShipStorageCapacity = 50,
+                    ShipCpuPower = 9,
+                    ShipAccuracy = user.IsOffensive() ? 45 : 40,
+                    ShipShieldPower = user.IsOffensive() ? 20 : 25,
+                    ShipAttackPower = user.IsOffensive() ? 40 : 35,
+                    ShipArmour = user.IsOffensive() ? 10 : 15
+                }); ;
+            }
+        }
+
+        private void Do_ProduceShipCarrier(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                User user = context.User.FirstOrDefault(u => u.UserId.Equals(planet.PlanetUserId));
+                planet.UpdateRessources();
+                context.Ship.Add(new Ship
+                {
+                    ShipUserId = planet.PlanetUserId,
+                    ShipPlanetId = planetId,
+                    ShipType = ShipTypeEnum.Carrier.ToString(),
+                    ShipTactical = user.IsOffensive()
+                        ? TacticalEnum.Offensive.ToString()
+                        : TacticalEnum.Defensive.ToString(),
+                    ShipWeaponSlots = user.IsOffensive() ? 2 : 1,
+                    ShipArmorSlots = user.IsOffensive() ? 2 : 3,
+                    ShipItemSlots = 3,
+                    ShipStructurePoints = 80,
+                    ShipDriveStrength = 800,
+                    ShipPowerConsumption = 2,
+                    ShipStorageCapacity = 500,
+                    ShipCpuPower = 8,
+                    ShipAccuracy = user.IsOffensive() ? 40 : 35,
+                    ShipShieldPower = user.IsOffensive() ? 20 : 25,
+                    ShipAttackPower = user.IsOffensive() ? 64 : 56,
+                    ShipArmour = user.IsOffensive() ? 16 : 24
                 }); ;
             }
         }

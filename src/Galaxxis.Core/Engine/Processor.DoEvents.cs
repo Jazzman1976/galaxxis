@@ -1,4 +1,5 @@
-﻿using Galaxxis.Core.Extensions;
+﻿using Galaxxis.Core.Business.Provider;
+using Galaxxis.Core.Extensions;
 using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
@@ -93,6 +94,14 @@ namespace Galaxxis.Core.Engine
 
                 case EventNameEnum.ProduceShipCarrier:
                     Do_ProduceShipCarrier(@event, context);
+                    break;
+
+                case EventNameEnum.Attack:
+                    Do_Attack(@event, context);
+                    break;
+
+                case EventNameEnum.Return:
+                    Do_Return(@event, context);
                     break;
             }
         }
@@ -381,5 +390,179 @@ namespace Galaxxis.Core.Engine
                 }); ;
             }
         }
+
+        private void Do_Attack(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                // local variables
+                int planetAttackerId = @event.EventLocationId;
+                string[] parameter = @event.EventData.Split('|');
+                int planetTargetId = int.Parse(parameter[1]);
+                string[] attackingShipIds = parameter[2].Split(';');
+                Planet planetTarget = PlanetProvider.GetPlanet(planetTargetId, true, context);                
+                int storageCapacity = context.Ship
+                    .Where(s => attackingShipIds.Contains(s.ShipId.ToString()))
+                    .Sum(s => s.ShipStorageCapacity);
+                double
+                    takeSize = (double)storageCapacity / 7,
+                    taken = 0,
+                    stolenOre = 0,
+                    stolenEnergy = 0,
+                    stolenTools = 0,
+                    stolenMana = 0,
+                    stolenCrystals = 0,
+                    stolenAntimatter = 0,
+                    stolenElementium = 0;
+
+                // attack target planet                
+                while (taken < storageCapacity)
+                {
+                    // steal ore
+                    if (planetTarget.PlanetOre > takeSize)
+                    {
+                        stolenOre += takeSize;
+                        planetTarget.PlanetOre -= takeSize;                        
+                    }
+                    else if (planetTarget.PlanetOre > 0)
+                    {
+                        stolenOre += planetTarget.PlanetOre;
+                        planetTarget.PlanetOre = 0;
+                    }
+
+                    // steal energy
+                    if (planetTarget.PlanetEnergy > takeSize)
+                    {
+                        stolenEnergy += takeSize;
+                        planetTarget.PlanetEnergy -= takeSize;
+                    }
+                    else if (planetTarget.PlanetEnergy > 0)
+                    {
+                        stolenEnergy += planetTarget.PlanetEnergy;
+                        planetTarget.PlanetEnergy = 0;
+                    }
+
+                    // steal tools
+                    if (planetTarget.PlanetTools > takeSize)
+                    {
+                        stolenTools += takeSize;
+                        planetTarget.PlanetTools -= takeSize;
+                    }
+                    else if (planetTarget.PlanetTools > 0)
+                    {
+                        stolenTools += planetTarget.PlanetTools;
+                        planetTarget.PlanetTools = 0;
+                    }
+
+                    // steal mana
+                    if (planetTarget.PlanetMana > takeSize)
+                    {
+                        stolenMana += takeSize;
+                        planetTarget.PlanetMana -= takeSize;
+                    }
+                    else if (planetTarget.PlanetMana > 0)
+                    {
+                        stolenMana += planetTarget.PlanetMana;
+                        planetTarget.PlanetMana = 0;
+                    }
+
+                    // steal crystals
+                    if (planetTarget.PlanetCrystals > takeSize)
+                    {
+                        stolenCrystals += takeSize;
+                        planetTarget.PlanetCrystals -= takeSize;
+                    }
+                    else if (planetTarget.PlanetCrystals > 0)
+                    {
+                        stolenCrystals += planetTarget.PlanetCrystals;
+                        planetTarget.PlanetCrystals = 0;
+                    }
+
+                    // steal antimatter
+                    if (planetTarget.PlanetAntimatter > takeSize)
+                    {
+                        stolenAntimatter += takeSize;
+                        planetTarget.PlanetAntimatter -= takeSize;
+                    }
+                    else if (planetTarget.PlanetAntimatter > 0)
+                    {
+                        stolenAntimatter += planetTarget.PlanetAntimatter;
+                        planetTarget.PlanetAntimatter = 0;
+                    }
+
+                    // steal elementium
+                    if (planetTarget.PlanetElementium > takeSize)
+                    {
+                        stolenElementium += takeSize;
+                        planetTarget.PlanetElementium -= takeSize;
+                    }
+                    else if (planetTarget.PlanetElementium > 0)
+                    {
+                        stolenElementium += planetTarget.PlanetElementium;
+                        planetTarget.PlanetElementium = 0;
+                    }
+
+                    // break if nothing left
+                    if (planetTarget.PlanetOre
+                        + planetTarget.PlanetEnergy
+                        + planetTarget.PlanetTools
+                        + planetTarget.PlanetMana
+                        + planetTarget.PlanetCrystals
+                        + planetTarget.PlanetAntimatter
+                        + planetTarget.PlanetElementium
+                        == 0)
+                    {
+                        break;
+                    }
+                }
+
+                // create return event
+                Event returnEvent = EventProvider.NewEvent(
+                    EventLocationEnum.Planet,
+                    @event.EventLocationId,
+                    EventNameEnum.Return,
+                    100,
+                    EventTypeEnum.Move,
+                    $"returning|{parameter[1]}|{parameter[2]}|" //p1:targetPlanetID, p2:shipIds
+                    + $"{stolenOre}|"
+                    + $"{stolenEnergy}|"
+                    + $"{stolenTools}|"
+                    + $"{stolenMana}|"
+                    + $"{stolenCrystals}|"
+                    + $"{stolenAntimatter}|"
+                    + $"{stolenElementium}|");
+                Instance.EventQueue.Enqueue(returnEvent);
+            }
+        }
+
+
+        private void Do_Return(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                // local variables
+                int planetId = @event.EventLocationId;
+                Planet planet = PlanetProvider.GetPlanet(planetId, false, context);
+                string[] parameter = @event.EventData.Split('|');
+                double
+                    stolenOre = Double.Parse(parameter[3]),
+                    stolenEnergy = Double.Parse(parameter[4]),
+                    stolenTools = Double.Parse(parameter[5]),
+                    stolenMana = Double.Parse(parameter[6]),
+                    stolenCrystals = Double.Parse(parameter[7]),
+                    stolenAntimatter = Double.Parse(parameter[8]),
+                    stolenElementium = Double.Parse(parameter[9]);
+
+                // add ressources
+                planet.PlanetOre += stolenOre;
+                planet.PlanetEnergy += stolenEnergy;
+                planet.PlanetTools += stolenTools;
+                planet.PlanetMana += stolenMana;
+                planet.PlanetCrystals += stolenCrystals;
+                planet.PlanetAntimatter += stolenAntimatter;
+                planet.PlanetElementium += stolenElementium;
+            }
+        }
+
     }
 }

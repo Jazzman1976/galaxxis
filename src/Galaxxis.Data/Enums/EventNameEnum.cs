@@ -28,6 +28,7 @@
         ProduceShipBattlestar,
         ProduceShipBattlestation,
 
-        Attack
+        Attack,
+        Return
     }
 }

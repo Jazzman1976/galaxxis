@@ -12,27 +12,52 @@ namespace Galaxxis.Core.Business.Provider
         /// Get a planet instance
         /// </summary>
         /// <param name="updateRessources">default: false</param>
-        public static Planet GetPlanet(int id, bool updateRessources = false)
+        public static Planet GetPlanet(
+            int id, 
+            bool updateRessources = false, 
+            GalaxxisContext currentContext = null)
         {
             Planet planet = null;
-            using (GalaxxisContext context = new GalaxxisContext())
+            if (currentContext == null)
             {
-                planet = context.Planet
+                using (GalaxxisContext context = new GalaxxisContext())
+                {
+                    planet = context.Planet
 
-                    // get moons
-                    .Include(planet => planet.Moon)
+                        // get moons
+                        .Include(planet => planet.Moon)
 
-                    // get system
-                    .Include(planet => planet.PlanetSystem)
+                        // get system
+                        .Include(planet => planet.PlanetSystem)
 
-                    // get galaxy
-                    .ThenInclude(system => system.SystemGalaxy)
+                        // get galaxy
+                        .ThenInclude(system => system.SystemGalaxy)
 
-                    // get universe
-                    .ThenInclude(galaxy => galaxy.GalaxyUniverse)
+                        // get universe
+                        .ThenInclude(galaxy => galaxy.GalaxyUniverse)
 
-                    // return first planet with data
-                    .FirstOrDefault(planet => planet.PlanetId.Equals(id));
+                        // return first planet with data
+                        .FirstOrDefault(planet => planet.PlanetId.Equals(id));
+                }
+            }
+            else
+            {
+                planet = currentContext.Planet
+
+                        // get moons
+                        .Include(planet => planet.Moon)
+
+                        // get system
+                        .Include(planet => planet.PlanetSystem)
+
+                        // get galaxy
+                        .ThenInclude(system => system.SystemGalaxy)
+
+                        // get universe
+                        .ThenInclude(galaxy => galaxy.GalaxyUniverse)
+
+                        // return first planet with data
+                        .FirstOrDefault(planet => planet.PlanetId.Equals(id));
             }
             if (planet == null)
             {

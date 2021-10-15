@@ -1,5 +1,4 @@
 ﻿using Galaxxis.Core.Classes.Buildings.BaseClasses;
-using Galaxxis.Core.Classes.Buildings.Enums;
 using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;

@@ -1,5 +1,5 @@
 ﻿
-namespace Galaxxis.Core.Business.Provider
+namespace Galaxxis.Core.Provider
 {
     using Galaxxis.Core.Exceptions;
     using Galaxxis.Data.Models;

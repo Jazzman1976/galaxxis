@@ -1,8 +1,4 @@
-﻿using Galaxxis.Core.Classes.Ships.BaseClasses;
-using Galaxxis.Data.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Galaxxis.Data.Enums;
 
 namespace Galaxxis.Core.Classes.Ships
 {

@@ -2,7 +2,7 @@
 using Galaxxis.Data.Models;
 using System;
 
-namespace Galaxxis.Core.Business.Helper
+namespace Galaxxis.Core.Helper
 {
     public static class DistanceHelper
     {

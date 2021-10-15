@@ -1,8 +1,7 @@
-﻿using Galaxxis.Core.Business.Provider;
-using Galaxxis.Core.Classes.Buildings.Enums;
-using Galaxxis.Core.Classes.Buildings.Interfaces;
+﻿using Galaxxis.Core.Classes.Buildings.Interfaces;
 using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions;
+using Galaxxis.Core.Provider;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
 using System.Linq;
@@ -69,8 +68,6 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         public abstract GrowthRate ConsupmtionAntimatter { get; }
 
         public abstract GrowthRate ConsumptionElementium { get; }
-
-        public EnumConsumingType ConsumingType => EnumConsumingType.production;
 
         public abstract bool Build(out string info);
 

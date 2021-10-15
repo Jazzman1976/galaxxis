@@ -4,7 +4,7 @@ using Galaxxis.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace Galaxxis.Core.Business.Provider
+namespace Galaxxis.Core.Provider
 {
     public static class PlanetProvider
     {

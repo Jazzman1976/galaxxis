@@ -1,9 +1,6 @@
 ﻿using Galaxxis.Data.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Galaxxis.Core.Classes.Ships.Interfaces
+namespace Galaxxis.Core.Classes.Ships
 {
     public interface IShip
     {

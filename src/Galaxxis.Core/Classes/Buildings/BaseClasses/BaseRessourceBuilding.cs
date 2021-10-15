@@ -1,14 +1,10 @@
-﻿using Galaxxis.Core.Business.Provider;
-using Galaxxis.Core.Classes.Buildings.Enums;
-using Galaxxis.Core.Classes.Buildings.Interfaces;
+﻿using Galaxxis.Core.Classes.Buildings.Interfaces;
 using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions;
-using Galaxxis.Core.Extensions.PlanetExtensions;
+using Galaxxis.Core.Provider;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.BaseClasses
@@ -66,8 +62,6 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         public abstract GrowthRate ConsupmtionAntimatter { get; }
 
         public abstract GrowthRate ConsumptionElementium { get; }
-
-        public EnumConsumingType ConsumingType => EnumConsumingType.continuous;
 
         #endregion
 

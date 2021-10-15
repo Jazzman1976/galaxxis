@@ -1,5 +1,4 @@
-﻿using Galaxxis.Core.Classes.Buildings.Enums;
-using Galaxxis.Core.Engine;
+﻿using Galaxxis.Core.Engine;
 
 namespace Galaxxis.Core.Classes.Buildings.Interfaces
 {
@@ -9,6 +8,5 @@ namespace Galaxxis.Core.Classes.Buildings.Interfaces
         public GrowthRate ConsumptionManaRate { get; }
         public GrowthRate ConsupmtionAntimatter { get; }
         public GrowthRate ConsumptionElementium { get; }
-        public EnumConsumingType ConsumingType {get;}
     }
 }

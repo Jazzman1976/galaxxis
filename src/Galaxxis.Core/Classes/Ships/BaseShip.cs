@@ -1,13 +1,6 @@
-﻿using Galaxxis.Core.Business.Provider;
-using Galaxxis.Core.Classes.Ships.Interfaces;
-using Galaxxis.Core.Extensions;
-using Galaxxis.Data.Enums;
-using Galaxxis.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Galaxxis.Data.Enums;
 
-namespace Galaxxis.Core.Classes.Ships.BaseClasses
+namespace Galaxxis.Core.Classes.Ships
 {
     public abstract class BaseShip : IShip
     {

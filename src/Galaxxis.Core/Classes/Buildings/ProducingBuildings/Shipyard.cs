@@ -1,4 +1,4 @@
-﻿using Galaxxis.Core.Business.Provider;
+﻿using Galaxxis.Core.Provider;
 using Galaxxis.Core.Classes.Buildings.BaseClasses;
 using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions;

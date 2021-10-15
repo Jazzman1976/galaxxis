@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Galaxxis.Core.Business.Provider
+namespace Galaxxis.Core.Provider
 {
     public static class SystemProvider
     {

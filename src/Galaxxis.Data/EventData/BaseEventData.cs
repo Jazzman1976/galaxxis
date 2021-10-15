@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace Galaxxis.Data.EventData
 {
-    public abstract class EventDataBase : IEventData
+    public abstract class BaseEventData : IEventData
     {
         public virtual EventNameEnum EventName { get; set; }
 

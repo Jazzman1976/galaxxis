@@ -395,18 +395,19 @@ namespace Galaxxis.Core.Engine
         {
             if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
-                // local variables
-                int planetAttackerId = @event.EventLocationId;
-                string[] parameter = @event.EventData.Split('|');
-                int planetTargetId = int.Parse(parameter[1]);
-                string[] attackingShipIds = parameter[2].Split(';');
-                Planet planetTarget = PlanetProvider.GetPlanet(planetTargetId, true, context);                
-                int storageCapacity = context.Ship
-                    .Where(s => attackingShipIds.Contains(s.ShipId.ToString()))
-                    .Sum(s => s.ShipStorageCapacity);
+                // local variables                
+                string[] 
+                    parameter = @event.EventData.Split('|'),
+                    attackingShipIds = parameter[2].Split(';');
+                int
+                    planetTargetId = int.Parse(parameter[1]),
+                    storageCapacity = context.Ship
+                        .Where(s => attackingShipIds.Contains(s.ShipId.ToString()))
+                        .Sum(s => s.ShipStorageCapacity);                    
+                Planet 
+                    planetTarget = PlanetProvider.GetPlanet(planetTargetId, true, context);
                 double
                     takeSize = (double)storageCapacity / 7,
-                    taken = 0,
                     stolenOre = 0,
                     stolenEnergy = 0,
                     stolenTools = 0,
@@ -414,9 +415,12 @@ namespace Galaxxis.Core.Engine
                     stolenCrystals = 0,
                     stolenAntimatter = 0,
                     stolenElementium = 0;
+                bool
+                    hasRessourcesLeft = true,
+                    hasStorageLeft = true;
 
-                // attack target planet                
-                while (taken < storageCapacity)
+                // attack target planet
+                while (hasRessourcesLeft && hasStorageLeft)
                 {
                     // steal ore
                     if (planetTarget.PlanetOre > takeSize)
@@ -512,8 +516,25 @@ namespace Galaxxis.Core.Engine
                         + planetTarget.PlanetElementium
                         == 0)
                     {
-                        break;
+                        hasRessourcesLeft = false;
                     }
+
+                    // break if storage is full
+                    double storageLeft = storageCapacity
+                        - stolenOre
+                        - stolenEnergy
+                        - stolenTools
+                        - stolenMana
+                        - stolenCrystals
+                        - stolenAntimatter
+                        - stolenElementium;                    
+                    if (storageLeft <= 1) // (rounding issue fix)
+                    {
+                        hasStorageLeft = false;
+                    }
+
+                    // set new take size and continue stealing
+                    takeSize = storageLeft / 7;
                 }
 
                 // create return event
@@ -534,7 +555,6 @@ namespace Galaxxis.Core.Engine
                 Instance.EventQueue.Enqueue(returnEvent);
             }
         }
-
 
         private void Do_Return(Event @event, GalaxxisContext context)
         {

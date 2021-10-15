@@ -12,7 +12,7 @@ namespace Galaxxis.Web.Views.Account
 
         private SignInManager<AppUser> SignInMgr { get; }
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) 
         {
             this.UserMgr = userManager;
             this.SignInMgr = signInManager;

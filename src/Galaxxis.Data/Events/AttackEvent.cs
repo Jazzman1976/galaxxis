@@ -1,9 +1,6 @@
 ﻿using Galaxxis.Data.Enums;
 using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Galaxxis.Data.Events
 {

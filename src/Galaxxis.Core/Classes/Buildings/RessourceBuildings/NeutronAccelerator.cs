@@ -2,6 +2,7 @@
 using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Enums;
+using Galaxxis.Data.Events.BuildEvents;
 using Galaxxis.Data.Models;
 using System;
 
@@ -112,7 +113,7 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 
         public override bool Build(out string info)
         {
-            return base.Build(EventNameEnum.BuildNeutronAccelerator, out info);
+            return base.Build<BuildNeutronAcceleratorEvent>(out info);
         }
 
         public override double ApplyRaceFactor(double value)

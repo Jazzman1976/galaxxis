@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Events;
+using Galaxxis.Data.Events.BuildEvents;
 
 namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
 {
@@ -83,7 +84,7 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
 
         public override bool Build(out string info)
         {
-            return base.Build(EventNameEnum.BuildShipyard, out info);
+            return base.Build<BuildShipyardEvent>(out info);
         }
 
         public bool ProduceShipExplorer(out string info)

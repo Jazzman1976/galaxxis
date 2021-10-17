@@ -1,10 +1,10 @@
 ﻿using Galaxxis.Core.Classes.Buildings.Interfaces;
 using Galaxxis.Core.Engine;
-using Galaxxis.Core.Extensions;
 using Galaxxis.Core.Provider;
 using Galaxxis.Data.Enums;
-using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Events;
+using Galaxxis.Data.Events.BuildEvents;
+using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Models;
 using System;
 using System.Linq;
@@ -128,7 +128,7 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         /// Use this in the Build method of derived classes to build the next building level 
         /// using the correct event name.
         /// </summary>
-        protected bool Build(EventNameEnum eventName, out string info)
+        protected bool Build<TBuildEvent>(out string info) where TBuildEvent : BaseBuildEvent
         {
             // check conditions
             if (EventProvider
@@ -160,7 +160,6 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
             }
 
             // get event
-            Event @event = null;
             BuildEventTypeData data = new BuildEventTypeData(
                 BuildCosts[0],
                 BuildCosts[1],
@@ -168,12 +167,9 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                 BuildCosts[3]);
             long t = BuildTimeRate.ValueLong;
             int id = _planet.PlanetId;
-            switch (eventName)
-            {
-                case EventNameEnum.BuildOreMine:
-                    @event = new BuildOreMineEvent(EventLocationEnum.Planet, id, t, data);
-                    break;
-            }
+            TBuildEvent @event = (TBuildEvent)Activator.CreateInstance(
+                typeof(TBuildEvent), 
+                new object[] { EventLocationEnum.Planet, id, t, data });
 
             // queue event
             if (@event != null)

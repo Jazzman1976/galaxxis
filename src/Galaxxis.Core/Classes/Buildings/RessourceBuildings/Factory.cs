@@ -1,6 +1,7 @@
 ﻿using Galaxxis.Core.Classes.Buildings.BaseClasses;
 using Galaxxis.Core.Engine;
 using Galaxxis.Data.Enums;
+using Galaxxis.Data.Events.BuildEvents;
 using Galaxxis.Data.Models;
 using System;
 
@@ -104,7 +105,7 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 
         public override bool Build(out string info)
         {
-            return base.Build(EventNameEnum.BuildFactory, out info);
+            return base.Build<BuildFactoryEvent>(out info);
         }
 
         public override double ApplyRaceFactor(double value)

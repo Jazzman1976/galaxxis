@@ -2,22 +2,23 @@
 using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Models;
 
-namespace Galaxxis.Data.Events
+namespace Galaxxis.Data.Events.BuildEvents
 {
-    public class BuildOreMineEvent : Event
+    public abstract class BaseBuildEvent : Event
     {
-        private BuildOreMineEvent() { }
+        protected BaseBuildEvent() { }
 
-        public BuildOreMineEvent(
-            EventLocationEnum location, 
+        public BaseBuildEvent(
+            EventLocationEnum location,
             int locationId,
             long ticksToEventTick,
-            BuildEventTypeData data)
+            BuildEventTypeData data,
+            EventNameEnum eventName)
         {
             // entity properties
             this.EventLocation = location.ToString();
             this.EventLocationId = locationId;
-            this.EventName = EventNameEnum.BuildOreMine.ToString();
+            this.EventName = eventName.ToString();
             this.EventData = data.GetXml();
             this.EventType = EventTypeEnum.Build.ToString();
 

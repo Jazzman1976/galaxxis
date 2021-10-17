@@ -13,8 +13,10 @@ namespace Galaxxis.Data.EventTypeData
         protected string GetXml<TEventData>(TEventData obj)
         {
             XmlSerializer x = new XmlSerializer(typeof(TEventData));
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            ns.Add("", "");
             MemoryStream m = new MemoryStream();
-            x.Serialize(m, obj);
+            x.Serialize(m, obj, ns);
             string xml = Encoding.UTF8.GetString(m.ToArray());
             return xml;
         }

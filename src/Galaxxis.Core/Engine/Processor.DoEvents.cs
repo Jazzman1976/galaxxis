@@ -535,23 +535,6 @@ namespace Galaxxis.Core.Engine
                     takeSize = storageLeft / 7;
                 }
 
-                // create return event
-                //Event returnEvent = EventProvider.NewEvent(
-                //    EventLocationEnum.Planet,
-                //    @event.EventLocationId,
-                //    EventNameEnum.Return,
-                //    100,
-                //    EventTypeEnum.Move,
-                //    $"returning|{parameter[1]}|{parameter[2]}|" //p1:targetPlanetID, p2:shipIds
-                //    + $"{stolenOre}|"
-                //    + $"{stolenEnergy}|"
-                //    + $"{stolenTools}|"
-                //    + $"{stolenMana}|"
-                //    + $"{stolenCrystals}|"
-                //    + $"{stolenAntimatter}|"
-                //    + $"{stolenElementium}|");
-
-                
                 // enqueue return event
                 MoveEventTypeData data = new MoveEventTypeData(
                     attackMoveData.ToLocation, attackMoveData.ToLocationId, // from
@@ -577,26 +560,17 @@ namespace Galaxxis.Core.Engine
             if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 // local variables
-                int planetId = @event.EventLocationId;
-                Planet planet = PlanetProvider.GetPlanet(planetId, false, context);
-                string[] parameter = @event.EventData.Split('|');
-                double
-                    stolenOre = Double.Parse(parameter[3]),
-                    stolenEnergy = Double.Parse(parameter[4]),
-                    stolenTools = Double.Parse(parameter[5]),
-                    stolenMana = Double.Parse(parameter[6]),
-                    stolenCrystals = Double.Parse(parameter[7]),
-                    stolenAntimatter = Double.Parse(parameter[8]),
-                    stolenElementium = Double.Parse(parameter[9]);
-
+                MoveEventTypeData data = new MoveEventTypeData(@event.EventData);
+                Planet planet = PlanetProvider.GetPlanet(data.ToLocationId, false, context);
+                
                 // add ressources
-                planet.PlanetOre += stolenOre;
-                planet.PlanetEnergy += stolenEnergy;
-                planet.PlanetTools += stolenTools;
-                planet.PlanetMana += stolenMana;
-                planet.PlanetCrystals += stolenCrystals;
-                planet.PlanetAntimatter += stolenAntimatter;
-                planet.PlanetElementium += stolenElementium;
+                planet.PlanetOre += data.Ore;
+                planet.PlanetEnergy += data.Energy;
+                planet.PlanetTools += data.Tools;
+                planet.PlanetMana += data.Mana;
+                planet.PlanetCrystals += data.Crystals;
+                planet.PlanetAntimatter += data.Antimatter;
+                planet.PlanetElementium += data.Elementium;
             }
         }
 

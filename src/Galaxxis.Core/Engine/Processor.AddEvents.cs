@@ -25,12 +25,6 @@ namespace Galaxxis.Core.Engine
 
             // get planet to edit
             // currently only planet events!
-            //Planet editPlanet = context.Planet
-            //    .Include(planet => planet.PlanetSystem)
-            //    .ThenInclude(system => system.SystemGalaxy)
-            //    .ThenInclude(galaxy => galaxy.GalaxyUniverse)
-            //    .First(p => p.PlanetId == @event.EventLocationId);
-            //editPlanet.UpdateRessources();
             Planet editPlanet = PlanetProvider.GetPlanet(@event.EventLocationId, true, context);
 
             // pay costs when event is added to database (build|production started)

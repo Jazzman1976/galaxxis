@@ -176,14 +176,6 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
             }
 
             // queue event
-            //Processor.Instance.EventQueue
-            //    .Enqueue(EventProvider.NewEvent(
-            //        EventLocationEnum.Planet,
-            //        _planet.PlanetId,
-            //        eventName,
-            //        BuildTimeRate.ValueLong,
-            //        EventTypeEnum.Build,
-            //        BuildCosts.ToValueString()));
             if (@event != null)
             {
                 Processor.Instance.EventQueue.Enqueue(@event);
@@ -219,14 +211,6 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
             }
 
             // queue event
-            //Processor.Instance.EventQueue
-            //    .Enqueue(EventProvider.NewEvent(
-            //        EventLocationEnum.Planet,
-            //        _planet.PlanetId,
-            //        eventName,
-            //        0,
-            //        EventTypeEnum.ChangeUsage,
-            //        newValue.ToString()));
             if (@event != null)
             {
                 Processor.Instance.EventQueue.Enqueue(@event);

@@ -189,7 +189,7 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
                 produceCosts[1],
                 produceCosts[2],
                 produceCosts[3]);
-            ProduceShipExplorerEvent @event = new ProduceShipExplorerEvent(
+            ProduceShipCarrierEvent @event = new ProduceShipCarrierEvent(
                 EventLocationEnum.Planet,
                 _planet.PlanetId,
                 100,

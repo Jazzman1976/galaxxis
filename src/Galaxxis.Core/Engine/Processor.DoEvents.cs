@@ -6,6 +6,8 @@ using Galaxxis.Data.Models;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using Galaxxis.Data.Events;
+using Galaxxis.Data.EventTypeData;
 
 namespace Galaxxis.Core.Engine
 {
@@ -227,8 +229,8 @@ namespace Galaxxis.Core.Engine
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
-                double newValue = double.Parse(@event.EventData);
-                planet.PlanetOreMineUsage = newValue;
+                planet.PlanetOreMineUsage 
+                    = new ChangeUsageEventTypeData(@event.EventData).NewValue;
                 planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Ore Mine usage changed on planet {planet.PlanetId}.");
@@ -241,9 +243,9 @@ namespace Galaxxis.Core.Engine
             {
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
-                planet.UpdateRessources();
-                double newValue = double.Parse(@event.EventData);
-                planet.PlanetPowerSupplyUsage = newValue;
+                planet.UpdateRessources();                
+                planet.PlanetPowerSupplyUsage
+                    = new ChangeUsageEventTypeData(@event.EventData).NewValue;
                 planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Power Supply usage changed on planet {planet.PlanetId}.");
@@ -257,8 +259,8 @@ namespace Galaxxis.Core.Engine
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
-                double newValue = double.Parse(@event.EventData);
-                planet.PlanetFactoryUsage = newValue;
+                planet.PlanetFactoryUsage
+                    = new ChangeUsageEventTypeData(@event.EventData).NewValue;
                 planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Power Supply usage changed on planet {planet.PlanetId}.");
@@ -272,8 +274,8 @@ namespace Galaxxis.Core.Engine
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
-                double newValue = double.Parse(@event.EventData);
-                planet.PlanetMageAcademyUsage = newValue;
+                planet.PlanetMageAcademyUsage
+                    = new ChangeUsageEventTypeData(@event.EventData).NewValue;
                 planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Mage Academy usage changed on planet {planet.PlanetId}.");
@@ -287,8 +289,8 @@ namespace Galaxxis.Core.Engine
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
-                double newValue = double.Parse(@event.EventData);
-                planet.PlanetCrystalMineUsage = newValue;
+                planet.PlanetCrystalMineUsage
+                    = new ChangeUsageEventTypeData(@event.EventData).NewValue;
                 planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Crystal Mine usage changed on planet {planet.PlanetId}.");
@@ -302,8 +304,8 @@ namespace Galaxxis.Core.Engine
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
-                double newValue = double.Parse(@event.EventData);
-                planet.PlanetNeutronAcceleratorUsage = newValue;
+                planet.PlanetNeutronAcceleratorUsage
+                    = new ChangeUsageEventTypeData(@event.EventData).NewValue;
                 planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Neutron Accelerator usage changed on planet {planet.PlanetId}.");
@@ -317,8 +319,8 @@ namespace Galaxxis.Core.Engine
                 int planetId = @event.EventLocationId;
                 Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
                 planet.UpdateRessources();
-                double newValue = double.Parse(@event.EventData);
-                planet.PlanetElementiumSynthesizerUsage = newValue;
+                planet.PlanetElementiumSynthesizerUsage
+                    = new ChangeUsageEventTypeData(@event.EventData).NewValue;
                 planet.ClearCache();
                 Debug.WriteLine(
                     $"{DateStamp}: Elementium Synthesizer usage changed on planet {planet.PlanetId}.");
@@ -396,16 +398,12 @@ namespace Galaxxis.Core.Engine
             if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
             {
                 // local variables                
-                string[] 
-                    parameter = @event.EventData.Split('|'),
-                    attackingShipIds = parameter[2].Split(';');
-                int
-                    planetTargetId = int.Parse(parameter[1]),
-                    storageCapacity = context.Ship
-                        .Where(s => attackingShipIds.Contains(s.ShipId.ToString()))
-                        .Sum(s => s.ShipStorageCapacity);                    
-                Planet 
-                    planetTarget = PlanetProvider.GetPlanet(planetTargetId, true, context);
+                MoveEventTypeData attackMoveData = new MoveEventTypeData(@event.EventData);
+                int storageCapacity = context.Ship
+                    .Where(s => attackMoveData.MovingShipIds.Contains(s.ShipId))
+                    .Sum(s => s.ShipStorageCapacity);                    
+                Planet planetTarget = PlanetProvider
+                    .GetPlanet(attackMoveData.ToLocationId, true, context);
                 double
                     takeSize = (double)storageCapacity / 7,
                     stolenOre = 0,
@@ -538,20 +536,38 @@ namespace Galaxxis.Core.Engine
                 }
 
                 // create return event
-                Event returnEvent = EventProvider.NewEvent(
-                    EventLocationEnum.Planet,
-                    @event.EventLocationId,
-                    EventNameEnum.Return,
+                //Event returnEvent = EventProvider.NewEvent(
+                //    EventLocationEnum.Planet,
+                //    @event.EventLocationId,
+                //    EventNameEnum.Return,
+                //    100,
+                //    EventTypeEnum.Move,
+                //    $"returning|{parameter[1]}|{parameter[2]}|" //p1:targetPlanetID, p2:shipIds
+                //    + $"{stolenOre}|"
+                //    + $"{stolenEnergy}|"
+                //    + $"{stolenTools}|"
+                //    + $"{stolenMana}|"
+                //    + $"{stolenCrystals}|"
+                //    + $"{stolenAntimatter}|"
+                //    + $"{stolenElementium}|");
+
+                
+                // enqueue return event
+                MoveEventTypeData data = new MoveEventTypeData(
+                    attackMoveData.ToLocation, attackMoveData.ToLocationId, // from
+                    attackMoveData.FromLocation, attackMoveData.FromLocationId, // to
+                    attackMoveData.MovingShipIds,
+                    stolenOre,
+                    stolenEnergy,
+                    stolenTools,
+                    stolenMana,
+                    stolenCrystals,
+                    stolenAntimatter,
+                    stolenElementium);
+                Event returnEvent = new ReturnEvent(
+                    EventLocationEnum.Planet, @event.EventLocationId,
                     100,
-                    EventTypeEnum.Move,
-                    $"returning|{parameter[1]}|{parameter[2]}|" //p1:targetPlanetID, p2:shipIds
-                    + $"{stolenOre}|"
-                    + $"{stolenEnergy}|"
-                    + $"{stolenTools}|"
-                    + $"{stolenMana}|"
-                    + $"{stolenCrystals}|"
-                    + $"{stolenAntimatter}|"
-                    + $"{stolenElementium}|");
+                    data);
                 Instance.EventQueue.Enqueue(returnEvent);
             }
         }

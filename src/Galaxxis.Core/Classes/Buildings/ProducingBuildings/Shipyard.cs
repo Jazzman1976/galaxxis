@@ -6,6 +6,8 @@ using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
 using System;
 using System.Linq;
+using Galaxxis.Data.EventTypeData;
+using Galaxxis.Data.Events;
 
 namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
 {
@@ -123,14 +125,20 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
                 return false;
             }
 
-            Processor.Instance.EventQueue
-                .Enqueue(EventProvider.NewEvent(
-                    EventLocationEnum.Planet,
-                    _planet.PlanetId,
-                    EventNameEnum.ProduceShipExplorer,
-                    100,
-                    EventTypeEnum.Produce,
-                    produceCosts.ToValueString()));
+            // get event
+            ProduceEventTypeData data = new ProduceEventTypeData(
+                produceCosts[0],
+                produceCosts[1],
+                produceCosts[2],
+                produceCosts[3]);
+            ProduceShipExplorerEvent @event = new ProduceShipExplorerEvent(
+                EventLocationEnum.Planet,
+                _planet.PlanetId,
+                100,
+                data);
+
+            // enqueue event
+            Processor.Instance.EventQueue.Enqueue(@event);
 
             info = "Producing of a new explorer ship has been started.";
             return true;
@@ -175,14 +183,20 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
                 return false;
             }
 
-            Processor.Instance.EventQueue
-                .Enqueue(EventProvider.NewEvent(
-                    EventLocationEnum.Planet,
-                    _planet.PlanetId,
-                    EventNameEnum.ProduceShipCarrier,
-                    100,
-                    EventTypeEnum.Produce,
-                    produceCosts.ToValueString()));
+            // get event
+            ProduceEventTypeData data = new ProduceEventTypeData(
+                produceCosts[0],
+                produceCosts[1],
+                produceCosts[2],
+                produceCosts[3]);
+            ProduceShipExplorerEvent @event = new ProduceShipExplorerEvent(
+                EventLocationEnum.Planet,
+                _planet.PlanetId,
+                100,
+                data);
+
+            // enqueue event
+            Processor.Instance.EventQueue.Enqueue(@event);
 
             info = "Producing of a new carrier ship has been started.";
             return true;

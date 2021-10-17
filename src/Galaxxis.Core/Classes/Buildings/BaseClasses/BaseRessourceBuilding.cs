@@ -3,6 +3,8 @@ using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions;
 using Galaxxis.Core.Provider;
 using Galaxxis.Data.Enums;
+using Galaxxis.Data.EventTypeData;
+using Galaxxis.Data.Events;
 using Galaxxis.Data.Models;
 using System;
 using System.Linq;
@@ -157,15 +159,35 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                 return false;
             }
 
+            // get event
+            Event @event = null;
+            BuildEventTypeData data = new BuildEventTypeData(
+                BuildCosts[0],
+                BuildCosts[1],
+                BuildCosts[2],
+                BuildCosts[3]);
+            long t = BuildTimeRate.ValueLong;
+            int id = _planet.PlanetId;
+            switch (eventName)
+            {
+                case EventNameEnum.BuildOreMine:
+                    @event = new BuildOreMineEvent(EventLocationEnum.Planet, id, t, data);
+                    break;
+            }
+
             // queue event
-            Processor.Instance.EventQueue
-                .Enqueue(EventProvider.NewEvent(
-                    EventLocationEnum.Planet,
-                    _planet.PlanetId,
-                    eventName,
-                    BuildTimeRate.ValueLong,
-                    EventTypeEnum.Build,
-                    BuildCosts.ToValueString()));
+            //Processor.Instance.EventQueue
+            //    .Enqueue(EventProvider.NewEvent(
+            //        EventLocationEnum.Planet,
+            //        _planet.PlanetId,
+            //        eventName,
+            //        BuildTimeRate.ValueLong,
+            //        EventTypeEnum.Build,
+            //        BuildCosts.ToValueString()));
+            if (@event != null)
+            {
+                Processor.Instance.EventQueue.Enqueue(@event);
+            }
 
             // exit
             info = "Construction of the next building level has been started.";
@@ -185,15 +207,30 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                 return false;
             }
 
+            // get event
+            Event @event = null;
+            ChangeUsageEventTypeData data = new ChangeUsageEventTypeData(newValue);
+            int id = _planet.PlanetId;
+            switch (eventName)
+            {
+                case EventNameEnum.ChangeOreMineUsage:
+                    @event = new ChangeOreMineUsageEvent(EventLocationEnum.Planet, id, data);
+                    break;
+            }
+
             // queue event
-            Processor.Instance.EventQueue
-                .Enqueue(EventProvider.NewEvent(
-                    EventLocationEnum.Planet,
-                    _planet.PlanetId,
-                    eventName,
-                    0,
-                    EventTypeEnum.Change,
-                    newValue.ToString()));
+            //Processor.Instance.EventQueue
+            //    .Enqueue(EventProvider.NewEvent(
+            //        EventLocationEnum.Planet,
+            //        _planet.PlanetId,
+            //        eventName,
+            //        0,
+            //        EventTypeEnum.ChangeUsage,
+            //        newValue.ToString()));
+            if (@event != null)
+            {
+                Processor.Instance.EventQueue.Enqueue(@event);
+            }
 
             // exit
             info = "Usage of the building has been changed.";

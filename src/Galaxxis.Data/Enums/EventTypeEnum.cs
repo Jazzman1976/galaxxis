@@ -4,7 +4,7 @@
     {
         Build,
         Move,
-        Change,
+        ChangeUsage,
         Produce
     }
 }

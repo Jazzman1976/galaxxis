@@ -1,5 +1,7 @@
 ﻿using Galaxxis.Core.Extensions.PlanetExtensions;
+using Galaxxis.Core.Provider;
 using Galaxxis.Data.Enums;
+using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,38 +15,41 @@ namespace Galaxxis.Core.Engine
         /// <summary>
         /// Add events to the database to be processed when they hit the execution tick.
         /// </summary>
-        private void Add_EventAction(Event @event, GalaxxisContext context, long universeTickEventIsAdded)
+        private void Add_EventAction(
+            Event @event, GalaxxisContext context, long universeTickEventIsAdded)
         {
             // events in queue store ticks until it is executed
             // events in db store exact tick when it is executed
             // => a queued event has to add the current tick to it's eventTick
-            @event.EventTick += universeTickEventIsAdded;
+            @event.EventTick = @event.EventTicksToEventTick + universeTickEventIsAdded;
 
             // get planet to edit
             // currently only planet events!
-            Planet editPlanet = context.Planet
-                .Include(planet => planet.PlanetSystem)
-                .ThenInclude(system => system.SystemGalaxy)
-                .ThenInclude(galaxy => galaxy.GalaxyUniverse)
-                .First(p => p.PlanetId == @event.EventLocationId);
-            editPlanet.UpdateRessources();
+            //Planet editPlanet = context.Planet
+            //    .Include(planet => planet.PlanetSystem)
+            //    .ThenInclude(system => system.SystemGalaxy)
+            //    .ThenInclude(galaxy => galaxy.GalaxyUniverse)
+            //    .First(p => p.PlanetId == @event.EventLocationId);
+            //editPlanet.UpdateRessources();
+            Planet editPlanet = PlanetProvider.GetPlanet(@event.EventLocationId, true, context);
 
-            // pay build costs
-            string[] eventDataArray = @event.EventData.Split('|');
+            // pay costs when event is added to database (build|production started)
             switch (Enum.Parse(typeof(EventTypeEnum), @event.EventType))
             {
                 case EventTypeEnum.Build:
-                    editPlanet.PlanetOre -= double.Parse(eventDataArray[0]);
-                    editPlanet.PlanetMana -= double.Parse(eventDataArray[1]);
-                    editPlanet.PlanetCrystals -= double.Parse(eventDataArray[2]);
-                    editPlanet.PlanetElementium -= double.Parse(eventDataArray[3]);
+                    BuildEventTypeData buildData = new BuildEventTypeData(@event.EventData);
+                    editPlanet.PlanetOre -= buildData.CostsOre;
+                    editPlanet.PlanetMana -= buildData.CostsMana;
+                    editPlanet.PlanetCrystals -= buildData.CostsCrystals;
+                    editPlanet.PlanetElementium -= buildData.CostsElementium;
                     break;
 
                 case EventTypeEnum.Produce:
-                    editPlanet.PlanetTools -= double.Parse(eventDataArray[0]);
-                    editPlanet.PlanetCrystals -= double.Parse(eventDataArray[1]);
-                    editPlanet.PlanetAntimatter -= double.Parse(eventDataArray[2]);
-                    editPlanet.PlanetElementium -= double.Parse(eventDataArray[3]);
+                    ProduceEventTypeData prodData = new ProduceEventTypeData(@event.EventData);
+                    editPlanet.PlanetTools -= prodData.CostsTools;
+                    editPlanet.PlanetCrystals -= prodData.CostsCrystals;
+                    editPlanet.PlanetAntimatter -= prodData.CostsAntimatter;
+                    editPlanet.PlanetElementium -= prodData.CostsElementium;
                     break;
             }
 

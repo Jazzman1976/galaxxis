@@ -1,8 +1,10 @@
 ﻿using Galaxxis.Core.Classes.Buildings.Interfaces;
 using Galaxxis.Core.Engine;
-using Galaxxis.Core.Extensions;
 using Galaxxis.Core.Provider;
 using Galaxxis.Data.Enums;
+using Galaxxis.Data.Events;
+using Galaxxis.Data.Events.BuildEvents;
+using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Models;
 using System;
 using System.Linq;
@@ -126,50 +128,10 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         /// Use this in the Build method of derived classes to build the next building level 
         /// using the correct event name.
         /// </summary>
-        protected bool Build(EventNameEnum eventName, out string info)
+        protected bool Build<TBuildEvent>(out string info) where TBuildEvent : BaseBuildEvent
         {
-            // check conditions
-            if (EventProvider
-                .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
-                .Any())
-            {
-                info = "A build is still in progress!";
-                return false;
-            }
-            if (BuildCosts[0] > _planet.PlanetOre)
-            {
-                info = "Not enough ore!";
-                return false;
-            }
-            if (BuildCosts[1] > _planet.PlanetMana)
-            {
-                info = "Not enough mana!";
-                return false;
-            }
-            if (BuildCosts[2] > _planet.PlanetCrystals)
-            {
-                info = "Not enough crystals!";
-                return false;
-            }
-            if (BuildCosts[3] > _planet.PlanetElementium)
-            {
-                info = "Not enough elementium!";
-                return false;
-            }
-
-            // queue event
-            Processor.Instance.EventQueue
-                .Enqueue(EventProvider.NewEvent(
-                    EventLocationEnum.Planet,
-                    _planet.PlanetId,
-                    eventName,
-                    BuildTimeRate.ValueLong,
-                    EventTypeEnum.Build,
-                    BuildCosts.ToValueString()));
-
-            // exit
-            info = "Construction of the next building level has been started.";
-            return true;
+            return BuildingsHelper.BuildOnPlanet<TBuildEvent>(
+                _planet, BuildCosts, BuildTimeRate.ValueLong, out info);
         }
 
         /// <summary>
@@ -185,15 +147,22 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                 return false;
             }
 
+            // get event
+            Event @event = null;
+            ChangeUsageEventTypeData data = new ChangeUsageEventTypeData(newValue);
+            int id = _planet.PlanetId;
+            switch (eventName)
+            {
+                case EventNameEnum.ChangeOreMineUsage:
+                    @event = new ChangeOreMineUsageEvent(EventLocationEnum.Planet, id, data);
+                    break;
+            }
+
             // queue event
-            Processor.Instance.EventQueue
-                .Enqueue(EventProvider.NewEvent(
-                    EventLocationEnum.Planet,
-                    _planet.PlanetId,
-                    eventName,
-                    0,
-                    EventTypeEnum.Change,
-                    newValue.ToString()));
+            if (@event != null)
+            {
+                Processor.Instance.EventQueue.Enqueue(@event);
+            }
 
             // exit
             info = "Usage of the building has been changed.";

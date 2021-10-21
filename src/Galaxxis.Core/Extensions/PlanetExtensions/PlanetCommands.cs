@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Galaxxis.Data.Events;
+using Galaxxis.Data.EventTypeData;
 
 namespace Galaxxis.Core.Extensions.PlanetExtensions
 {
@@ -13,13 +15,18 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
     {
         public static string Attack(this Planet planet, List<Ship> fleet, int planetIdTarget)
         {
-            Event attackEvent = EventProvider.NewEvent(
+            MoveEventTypeData data = new MoveEventTypeData(
                 EventLocationEnum.Planet,
                 planet.PlanetId,
-                EventNameEnum.Attack,
+                EventLocationEnum.Planet,
+                planetIdTarget,
+                fleet.Select(ship => ship.ShipId).ToArray());
+
+            AttackEvent attackEvent = new AttackEvent(
+                EventLocationEnum.Planet,
+                planet.PlanetId,
                 100,
-                EventTypeEnum.Move,
-                $"attacking|{planetIdTarget}|{string.Join(";", fleet.Select(ship => ship.ShipId.ToString()))}");
+                data);
 
             Processor.Instance.EventQueue.Enqueue(attackEvent);
 

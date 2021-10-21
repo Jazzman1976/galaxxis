@@ -130,56 +130,8 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         /// </summary>
         protected bool Build<TBuildEvent>(out string info) where TBuildEvent : BaseBuildEvent
         {
-            // check conditions
-            if (EventProvider
-                .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
-                .Any())
-            {
-                info = "A build is still in progress!";
-                return false;
-            }
-            if (BuildCosts[0] > _planet.PlanetOre)
-            {
-                info = "Not enough ore!";
-                return false;
-            }
-            if (BuildCosts[1] > _planet.PlanetMana)
-            {
-                info = "Not enough mana!";
-                return false;
-            }
-            if (BuildCosts[2] > _planet.PlanetCrystals)
-            {
-                info = "Not enough crystals!";
-                return false;
-            }
-            if (BuildCosts[3] > _planet.PlanetElementium)
-            {
-                info = "Not enough elementium!";
-                return false;
-            }
-
-            // get event
-            BuildEventTypeData data = new BuildEventTypeData(
-                BuildCosts[0],
-                BuildCosts[1],
-                BuildCosts[2],
-                BuildCosts[3]);
-            long t = BuildTimeRate.ValueLong;
-            int id = _planet.PlanetId;
-            TBuildEvent @event = (TBuildEvent)Activator.CreateInstance(
-                typeof(TBuildEvent), 
-                new object[] { EventLocationEnum.Planet, id, t, data });
-
-            // queue event
-            if (@event != null)
-            {
-                Processor.Instance.EventQueue.Enqueue(@event);
-            }
-
-            // exit
-            info = "Construction of the next building level has been started.";
-            return true;
+            return BuildingsHelper.BuildOnPlanet<TBuildEvent>(
+                _planet, BuildCosts, BuildTimeRate.ValueLong, out info);
         }
 
         /// <summary>

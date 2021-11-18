@@ -1,5 +1,5 @@
-﻿using Galaxxis.Core.Provider;
-using Galaxxis.Core.Extensions.PlanetExtensions;
+﻿using Galaxxis.Core.Extensions.PlanetExtensions;
+using Galaxxis.Core.Provider;
 using Galaxxis.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

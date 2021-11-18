@@ -1,5 +1,4 @@
-﻿
-using Galaxxis.Data.Models;
+﻿using Galaxxis.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

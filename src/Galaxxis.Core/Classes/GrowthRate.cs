@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Galaxxis.Core.Engine
+namespace Galaxxis.Core.Classes
 {
     public class GrowthRate
     {

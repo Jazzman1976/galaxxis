@@ -1,4 +1,4 @@
-﻿namespace Galaxxis.Core.Engine
+﻿namespace Galaxxis.Core.Static
 {
     public static class Constants
     {

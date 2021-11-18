@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Galaxxis.Core.Classes
+﻿namespace Galaxxis.Core.Classes
 {
     public class Coordinate
     {

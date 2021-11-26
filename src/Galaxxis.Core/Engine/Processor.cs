@@ -740,6 +740,9 @@ namespace Galaxxis.Core.Engine
                 planet.PlanetCrystals += data.Crystals;
                 planet.PlanetAntimatter += data.Antimatter;
                 planet.PlanetElementium += data.Elementium;
+
+                // log event
+                context.EventLog.Add(new EventLog(@event, data.GetXml));
             }
         }
 

@@ -37,6 +37,7 @@
     Shipyard shipyard = thePlanet.GetShipyard();
     double universeTicks = Model.Ticker.Ticks;
     List<Ship> planetShips = Model.User.Ship.Where(ship => ship.ShipPlanetId.Equals(thePlanet.PlanetId)).ToList();
+    List<EventLog> logs = EventLogProvider.GetEventLogs(Data.Enums.EventLocationEnum.Planet, thePlanet.PlanetId);
 }
 
 <style>
@@ -505,6 +506,23 @@
                 <td>@(@event.EventTick)</td>
                 <td>@(@event.EventName)</td>
                 <td>@(@event.EventData)</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div id="event-logs-panel" style="margin-bottom: 1rem;">
+    <table>
+        <tr>
+            <th>Logged Event Tick</th>
+            <th>Logged Event Name</th>
+        </tr>
+        @foreach (EventLog log in logs)
+        {
+            <tr>
+                <td>@(@log.EventTick)</td>
+                <td>@(@log.EventName)</td>
+                <td>@(@log.EventData)</td>
             </tr>
         }
     </table>

@@ -87,25 +87,5 @@ namespace Galaxxis.Core.Provider
                 ?? new List<Event>();
             return events;
         }
-
-        //public static Event NewEvent(
-        //    EventLocationEnum location, 
-        //    int locationId, 
-        //    EventNameEnum eventName, 
-        //    long executionTick,
-        //    EventTypeEnum type,
-        //    string eventData = "")
-        //{
-        //    Event @event = new Event
-        //    {
-        //        EventLocation = location.ToString(),
-        //        EventLocationId = locationId,
-        //        EventTick = executionTick,
-        //        EventName = eventName.ToString(),
-        //        EventData = eventData,
-        //        EventType = type.ToString()
-        //    };
-        //    return @event;
-        //}
     }
 }

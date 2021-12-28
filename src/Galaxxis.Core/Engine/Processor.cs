@@ -113,9 +113,6 @@ namespace Galaxxis.Core.Engine
                     Debug.WriteLine($"{DateStamp}: Tick {universe.UniverseTicks} done in "
                         + $"{tStartTick.MsGone()} ms.");
                 }
-
-                // save all changes
-                //context.SaveChanges();
             }
 
             // mark not processing, unlock processor
@@ -263,6 +260,10 @@ namespace Galaxxis.Core.Engine
 
                 case EventNameEnum.Return:
                     Do_Return(@event, context);
+                    break;
+
+                case EventNameEnum.Scan:
+                    Do_Scan(@event, context);
                     break;
 
                 #endregion
@@ -743,6 +744,38 @@ namespace Galaxxis.Core.Engine
 
                 // log event
                 context.EventLog.Add(new EventLog(@event, data.GetXml));
+            }
+        }
+
+        private void Do_Scan(Event @event, GalaxxisContext context)
+        {
+            EventLocationEnum location = Enum.Parse<EventLocationEnum>(@event.EventLocation);
+            if (location.Equals(EventLocationEnum.Planet))
+            {
+                // scan target planet
+                ScanEventTypeData data = new ScanEventTypeData(@event.EventData);
+                Planet planet = PlanetProvider.GetPlanet(data.ScanLocationId, true, context);
+                data.ScannedOre = planet.PlanetOre;
+                data.ScannedEnergy = planet.PlanetEnergy;
+                data.ScannedTools = planet.PlanetTools;
+                data.ScannedMana = planet.PlanetMana;
+                data.ScannedCrystals = planet.PlanetCrystals;
+                data.ScannedAntimatter = planet.PlanetAntimatter;
+                data.ScannedElementium = planet.PlanetElementium;
+
+                // log scan result
+                context.EventLog.Add(new EventLog(@event, data.GetXml));
+
+                // enqueue return event
+                MoveEventTypeData moveData = new MoveEventTypeData(
+                    data.ScanLocation, data.ScanLocationId, // from
+                    data.FromLocation, data.FromLocationId, // to
+                    data.ScanningShipIds);
+                Event returnEvent = new ReturnEvent(
+                    EventLocationEnum.Planet, @event.EventLocationId,
+                    100,
+                    moveData);
+                Instance.EventQueue.Enqueue(returnEvent);
             }
         }
 

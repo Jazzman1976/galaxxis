@@ -32,5 +32,25 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
 
             return "attack committed";
         }
+
+        public static string Scan(this Planet planet, List<Ship> fleet, int planetIdTarget)
+        {
+            ScanEventTypeData data = new ScanEventTypeData(
+                EventLocationEnum.Planet,
+                planet.PlanetId,
+                EventLocationEnum.Planet,
+                planetIdTarget,
+                fleet.Select(ship => ship.ShipId).ToArray());
+
+            ScanEvent scanEvent = new ScanEvent(
+                EventLocationEnum.Planet,
+                planet.PlanetId,
+                100,
+                data);
+
+            Processor.Instance.EventQueue.Enqueue(scanEvent);
+
+            return "scan committed";
+        }
     }
 }

@@ -19,7 +19,6 @@ namespace Galaxxis.Data.Events
             this.EventName = EventNameEnum.Attack.ToString();
             this.EventType = EventTypeEnum.Move.ToString();
             this.EventData = data.GetXml();
-
             this.EventTicksToEventTick = ticksToEventTick;
         }
     }

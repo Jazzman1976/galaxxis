@@ -552,12 +552,26 @@
                 <td>@aPlanet.PlanetCoordinateZ</td>
                 <td>@(DistanceHelper.GetDistance(thePlanet, aPlanet))</td>
                 <td>
-                    <form asp-controller="Home" asp-action="Attack" method="post">
-                        <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                        <input type="hidden" name="userId" value="@Model.User.UserId" />
-                        <input type="hidden" name="planetIdTarget" value="@aPlanet.PlanetId" />
-                        <input type="submit" value="Attack" />
-                    </form>
+                    <table>
+                        <tr>
+                            <td>
+                                <form asp-controller="Home" asp-action="Attack" method="post">
+                                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                                    <input type="hidden" name="userId" value="@Model.User.UserId" />
+                                    <input type="hidden" name="planetIdTarget" value="@aPlanet.PlanetId" />
+                                    <input type="submit" value="Attack" />
+                                </form>
+                            </td>
+                            <td>
+                                <form asp-controller="Home" asp-action="Scan" method="post">
+                                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                                    <input type="hidden" name="userId" value="@Model.User.UserId" />
+                                    <input type="hidden" name="planetIdTarget" value="@aPlanet.PlanetId" />
+                                    <input type="submit" value="Scan" />
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         }

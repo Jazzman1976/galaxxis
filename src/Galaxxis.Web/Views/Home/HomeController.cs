@@ -252,5 +252,22 @@ namespace Galaxxis.Web.Views.Home
             // show view
             return View("Home", new HomeViewModel(info));
         }
+
+        [HttpPost]
+        public IActionResult Scan(int planetId, int userId, int planetIdTarget)
+        {
+            // get entities from database
+            Planet planet = PlanetProvider.GetPlanet(planetId);
+            User user = UserProvider.GetUser(userId, true);
+
+            // get fleet
+            List<Ship> planetShips = user.Ship.Where(ship => ship.ShipPlanetId.Equals(planetId)).ToList();
+
+            // add event
+            string info = planet.Scan(planetShips, planetIdTarget);
+
+            // show view
+            return View("Home", new HomeViewModel(info));
+        }
     }
 }

@@ -29,6 +29,7 @@
         ProduceShipBattlestation,
 
         Attack,
-        Return
+        Return,
+        Scan
     }
 }

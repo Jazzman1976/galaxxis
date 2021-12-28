@@ -64,8 +64,6 @@ namespace Galaxxis.Data.Models
 
             modelBuilder.Entity<EventLog>(entity =>
             {
-                entity.Property(e => e.EventLogId).ValueGeneratedNever();
-
                 entity.Property(e => e.EventData).HasColumnType("xml");
 
                 entity.Property(e => e.EventLocation)

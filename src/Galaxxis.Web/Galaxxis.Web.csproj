@@ -12,6 +12,25 @@
   </ItemGroup>
   
   <ItemGroup>
+    <None Include="wwwroot\images\cockpit.svg" />
+    <None Include="wwwroot\scripts\main.js" />
+    <None Include="wwwroot\scripts\main.js.map" />
+    <None Include="wwwroot\scripts\main.min.js" />
+    <None Include="wwwroot\scripts\main.min.js.map" />
+    <None Include="wwwroot\scripts\perfect-scrollbar.common.js" />
+    <None Include="wwwroot\scripts\perfect-scrollbar.esm.js" />
+    <None Include="wwwroot\scripts\perfect-scrollbar.js" />
+    <None Include="wwwroot\scripts\perfect-scrollbar.min.js" />
+    <None Include="wwwroot\scripts\src\main.js" />
+    <None Include="wwwroot\scripts\vue.js" />
+    <None Include="wwwroot\scripts\vue.min.js" />
+    <None Include="wwwroot\styles\main.css.map" />
+    <None Include="wwwroot\styles\main.min.css.map" />
+    <None Include="wwwroot\styles\src\main.scss" />
+    <None Include="wwwroot\styles\src\partials\_reset.scss" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
   </ItemGroup>
 

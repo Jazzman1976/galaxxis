@@ -1,12 +1,14 @@
 ﻿using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Core.Provider;
 using Galaxxis.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Galaxxis.Web.Views.Home
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()

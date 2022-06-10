@@ -1,0 +1,33 @@
+﻿@using Galaxxis.Data.Models
+
+@model UniverseViewmodel
+
+@{
+    Layout = "~/Views/Shared/_Game.cshtml";
+}
+
+<div id="layer-background" class="layer-background-universe"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">      
+    <main>      
+        <h1>Universum</h1>
+        <h2>Galaxien in diesem Universum:</h2>
+        <form id="form" asp-action="GoGalaxy" method="post">
+            <div class="location-selection">
+                <button type="button" class="location-selection__prev" data-for="galaxy">&lt;</button>
+                <div class="select-wrapper">
+                    <select id="galaxy" name="galaxy">
+                        @foreach(Galaxy galaxy in Model.Galaxies)
+                        {
+                            <option value="@galaxy.GalaxyId">@galaxy.GalaxyName</option>
+                        }
+                    </select>
+                </div>
+                <button type="button" class="location-selection__next" data-for="galaxy">&gt;</button>
+                @*<a href="#" onclick="document.getElementById('form').submit()" class="button-link">GO</a>*@
+                <button style="width:auto" class="button-link">GO</button>
+            </div>                    
+        </form>
+    </main>    
+</div>

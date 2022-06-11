@@ -16,7 +16,7 @@ namespace Galaxxis.Web.Views.Universe
         [HttpPost]
         public RedirectResult GoGalaxy(int galaxy)
         {
-            return new RedirectResult($"/galaxy/{galaxy}");
+            return new RedirectResult($"/galaxy/index/{galaxy}");
         }
     }
 }

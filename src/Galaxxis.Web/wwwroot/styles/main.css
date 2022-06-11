@@ -303,10 +303,6 @@ hr {
   background-color: green;
 }
 
-main {
-  height: 2000px;
-}
-
 select, button {
   border: 1px solid black;
   color: #49fb35;

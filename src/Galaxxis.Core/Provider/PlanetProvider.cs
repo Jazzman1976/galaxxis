@@ -2,6 +2,7 @@
 using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Galaxxis.Core.Provider
@@ -9,7 +10,7 @@ namespace Galaxxis.Core.Provider
     public static class PlanetProvider
     {
         /// <summary>
-        /// Get a planet instance
+        /// Get a planet with all moons, it's system, galaxy and universe
         /// </summary>
         /// <param name="updateRessources">default: false</param>
         public static Planet GetPlanet(
@@ -56,6 +57,11 @@ namespace Galaxxis.Core.Provider
 
             // exit
             return planet;
+        }
+
+        public static List<Planet> GetPlanets(int systemId)
+        {
+            return null;
         }
     }
 }

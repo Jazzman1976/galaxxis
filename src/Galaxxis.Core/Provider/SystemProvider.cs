@@ -9,6 +9,11 @@ namespace Galaxxis.Core.Provider
 {
     public static class SystemProvider
     {
+        /// <summary>
+        /// Get a system with all planets and the moons of the planets
+        /// </summary>
+        /// <param name="id">The id of the system to get</param>
+        /// <returns></returns>
         public static Data.Models.System GetSystem(int id)
         {
             Data.Models.System system = null;

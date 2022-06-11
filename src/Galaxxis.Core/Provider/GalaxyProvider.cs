@@ -1,24 +1,26 @@
 ﻿using Galaxxis.Data.Models;
-using System;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Galaxxis.Core.Provider
 {
     public static class GalaxyProvider
     {
-        public static List<Galaxy> GetGalaxies(int universeId)
+        /// <summary>
+        /// Get a galaxy with all systems and it's universe
+        /// </summary>
+        /// <param name="galaxyId">Id of the galaxy to get</param>
+        public static Galaxy GetGalaxy(int galaxyId)
         {
-            List<Galaxy> galaxies;
+            Galaxy galaxy = null;
             using (GalaxxisContext context = new GalaxxisContext())
             {
-                galaxies = context.Galaxy
-                    .Where(galaxy => galaxy.GalaxyUniverseId == universeId)
-                    .ToList();
+                galaxy = context.Galaxy
+                    .Include(galaxy => galaxy.System)
+                    .Include(galaxy => galaxy.GalaxyUniverse)
+                    .FirstOrDefault(galaxy => galaxy.GalaxyId == galaxyId);
             }
-            return galaxies;
+            return galaxy;
         }
     }
 }

@@ -1,69 +1,19 @@
+/* processor files (does not compile to css) */
+@import "processor/_variables.scss";
+@import "processor/_mixins.scss";
+
+/* reset stylesheet */
 @import "partials/reset";
+
+/* vendor stylesheets */
 @import "node_modules/perfect-scrollbar/css/perfect-scrollbar";
 
-$color-neon: #49fb35;
-$color-gray-dark: #3b4045 ;
-$color-gray-dark-transparent: rgba(59,64,69,0.5);
-
-@mixin view-small {
-    @media (max-width: 1023px) {
-        @content;
-    }
-}
-
-html {
-    min-height: 100%;
-    background-color: black;
-}
-
-body {
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: normal;
-    line-height: 1.5;
-}
-
-h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-h2 {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 6px;
-}
-
-p {
-    margin-bottom: 6px;
-}
-
-ul {
-    list-style-position: outside;
-    list-style-type: disc;
-    padding-left: 20px;
-}
-
-a, a:visited {
-    color: $color-neon;
-    text-decoration: underline;
-    font-style: italic;
-}
-
-b {
-    font-weight: bold;
-}
-
-hr {
-    border-style: dashed;
-    border-color: green;
-    margin-top: 2px;
-    margin-bottom: 2px;
-}
+/* custom styles */
+@import "partials/_html-elements.scss";
+@import "partials/_layer-background.scss";
 
 #content, 
-#layer-background, 
+//#layer-background, 
 #layer-foreground {
     position: absolute;
     top: 0;

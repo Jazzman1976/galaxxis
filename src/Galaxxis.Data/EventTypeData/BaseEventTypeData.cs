@@ -17,8 +17,10 @@ namespace Galaxxis.Data.EventTypeData
             ns.Add("", "");
             MemoryStream m = new MemoryStream();
             x.Serialize(m, obj, ns);
-            string xml = Encoding.UTF8.GetString(m.ToArray());
-            return xml;
+            string xmlUtf8Text = Encoding.UTF8.GetString(m.ToArray());
+            System.Xml.Linq.XDocument xmldoc = System.Xml.Linq.XDocument.Parse(xmlUtf8Text);
+            xmldoc.Declaration.Encoding = "utf-16";
+            return xmldoc.ToString();
         }
 
         protected void ReadData<TEventData>(string xml, TEventData obj)

@@ -5,6 +5,7 @@
 @using Galaxxis.Core.Classes.Buildings.ProducingBuildings
 @using Galaxxis.Core.Helper
 @using Galaxxis.Core.Provider
+@using Galaxxis.Core.Classes.Ships
 
 @model HomeViewModel
 
@@ -35,6 +36,7 @@
     NeutronAccelerator neutronAccelerator = thePlanet.GetNeutronAccelerator();
     ElementiumSynthesizer elementiumSynthesizer = thePlanet.GetElementiumSynthesizer();
     Shipyard shipyard = thePlanet.GetShipyard();
+    DefenseSystem defenseSystem = thePlanet.GetDefenseSystem();
     double universeTicks = Model.Ticker.Ticks;
     List<Ship> planetShips = Model.User.Ship.Where(ship => ship.ShipPlanetId.Equals(thePlanet.PlanetId)).ToList();
     List<EventLog> logs = EventLogProvider.GetEventLogs(Data.Enums.EventLocationEnum.Planet, thePlanet.PlanetId);
@@ -447,11 +449,12 @@
 
             <td>
                 <table>
+                    @{ Explorer explorer = new(thePlanet); }
                     <tr><th colspan="2">Produce Explorer</th></tr>
-                    <tr><th>Tools</th><td>225</td></tr>
-                    <tr><th>Crystals</th><td>@(Model.User.IsOffensive() ? "225" : "450")</td></tr>
-                    <tr><th>Antimatter</th><td>@(Model.User.IsOffensive() ? "450" : "225")</td></tr>
-                    <tr><th>Elementium</th><td>75</td></tr>
+                    <tr><th>Tools</th><td>@explorer.CostTools</td></tr>
+                    <tr><th>Crystals</th><td>@explorer.CostCrystals</td></tr>
+                    <tr><th>Antimatter</th><td>@explorer.CostAntimatter</td></tr>
+                    <tr><th>Elementium</th><td>@explorer.CostElementium</td></tr>
                 </table>
                 <form asp-controller="Home" asp-action="ProduceShipExplorer" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
@@ -461,15 +464,38 @@
 
             <td>
                 <table>
+                    @{ Carrier carrier = new(thePlanet); }
                     <tr><th colspan="2">Produce Carrier</th></tr>
-                    <tr><th>Tools</th><td>450</td></tr>
-                    <tr><th>Crystals</th><td>@(Model.User.IsOffensive() ? "450" : "900")</td></tr>
-                    <tr><th>Antimatter</th><td>@(Model.User.IsOffensive() ? "900" : "450")</td></tr>
-                    <tr><th>Elementium</th><td>150</td></tr>
+                    <tr><th>Tools</th><td>@carrier.CostTools</td></tr>
+                    <tr><th>Crystals</th><td>@carrier.CostCrystals</td></tr>
+                    <tr><th>Antimatter</th><td>@carrier.CostAntimatter</td></tr>
+                    <tr><th>Elementium</th><td>@carrier.CostElementium</td></tr>
                 </table>
                 <form asp-controller="Home" asp-action="ProduceShipCarrier" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
                     <input type="submit" value="Produce Carrier" />
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th>Defense System (Level: @thePlanet.PlanetDefenseSystem)</th>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr><th colspan="2">Upgrade to next level</th></tr>
+                    <tr><th>Ore</th><td>@defenseSystem.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@defenseSystem.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@defenseSystem.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@defenseSystem.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@defenseSystem.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildDefenseSystem" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!defenseSystem.CanBuild ? "disabled" : "") />
                 </form>
             </td>
         </tr>
@@ -545,6 +571,10 @@
 
         @foreach (Planet aPlanet in theSystem.Planet)
         {
+            if (aPlanet.PlanetId == thePlanet.PlanetId)
+            {
+                continue;
+            }
             <tr>
                 <td>@aPlanet.PlanetName</td>
                 <td>@aPlanet.PlanetCoordinateX</td>

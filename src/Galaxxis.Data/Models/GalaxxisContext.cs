@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-
-#nullable disable
 
 namespace Galaxxis.Data.Models
 {
@@ -38,8 +37,6 @@ namespace Galaxxis.Data.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
-
             modelBuilder.Entity<Event>(entity =>
             {
                 entity.HasIndex(e => new { e.EventTick, e.EventLocation, e.EventLocationId }, "ix_event_target");
@@ -49,17 +46,17 @@ namespace Galaxxis.Data.Models
                 entity.Property(e => e.EventLocation)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
 
                 entity.Property(e => e.EventName)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
 
                 entity.Property(e => e.EventType)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
             });
 
             modelBuilder.Entity<EventLog>(entity =>
@@ -69,17 +66,17 @@ namespace Galaxxis.Data.Models
                 entity.Property(e => e.EventLocation)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
 
                 entity.Property(e => e.EventName)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
 
                 entity.Property(e => e.EventType)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
             });
 
             modelBuilder.Entity<Galaxy>(entity =>
@@ -208,7 +205,7 @@ namespace Galaxxis.Data.Models
                 entity.Property(e => e.UserRace)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
             });
 
             OnModelCreatingPartial(modelBuilder);

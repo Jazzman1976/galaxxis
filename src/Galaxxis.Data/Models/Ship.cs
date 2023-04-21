@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace Galaxxis.Data.Models
 {
     public partial class Ship

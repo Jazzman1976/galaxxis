@@ -206,6 +206,10 @@ namespace Galaxxis.Core.Engine
                     Do_BuildShipyard(@event, context);
                     break;
 
+                case EventNameEnum.BuildDefenseSystem:
+                    Do_BuildDefenseSystem(@event, context);
+                    break;
+
                 #endregion
 
                 #region Change event actions ------------------------------------------------------
@@ -376,6 +380,19 @@ namespace Galaxxis.Core.Engine
                 planet.PlanetShipyard++;
                 planet.ClearCache();
                 Debug.WriteLine($"{DateStamp}: Shipyard build on planet {planet.PlanetId}.");
+            }
+        }
+
+        private void Do_BuildDefenseSystem(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
+                planet.PlanetDefenseSystem++;
+                planet.ClearCache();
+                Debug.WriteLine($"{DateStamp}: Defense System build on planet {planet.PlanetId}.");
             }
         }
 

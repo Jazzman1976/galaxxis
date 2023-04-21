@@ -10,6 +10,7 @@
         BuildNeutronAccelerator,
         BuildElementiumSynthesizer,
         BuildShipyard,
+        BuildDefenseSystem,
 
         ChangeOreMineUsage,
         ChangePowerSupplyUsage,

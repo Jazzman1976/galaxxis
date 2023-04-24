@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="assets/styles/main.css">
+    </head>
+    <body>
+        <div id="content">
+            <div id="layer-background" class="layer-background-system"></div>
+            <div id="layer-foreground"></div>
+            <div id="layer-inferface-background"></div>
+            <div id="layer-interface">      
+                <main>      
+                    <h1>Dagoba System</h1>
+                    <p><a href="interface_004.html">Zurück</a> zum Quadranten</p>
+                    <h2>Planeten in diesem System:</h2>
+                    <div class="location-selection">
+                        <button class="location-selection__prev" data-for="planet">&lt;</button>
+                        <div class="select-wrapper">
+                            <select id="planet">
+                                <option selected>Dagoba</option>
+                                <option>Gasplanet I</option>
+                                <option>Gasplanet II</option>
+                                <option>Eisplanet I</option>
+                                <option>Gesteinsplanet I</option>
+                            </select>
+                        </div>
+                        <button class="location-selection__next" data-for="planet">&gt;</button>
+                        <a href="interface_001.html" class="button-link">GO</a>
+                    </div>                    
+                </main>    
+            </div>
+        </div>
+        <script src="assets/scripts/perfect-scrollbar.js"></script>
+        <script src="assets/scripts/main.js"></script>
+    </body>
+</html>

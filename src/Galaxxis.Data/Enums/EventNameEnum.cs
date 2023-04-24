@@ -9,6 +9,8 @@
         BuildCrystalMine,
         BuildNeutronAccelerator,
         BuildElementiumSynthesizer,
+        BuildShipyard,
+        BuildDefenseSystem,
 
         ChangeOreMineUsage,
         ChangePowerSupplyUsage,
@@ -16,6 +18,28 @@
         ChangeMageAcademyUsage,
         ChangeCrystalMineUsage,
         ChangeNeutronAcceleratorUsage,
-        ChangeElementiumSynthesizerUsage
+        ChangeElementiumSynthesizerUsage,
+
+        ProduceShipExplorer,
+        ProduceShipCarrier,
+        ProduceShipFighter,
+        ProduceShipCruiser,
+        ProduceShipBattleship,
+        ProduceShipDestroyer,
+        ProduceShipBattlestar,
+        ProduceShipBattlestation,
+
+        ProduceLightManualCannon,
+        ProduceHeavyManualCannon,
+        ProduceLightAutomaticCannon,
+        ProduceHeavyAutomaticCannon,
+        ProduceLightComputerAidedCannon,
+        ProduceHeavyComputerAidedCannon,
+        ProduceLightTurret,
+        ProduceHeavyTurret,
+
+        Attack,
+        Return,
+        Scan
     }
 }

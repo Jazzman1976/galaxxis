@@ -1,4 +1,4 @@
-﻿using Galaxxis.Core.Business.Provider;
+﻿using Galaxxis.Core.Provider;
 using Galaxxis.Data.Models;
 using System.Timers;
 

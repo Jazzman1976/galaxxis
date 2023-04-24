@@ -1,10 +1,14 @@
-﻿using Galaxxis.Core.Business.Provider;
+﻿using Galaxxis.Core.Extensions.PlanetExtensions;
+using Galaxxis.Core.Provider;
 using Galaxxis.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Galaxxis.Core.Extensions.PlanetExtensions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Galaxxis.Web.Views.Home
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -192,6 +196,105 @@ namespace Galaxxis.Web.Views.Home
             planet.GetElementiumSynthesizer().ChangeUsage(newValue / 100, out string info);
 
             // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult BuildShipyard(int planetId)
+        {
+            // get planet from database
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+
+            // build Shipyard
+            planet.GetShipyard().Build(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult BuildDefenseSystem(int planetId)
+        {
+            // get planet from database
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+
+            // build Defense System
+            planet.GetDefenseSystem().Build(out string info);
+            
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult ProduceShipExplorer(int planetId, int userId)
+        {
+            // get entities from database
+            Planet planet = PlanetProvider.GetPlanet(planetId);
+
+            // produce ship: explorer
+            planet.GetShipyard().ProduceShipExplorer(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult ProduceShipCarrier(int planetId, int userId)
+        {
+            // get entities from database
+            Planet planet = PlanetProvider.GetPlanet(planetId);
+
+            // produce ship: explorer
+            planet.GetShipyard().ProduceShipCarrier(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult ProduceDefenseLightManualCannon(int planetId)
+        {
+            // get entities from database
+            Planet planet = PlanetProvider.GetPlanet(planetId);
+
+            // produce defense: light manual cannon
+            planet.GetDefenseSystem().ProduceDefenseLightManualCannon(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult Attack(int planetId, int userId, int planetIdTarget)
+        {
+            // get entities from database
+            Planet planet = PlanetProvider.GetPlanet(planetId);
+            User user = UserProvider.GetUser(userId, true);
+
+            // get fleet
+            List<Ship> planetShips = user.Ship.Where(ship => ship.ShipPlanetId.Equals(planetId)).ToList();
+
+            // add event
+            string info = planet.Attack(planetShips, planetIdTarget);
+
+            // show view
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult Scan(int planetId, int userId, int planetIdTarget)
+        {
+            // get entities from database
+            Planet planet = PlanetProvider.GetPlanet(planetId);
+            User user = UserProvider.GetUser(userId, true);
+
+            // get fleet
+            List<Ship> planetShips = user.Ship.Where(ship => ship.ShipPlanetId.Equals(planetId)).ToList();
+
+            // add event
+            string info = planet.Scan(planetShips, planetIdTarget);
+
+            // show view
             return View("Home", new HomeViewModel(info));
         }
     }

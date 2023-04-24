@@ -1,6 +1,12 @@
 ﻿@using Galaxxis.Core.Extensions.PlanetExtensions
+@using Galaxxis.Core.Extensions
 @using Galaxxis.Data.Models
 @using Galaxxis.Core.Classes.Buildings.RessourceBuildings
+@using Galaxxis.Core.Classes.Buildings.ProducingBuildings
+@using Galaxxis.Core.Helper
+@using Galaxxis.Core.Provider
+@using Galaxxis.Core.Classes.Ships
+@using Galaxxis.Core.Classes.Defense
 
 @model HomeViewModel
 
@@ -9,7 +15,8 @@
     ViewBag.Title = "Home";
 
     // use first as demo planet in this homepage
-    Planet thePlanet = Model.User.Planet.FirstOrDefault();
+    Planet thePlanet = Model.User.Planet.First();
+    Data.Models.System theSystem = SystemProvider.GetSystem(thePlanet.PlanetSystemId);
 
     // assure planet and user
     if (thePlanet == null || Model.User == null)
@@ -19,6 +26,7 @@
 
     // update ressources on planet
     thePlanet.UpdateRessources();
+    thePlanet.ClearCache();
 
     // init markup vars
     OreMine oreMine = thePlanet.GetOreMine();
@@ -28,7 +36,12 @@
     CrystalMine crystalMine = thePlanet.GetCrystalMine();
     NeutronAccelerator neutronAccelerator = thePlanet.GetNeutronAccelerator();
     ElementiumSynthesizer elementiumSynthesizer = thePlanet.GetElementiumSynthesizer();
+    Shipyard shipyard = thePlanet.GetShipyard();
+    DefenseSystem defenseSystem = thePlanet.GetDefenseSystem();
     double universeTicks = Model.Ticker.Ticks;
+    List<Ship> planetShips = Model.User.Ship.Where(ship => ship.ShipPlanetId.Equals(thePlanet.PlanetId)).ToList();
+    List<EventLog> logs = EventLogProvider.GetEventLogs(Data.Enums.EventLocationEnum.Planet, thePlanet.PlanetId);
+    List<Defense> planetDefense = Model.User.Defense.Where(defense => defense.DefensePlanetId.Equals(thePlanet.PlanetId)).ToList();
 }
 
 <style>
@@ -36,13 +49,14 @@
         border-spacing: 0;
         border-collapse: collapse;
     }
-    
-    td, th { 
-        font-size: .9rem;        
-        padding: 5px 10px; 
-        border-width: 1px; 
-        border-style: solid; 
-        border-color: blueviolet; }
+
+    td, th {
+        font-size: .8rem;
+        padding: 5px 10px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: blueviolet;
+    }
 
     th {
         text-align: center;
@@ -61,8 +75,8 @@
 <div>Game Ticks: @universeTicks</div>
 <div style="margin-bottom: 1rem;">Building in progress?: @(thePlanet.IsBuilding() ? "yes" : "no")</div>
 
-<div style="margin-bottom: 1rem;">
-    <table style="margin-bottom: 1rem;">
+<div id="user-panel" style="margin-bottom: 1rem;">
+    <table>
         <tr>
             <th>UserId</th>
             <th>UserEmail</th>
@@ -81,8 +95,8 @@
     </table>
 </div>
 
-<div style="margin-bottom: 1rem;">
-    <table style="margin-bottom: 1rem;">
+<div id="planet-panel" style="margin-bottom: 1rem;">
+    <table>
         <tr>
             <th>PlanetId</th>
             <th>PlanetName</th>
@@ -125,8 +139,8 @@
     </table>
 </div>
 
-<div style="margin-bottom: 1rem;">
-    <table style="margin-bottom: 1rem;">
+<div id="ressources-panel" style="margin-bottom: 1rem;">
+    <table>
         <tr>
             <th></th>
             <th>Ore</th>
@@ -208,6 +222,65 @@
             <td>@elementiumSynthesizer.AmountPerTick</td>
         </tr>
         <tr>
+            <th>Consuming/Tick</th>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@oreMine.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@oreMine.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@oreMine.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@oreMine.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@powerSupply.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@powerSupply.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@powerSupply.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@powerSupply.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@factory.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@factory.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@factory.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@factory.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@mageAcademy.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@mageAcademy.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@mageAcademy.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@mageAcademy.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@crystalMine.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@crystalMine.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@crystalMine.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@crystalMine.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@neutronAccelerator.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@neutronAccelerator.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@neutronAccelerator.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@neutronAccelerator.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr><th>Energy</th><td>@elementiumSynthesizer.ConsumptionEnergyRate.GetValuePerTick()</td></tr>
+                    <tr><th>Mana</th><td>@elementiumSynthesizer.ConsumptionManaRate.GetValuePerTick()</td></tr>
+                    <tr><th>Antimatter</th><td>@elementiumSynthesizer.ConsupmtionAntimatter.GetValuePerTick()</td></tr>
+                    <tr><th>Elementium</th><td>@elementiumSynthesizer.ConsumptionElementium.GetValuePerTick()</td></tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
             <th>Actions</th>
             <td class="table-ore">
                 <table>
@@ -223,10 +296,10 @@
                     <input type="submit" value="Build" @(!oreMine.CanBuild ? "disabled" : "") />
                 </form>
                 <form asp-controller="Home" asp-action="ChangeOreMineUsage">
-                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />                    
-                    <input type="range" name="newValue" value="@(thePlanet.PlanetOreMineUsage * 100)" min="0" max="100" />                    
-                    <br/>
-                    <input type="submit" value="Change Usage" />                    
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="range" name="newValue" value="@(thePlanet.PlanetOreMineUsage * 100)" min="0" max="100" />
+                    <br />
+                    <input type="submit" value="Change Usage" />
                 </form>
             </td>
             <td class="table-power-supply">
@@ -243,7 +316,7 @@
                     <input type="submit" value="Build" @(!powerSupply.CanBuild ? "disabled" : "") />
                 </form>
                 <form asp-controller="Home" asp-action="ChangePowerSupplyUsage">
-                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />    
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
                     <input type="range" name="newValue" value="@(thePlanet.PlanetPowerSupplyUsage * 100)" min="0" max="100" />
                     <br />
                     <input type="submit" value="Change Usage" />
@@ -353,20 +426,217 @@
     </table>
 </div>
 
-<div style="margin-bottom: 1rem;">
+<div id="producing-panel" style="margin-bottom: 1rem;">
+    <table>
+        <tr>
+            <th>Shipyard (Level: @thePlanet.PlanetShipyard)</th>
+            <th colspan="2">Produce</th>
+        </tr>
+        
+        <tr>
+            <td>
+                <table>
+                    <tr><th colspan="2">Upgrade to next level</th></tr>
+                    <tr><th>Ore</th><td>@shipyard.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@shipyard.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@shipyard.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@shipyard.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@shipyard.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildShipyard" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!shipyard.CanBuild ? "disabled" : "") />
+                </form>
+            </td>
+
+            <td>
+                <table>
+                    @{ Explorer explorer = new(thePlanet); }
+                    <tr><th colspan="2">Produce Explorer</th></tr>
+                    <tr><th>Tools</th><td>@explorer.CostTools</td></tr>
+                    <tr><th>Crystals</th><td>@explorer.CostCrystals</td></tr>
+                    <tr><th>Antimatter</th><td>@explorer.CostAntimatter</td></tr>
+                    <tr><th>Elementium</th><td>@explorer.CostElementium</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="ProduceShipExplorer" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Produce Explorer" />
+                </form>
+            </td>
+
+            <td>
+                <table>
+                    @{ Carrier carrier = new(thePlanet); }
+                    <tr><th colspan="2">Produce Carrier</th></tr>
+                    <tr><th>Tools</th><td>@carrier.CostTools</td></tr>
+                    <tr><th>Crystals</th><td>@carrier.CostCrystals</td></tr>
+                    <tr><th>Antimatter</th><td>@carrier.CostAntimatter</td></tr>
+                    <tr><th>Elementium</th><td>@carrier.CostElementium</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="ProduceShipCarrier" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Produce Carrier" />
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th>Defense System (Level: @thePlanet.PlanetDefenseSystem)</th>
+            <th>Produce</th>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr><th colspan="2">Upgrade to next level</th></tr>
+                    <tr><th>Ore</th><td>@defenseSystem.BuildCosts[0]</td></tr>
+                    <tr><th>Mana</th><td>@defenseSystem.BuildCosts[1]</td></tr>
+                    <tr><th>Crystal</th><td>@defenseSystem.BuildCosts[2]</td></tr>
+                    <tr><th>Elementium</th><td>@defenseSystem.BuildCosts[3]</td></tr>
+                    <tr><th>Ticks</th><td>@defenseSystem.BuildCosts[4]</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="BuildDefenseSystem" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Build" @(!defenseSystem.CanBuild ? "disabled" : "") />
+                </form>
+            </td>
+            <td>
+                <table>
+                    @{ LightManualCannon lightManualCannon = new(thePlanet); }
+                    <tr><th colspan="2">Produce Light Manual Cannon</th></tr>
+                    <tr><th>Tools</th><td>@lightManualCannon.CostTools</td></tr>
+                    <tr><th>Crystals</th><td>@lightManualCannon.CostCrystals</td></tr>
+                    <tr><th>Antimatter</th><td>@lightManualCannon.CostAntimatter</td></tr>
+                    <tr><th>Elementium</th><td>@lightManualCannon.CostElementium</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="ProduceDefenseLightManualCannon" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Produce Light Manual Cannon" />
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="fleet-panel" style="margin-bottom: 1rem;">
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Tactical</th>
+            <th>Storage capacity</th>
+        </tr>
+        @foreach (Ship ship in planetShips)
+        {
+            <tr>
+                <td>@ship.ShipType</td>
+                <td>@ship.ShipTactical</td>
+                <td>@ship.ShipStorageCapacity</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div id="defense-panel" style="margin-bottom: 1rem;">
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Tactical</th>
+        </tr>
+        @foreach (Defense defense in planetDefense)
+        {
+            <tr>
+                <td>@defense.DefenseType</td>
+                <td>@defense.DefenseTactical</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div id="events-panel" style="margin-bottom: 1rem;">
     <table>
         <tr>
             <th>Event Tick</th>
             <th>Event Name</th>
         </tr>
-    @foreach (Event @event in thePlanet.GetEvents())
-    {
-        <tr>
-            <td>@(@event.EventTick)</td>
-            <td>@(@event.EventName)</td>
-        </tr>
-    }
+        @foreach (Event @event in thePlanet.GetEvents())
+        {
+            <tr>
+                <td>@(@event.EventTick)</td>
+                <td>@(@event.EventName)</td>
+                <td>@(@event.EventData)</td>
+            </tr>
+        }
     </table>
 </div>
 
-<div style="margin-bottom: 1rem;">@Model.Info</div>
+<div id="event-logs-panel" style="margin-bottom: 1rem;">
+    <table>
+        <tr>
+            <th>Logged Event Tick</th>
+            <th>Logged Event Name</th>
+        </tr>
+        @foreach (EventLog log in logs)
+        {
+            <tr>
+                <td>@(@log.EventTick)</td>
+                <td>@(@log.EventName)</td>
+                <td>@(@log.EventData)</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div id="info-panel" style="margin-bottom: 1rem;">
+    @Model.Info
+</div>
+
+<div id="system-panel" style="margin-bottom: 1rem;">
+    <table>
+        <tr>
+            <th>Planet</th>
+            <th>X Coord</th>
+            <th>Y Coord</th>
+            <th>Z Coord</th>
+            <th>Distance</th>
+            <th>Commands</th>
+        </tr>
+
+        @foreach (Planet aPlanet in theSystem.Planet)
+        {
+            if (aPlanet.PlanetId == thePlanet.PlanetId)
+            {
+                continue;
+            }
+            <tr>
+                <td>@aPlanet.PlanetName</td>
+                <td>@aPlanet.PlanetCoordinateX</td>
+                <td>@aPlanet.PlanetCoordinateY</td>
+                <td>@aPlanet.PlanetCoordinateZ</td>
+                <td>@(DistanceHelper.GetDistance(thePlanet, aPlanet))</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <form asp-controller="Home" asp-action="Attack" method="post">
+                                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                                    <input type="hidden" name="userId" value="@Model.User.UserId" />
+                                    <input type="hidden" name="planetIdTarget" value="@aPlanet.PlanetId" />
+                                    <input type="submit" value="Attack" />
+                                </form>
+                            </td>
+                            <td>
+                                <form asp-controller="Home" asp-action="Scan" method="post">
+                                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                                    <input type="hidden" name="userId" value="@Model.User.UserId" />
+                                    <input type="hidden" name="planetIdTarget" value="@aPlanet.PlanetId" />
+                                    <input type="submit" value="Scan" />
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

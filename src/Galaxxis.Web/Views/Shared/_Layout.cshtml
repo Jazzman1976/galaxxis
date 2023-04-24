@@ -10,7 +10,11 @@
 
 <header class="gx-header">
     <div class="gx-header__left">
-        <a class="gx-header__link" href="/">Home</a>
+        <a class="gx-header__link" href="/">Start</a>
+        @if(User.Identity.IsAuthenticated)
+        {
+            <a class="gx-header__link" href="/home">Home</a>
+        }
     </div>
     <div class="gx-header__right">
         @if(User.Identity.IsAuthenticated)

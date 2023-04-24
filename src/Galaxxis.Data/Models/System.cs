@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace Galaxxis.Data.Models
 {
     public partial class System
@@ -15,6 +13,9 @@ namespace Galaxxis.Data.Models
         public int SystemId { get; set; }
         public string SystemName { get; set; }
         public int SystemGalaxyId { get; set; }
+        public int SystemCoordinateX { get; set; }
+        public int SystemCoordinateY { get; set; }
+        public int SystemCoordinateZ { get; set; }
 
         public virtual Galaxy SystemGalaxy { get; set; }
         public virtual ICollection<Planet> Planet { get; set; }

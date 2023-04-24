@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-
-#nullable disable
 
 namespace Galaxxis.Data.Models
 {
@@ -17,11 +16,13 @@ namespace Galaxxis.Data.Models
         {
         }
 
+        public virtual DbSet<Defense> Defense { get; set; }
         public virtual DbSet<Event> Event { get; set; }
+        public virtual DbSet<EventLog> EventLog { get; set; }
         public virtual DbSet<Galaxy> Galaxy { get; set; }
-        public virtual DbSet<Job> Job { get; set; }
         public virtual DbSet<Moon> Moon { get; set; }
         public virtual DbSet<Planet> Planet { get; set; }
+        public virtual DbSet<Ship> Ship { get; set; }
         public virtual DbSet<System> System { get; set; }
         public virtual DbSet<Universe> Universe { get; set; }
         public virtual DbSet<User> User { get; set; }
@@ -37,7 +38,22 @@ namespace Galaxxis.Data.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
+            modelBuilder.Entity<Defense>(entity =>
+            {
+                entity.Property(e => e.DefenseTactical)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.DefenseType)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.DefenseUser)
+                    .WithMany(p => p.Defense)
+                    .HasForeignKey(d => d.DefenseUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Defense_User");
+            });
 
             modelBuilder.Entity<Event>(entity =>
             {
@@ -48,17 +64,37 @@ namespace Galaxxis.Data.Models
                 entity.Property(e => e.EventLocation)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
 
                 entity.Property(e => e.EventName)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
 
                 entity.Property(e => e.EventType)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
+            });
+
+            modelBuilder.Entity<EventLog>(entity =>
+            {
+                entity.Property(e => e.EventData).HasColumnType("xml");
+
+                entity.Property(e => e.EventLocation)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsFixedLength();
+
+                entity.Property(e => e.EventName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsFixedLength();
+
+                entity.Property(e => e.EventType)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsFixedLength();
             });
 
             modelBuilder.Entity<Galaxy>(entity =>
@@ -70,21 +106,6 @@ namespace Galaxxis.Data.Models
                     .HasForeignKey(d => d.GalaxyUniverseId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Galaxy_Universe");
-            });
-
-            modelBuilder.Entity<Job>(entity =>
-            {
-                entity.Property(e => e.JobData).HasColumnType("xml");
-
-                entity.Property(e => e.JobEvent)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.JobUniverse)
-                    .WithMany(p => p.Job)
-                    .HasForeignKey(d => d.JobUniverseId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Job_Universe");
             });
 
             modelBuilder.Entity<Moon>(entity =>
@@ -104,13 +125,21 @@ namespace Galaxxis.Data.Models
             {
                 entity.Property(e => e.PlanetAntimatter).HasDefaultValueSql("((175))");
 
+                entity.Property(e => e.PlanetCrystalMineUsage).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.PlanetCrystals).HasDefaultValueSql("((175))");
 
                 entity.Property(e => e.PlanetElementium).HasDefaultValueSql("((75))");
 
+                entity.Property(e => e.PlanetElementiumSynthesizerUsage).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.PlanetEnergy).HasDefaultValueSql("((200))");
 
+                entity.Property(e => e.PlanetFactoryUsage).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.PlanetFields).HasDefaultValueSql("((150))");
+
+                entity.Property(e => e.PlanetMageAcademyUsage).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.PlanetMana).HasDefaultValueSql("((175))");
 
@@ -118,7 +147,13 @@ namespace Galaxxis.Data.Models
                     .IsRequired()
                     .HasMaxLength(50);
 
+                entity.Property(e => e.PlanetNeutronAcceleratorUsage).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.PlanetOre).HasDefaultValueSql("((200))");
+
+                entity.Property(e => e.PlanetOreMineUsage).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.PlanetPowerSupplyUsage).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.PlanetTools).HasDefaultValueSql("((200))");
 
@@ -133,6 +168,25 @@ namespace Galaxxis.Data.Models
                     .HasForeignKey(d => d.PlanetUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Planet_User");
+            });
+
+            modelBuilder.Entity<Ship>(entity =>
+            {
+                entity.Property(e => e.ShipTactical)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('Offensive')");
+
+                entity.Property(e => e.ShipType)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("('Explorer')");
+
+                entity.HasOne(d => d.ShipUser)
+                    .WithMany(p => p.Ship)
+                    .HasForeignKey(d => d.ShipUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Ship_User");
             });
 
             modelBuilder.Entity<System>(entity =>
@@ -169,7 +223,7 @@ namespace Galaxxis.Data.Models
                 entity.Property(e => e.UserRace)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
             });
 
             OnModelCreatingPartial(modelBuilder);

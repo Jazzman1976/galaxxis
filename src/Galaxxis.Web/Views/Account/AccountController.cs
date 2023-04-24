@@ -12,16 +12,22 @@ namespace Galaxxis.Web.Views.Account
 
         private SignInManager<AppUser> SignInMgr { get; }
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) 
         {
             this.UserMgr = userManager;
             this.SignInMgr = signInManager;
         }
 
-        public async Task<IActionResult> Login(string returnUrl = null)
+        public async Task<IActionResult> Login(string returnUrl = null, string user = null, string password = null)
         {
-            Microsoft.AspNetCore.Identity.SignInResult result
-                = await SignInMgr.PasswordSignInAsync("Administrator", "***REMOVED***", true, false);
+            if (user == null || password == null)
+            {
+                return View();
+            }
+
+            //Microsoft.AspNetCore.Identity.SignInResult result = await SignInMgr.PasswordSignInAsync("Administrator", "***REMOVED***", true, false);
+            Microsoft.AspNetCore.Identity.SignInResult result = await SignInMgr
+                .PasswordSignInAsync(user, password, true, false);
             if (result.Succeeded)
             {
                 if (string.IsNullOrWhiteSpace(returnUrl) || !Url.IsLocalUrl(returnUrl))

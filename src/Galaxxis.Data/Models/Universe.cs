@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace Galaxxis.Data.Models
 {
     public partial class Universe
@@ -10,7 +8,6 @@ namespace Galaxxis.Data.Models
         public Universe()
         {
             Galaxy = new HashSet<Galaxy>();
-            Job = new HashSet<Job>();
         }
 
         public int UniverseId { get; set; }
@@ -19,6 +16,5 @@ namespace Galaxxis.Data.Models
         public long UniverseTicks { get; set; }
 
         public virtual ICollection<Galaxy> Galaxy { get; set; }
-        public virtual ICollection<Job> Job { get; set; }
     }
 }

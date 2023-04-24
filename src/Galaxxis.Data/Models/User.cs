@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace Galaxxis.Data.Models
 {
     public partial class User
     {
         public User()
         {
+            Defense = new HashSet<Defense>();
             Planet = new HashSet<Planet>();
+            Ship = new HashSet<Ship>();
         }
 
         public int UserId { get; set; }
@@ -18,6 +18,8 @@ namespace Galaxxis.Data.Models
         public string UserLastname { get; set; }
         public string UserRace { get; set; }
 
+        public virtual ICollection<Defense> Defense { get; set; }
         public virtual ICollection<Planet> Planet { get; set; }
+        public virtual ICollection<Ship> Ship { get; set; }
     }
 }

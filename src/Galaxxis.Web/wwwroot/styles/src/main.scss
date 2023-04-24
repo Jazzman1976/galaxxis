@@ -1,0 +1,234 @@
+/* processor files (does not compile to css) */
+@import "processor/_variables.scss";
+@import "processor/_mixins.scss";
+
+/* reset stylesheet */
+@import "partials/reset";
+
+/* vendor stylesheets */
+@import "node_modules/perfect-scrollbar/css/perfect-scrollbar";
+
+/* custom styles */
+@import "partials/_html-elements.scss";
+@import "partials/_layer-background.scss";
+
+#content, 
+//#layer-background, 
+#layer-foreground {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#layer-interface, 
+#layer-inferface-background {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    left: 10%;
+    bottom: 0;
+}
+
+#layer-background, #layer-foreground {    
+    background-repeat: no-repeat;
+}
+
+#layer-background {
+    background-image: url("../images/planet_earth-wallpaper-1920x1080.jpg");    
+    background-size: cover;
+    background-position: center;
+
+    &.layer-background-universe {        
+        background-image: url("../images/galaxies.jpg");
+    }
+    &.layer-background-galaxy {        
+        background-image: url("../images/galaxy.jpg");
+    }
+    &.layer-background-quadrant {        
+        background-image: url("../images/quadrant.jpg");
+    }
+    &.layer-background-system {
+        background-image: url("../images/system.jpg")
+    }
+}
+
+#layer-foreground {
+    background-image: url("../images/cockpit.svg");
+    background-position: bottom center;
+}
+
+#layer-inferface-background {
+    background-color: $color-neon;
+    opacity: 0.25;    
+}
+
+#layer-interface {
+    box-shadow: 0 0 5px 1px $color-neon;
+    z-index: 100;
+    color: $color-neon;
+    padding: 10px;
+    overflow: hidden;
+
+    &.ps {
+        .ps__rail-x:hover, 
+        .ps__rail-y:hover, 
+        .ps__rail-x:focus,
+        .ps__rail-y:focus, 
+        .ps__rail-x.ps--clicking, 
+        .ps__rail-y.ps--clicking {
+            background-color: $color-neon;
+            opacity: 0.3;
+        }
+        .ps__thumb-y {
+            background-color: green;
+        }
+    }
+}
+
+main {
+    //height: 2000px;
+}
+
+
+select, button {
+    border: 1px solid black;
+    color: $color-neon;
+    background-color: $color-gray-dark-transparent;
+    padding: 3px 10px;
+    height: 30px;
+    
+    &:focus, &:active {
+        outline: none;
+    }
+
+    &:hover {
+        background-color: $color-gray-dark;
+        cursor: pointer;
+    }
+}
+select {
+    appearance: none;
+    min-width: 125px;
+
+    &::-ms-expand {
+        display: none;
+    }
+}
+.location-selection > button {
+    width: 30px;
+}
+
+.button-link {
+    display: inline-block;
+    text-decoration: none;    
+    border: 1px solid black;
+    color: $color-neon;
+    background-color: $color-gray-dark-transparent;
+    padding: 3px 10px;
+    height: 30px;
+    box-sizing: border-box;
+    vertical-align: center;
+    margin: 0 10px;
+
+    &:hover {
+        background-color: $color-gray-dark;
+    }
+
+    &--selection {
+        margin-top: 10px;
+        margin-left: 110px;
+        margin-right: auto;
+        display: block;
+        width: 185px;
+        text-align: center;
+    }
+}
+
+.two-col-panel {
+    display: flex;
+    
+    & > * + * {
+        margin-left: 15px;
+    }
+
+    @include view-small {
+        display: block;
+
+        & > * + * {
+            margin-top: 15px;
+            margin-left: 0;
+        }
+    }
+}
+
+.befehl-panel {
+    display: inline-block;
+
+    i {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 12px;
+        font-style: italic;
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+}
+
+fieldset {
+    padding: 2px 10px 5px;
+    border: 1px solid green;
+    border-radius: 5px;
+    position: relative;
+    display: inline-block;
+}
+
+legend {
+    padding: 0 5px;
+    margin-left: -5px;
+    font-size: 12px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.location-selection {
+        display: inline-flex;
+        align-items: center;
+
+        &--block {
+            display: flex;
+        }
+
+        label {
+            padding-right: 10px;
+            min-width: 100px;
+        }
+}
+.location-selection + .location-selection {
+    margin-top: 10px;
+}
+
+.select-wrapper {
+    position: relative;
+
+    select {
+        padding-right: 30px;
+        padding-left: 10px;
+
+        // option style hack
+        * {
+            background-color: $color-gray-dark;
+            color: $color-neon;
+            padding: 10px 0;
+        }
+    }
+    
+    &::before {        
+        content: "▼";        
+        position: absolute;
+        right: 7px;
+        top: 6px;
+        color: $color-neon;
+        font-size: 12px;
+        pointer-events: none;
+      }
+}

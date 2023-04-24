@@ -1,6 +1,6 @@
 ﻿using Galaxxis.Core.Classes.Buildings.BaseClasses;
+using Galaxxis.Core.Classes.Ships;
 using Galaxxis.Core.Engine;
-using Galaxxis.Core.Extensions;
 using Galaxxis.Core.Provider;
 using Galaxxis.Core.Static;
 using Galaxxis.Data.Enums;
@@ -98,41 +98,39 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
                 return false;
             }
 
-            double[] produceCosts = new double[] 
-            {
-                225,
-                _owner.IsOffensive() ? 225 : 450,
-                _owner.IsOffensive() ? 450 : 225,
-                75
-            };
+            // init a new explorer ship object on the shipyard's planet
+            Explorer explorer = new(_planet);
 
-            if (produceCosts[0] > _planet.PlanetTools)
+            // check costs
+            if (explorer.CostTools > _planet.PlanetTools)
             {
                 info = "Not enough tools!";
                 return false;
             }
-            if (produceCosts[1] > _planet.PlanetCrystals)
+            if (explorer.CostCrystals > _planet.PlanetCrystals)
             {
                 info = "Not enough crystals!";
                 return false;
             }
-            if (produceCosts[2] > _planet.PlanetAntimatter)
+            if (explorer.CostAntimatter > _planet.PlanetAntimatter)
             {
                 info = "Not enough antimatter!";
                 return false;
             }
-            if (produceCosts[3] > _planet.PlanetElementium)
+            if (explorer.CostElementium > _planet.PlanetElementium)
             {
                 info = "Not enough elementium!";
                 return false;
             }
 
-            // get event
+            // init produce event type data
             ProduceEventTypeData data = new ProduceEventTypeData(
-                produceCosts[0],
-                produceCosts[1],
-                produceCosts[2],
-                produceCosts[3]);
+                explorer.CostTools,
+                explorer.CostCrystals,
+                explorer.CostAntimatter,
+                explorer.CostElementium);
+
+            // init produce ship explorer event
             ProduceShipExplorerEvent @event = new ProduceShipExplorerEvent(
                 EventLocationEnum.Planet,
                 _planet.PlanetId,
@@ -156,30 +154,24 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
                 return false;
             }
 
-            double[] produceCosts = new double[]
-            {
-                450,
-                _owner.IsOffensive() ? 450 : 900,
-                _owner.IsOffensive() ? 900 : 450,
-                150
-            };
+            Carrier carrier = new Carrier(_planet); 
 
-            if (produceCosts[0] > _planet.PlanetTools)
+            if (carrier.CostTools > _planet.PlanetTools)
             {
                 info = "Not enough tools!";
                 return false;
             }
-            if (produceCosts[1] > _planet.PlanetCrystals)
+            if (carrier.CostCrystals > _planet.PlanetCrystals)
             {
                 info = "Not enough crystals!";
                 return false;
             }
-            if (produceCosts[2] > _planet.PlanetAntimatter)
+            if (carrier.CostAntimatter > _planet.PlanetAntimatter)
             {
                 info = "Not enough antimatter!";
                 return false;
             }
-            if (produceCosts[3] > _planet.PlanetElementium)
+            if (carrier.CostElementium > _planet.PlanetElementium)
             {
                 info = "Not enough elementium!";
                 return false;
@@ -187,10 +179,10 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
 
             // get event
             ProduceEventTypeData data = new ProduceEventTypeData(
-                produceCosts[0],
-                produceCosts[1],
-                produceCosts[2],
-                produceCosts[3]);
+                carrier.CostTools,
+                carrier.CostCrystals,
+                carrier.CostAntimatter,
+                carrier.CostElementium);
             ProduceShipCarrierEvent @event = new ProduceShipCarrierEvent(
                 EventLocationEnum.Planet,
                 _planet.PlanetId,

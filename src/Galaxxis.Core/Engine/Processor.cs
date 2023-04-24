@@ -206,6 +206,10 @@ namespace Galaxxis.Core.Engine
                     Do_BuildShipyard(@event, context);
                     break;
 
+                case EventNameEnum.BuildDefenseSystem:
+                    Do_BuildDefenseSystem(@event, context);
+                    break;
+
                 #endregion
 
                 #region Change event actions ------------------------------------------------------
@@ -248,6 +252,10 @@ namespace Galaxxis.Core.Engine
 
                 case EventNameEnum.ProduceShipCarrier:
                     Do_ProduceShipCarrier(@event, context);
+                    break;
+
+                case EventNameEnum.ProduceLightManualCannon:
+                    Do_ProduceDefenseLightManualCannon(@event, context);
                     break;
 
                 #endregion
@@ -376,6 +384,19 @@ namespace Galaxxis.Core.Engine
                 planet.PlanetShipyard++;
                 planet.ClearCache();
                 Debug.WriteLine($"{DateStamp}: Shipyard build on planet {planet.PlanetId}.");
+            }
+        }
+
+        private void Do_BuildDefenseSystem(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                planet.UpdateRessources();
+                planet.PlanetDefenseSystem++;
+                planet.ClearCache();
+                Debug.WriteLine($"{DateStamp}: Defense System build on planet {planet.PlanetId}.");
             }
         }
 
@@ -555,6 +576,33 @@ namespace Galaxxis.Core.Engine
                     ShipAttackPower = user.IsOffensive() ? 64 : 56,
                     ShipArmour = user.IsOffensive() ? 16 : 24
                 }); ;
+            }
+        }
+
+        private void Do_ProduceDefenseLightManualCannon(Event @event, GalaxxisContext context)
+        {
+            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
+            {
+                int planetId = @event.EventLocationId;
+                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
+                User user = context.User.FirstOrDefault(u => u.UserId.Equals(planet.PlanetUserId));
+                planet.UpdateRessources();
+                context.Defense.Add(new Defense 
+                {
+                    DefenseUserId = planet.PlanetUserId,
+                    DefensePlanetId = planetId,
+                    DefenseType = DefenseTypeEnum.LightManualCannon.ToString(),
+                    DefenseTactical = user.GetTacticalEnum().ToString(),
+                    DefenseWeaponSlots = user.IsOffensive() ? 2 : 1,
+                    DefenseArmorSlots = user.IsOffensive() ? 1 : 2,
+                    DefenseItemSlots = 2,
+                    DefenseStructurePoints = 50,
+                    DefenseCpuPower = 9,
+                    DefenseAccuracy = user.IsOffensive() ? 45 : 40,
+                    DefenseShieldPower = user.IsOffensive() ? 20 : 25,
+                    DefenseAttackPower = user.IsOffensive() ? 40 : 35,
+                    DefenseArmour = user.IsOffensive() ? 10 : 15
+                });
             }
         }
 

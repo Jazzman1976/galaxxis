@@ -4,6 +4,9 @@ namespace Galaxxis.Core.Classes.Ships
 {
     public abstract class BaseShip : IShip
     {
+        /// <summary>
+        /// location of the ship's home planet
+        /// </summary>
         public int PlanetId { get; }
         public ShipTypeEnum ShipType { get; }
         public TacticalEnum Tactical { get; }

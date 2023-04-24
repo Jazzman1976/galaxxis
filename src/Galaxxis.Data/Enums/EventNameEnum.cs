@@ -10,6 +10,7 @@
         BuildNeutronAccelerator,
         BuildElementiumSynthesizer,
         BuildShipyard,
+        BuildDefenseSystem,
 
         ChangeOreMineUsage,
         ChangePowerSupplyUsage,
@@ -27,6 +28,15 @@
         ProduceShipDestroyer,
         ProduceShipBattlestar,
         ProduceShipBattlestation,
+
+        ProduceLightManualCannon,
+        ProduceHeavyManualCannon,
+        ProduceLightAutomaticCannon,
+        ProduceHeavyAutomaticCannon,
+        ProduceLightComputerAidedCannon,
+        ProduceHeavyComputerAidedCannon,
+        ProduceLightTurret,
+        ProduceHeavyTurret,
 
         Attack,
         Return,

@@ -32,7 +32,8 @@ namespace Galaxxis.Core.Provider
                         .ThenInclude(planet => planet.PlanetSystem)
                         .ThenInclude(system => system.SystemGalaxy)
                         .ThenInclude(galaxy => galaxy.GalaxyUniverse)
-                        .Include(user => user.Ship);
+                        .Include(user => user.Ship)
+                        .Include(user => user.Defense);
                 }
 
                 // get user

@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-
-#nullable disable
 
 namespace Galaxxis.Data.Models
 {
@@ -17,6 +16,7 @@ namespace Galaxxis.Data.Models
         {
         }
 
+        public virtual DbSet<Defense> Defense { get; set; }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<EventLog> EventLog { get; set; }
         public virtual DbSet<Galaxy> Galaxy { get; set; }
@@ -38,7 +38,22 @@ namespace Galaxxis.Data.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
+            modelBuilder.Entity<Defense>(entity =>
+            {
+                entity.Property(e => e.DefenseTactical)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.DefenseType)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.DefenseUser)
+                    .WithMany(p => p.Defense)
+                    .HasForeignKey(d => d.DefenseUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Defense_User");
+            });
 
             modelBuilder.Entity<Event>(entity =>
             {
@@ -49,17 +64,17 @@ namespace Galaxxis.Data.Models
                 entity.Property(e => e.EventLocation)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
 
                 entity.Property(e => e.EventName)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
 
                 entity.Property(e => e.EventType)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
             });
 
             modelBuilder.Entity<EventLog>(entity =>
@@ -69,17 +84,17 @@ namespace Galaxxis.Data.Models
                 entity.Property(e => e.EventLocation)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
 
                 entity.Property(e => e.EventName)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
 
                 entity.Property(e => e.EventType)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
             });
 
             modelBuilder.Entity<Galaxy>(entity =>
@@ -208,7 +223,7 @@ namespace Galaxxis.Data.Models
                 entity.Property(e => e.UserRace)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsFixedLength(true);
+                    .IsFixedLength();
             });
 
             OnModelCreatingPartial(modelBuilder);

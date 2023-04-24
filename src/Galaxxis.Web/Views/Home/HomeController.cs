@@ -205,9 +205,22 @@ namespace Galaxxis.Web.Views.Home
             // get planet from database
             Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
-            // build Elementium Synthesizer
+            // build Shipyard
             planet.GetShipyard().Build(out string info);
 
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult BuildDefenseSystem(int planetId)
+        {
+            // get planet from database
+            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+
+            // build Defense System
+            planet.GetDefenseSystem().Build(out string info);
+            
             // exit
             return View("Home", new HomeViewModel(info));
         }
@@ -233,6 +246,19 @@ namespace Galaxxis.Web.Views.Home
 
             // produce ship: explorer
             planet.GetShipyard().ProduceShipCarrier(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
+        public IActionResult ProduceDefenseLightManualCannon(int planetId)
+        {
+            // get entities from database
+            Planet planet = PlanetProvider.GetPlanet(planetId);
+
+            // produce defense: light manual cannon
+            planet.GetDefenseSystem().ProduceDefenseLightManualCannon(out string info);
 
             // exit
             return View("Home", new HomeViewModel(info));

@@ -19,5 +19,12 @@ namespace Galaxxis.Core.Extensions
         {
             return !user.IsDefensive();
         }
+
+        public static TacticalEnum GetTacticalEnum(this User user)
+        {
+            return user.IsDefensive()
+                ? TacticalEnum.Defensive
+                : TacticalEnum.Offensive;
+        }
     }
 }

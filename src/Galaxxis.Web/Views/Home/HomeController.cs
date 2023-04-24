@@ -252,6 +252,19 @@ namespace Galaxxis.Web.Views.Home
         }
 
         [HttpPost]
+        public IActionResult ProduceDefenseLightManualCannon(int planetId)
+        {
+            // get entities from database
+            Planet planet = PlanetProvider.GetPlanet(planetId);
+
+            // produce defense: light manual cannon
+            planet.GetDefenseSystem().ProduceDefenseLightManualCannon(out string info);
+
+            // exit
+            return View("Home", new HomeViewModel(info));
+        }
+
+        [HttpPost]
         public IActionResult Attack(int planetId, int userId, int planetIdTarget)
         {
             // get entities from database

@@ -1,14 +1,15 @@
 ﻿using Galaxxis.Core.Classes.Buildings.BaseClasses;
+using Galaxxis.Core.Classes.Defense;
+using Galaxxis.Core.Engine;
 using Galaxxis.Core.Provider;
 using Galaxxis.Core.Static;
 using Galaxxis.Data.Enums;
+using Galaxxis.Data.Events;
 using Galaxxis.Data.Events.BuildEvents;
+using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
 {
@@ -85,6 +86,63 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
         public override bool Build(out string info)
         {
             return base.Build<BuildDefenseSystemEvent>(out info);
+        }
+
+        public bool ProduceDefenseLightManualCannon(out string info)
+        {
+            if (EventProvider
+                .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Produce)
+                .Any())
+            {
+                info = "Producing is still in progress!";
+                return false;
+            }
+
+            // init new light manual cannon object on defense system's planet
+            LightManualCannon lightManualCannon = new(_planet);
+
+            // check costs
+            if (lightManualCannon.CostTools > _planet.PlanetTools)
+            {
+                info = "Not enough tools!";
+                return false;
+            }
+            if (lightManualCannon.CostCrystals > _planet.PlanetCrystals)
+            {
+                info = "Not enough crystals!";
+                return false;
+            }
+            if (lightManualCannon.CostAntimatter > _planet.PlanetAntimatter)
+            {
+                info = "Not enough antimatter!";
+                return false;
+            }
+            if (lightManualCannon.CostElementium > _planet.PlanetElementium)
+            {
+                info = "Not enough elementium!";
+                return false;
+            }
+
+            // init produce event type data
+            ProduceEventTypeData data = new ProduceEventTypeData(
+                lightManualCannon.CostTools,
+                lightManualCannon.CostCrystals,
+                lightManualCannon.CostAntimatter,
+                lightManualCannon.CostElementium);
+
+            // init produce light manual cannon event
+            ProduceLightManualCannonEvent @event = new ProduceLightManualCannonEvent(
+                EventLocationEnum.Planet,
+                _planet.PlanetId,
+                100,
+                data);
+
+            // enqueue event
+            Processor.Instance.EventQueue.Enqueue(@event);
+
+            // set out variable and exit
+            info = "Producing of a new light manual cannon defense has been started.";
+            return true;
         }
 
         public DefenseSystem(Planet planet) : base(planet)

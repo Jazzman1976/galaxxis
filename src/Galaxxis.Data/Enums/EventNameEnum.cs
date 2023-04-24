@@ -29,6 +29,15 @@
         ProduceShipBattlestar,
         ProduceShipBattlestation,
 
+        ProduceLightManualCannon,
+        ProduceHeavyManualCannon,
+        ProduceLightAutomaticCannon,
+        ProduceHeavyAutomaticCannon,
+        ProduceLightComputerAidedCannon,
+        ProduceHeavyComputerAidedCannon,
+        ProduceLightTurret,
+        ProduceHeavyTurret,
+
         Attack,
         Return,
         Scan

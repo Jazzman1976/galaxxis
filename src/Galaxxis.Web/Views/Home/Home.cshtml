@@ -6,6 +6,7 @@
 @using Galaxxis.Core.Helper
 @using Galaxxis.Core.Provider
 @using Galaxxis.Core.Classes.Ships
+@using Galaxxis.Core.Classes.Defense
 
 @model HomeViewModel
 
@@ -40,6 +41,7 @@
     double universeTicks = Model.Ticker.Ticks;
     List<Ship> planetShips = Model.User.Ship.Where(ship => ship.ShipPlanetId.Equals(thePlanet.PlanetId)).ToList();
     List<EventLog> logs = EventLogProvider.GetEventLogs(Data.Enums.EventLocationEnum.Planet, thePlanet.PlanetId);
+    List<Defense> planetDefense = Model.User.Defense.Where(defense => defense.DefensePlanetId.Equals(thePlanet.PlanetId)).ToList();
 }
 
 <style>
@@ -482,6 +484,7 @@
     <table>
         <tr>
             <th>Defense System (Level: @thePlanet.PlanetDefenseSystem)</th>
+            <th>Produce</th>
         </tr>
         <tr>
             <td>
@@ -496,6 +499,20 @@
                 <form asp-controller="Home" asp-action="BuildDefenseSystem" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
                     <input type="submit" value="Build" @(!defenseSystem.CanBuild ? "disabled" : "") />
+                </form>
+            </td>
+            <td>
+                <table>
+                    @{ LightManualCannon lightManualCannon = new(thePlanet); }
+                    <tr><th colspan="2">Produce Light Manual Cannon</th></tr>
+                    <tr><th>Tools</th><td>@lightManualCannon.CostTools</td></tr>
+                    <tr><th>Crystals</th><td>@lightManualCannon.CostCrystals</td></tr>
+                    <tr><th>Antimatter</th><td>@lightManualCannon.CostAntimatter</td></tr>
+                    <tr><th>Elementium</th><td>@lightManualCannon.CostElementium</td></tr>
+                </table>
+                <form asp-controller="Home" asp-action="ProduceDefenseLightManualCannon" method="post">
+                    <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
+                    <input type="submit" value="Produce Light Manual Cannon" />
                 </form>
             </td>
         </tr>
@@ -515,6 +532,22 @@
                 <td>@ship.ShipType</td>
                 <td>@ship.ShipTactical</td>
                 <td>@ship.ShipStorageCapacity</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div id="defense-panel" style="margin-bottom: 1rem;">
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Tactical</th>
+        </tr>
+        @foreach (Defense defense in planetDefense)
+        {
+            <tr>
+                <td>@defense.DefenseType</td>
+                <td>@defense.DefenseTactical</td>
             </tr>
         }
     </table>

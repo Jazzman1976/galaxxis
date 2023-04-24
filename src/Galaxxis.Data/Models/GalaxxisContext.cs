@@ -16,6 +16,7 @@ namespace Galaxxis.Data.Models
         {
         }
 
+        public virtual DbSet<Defense> Defense { get; set; }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<EventLog> EventLog { get; set; }
         public virtual DbSet<Galaxy> Galaxy { get; set; }
@@ -37,6 +38,23 @@ namespace Galaxxis.Data.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Defense>(entity =>
+            {
+                entity.Property(e => e.DefenseTactical)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.DefenseType)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.DefenseUser)
+                    .WithMany(p => p.Defense)
+                    .HasForeignKey(d => d.DefenseUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Defense_User");
+            });
+
             modelBuilder.Entity<Event>(entity =>
             {
                 entity.HasIndex(e => new { e.EventTick, e.EventLocation, e.EventLocationId }, "ix_event_target");

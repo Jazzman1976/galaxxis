@@ -1,4 +1,6 @@
 @charset "UTF-8";
+/* processor files (does not compile to css) */
+/* reset stylesheet */
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -53,6 +55,7 @@ table {
   border-spacing: 0;
 }
 
+/* vendor stylesheets */
 /*
  * Container style
  */
@@ -174,6 +177,7 @@ table {
   }
 }
 
+/* custom styles */
 html {
   min-height: 100%;
   background-color: black;
@@ -225,8 +229,15 @@ hr {
   margin-bottom: 2px;
 }
 
+.layer-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
 #content,
-#layer-background,
 #layer-foreground {
   position: absolute;
   top: 0;

@@ -261,7 +261,8 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
 
         /// <summary>
         /// Calculates all ressources on the planet depending on
-        /// income and consumption. Does not store calculated planet to db. <br/>
+        /// income and consumption. Does not automatically store calculated planet to db, 
+        /// but changes the planet instance. To update the database save the context. <br/> 
         /// ! Heavy performance costs !
         /// </summary>
         public static void UpdateRessources(this Planet planet)

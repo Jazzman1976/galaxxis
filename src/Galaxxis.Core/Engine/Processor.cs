@@ -44,6 +44,9 @@ namespace Galaxxis.Core.Engine
             new BuildCrystalMineAction(),           // Crystals
             new BuildNeutronAcceleratorAction(),    // Antimatter
             new BuildElementiumSynthesizerAction(), // Elementium
+
+            // register change actions of producing buildings
+            new ChangeOreMineUsageAction(),         // Ore
         };
 
         public static Processor Instance
@@ -217,10 +220,6 @@ namespace Galaxxis.Core.Engine
 
                 #region Change event actions ------------------------------------------------------
 
-                case EventNameEnum.ChangeOreMineUsage:
-                    Do_ChangeOreMineUsage(@event, context);
-                    break;
-
                 case EventNameEnum.ChangePowerSupplyUsage:
                     Do_ChangePowerSupplyUsage(@event, context);
                     break;
@@ -316,21 +315,6 @@ namespace Galaxxis.Core.Engine
 
 
         #region Do Change Event Methods -----------------------------------------------------------
-
-        private void Do_ChangeOreMineUsage(Event @event, GalaxxisContext context)
-        {
-            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
-            {
-                int planetId = @event.EventLocationId;
-                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
-                planet.UpdateRessources();
-                planet.PlanetOreMineUsage
-                    = new ChangeUsageEventTypeData(@event.EventData).NewValue;
-                planet.ClearCache();
-                Debug.WriteLine(
-                    $"{DateStamp}: Ore Mine usage changed on planet {planet.PlanetId}.");
-            }
-        }
 
         private void Do_ChangePowerSupplyUsage(Event @event, GalaxxisContext context)
         {

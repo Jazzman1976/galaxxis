@@ -30,9 +30,20 @@ namespace Galaxxis.Core.Engine
         public Queue<Event> EventQueue { get; set; } = new Queue<Event>();
 
         private static string DateStamp => DateTime.Now.ToString(_dateFormat);
+
+        /// <summary>
+        /// Register all event actions that should be processed by the processor
+        /// </summary>
         private static readonly List<IAction> _actionStore = new()
         {
-            new BuildOreMineAction()
+            // register build actions of producing buildings
+            new BuildOreMineAction(),               // Ore
+            new BuildPowerSupplyAction(),           // Tools
+            new BuildFactoryAction(),               // Energy
+            new BuildMageAcademyAction(),           // Mana
+            new BuildCrystalMineAction(),           // Crystals
+            new BuildNeutronAcceleratorAction(),    // Antimatter
+            new BuildElementiumSynthesizerAction(), // Elementium
         };
 
         public static Processor Instance
@@ -185,7 +196,7 @@ namespace Galaxxis.Core.Engine
             if (triggeredAction != null)
             {
                 bool success = triggeredAction.DoAction(@event, context, out string feedback);
-                Debug.WriteLine(success ? "Action done: " : "Action failed: " + feedback);
+                Debug.WriteLine((success ? "Action done: " : "Action failed: ") + feedback);
                 return;
             }
 
@@ -193,30 +204,6 @@ namespace Galaxxis.Core.Engine
             switch (Enum.Parse(typeof(EventNameEnum), @event.EventName))
             {
                 #region Build event actions -------------------------------------------------------
-
-                case EventNameEnum.BuildPowerSupply:
-                    Do_BuildPowerSupply(@event, context);
-                    break;
-
-                case EventNameEnum.BuildFactory:
-                    Do_BuildFactory(@event, context);
-                    break;
-
-                case EventNameEnum.BuildMageAcademy:
-                    Do_BuildMageAcademy(@event, context);
-                    break;
-
-                case EventNameEnum.BuildCrystalMine:
-                    Do_BuildCrystalMine(@event, context);
-                    break;
-
-                case EventNameEnum.BuildNeutronAccelerator:
-                    Do_BuildNeutronAccelerator(@event, context);
-                    break;
-
-                case EventNameEnum.BuildElementiumSynthesizer:
-                    Do_BuildElementiumSynthesizer(@event, context);
-                    break;
 
                 case EventNameEnum.BuildShipyard:
                     Do_BuildShipyard(@event, context);
@@ -298,84 +285,6 @@ namespace Galaxxis.Core.Engine
 
 
         #region Do Build Event Methods ------------------------------------------------------------
-
-        private void Do_BuildPowerSupply(Event @event, GalaxxisContext context)
-        {
-            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
-            {
-                int planetId = @event.EventLocationId;
-                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
-                planet.UpdateRessources();
-                planet.PlanetPowerSupply++;
-                planet.ClearCache();
-                Debug.WriteLine($"{DateStamp}: Power Supply build on planet {planet.PlanetId}.");
-            }
-        }
-
-        private void Do_BuildFactory(Event @event, GalaxxisContext context)
-        {
-            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
-            {
-                int planetId = @event.EventLocationId;
-                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
-                planet.UpdateRessources();
-                planet.PlanetFactory++;
-                planet.ClearCache();
-                Debug.WriteLine($"{DateStamp}: Factory build on planet {planet.PlanetId}.");
-            }
-        }
-
-        private void Do_BuildMageAcademy(Event @event, GalaxxisContext context)
-        {
-            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
-            {
-                int planetId = @event.EventLocationId;
-                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
-                planet.UpdateRessources();
-                planet.PlanetMageAcademy++;
-                planet.ClearCache();
-                Debug.WriteLine($"{DateStamp}: Mage Academy build on planet {planet.PlanetId}.");
-            }
-        }
-
-        private void Do_BuildCrystalMine(Event @event, GalaxxisContext context)
-        {
-            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
-            {
-                int planetId = @event.EventLocationId;
-                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
-                planet.UpdateRessources();
-                planet.PlanetCrystalMine++;
-                planet.ClearCache();
-                Debug.WriteLine($"{DateStamp}: Chrystal Mine build on planet {planet.PlanetId}.");
-            }
-        }
-
-        private void Do_BuildNeutronAccelerator(Event @event, GalaxxisContext context)
-        {
-            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
-            {
-                int planetId = @event.EventLocationId;
-                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
-                planet.UpdateRessources();
-                planet.PlanetNeutronAccelerator++;
-                planet.ClearCache();
-                Debug.WriteLine($"{DateStamp}: Neutron Accelerator build on planet {planet.PlanetId}.");
-            }
-        }
-
-        private void Do_BuildElementiumSynthesizer(Event @event, GalaxxisContext context)
-        {
-            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
-            {
-                int planetId = @event.EventLocationId;
-                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
-                planet.UpdateRessources();
-                planet.PlanetElementiumSynthesizer++;
-                planet.ClearCache();
-                Debug.WriteLine($"{DateStamp}: Elementium Synthesizer build on planet {planet.PlanetId}.");
-            }
-        }
 
         private void Do_BuildShipyard(Event @event, GalaxxisContext context)
         {

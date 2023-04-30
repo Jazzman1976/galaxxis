@@ -1,4 +1,5 @@
-﻿using Galaxxis.Core.Extensions;
+﻿using Galaxxis.Core.Actions;
+using Galaxxis.Core.Extensions;
 using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Core.Provider;
 using Galaxxis.Data.Enums;
@@ -27,7 +28,13 @@ namespace Galaxxis.Core.Engine
 
         public bool IsWorking { get; set; }
         public Queue<Event> EventQueue { get; set; } = new Queue<Event>();
-        private string DateStamp => DateTime.Now.ToString(_dateFormat);
+
+        private static string DateStamp => DateTime.Now.ToString(_dateFormat);
+        private static readonly List<IAction> _actionStore = new()
+        {
+            new BuildOreMineAction()
+        };
+
         public static Processor Instance
         {
             get
@@ -46,7 +53,7 @@ namespace Galaxxis.Core.Engine
         #region Common Methods --------------------------------------------------------------------
 
         /// <summary>
-        /// Starts processing all ticks not still processed up to universeTicks. 
+        /// Starts processing all ticks not still processed up to latest universeTicks. 
         /// If processor is still running, processing is skipped and the tick is queued. 
         /// </summary>
         /// <param name="universeTicks"></param>
@@ -70,46 +77,44 @@ namespace Galaxxis.Core.Engine
             // mark processing, block another run simultaniously
             this.IsWorking = true;
 
-            // log time started processing
+            // log time started processing all ticks
             DateTime tStartProcessing = DateTime.Now;
 
-            // for debugging purposes
-            //System.Threading.Thread.Sleep(5000);
-
-            // process db objects (for now only one universe supported)
+            // process db objects
             using (GalaxxisContext context = new GalaxxisContext())
             {
-                // get universe
+                // get universe (for now only one universe supported)
                 Universe universe = context.Universe.First();
 
                 // process all ticks gone until last processed tick
                 while (universe.UniverseTicks < universeTicks)
                 {
-                    // log time started processing
+                    // log time started processing a single tick
                     DateTime tStartTick = DateTime.Now;
 
-                    // raise tick to be processed
+                    // raise universe ticks for next tick to be processed
                     universe.UniverseTicks++;
 
-                    // add new Events to Database
+                    // read queued events and add new Events to Database
                     while (EventQueue.Any())
                     {
                         Event @event = EventQueue.Dequeue();
                         Add_EventAction(@event, context, universe.UniverseTicks);
                     }
 
-                    // iterate events, do action and remove
-                    List<Event> events = EventProvider.GetEvents(universe.UniverseTicks, context);
+                    // process all events in the database for the current tick
+                    List<Event> events = EventProvider
+                        .GetEvents(universe.UniverseTicks, context);
                     foreach (Event @event in events)
                     {
                         Do_EventAction(@event, context);
                         context.Event.Remove(@event);
                     }
 
-                    // save changes the tick has made
+                    // save changes processing the tick has made to the context to database
                     context.SaveChanges();
 
-                    // write log
+                    // write log for the single tick processed
                     Debug.WriteLine($"{DateStamp}: Tick {universe.UniverseTicks} done in "
                         + $"{tStartTick.MsGone()} ms.");
                 }
@@ -118,7 +123,7 @@ namespace Galaxxis.Core.Engine
             // mark not processing, unlock processor
             this.IsWorking = false;
 
-            // write log
+            // write log for all ticks processed
             Debug.WriteLine($"{DateStamp}: Processing completely done in "
                 + $"{tStartProcessing.MsGone()} ms.");
             Debug.WriteLine("");
@@ -170,13 +175,24 @@ namespace Galaxxis.Core.Engine
         /// </summary>
         private void Do_EventAction(Event @event, GalaxxisContext context)
         {
+            // find first action in action store by trigger event
+            IAction triggeredAction = _actionStore
+                .FirstOrDefault(
+                    a => a.TriggerEvent == (EventNameEnum)Enum
+                        .Parse(typeof(EventNameEnum), @event.EventName));
+
+            // if found, execute it
+            if (triggeredAction != null)
+            {
+                bool success = triggeredAction.DoAction(@event, context, out string feedback);
+                Debug.WriteLine(success ? "Action done: " : "Action failed: " + feedback);
+                return;
+            }
+
+            // if not found, do the common way (fallback until all is added to the new store)
             switch (Enum.Parse(typeof(EventNameEnum), @event.EventName))
             {
                 #region Build event actions -------------------------------------------------------
-
-                case EventNameEnum.BuildOreMine:
-                    Do_BuildOreMine(@event, context);
-                    break;
 
                 case EventNameEnum.BuildPowerSupply:
                     Do_BuildPowerSupply(@event, context);
@@ -282,19 +298,6 @@ namespace Galaxxis.Core.Engine
 
 
         #region Do Build Event Methods ------------------------------------------------------------
-
-        private void Do_BuildOreMine(Event @event, GalaxxisContext context)
-        {
-            if (@event.EventLocation.Trim() == EventLocationEnum.Planet.ToString())
-            {
-                int planetId = @event.EventLocationId;
-                Planet planet = context.Planet.FirstOrDefault(p => p.PlanetId.Equals(planetId));
-                planet.UpdateRessources();
-                planet.PlanetOreMine++;
-                planet.ClearCache();
-                Debug.WriteLine($"{DateStamp}: Ore Mine build on planet {planet.PlanetId}.");
-            }
-        }
 
         private void Do_BuildPowerSupply(Event @event, GalaxxisContext context)
         {

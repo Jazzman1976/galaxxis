@@ -23,7 +23,7 @@ namespace Galaxxis.Data
 
             #region create galaxies
 
-            if (input == "g" || input == "g")
+            if (input == "g" || input == "G")
             {
                 // step 1: create 3D coordinates for galaxies
                 bool successGalaxies = UniverseCreator.Create3D(2, 10, 10, out List<int[]> galaxyCoords);

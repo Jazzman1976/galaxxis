@@ -6,7 +6,7 @@
 
         public AdminViewModel()
         {
-            this.TickerStatus = Galaxxis.Core.Engine.Ticker.Instance.Status;
+            this.TickerStatus = Core.Engine.Ticker.Instance.Status;
         }
     }
 }

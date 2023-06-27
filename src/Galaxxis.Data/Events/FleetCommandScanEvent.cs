@@ -4,19 +4,19 @@ using Galaxxis.Data.Models;
 
 namespace Galaxxis.Data.Events
 {
-    public class AttackEvent : Event
+    public class FleetCommandScanEvent : Event
     {
-        private AttackEvent() { }
+        private FleetCommandScanEvent() { }
 
-        public AttackEvent(
+        public FleetCommandScanEvent(
             EventLocationEnum location,
             int locationId,
             long ticksToEventTick,
-            MoveEventTypeData data)
+            ScanEventTypeData data)
         {
             this.EventLocation = location.ToString();
             this.EventLocationId = locationId;
-            this.EventName = EventNameEnum.Attack.ToString();
+            this.EventName = EventNameEnum.FleetCommandScan.ToString();
             this.EventType = EventTypeEnum.Move.ToString();
             this.EventData = data.GetXml();
             this.EventTicksToEventTick = ticksToEventTick;

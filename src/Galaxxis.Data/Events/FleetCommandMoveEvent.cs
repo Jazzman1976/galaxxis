@@ -1,27 +1,25 @@
 ﻿using Galaxxis.Data.Enums;
 using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Galaxxis.Data.Events
 {
-    public class ScanEvent : Event
+    public class FleetCommandMoveEvent : Event
     {
-        private ScanEvent() { }
+        private FleetCommandMoveEvent() { }
 
-        public ScanEvent(
+        public FleetCommandMoveEvent(
             EventLocationEnum location,
             int locationId,
             long ticksToEventTick,
-            ScanEventTypeData data)
+            MoveEventTypeData data)
         {
             this.EventLocation = location.ToString();
             this.EventLocationId = locationId;
-            this.EventName = EventNameEnum.Scan.ToString();
+            this.EventName = EventNameEnum.FleetCommandMove.ToString();
             this.EventType = EventTypeEnum.Move.ToString();
             this.EventData = data.GetXml();
+
             this.EventTicksToEventTick = ticksToEventTick;
         }
     }

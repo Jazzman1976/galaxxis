@@ -16,7 +16,7 @@ namespace Galaxxis.Data.Events
         {
             this.EventLocation = location.ToString();
             this.EventLocationId = locationId;
-            this.EventName = EventNameEnum.ProduceLightManualCannon.ToString();
+            this.EventName = EventNameEnum.ProduceDefenseLightManualCannon.ToString();
             this.EventData = data.GetXml();
             this.EventType = EventTypeEnum.Produce.ToString();
 

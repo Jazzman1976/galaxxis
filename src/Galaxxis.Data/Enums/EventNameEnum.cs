@@ -29,17 +29,17 @@
         ProduceShipBattlestar,
         ProduceShipBattlestation,
 
-        ProduceLightManualCannon,
-        ProduceHeavyManualCannon,
-        ProduceLightAutomaticCannon,
-        ProduceHeavyAutomaticCannon,
-        ProduceLightComputerAidedCannon,
-        ProduceHeavyComputerAidedCannon,
-        ProduceLightTurret,
-        ProduceHeavyTurret,
+        ProduceDefenseLightManualCannon,
+        ProduceDefenseHeavyManualCannon,
+        ProduceDefenseLightAutomaticCannon,
+        ProduceDefenseHeavyAutomaticCannon,
+        ProduceDefenseLightComputerAidedCannon,
+        ProduceDefenseHeavyComputerAidedCannon,
+        ProduceDefenseLightTurret,
+        ProduceDefenseHeavyTurret,
 
-        Attack,
-        Return,
-        Scan
+        FleetCommandAttack,
+        FleetCommandMove,
+        FleetCommandScan
     }
 }

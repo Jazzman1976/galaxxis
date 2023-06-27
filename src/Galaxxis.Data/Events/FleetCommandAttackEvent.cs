@@ -1,17 +1,14 @@
 ﻿using Galaxxis.Data.Enums;
 using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Galaxxis.Data.Events
 {
-    public class ReturnEvent : Event
+    public class FleetCommandAttackEvent : Event
     {
-        private ReturnEvent() { }
+        private FleetCommandAttackEvent() { }
 
-        public ReturnEvent(
+        public FleetCommandAttackEvent(
             EventLocationEnum location,
             int locationId,
             long ticksToEventTick,
@@ -19,10 +16,9 @@ namespace Galaxxis.Data.Events
         {
             this.EventLocation = location.ToString();
             this.EventLocationId = locationId;
-            this.EventName = EventNameEnum.Return.ToString();
+            this.EventName = EventNameEnum.FleetCommandAttack.ToString();
             this.EventType = EventTypeEnum.Move.ToString();
             this.EventData = data.GetXml();
-
             this.EventTicksToEventTick = ticksToEventTick;
         }
     }

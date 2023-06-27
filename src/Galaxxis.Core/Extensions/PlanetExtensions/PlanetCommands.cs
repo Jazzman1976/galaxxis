@@ -22,7 +22,7 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
                 planetIdTarget,
                 fleet.Select(ship => ship.ShipId).ToArray());
 
-            AttackEvent attackEvent = new AttackEvent(
+            FleetCommandAttackEvent attackEvent = new FleetCommandAttackEvent(
                 EventLocationEnum.Planet,
                 planet.PlanetId,
                 100,
@@ -42,7 +42,7 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
                 planetIdTarget,
                 fleet.Select(ship => ship.ShipId).ToArray());
 
-            ScanEvent scanEvent = new ScanEvent(
+            FleetCommandScanEvent scanEvent = new FleetCommandScanEvent(
                 EventLocationEnum.Planet,
                 planet.PlanetId,
                 100,

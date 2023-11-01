@@ -470,4 +470,35 @@ legend {
   pointer-events: none;
 }
 
+.gx-form {
+  margin-bottom: -1rem;
+}
+
+.gx-form__label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 1rem;
+}
+
+.gx-form__label *:first-child {
+  min-width: 5rem;
+}
+
+.gx-form__textbox {
+  background-color: rgba(59, 64, 69, 0.5);
+  color: #49fb35;
+  border: 1px solid black;
+  padding: 3px 10px;
+  height: 30px;
+}
+
+.gx-form__textbox:focus {
+  outline: none;
+  border-color: #49fb35;
+}
+
 /*# sourceMappingURL=main.css.map */

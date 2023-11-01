@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "_Game";
+    ViewBag.Title = "Register";
+}
+
+@model RegisterViewModel
+
+<div id="layer-background"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        <h1>Registrieren</h1>
+
+        <div>@Html.Raw(ViewBag.Message)</div>
+    </header>
+    <main>
+        <p>
+            Dein Passwort muss mindestens einen großen Buchstaben enthalten.
+            Dein Passwort muss mindestens einen kleinen Buchstaben enthalten.
+            Dein Passwort muss mindestens ein Zeichen enthalten.
+        </p>
+        <form id="my-form" asp-controller="Account" asp-action="Register" method="post">
+            <label class="gx-form__label" asp-for="Username">
+                <span>Username:</span>
+                <input class="gx-form__textbox" asp-for="Username" />
+            </label>
+            <label class="gx-form__label" asp-for="Firstname">
+                <span>Firstname:</span>
+                <input class="gx-form__textbox" asp-for="Firstname" />
+            </label>
+            <label class="gx-form__label" asp-for="Lastname">
+                <span>Lastname:</span>
+                <input class="gx-form__textbox" asp-for="Lastname" />
+            </label>
+            <label class="gx-form__label" asp-for="Email">
+                <span>Email:</span>
+                <input class="gx-form__textbox" asp-for="Email" />
+            </label>
+            <label class="gx-form__label" asp-for="Password">
+                <span>Password:</span>
+                <input class="gx-form__textbox" asp-for="Password" />
+            </label>
+            <label class="gx-form__label" asp-for="Password2">
+                <span>Password2:</span>
+                <input class="gx-form__textbox" asp-for="Password2" />
+            </label>
+            <span class="gx-form__label">
+                <span></span>
+                <input class="gx-form__textbox" type="submit" value="Registrieren" />
+            </span>
+        </form>
+    </main>
+</div>

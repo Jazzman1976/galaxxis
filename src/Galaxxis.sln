@@ -19,6 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dummy", "Dummy", "{0BEAB03C
 	ProjectSection(SolutionItems) = preProject
 		Dummy\index.html = Dummy\index.html
 		Dummy\interface_001.html = Dummy\interface_001.html
+		Dummy\interface_002.html = Dummy\interface_002.html
+		Dummy\interface_003.html = Dummy\interface_003.html
+		Dummy\interface_004.html = Dummy\interface_004.html
+		Dummy\interface_005.html = Dummy\interface_005.html
+		Dummy\assets\styles\src\main.scss = Dummy\assets\styles\src\main.scss
 	EndProjectSection
 EndProject
 Global

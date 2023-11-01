@@ -238,6 +238,7 @@ hr {
 }
 
 #content,
+#layer-background,
 #layer-foreground {
   position: absolute;
   top: 0;
@@ -260,29 +261,29 @@ hr {
 }
 
 #layer-background {
-  background-image: url("../images/planet_earth-wallpaper-1920x1080.jpg");
+  background-image: url("/images/planet_earth-wallpaper-1920x1080.jpg");
   background-size: cover;
   background-position: center;
 }
 
 #layer-background.layer-background-universe {
-  background-image: url("../images/galaxies.jpg");
+  background-image: url("/images/galaxies.jpg");
 }
 
 #layer-background.layer-background-galaxy {
-  background-image: url("../images/galaxy.jpg");
+  background-image: url("/images/galaxy.jpg");
 }
 
 #layer-background.layer-background-quadrant {
-  background-image: url("../images/quadrant.jpg");
+  background-image: url("/images/quadrant.jpg");
 }
 
 #layer-background.layer-background-system {
-  background-image: url("../images/system.jpg");
+  background-image: url("/images/system.jpg");
 }
 
 #layer-foreground {
-  background-image: url("../images/cockpit.svg");
+  background-image: url("/images/cockpit.svg");
   background-position: bottom center;
 }
 

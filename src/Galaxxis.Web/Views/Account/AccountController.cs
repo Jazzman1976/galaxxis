@@ -32,7 +32,7 @@ namespace Galaxxis.Web.Views.Account
             {
                 if (string.IsNullOrWhiteSpace(returnUrl) || !Url.IsLocalUrl(returnUrl))
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Start");
                 }
                 else
                 {

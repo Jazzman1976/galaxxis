@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30225.117
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Galaxxis.Data", "Galaxxis.Data\Galaxxis.Data.csproj", "{EF6D37EC-9626-4F72-B8C5-CD4069EC2416}"
 EndProject
@@ -12,6 +12,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{00A977BD-B3A5-429C-B550-855018898C99}"
 	ProjectSection(SolutionItems) = preProject
 		..\docs\ConzeptExcel.fods = ..\docs\ConzeptExcel.fods
+		..\docs\KonzeptWord.fodt = ..\docs\KonzeptWord.fodt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dummy", "Dummy", "{0BEAB03C-B156-4A72-9F0E-A68150C20A4D}"
+	ProjectSection(SolutionItems) = preProject
+		Dummy\index.html = Dummy\index.html
+		Dummy\interface_001.html = Dummy\interface_001.html
 	EndProjectSection
 EndProject
 Global

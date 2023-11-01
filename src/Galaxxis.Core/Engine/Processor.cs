@@ -113,7 +113,8 @@ namespace Galaxxis.Core.Engine
             // skip if task is still running
             if (this.IsWorking)
             {
-                Debug.WriteLine($"{DateStamp}: Still processing... Tick {universeTicks} is queued.");
+                Debug.WriteLine(
+                    $"{DateStamp}: Still processing... Tick {universeTicks} is queued.");
                 return;
             }
 

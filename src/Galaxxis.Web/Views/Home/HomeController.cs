@@ -1,20 +1,55 @@
 ﻿using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Core.Provider;
 using Galaxxis.Data.Models;
+using Galaxxis.Web.Code.Identity;
+using Galaxxis.Web.Code.Services.CurrentUserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Galaxxis.Web.Views.Home
 {
     [Authorize]
     public class HomeController : Controller
     {
+        private readonly ICurrentUserService _currentUserService;
+
+        public AppUser CurrentUser { get; private set; }
+
+        private async Task InitializeAsync()
+        {
+            this.CurrentUser = await _currentUserService.GetCurrentUserAsync();
+        }
+
+        public HomeController(ICurrentUserService currentUserService)
+        {
+            _currentUserService = currentUserService;
+            Task.Run(() => InitializeAsync()).Wait();
+        }
+
         public IActionResult Index()
         {
-            // exit
-            return View("Home", new HomeViewModel());
+            if (CurrentUser == null)
+            {
+                return RedirectToAction("Index", "Start");
+            }
+
+            HomeViewModel model;
+            try
+            {
+                model = new HomeViewModel(CurrentUser);
+            }
+            catch
+            {
+                return RedirectToAction("Logout", "Account");
+            }
+
+            return View(
+                "Home", 
+                model);
         }
 
         [HttpPost]
@@ -27,7 +62,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetOreMine().Build(out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -40,7 +75,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetOreMine().ChangeUsage(newValue/100, out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -53,7 +88,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetPowerSupply().Build(out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -66,7 +101,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetPowerSupply().ChangeUsage(newValue / 100, out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -79,7 +114,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetFactory().Build(out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -92,7 +127,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetFactory().ChangeUsage(newValue / 100, out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -105,7 +140,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetMageAcademy().Build(out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -118,7 +153,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetMageAcademy().ChangeUsage(newValue / 100, out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -131,7 +166,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetCrystalMine().Build(out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -144,7 +179,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetCrystalMine().ChangeUsage(newValue / 100, out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -157,7 +192,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetNeutronAccelerator().Build(out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -170,7 +205,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetNeutronAccelerator().ChangeUsage(newValue / 100, out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -183,7 +218,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetElementiumSynthesizer().Build(out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -196,7 +231,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetElementiumSynthesizer().ChangeUsage(newValue / 100, out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -209,7 +244,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetShipyard().Build(out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -222,7 +257,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetDefenseSystem().Build(out string info);
             
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -235,7 +270,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetShipyard().ProduceShipExplorer(out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -248,7 +283,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetShipyard().ProduceShipCarrier(out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -261,7 +296,7 @@ namespace Galaxxis.Web.Views.Home
             planet.GetDefenseSystem().ProduceDefenseLightManualCannon(out string info);
 
             // exit
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -278,7 +313,7 @@ namespace Galaxxis.Web.Views.Home
             string info = planet.Attack(planetShips, planetIdTarget);
 
             // show view
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
 
         [HttpPost]
@@ -295,7 +330,7 @@ namespace Galaxxis.Web.Views.Home
             string info = planet.Scan(planetShips, planetIdTarget);
 
             // show view
-            return View("Home", new HomeViewModel(info));
+            return View("Home", new HomeViewModel(CurrentUser, info));
         }
     }
 }

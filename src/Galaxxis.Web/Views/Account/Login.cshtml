@@ -1,23 +1,37 @@
 ﻿
 @{ 
-    Layout = "_Layout";
+    Layout = "_Game";
     ViewBag.Title = "Login";
 }
 
-<div>@ViewBag.Message</div>
+@model LoginViewModel
 
-<form asp-controller="Account" asp-action="Login" method="post">
-    <table>
-        <tr>
-            <td><label for="user">User:</label></td>
-            <td><input id="user" name="user" type="text" /></td>
-        </tr>
-        <tr>
-            <td><label for="password">Password:</label></td>
-            <td><input id="password" name="password" type="password" /></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Login" style="width:100%" /></td>
-        </tr>
-    </table>
-</form>
+<div id="layer-background"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        <h1>Login</h1>
+        <div>@Html.Raw(ViewBag.Message)</div>
+    </header>
+    <main>
+        <p>
+            Bitte log dich mit deinem Benutzernamen und deinem Passwort ein.
+        </p>
+        <form id="form-login" asp-controller="Account" asp-action="Login" method="post">
+            <label class="gx-form__label" asp-for="User">
+                <span>Username:</span>
+                <input class="gx-form__textbox" asp-for="User" />
+            </label>
+            <label class="gx-form__label" asp-for="Password">
+                <span>Password:</span>
+                <input class="gx-form__textbox" asp-for="Password" />
+            </label>
+            <input asp-for="ReturnUrl" type="hidden" />
+            <span class="gx-form__label">
+                <span></span>
+                <input class="gx-form__textbox" type="submit" value="Login" />
+            </span>
+        </form>
+    </main>
+</div>

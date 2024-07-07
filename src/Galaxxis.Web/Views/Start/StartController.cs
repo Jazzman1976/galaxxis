@@ -10,6 +10,11 @@ namespace Galaxxis.Web.Views.Start
     {
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
             return View("Start");
         }
     }

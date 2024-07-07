@@ -19,25 +19,26 @@ namespace Galaxxis.Web.Views.Account
             this.SignInMgr = signInManager;
         }
 
-        public async Task<IActionResult> Login(string returnUrl = null, string user = null, string password = null)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (user == null || password == null)
+            //"Administrator", "***REMOVED***"
+
+            if (model.User == null || model.Password == null)
             {
                 return View();
             }
 
-            //Microsoft.AspNetCore.Identity.SignInResult result = await SignInMgr.PasswordSignInAsync("Administrator", "***REMOVED***", true, false);
             Microsoft.AspNetCore.Identity.SignInResult result = await SignInMgr
-                .PasswordSignInAsync(user, password, true, false);
+                .PasswordSignInAsync(model.User, model.Password, true, false);
             if (result.Succeeded)
             {
-                if (string.IsNullOrWhiteSpace(returnUrl) || !Url.IsLocalUrl(returnUrl))
+                if (string.IsNullOrWhiteSpace(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))
                 {
                     return RedirectToAction("Index", "Start");
                 }
                 else
                 {
-                    return Redirect(returnUrl);
+                    return Redirect(model.ReturnUrl);
                 }
             }
             else
@@ -95,7 +96,7 @@ namespace Galaxxis.Web.Views.Account
                         throw new Exception(errors);
                     }
                     TempData[nameof(AccountController) + nameof(Register)] = "User has been created.";
-                    return RedirectToAction(nameof(Register));
+                    return RedirectToAction(nameof(Login));
                 }
                 else
                 {

@@ -1,4 +1,5 @@
 using Galaxxis.Web.Code.Identity;
+using Galaxxis.Web.Code.Services.CurrentUserService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,9 @@ namespace Galaxxis.Web
             });
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            services.AddHttpContextAccessor();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

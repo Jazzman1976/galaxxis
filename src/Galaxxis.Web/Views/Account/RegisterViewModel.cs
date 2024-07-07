@@ -4,24 +4,33 @@ namespace Galaxxis.Web.Views.Account
 {
     public class RegisterViewModel
     {
+        #region properties ------------------------------------------------------------------------
+
         [DataType(DataType.EmailAddress)]
+        [Required]
         public string Email { get; set; } = null;
 
         [DataType(DataType.Text)]
+        [Required]
         public string Username { get; set; } = null;
 
         [DataType(DataType.Text)]
+        [Required]
         public string Firstname { get; set; } = null;
 
         [DataType(DataType.Text)]
+        [Required]
         public string Lastname { get; set; } = null;
 
         [DataType(DataType.Password)]
+        [Required]
         public string Password { get; set; } = null;
 
         [DataType(DataType.Password)]
+        [Required]
         public string Password2 { get; set; } = null;
 
+        #endregion
 
         public bool IsEmpty() 
         {

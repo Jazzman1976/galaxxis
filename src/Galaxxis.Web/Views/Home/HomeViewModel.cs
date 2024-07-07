@@ -1,6 +1,8 @@
 ﻿using Galaxxis.Core.Provider;
 using Galaxxis.Core.Engine;
 using Galaxxis.Data.Models;
+using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Galaxxis.Web.Views.Home
 {
@@ -17,17 +19,18 @@ namespace Galaxxis.Web.Views.Home
 
         #region Constructors ----------------------------------------------------------------------
 
-        public HomeViewModel()
+        public HomeViewModel(Code.Identity.AppUser user)
         {
             // get current user
             // for now: user with id 1
             // TODO: Login and use Login User
-            this.User = UserProvider.GetUser(1, true);
+
+            this.User = UserProvider.GetUser(user.Id, true); //UserProvider.GetUser(1, true);
 
             this.Ticker = Ticker.Instance;
         }
 
-        public HomeViewModel(string info) : this()
+        public HomeViewModel(Code.Identity.AppUser user, string info) : this(user)
         {
             this.Info = info;
         }

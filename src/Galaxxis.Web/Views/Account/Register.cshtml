@@ -11,8 +11,6 @@
 <div id="layer-interface">
     <header>
         <h1>Registrieren</h1>
-
-        <div>@Html.Raw(ViewBag.Message)</div>
     </header>
     <main>
         <p>
@@ -47,8 +45,20 @@
             </label>
             <span class="gx-form__label">
                 <span></span>
-                <input class="gx-form__textbox" type="submit" value="Registrieren" />
+                <input 
+                    class="gx-form__textbox" 
+                    type="submit" 
+                    value="Registrieren" 
+                    style="margin-right: 0.5rem" />
+                <button
+                    class="gx-form__textbox" 
+                    type="button"
+                    onclick='window.location.href = "/"'>
+                    Zurück
+                </button>
             </span>
         </form>
+
+        <div>@Html.Raw(ViewBag.Message)</div>
     </main>
 </div>

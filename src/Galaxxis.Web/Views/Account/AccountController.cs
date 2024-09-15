@@ -32,7 +32,8 @@ namespace Galaxxis.Web.Views.Account
                 .PasswordSignInAsync(model.User, model.Password, true, false);
             if (result.Succeeded)
             {
-                if (string.IsNullOrWhiteSpace(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))
+                if (string.IsNullOrWhiteSpace(model.ReturnUrl) 
+                    || !Url.IsLocalUrl(model.ReturnUrl))
                 {
                     return RedirectToAction("Index", "Start");
                 }
@@ -60,12 +61,14 @@ namespace Galaxxis.Web.Views.Account
 
             if (model.IsEmpty())
             {
+                TempData[nameof(AccountController) + nameof(Register)] 
+                    = "Please fill the form!";
                 return View();
             }
 
             if (model.IsIncomplete())
             {
-                ViewBag.Message = "Please submit all fields!";
+                ViewBag.Message = "Please fill all fields!";
                 return View(model);
             }
 

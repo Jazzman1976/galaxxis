@@ -485,7 +485,7 @@ legend {
 }
 
 .gx-form__label *:first-child {
-  min-width: 5rem;
+  min-width: 6rem;
 }
 
 .gx-form__textbox {

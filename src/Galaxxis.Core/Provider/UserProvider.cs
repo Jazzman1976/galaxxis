@@ -2,6 +2,7 @@
 namespace Galaxxis.Core.Provider
 {
     using Galaxxis.Core.Exceptions;
+    using Galaxxis.Data.Enums;
     using Galaxxis.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using System.Linq;
@@ -68,6 +69,34 @@ namespace Galaxxis.Core.Provider
                 throw new UserNotFoundException();
             }
             return GetUser(user.UserId, includeData);
+        }
+
+        public static bool AddNewUser(
+            string userEmail, string userFirstname, string userLastname, int startingPlanetId)
+        {
+            // init new context for operation
+            using GalaxxisContext context = new ();
+
+            // get the planet where to change the user
+            Planet planet = PlanetProvider.GetPlanet(startingPlanetId, context: context);
+
+            // add new user
+            User user = new()
+            {
+                UserEmail = userEmail,
+                UserFirstname = userFirstname,
+                UserLastname = userLastname,
+                UserRace = UserRacesEnum.Human.ToString() //TODO: add race selection step!
+            };
+            context.User.Add(user);
+            context.SaveChanges(); // save to get userId through incremental autoset when added
+
+            //  and set planet as first home planet
+            planet.PlanetUserId = user.UserId;
+            context.SaveChanges();
+
+            // return success flag
+            return true;
         }
     }
 }

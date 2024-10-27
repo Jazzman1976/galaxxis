@@ -2,6 +2,7 @@
 using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -62,6 +63,28 @@ namespace Galaxxis.Core.Provider
         public static List<Planet> GetPlanets(int systemId)
         {
             return null;
+        }
+
+        public static Planet FindRandomNobodyPlanetInUniverse(int universeId)
+        {
+            using (GalaxxisContext context = new GalaxxisContext())
+            {
+                // get all planets of 'nobody'
+                IQueryable<Planet> nobodiesPlantes = context.Planet
+                    .Include(p => p.PlanetSystem)
+                        .ThenInclude(s => s.SystemGalaxy)
+                            .ThenInclude(g => g.GalaxyUniverse)
+                    .Where(
+                        p => p.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseId == universeId 
+                          && p.PlanetUserId == 2);
+                
+                // get a random planet out of these planets
+                int countOfPlanets = nobodiesPlantes.Count();
+                Random random = new();
+                Planet randomPlanet = nobodiesPlantes.ToArray()[random.Next(countOfPlanets)];
+
+                return randomPlanet;
+            }
         }
     }
 }

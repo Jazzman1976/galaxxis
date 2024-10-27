@@ -169,6 +169,10 @@ namespace Galaxxis.Data
                             system.Planet.Add(new Planet
                             {
                                 //#warning user id of nobody account!
+                                // userId 1 => admin account
+                                // userId 2 => nobody account
+                                // the nobody account is needed because it is not nullable
+                                // if 'nobody' owns a planet etc. the nobody userId is used!
                                 PlanetUserId = 2,
                                 PlanetCoordinateX = coords[0],
                                 PlanetCoordinateY = coords[1],

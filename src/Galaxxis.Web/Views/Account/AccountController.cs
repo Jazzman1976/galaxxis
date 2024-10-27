@@ -1,23 +1,43 @@
-﻿using Galaxxis.Web.Code.Identity;
+﻿using Galaxxis.Core.Provider;
+using Galaxxis.Data.Enums;
+using Galaxxis.Data.Models;
+using Galaxxis.Web.Code.Identity;
+using Galaxxis.Web.Code.Services.CurrentUserService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Galaxxis.Web.Views.Account
 {
     public class AccountController : Controller
     {
-        private UserManager<AppUser> UserMgr { get; }
+        #region properties ------------------------------------------------------------------------
 
+        private UserManager<AppUser> UserMgr { get; }
         private SignInManager<AppUser> SignInMgr { get; }
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) 
+        #endregion
+
+
+        #region constructors ----------------------------------------------------------------------
+
+        public AccountController(
+            UserManager<AppUser> userManager, // service to manage users
+            SignInManager<AppUser> signInManager, // service to login as user
+            ICurrentUserService currentUserService)
         {
             this.UserMgr = userManager;
             this.SignInMgr = signInManager;
         }
+
+        #endregion
+
+
+        #region methods ---------------------------------------------------------------------------
 
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -49,11 +69,13 @@ namespace Galaxxis.Web.Views.Account
             return View();
         }
 
+
         public async Task<IActionResult> Logout()
         {
             await SignInMgr.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
 
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -95,11 +117,22 @@ namespace Galaxxis.Web.Views.Account
                     IdentityResult result = await UserMgr.CreateAsync(newUser, model.Password);
                     if (result.Errors.Any()) 
                     {
-                        string errors = string.Join("<br />", result.Errors.Select(error => error.Description));
+                        string errors 
+                            = string.Join("<br />", 
+                              result.Errors.Select(error => error.Description));
                         throw new Exception(errors);
                     }
-                    TempData[nameof(AccountController) + nameof(Register)] = "User has been created.";
-                    return RedirectToAction(nameof(Login));
+
+                    // hand over viewmodel via temp-data and redirect to next step action
+                    var selectUniverseViewModel = new SelectUniverseViewModel
+                    {
+                        UserEmail = model.Email,
+                        UserFirstName = model.Firstname,
+                        UserLastName = model.Lastname
+                    };
+                    TempData[nameof(AccountController) + nameof(SelectUniverse)] 
+                        = JsonSerializer.Serialize(selectUniverseViewModel);
+                    return RedirectToAction(nameof(SelectUniverse));
                 }
                 else
                 {
@@ -113,6 +146,7 @@ namespace Galaxxis.Web.Views.Account
                 return View(model);
             }
         }
+
 
         public async Task<IActionResult> AddAdmin()
         {
@@ -134,7 +168,9 @@ namespace Galaxxis.Web.Views.Account
                     };
 
                     IdentityResult result = await UserMgr.CreateAsync(user, "***REMOVED***");
-                    ViewBag.Message = "Admin user was created. UserName: Administrator, Password: ***REMOVED***";
+                    ViewBag.Message 
+                        = "Admin user was created. UserName: " +
+                          "Administrator, Password: ***REMOVED***";
                 }
             }
             catch (Exception ex)
@@ -144,5 +180,39 @@ namespace Galaxxis.Web.Views.Account
 
             return View();
         }
+
+
+        public IActionResult SelectUniverse(SelectUniverseViewModel model)
+        {
+            string json = TempData[nameof(AccountController) + nameof(SelectUniverse)] as string;
+            if (!string.IsNullOrEmpty(json))
+            {
+                model = JsonSerializer.Deserialize<SelectUniverseViewModel>(json);
+            }
+
+            if (model.SelectedUniverseId == 0)
+            {
+                List<Data.Models.Universe> universes = UniverseProvider.GetAllUniverses();
+                ViewBag.Message = "Please select a universe.";
+                model.Universes = universes;
+                return View(model);
+            }
+            else
+            {
+                Planet randomPlanet = PlanetProvider
+                    .FindRandomNobodyPlanetInUniverse(model.SelectedUniverseId);
+
+                bool success = UserProvider
+                    .AddNewUser(
+                        model.UserEmail, 
+                        model.UserFirstName, 
+                        model.UserLastName, 
+                        randomPlanet.PlanetId);
+
+                return RedirectToAction("Index", "Start");
+            }
+        }
+
+        #endregion
     }
 }

@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "_Game";
+    ViewBag.Title = "Select Universe";
+}
+
+@model SelectUniverseViewModel
+
+<div id="layer-background"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        <h1>Login</h1>
+        <div>@Html.Raw(ViewBag.Message)</div>
+    </header>
+
+    <main>
+        <p>
+            Bitte wähle eines der verfügbaren Universen.
+        </p>
+
+        <form id="form-select-universe" 
+              asp-controller="Account" 
+              asp-action="SelectUniverse"
+              method="post">
+
+              <div class="location-selection">
+                <button class="location-selection__prev" data-for="universe">&lt;</button>
+                <div class="select-wrapper">
+                    <select asp-for="SelectedUniverseId" id="universe">
+                        @foreach (Data.Models.Universe universe in Model.Universes)
+                        {
+                            if (universe == Model.Universes.First())
+                            {
+                                <option selected value="@universe.UniverseId">@universe.UniverseName</option>
+                            }
+                            else
+                            {
+                                <option value="@universe.UniverseId">@universe.UniverseName</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <button class="location-selection__next" data-for="universe">&gt;</button>
+                <input type="submit" class="gx-form__textbox" value="Select" />
+              </div>
+
+              @* persist view model not used fields in form *@
+              <input asp-for="UserFirstName" type="hidden" />
+              <input asp-for="UserLastName" type="hidden" />
+              <input asp-for="UserEmail" type="hidden" />
+        </form>
+    </main>
+</div>

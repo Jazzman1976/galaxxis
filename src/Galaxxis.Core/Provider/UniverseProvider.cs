@@ -1,5 +1,6 @@
 ﻿using Galaxxis.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Galaxxis.Core.Provider
@@ -19,6 +20,28 @@ namespace Galaxxis.Core.Provider
                     .First();
             }
             return firstUniverse;
+        }
+
+        public static Universe GetUniverseById(int id)
+        {
+            Universe theUniverse;
+            using (GalaxxisContext context = new GalaxxisContext())
+            {
+                theUniverse = context.Universe
+                    .Include(universe => universe.Galaxy)
+                    .First(u => u.UniverseId == id);
+            }
+            return theUniverse;
+        }
+
+        public static List<Universe> GetAllUniverses()
+        { 
+            List<Universe> universes = new();
+            using (GalaxxisContext context = new GalaxxisContext())
+            {
+                universes = context.Universe.ToList();
+            }
+            return universes;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Galaxxis.Data.Models
 {
     public partial class GalaxxisContext : DbContext
     {
-        public GalaxxisContext()
+        internal GalaxxisContext()
         {
         }
 

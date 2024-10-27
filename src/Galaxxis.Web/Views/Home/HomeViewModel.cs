@@ -1,8 +1,6 @@
-﻿using Galaxxis.Core.Provider;
-using Galaxxis.Core.Engine;
+﻿using Galaxxis.Core.Engine;
+using Galaxxis.Core.Provider;
 using Galaxxis.Data.Models;
-using System;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Galaxxis.Web.Views.Home
 {
@@ -22,11 +20,9 @@ namespace Galaxxis.Web.Views.Home
         public HomeViewModel(Code.Identity.AppUser user)
         {
             // get current user
-            // for now: user with id 1
-            // TODO: Login and use Login User
+            this.User = UserProvider.GetUser(user.Email, true);
 
-            this.User = UserProvider.GetUser(user.Id, true); //UserProvider.GetUser(1, true);
-
+            // get ticker
             this.Ticker = Ticker.Instance;
         }
 

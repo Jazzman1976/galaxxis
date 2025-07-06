@@ -15,8 +15,8 @@ namespace Galaxxis.Core.Provider
         /// </summary>
         /// <param name="updateRessources">default: false</param>
         public static Planet GetPlanet(
-            int id, 
-            bool updateRessources = false, 
+            int id,
+            bool updateRessources = false,
             GalaxxisContext context = null)
         {
             // get planet from context
@@ -75,9 +75,9 @@ namespace Galaxxis.Core.Provider
                         .ThenInclude(s => s.SystemGalaxy)
                             .ThenInclude(g => g.GalaxyUniverse)
                     .Where(
-                        p => p.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseId == universeId 
+                        p => p.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseId == universeId
                           && p.PlanetUserId == 2);
-                
+
                 // get a random planet out of these planets
                 int countOfPlanets = nobodiesPlantes.Count();
                 Random random = new();
@@ -85,6 +85,28 @@ namespace Galaxxis.Core.Provider
 
                 return randomPlanet;
             }
+        }
+
+        public static List<Planet> GetPlanetsOfUser(int userId,
+            bool includeMoons = false,
+            GalaxxisContext context = null)
+        {
+            // get planets of user
+            if (context == null)
+            {
+                // create own context and repeat
+                using (GalaxxisContext newContext = new GalaxxisContext())
+                {
+                    return GetPlanetsOfUser(userId, includeMoons, newContext);
+                }
+            }
+            IQueryable<Planet> query = context.Planet
+                .Where(planet => planet.PlanetUserId == userId);
+            if (includeMoons)
+            {
+                query = query.Include(planet => planet.Moon);
+            }
+            return query.ToList();
         }
     }
 }

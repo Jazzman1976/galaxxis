@@ -108,5 +108,34 @@ namespace Galaxxis.Core.Provider
             }
             return query.ToList();
         }
+
+        public static bool AssignPlanetToUser(
+            int planetId, int userId, GalaxxisContext context = null)
+        {
+            // get planet
+            Planet planet = GetPlanet(planetId, context: context);
+            // check if planet is already assigned to user
+            if (planet.PlanetUserId == userId)
+            {
+                return false; // already assigned
+            }
+            // assign planet to user
+            planet.PlanetUserId = userId;
+            // save changes
+            if (context == null)
+            {
+                using (GalaxxisContext newContext = new GalaxxisContext())
+                {
+                    newContext.Planet.Update(planet);
+                    newContext.SaveChanges();
+                }
+            }
+            else
+            {
+                context.Planet.Update(planet);
+                context.SaveChanges();
+            }
+            return true;
+        }
     }
 }

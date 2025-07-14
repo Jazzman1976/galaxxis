@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Models = Galaxxis.Data.Models;
 
 namespace Galaxxis.Web.Views.Account
 {
@@ -199,7 +200,7 @@ namespace Galaxxis.Web.Views.Account
             }
             else
             {
-                Planet randomPlanet = PlanetProvider
+                Models.Planet randomPlanet = PlanetProvider
                     .FindRandomNobodyPlanetInUniverse(model.SelectedUniverseId);
 
                 bool success = UserProvider

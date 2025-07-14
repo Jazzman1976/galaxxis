@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Models = Galaxxis.Data.Models;
 
 namespace Galaxxis.Web.Views.Start
 {
@@ -32,13 +33,25 @@ namespace Galaxxis.Web.Views.Start
                     return View("Start");
                 }
 
+                // get galaxxis user
+                User player = UserProvider.GetUser(CurrentUser.Email, includeData: true);
+
                 // get planets of user
-                bool hasPlanets = PlanetProvider
-                    .GetPlanetsOfUser(CurrentUser.Id)
-                    .Any();
-                if (hasPlanets)
+                List<Models.Planet> planets = PlanetProvider.GetPlanetsOfUser(player.UserId);
+                
+                if (planets.Any())
                 {
-                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "Home");
+
+                    //TODO: add current location of user, which is a planet, to database
+                    // User has a "Home", which is the first planet he started on.
+                    // User starts each game on his home planet.
+                    // User can look at other planets and do actions on them.
+
+                    return RedirectToAction(
+                        "Index", 
+                        "Planet", 
+                        new { id = planets.FirstOrDefault()?.PlanetId ?? 0 });
                 }
 
                 // if user has no planets, redirect to new player page

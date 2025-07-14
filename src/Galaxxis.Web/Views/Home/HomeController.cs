@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Models = Galaxxis.Data.Models;
 
 namespace Galaxxis.Web.Views.Home
 {
@@ -37,6 +38,11 @@ namespace Galaxxis.Web.Views.Home
                 return RedirectToAction("Index", "Start");
             }
 
+            
+
+            // TODO: instead of home, go to the current location which is a planet
+            // TODO: add id of current planet to the user data model and database
+
             HomeViewModel model;
             try
             {
@@ -56,7 +62,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildOreMine(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build ore mine
             planet.GetOreMine().Build(out string info);
@@ -69,7 +75,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult ChangeOreMineUsage(int planetId, double newValue)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // change ore mine usage
             planet.GetOreMine().ChangeUsage(newValue/100, out string info);
@@ -82,7 +88,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildPowerSupply(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build mage power supply
             planet.GetPowerSupply().Build(out string info);
@@ -95,7 +101,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult ChangePowerSupplyUsage(int planetId, double newValue)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // change ore mine usage
             planet.GetPowerSupply().ChangeUsage(newValue / 100, out string info);
@@ -108,7 +114,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildFactory(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build factory
             planet.GetFactory().Build(out string info);
@@ -121,7 +127,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult ChangeFactoryUsage(int planetId, double newValue)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // change ore mine usage
             planet.GetFactory().ChangeUsage(newValue / 100, out string info);
@@ -134,7 +140,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildMageAcademy(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build mage academy
             planet.GetMageAcademy().Build(out string info);
@@ -147,7 +153,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult ChangeMageAcademyUsage(int planetId, double newValue)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // change ore mine usage
             planet.GetMageAcademy().ChangeUsage(newValue / 100, out string info);
@@ -160,7 +166,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildCrystalMine(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build chrystal mine
             planet.GetCrystalMine().Build(out string info);
@@ -173,7 +179,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult ChangeCrystalMineUsage(int planetId, double newValue)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // change ore mine usage
             planet.GetCrystalMine().ChangeUsage(newValue / 100, out string info);
@@ -186,7 +192,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildNeutronAccelerator(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build Neutron Accelerator
             planet.GetNeutronAccelerator().Build(out string info);
@@ -199,7 +205,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult ChangeNeutronAcceleratorUsage(int planetId, double newValue)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // change ore mine usage
             planet.GetNeutronAccelerator().ChangeUsage(newValue / 100, out string info);
@@ -212,7 +218,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildElementiumSynthesizer(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build Elementium Synthesizer
             planet.GetElementiumSynthesizer().Build(out string info);
@@ -225,7 +231,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult ChangeElementiumSynthesizerUsage(int planetId, double newValue)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // change ore mine usage
             planet.GetElementiumSynthesizer().ChangeUsage(newValue / 100, out string info);
@@ -238,7 +244,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildShipyard(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build Shipyard
             planet.GetShipyard().Build(out string info);
@@ -251,7 +257,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult BuildDefenseSystem(int planetId)
         {
             // get planet from database
-            Planet planet = PlanetProvider.GetPlanet(planetId, true);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId, true);
 
             // build Defense System
             planet.GetDefenseSystem().Build(out string info);
@@ -264,7 +270,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult ProduceShipExplorer(int planetId, int userId)
         {
             // get entities from database
-            Planet planet = PlanetProvider.GetPlanet(planetId);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId);
 
             // produce ship: explorer
             planet.GetShipyard().ProduceShipExplorer(out string info);
@@ -277,7 +283,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult ProduceShipCarrier(int planetId, int userId)
         {
             // get entities from database
-            Planet planet = PlanetProvider.GetPlanet(planetId);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId);
 
             // produce ship: explorer
             planet.GetShipyard().ProduceShipCarrier(out string info);
@@ -290,7 +296,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult ProduceDefenseLightManualCannon(int planetId)
         {
             // get entities from database
-            Planet planet = PlanetProvider.GetPlanet(planetId);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId);
 
             // produce defense: light manual cannon
             planet.GetDefenseSystem().ProduceDefenseLightManualCannon(out string info);
@@ -303,7 +309,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult Attack(int planetId, int userId, int planetIdTarget)
         {
             // get entities from database
-            Planet planet = PlanetProvider.GetPlanet(planetId);
+            Models.Planet planet = PlanetProvider.GetPlanet(planetId);
             User user = UserProvider.GetUser(userId, true);
 
             // get fleet
@@ -320,7 +326,7 @@ namespace Galaxxis.Web.Views.Home
         public IActionResult Scan(int planetId, int userId, int planetIdTarget)
         {
             // get entities from database
-            Planet planet = PlanetProvider.GetPlanet(planetId);
+            Models. Planet planet = PlanetProvider.GetPlanet(planetId);
             User user = UserProvider.GetUser(userId, true);
 
             // get fleet

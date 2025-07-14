@@ -5,6 +5,7 @@ using Galaxxis.Web.Code.Services.CurrentUserService;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Models = Galaxxis.Data.Models;
 
 namespace Galaxxis.Web.Views.NewPlayer
 {
@@ -27,14 +28,15 @@ namespace Galaxxis.Web.Views.NewPlayer
 
         public async Task<IActionResult> Spawn(NewPlayerViewModel model)
         {
-            Planet randomPlanet = PlanetProvider
+            Models.Planet randomPlanet = PlanetProvider
                 .FindRandomNobodyPlanetInUniverse(model.UniverseId);
 
             AppUser currentUser = await _currentUserService.GetCurrentUserAsync();
+            Models.User user = UserProvider.GetUser(currentUser.Email, includeData: true);
 
             model.HasAnyPlanet = PlanetProvider.AssignPlanetToUser(
                 randomPlanet.PlanetId,
-                currentUser.Id);
+                user.UserId);
 
             return View("NewPlayer", model);
         }

@@ -14,6 +14,55 @@ namespace Galaxxis.Data
 {
     class Program
     {
+        private static readonly string[] _prefixes = {
+            "Andro", "Zeta", "Nova", "Vega", "Xeno", "Orion", "Cryo", "Altair", "Cygn", "Luma",
+            "Astr", "Neb", "Draco", "Hydra", "Lyra", "Pavo", "Sirius", "Taur", "Ursa", "Vulc",
+            "Zeph", "Aquila", "Pegas", "Scorp", "Aether", "Nyx", "Solari", "Celest", "Nebu", "Thalos",
+            "Elyon", "Quor", "Velar", "Arcyn", "Oryn", "Kael", "Myra", "Icar", "Rho", "Syra"
+        };
+
+
+        private static readonly string[] _suffixes = {
+            "nex", "rax", "lia", "thar", "lux", "ion", "vex", "mir", "dax", "oria",
+            "aris", "zar", "ek", "tor", "zen", "xar", "yra", "kron", "nara", "sor",
+            "lith", "dron", "fex", "gala", "hax", "jora", "kira", "vyr", "thys", "quar",
+            "exis", "zun", "reth", "vorn", "myr", "tix", "omir", "tari", "sai", "ael"
+        };
+
+        private static readonly Random _random = new();
+
+        // 10000 unique random names build from prefixes and suffixes and a number if it is needed. Each name is unique. If it still exists a number is added to the end starting with 2.
+        private static List<string> _randomNames = null;
+
+        private static string GetRandomName()
+        {
+            // create a random name from the prefixes and suffixes and add it to the list of random names if it is not already in the list. return the name.
+            if (_randomNames == null)
+            {
+                _randomNames = new List<string>();
+            }
+            string name;
+            do
+            {
+                string prefix = _prefixes[_random.Next(_prefixes.Length)];
+                string suffix = _suffixes[_random.Next(_suffixes.Length)];
+                name = prefix + suffix;
+                // check if name already exists
+                if (_randomNames.Contains(name))
+                {
+                    // if it exists, add a number to the end starting with 2
+                    int number = 2;
+                    while (_randomNames.Contains(name + number))
+                    {
+                        number++;
+                    }
+                    name += number;
+                }
+            } while (_randomNames.Contains(name));
+            _randomNames.Add(name);
+            return name;
+        }
+
         static void Main(string[] args)
         {
             string input = "";
@@ -206,7 +255,7 @@ namespace Galaxxis.Data
             {
                 Universe universe = new Universe
                 {
-                    UniverseName = "Galaxxis Universe",
+                    UniverseName = GetRandomName(),
                     UniverseTimePerTick = 1000, // 1 second per tick
                     UniverseTicks = 0 // start with 0 ticks
                 };
@@ -263,7 +312,7 @@ namespace Galaxxis.Data
                         GalaxyCoordinateX = coords[0],
                         GalaxyCoordinateY = coords[1],
                         GalaxyCoordinateZ = coords[2],
-                        GalaxyName = $"Galaxy {coords[0]}.{coords[1]}.{coords[2]}"
+                        GalaxyName = GetRandomName()
                     });
                 }
                 
@@ -319,7 +368,7 @@ namespace Galaxxis.Data
                                 SystemCoordinateX = coords[0],
                                 SystemCoordinateY = coords[1],
                                 SystemCoordinateZ = coords[2],
-                                SystemName = $"System {coords[0]}.{coords[1]}.{coords[2]}"
+                                SystemName = GetRandomName()
                             });
                         }
                     }
@@ -390,7 +439,7 @@ namespace Galaxxis.Data
                                 PlanetCoordinateX = coords[0],
                                 PlanetCoordinateY = coords[1],
                                 PlanetCoordinateZ = coords[2],
-                                PlanetName = $"Planet {coords[0]}.{coords[1]}.{coords[2]}"
+                                PlanetName = GetRandomName()
                             });
                         }
                         Console.WriteLine("step 2: Planets created.");
@@ -439,7 +488,7 @@ namespace Galaxxis.Data
                         {
                             planet.Moon.Add(new Moon
                             {
-                                MoonName = $"Moon {i + 1} of {planet.PlanetName}"
+                                MoonName = GetRandomName()
                             });
                         }
                     }

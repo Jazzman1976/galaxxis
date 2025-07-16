@@ -6,7 +6,7 @@ namespace Galaxxis.Data
 {
     public static class UniverseCreator
     {
-        public static List<int[]> Galaxies = new List<int[]>();
+        //public static List<int[]> Galaxies = new List<int[]>();
 
         public static bool Create3D(int minDist, int size, int count, out List<int[]> created)
         {

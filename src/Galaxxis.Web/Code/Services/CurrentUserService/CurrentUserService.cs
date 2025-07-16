@@ -18,6 +18,11 @@ namespace Galaxxis.Web.Code.Services.CurrentUserService
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Get the current user's ASP.Net Identity ID from the HTTP context.<br/>
+        /// It's not the Galaxxis ID.
+        /// </summary>
+        /// <returns>String identifier of the ASP.Net Identity user.</returns>
         public string GetUserId()
         {
             string userId = _contextAccessor?.HttpContext?.User?

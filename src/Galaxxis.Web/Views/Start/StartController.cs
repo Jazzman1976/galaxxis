@@ -30,15 +30,19 @@ namespace Galaxxis.Web.Views.Start
                 AppUser CurrentUser = await _currentUserService.GetCurrentUserAsync();
                 if (CurrentUser == null)
                 {
+                    // => user is not logged in
                     return View("Start");
                 }
 
-                // get galaxxis user
+                // get galaxxis user via email from current user
                 User player = UserProvider.GetUser(CurrentUser.Email, includeData: true);
+
+                // player starts in the universe overview each time they log in
+                //return RedirectToAction("Index", "Universe");
 
                 // get planets of user
                 List<Models.Planet> planets = PlanetProvider.GetPlanetsOfUser(player.UserId);
-                
+
                 if (planets.Any())
                 {
                     //return RedirectToAction("Index", "Home");
@@ -48,10 +52,11 @@ namespace Galaxxis.Web.Views.Start
                     // User starts each game on his home planet.
                     // User can look at other planets and do actions on them.
 
-                    return RedirectToAction(
-                        "Index", 
-                        "Planet", 
-                        new { id = planets.FirstOrDefault()?.PlanetId ?? 0 });
+                    return RedirectToAction("Index", "Universe");
+                    //return RedirectToAction(
+                    //    "Index",
+                    //    "Planet",
+                    //    new { id = planets.FirstOrDefault()?.PlanetId ?? 0 });
                 }
 
                 // if user has no planets, redirect to new player page

@@ -4,6 +4,7 @@ using Galaxxis.Web.Code.Identity;
 using Galaxxis.Web.Code.Services.CurrentUserService;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Models = Galaxxis.Data.Models;
 
@@ -19,20 +20,21 @@ namespace Galaxxis.Web.Views.NewPlayer
 
         public IActionResult Index()
         {
+            User user = _currentUserService.GetGalaxxisUserAsync().GetAwaiter().GetResult();
             var model = new NewPlayerViewModel
             {
-                Universes = UniverseProvider.GetAllUniverses()
+                Universes = UniverseProvider.GetAllUniverses(),
+                HasAnyPlanet = PlanetProvider.GetPlanetsOfUser(user.UserId).Any(),
             };
             return View("NewPlayer", model);
         }
 
-        public async Task<IActionResult> Spawn(NewPlayerViewModel model)
+        public IActionResult Spawn(NewPlayerViewModel model)
         {
             Models.Planet randomPlanet = PlanetProvider
                 .FindRandomNobodyPlanetInUniverse(model.UniverseId);
 
-            AppUser currentUser = await _currentUserService.GetCurrentUserAsync();
-            Models.User user = UserProvider.GetUser(currentUser.Email, includeData: true);
+            User user = _currentUserService.GetGalaxxisUserAsync().GetAwaiter().GetResult();
 
             model.HasAnyPlanet = PlanetProvider.AssignPlanetToUser(
                 randomPlanet.PlanetId,

@@ -81,6 +81,7 @@ namespace Galaxxis.Core.Provider
                 // get a random planet out of these planets
                 int countOfPlanets = nobodiesPlantes.Count();
                 Random random = new();
+
                 Planet randomPlanet = nobodiesPlantes.ToArray()[random.Next(countOfPlanets)];
 
                 return randomPlanet;

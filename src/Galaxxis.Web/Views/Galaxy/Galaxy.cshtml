@@ -23,7 +23,7 @@
                     <select id="system" name="system">
                         @foreach(System system in Model.Galaxy.System)
                         {
-                            <option value="@system.SystemId">@system.SystemName</option>
+                            <option value="@system.SystemId">@system.SystemName @(Model.UserSystems.Any(s => s.SystemId == system.SystemId) ? " *" : "")</option>
                         }
                     </select>
                 </div>

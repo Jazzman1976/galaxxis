@@ -22,7 +22,7 @@ namespace Galaxxis.Web.Views.Home
 
         private async Task InitializeAsync()
         {
-            this.CurrentUser = await _currentUserService.GetCurrentUserAsync();
+            this.CurrentUser = await _currentUserService.GetCurrentAspNetAppUserAsync();
         }
 
         public HomeController(ICurrentUserService currentUserService)
@@ -37,8 +37,6 @@ namespace Galaxxis.Web.Views.Home
             {
                 return RedirectToAction("Index", "Start");
             }
-
-            
 
             // TODO: instead of home, go to the current location which is a planet
             // TODO: add id of current planet to the user data model and database

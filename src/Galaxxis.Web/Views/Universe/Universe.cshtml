@@ -22,7 +22,7 @@
                     <select id="galaxy" name="galaxy">
                         @foreach(Galaxy galaxy in Model.Universe.Galaxy)
                         {
-                            <option value="@galaxy.GalaxyId">@galaxy.GalaxyName</option>
+                            <option value="@galaxy.GalaxyId">@galaxy.GalaxyName @(Model.PlayerGalaxies.Any(g => g.GalaxyId == galaxy.GalaxyId) ? " *" : "")</option>
                         }
                     </select>
                 </div>

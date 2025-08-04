@@ -22,20 +22,19 @@ namespace Galaxxis.Web.Views.Start
             
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
             {
-                // get the current user
-                AppUser CurrentUser = await _currentUserService.GetCurrentUserAsync();
-                if (CurrentUser == null)
+                // get galaxxis user
+                User player = _currentUserService.GetGalaxxisUserAsync().GetAwaiter().GetResult();
+
+                // if player is null, user is not logged in or was not found
+                if (player == null)
                 {
                     // => user is not logged in
                     return View("Start");
                 }
-
-                // get galaxxis user via email from current user
-                User player = UserProvider.GetUser(CurrentUser.Email, includeData: true);
 
                 // player starts in the universe overview each time they log in
                 //return RedirectToAction("Index", "Universe");

@@ -1,0 +1,35 @@
+﻿@using Galaxxis.Data.Models
+
+@model GalaxxisSystemViewModel
+
+@{
+    Layout = "~/Views/Shared/_Game.cshtml";
+    ViewBag.Title = "System";
+    ViewBag.Description = "Select a planet you want to go";
+}
+
+<div id="layer-background" class="layer-background-system"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <main>
+        <h1>@Model.System.SystemName System</h1>
+        <p><a href="/galaxy">Zurück</a> zur @Model.System.SystemGalaxy.GalaxyName Galaxie</p>
+        <h2>Planeten in diesem System:</h2>
+        <form asp-action="GoPlanet" method="post">
+            <div class="location-selection">
+                <button type="button" class="location-selection__prev" data-for="planet">&lt;</button>
+                <div class="select-wrapper">
+                    <select id="planet" name="planet">
+                        @foreach (Planet planet in Model.System.Planet)
+                        {
+                            <option value="@planet.PlanetId">@planet.PlanetName @(Model.UserPlanets.Any(p => p.PlanetId == planet.PlanetId) ? " *" : "")</option>
+                        }
+                    </select>
+                </div>
+                <button type="button" class="location-selection__next" data-for="planet">&gt;</button>
+                <button style="width:auto" class="button-link">GO</button>
+            </div>
+        </form>
+    </main>
+</div>

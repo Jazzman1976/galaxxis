@@ -23,9 +23,11 @@ namespace Galaxxis.Core.Provider
 
                     // get planets
                     .Include(system => system.Planet)
-
                     // get moons
                     .ThenInclude(planet => planet.Moon)
+
+                    // get system galaxy
+                    .Include(system => system.SystemGalaxy)
 
                     // return first system with data
                     .FirstOrDefault(system => system.SystemId.Equals(id));

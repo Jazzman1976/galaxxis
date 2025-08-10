@@ -18,12 +18,18 @@ namespace Galaxxis.Web.Views.Galaxy
             int galaxyId = 0;
             if (int.TryParse(id, out galaxyId))
             {
-                return View("Galaxy", new GalaxyViewmodel(galaxyId, _currentUserService));
+                return View("Galaxy", new GalaxyViewModel(galaxyId, _currentUserService));
             }
             else
             {
                 return new EmptyResult();
             }
+        }
+
+        [HttpPost]
+        public RedirectResult GoSystem(int system)
+        {
+            return new RedirectResult($"/galaxxissystem/index/{system}");
         }
     }
 }

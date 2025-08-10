@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 namespace Galaxxis.Web.Views.Galaxy
 {
-    public class GalaxyViewmodel
+    public class GalaxyViewModel
     {
         public Data.Models.Galaxy Galaxy { get; }
         public List<Data.Models.System> UserSystems { get; } = new List<Data.Models.System>();
 
-        public GalaxyViewmodel(int galaxyId, ICurrentUserService currentUserService)
+        public GalaxyViewModel(int galaxyId, ICurrentUserService currentUserService)
         {
             this.Galaxy = GalaxyProvider.GetGalaxy(galaxyId);
 

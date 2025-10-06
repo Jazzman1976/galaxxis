@@ -1,0 +1,73 @@
+﻿@using Galaxxis.Core.Classes.Buildings.Interfaces
+@{
+    Layout = "_Game";
+    ViewBag.Title = "Ore Mine";
+}
+@model OreMineViewModel;
+
+@section Styles {
+    <style type="text/css">
+        .info-table, .info-table th, .info-table td {
+            border-collapse: collapse;
+            border: 1px solid #49fb35;
+            padding: 5px;
+        }
+
+        .info-table { margin-bottom: 20px; }
+        .info-table th { text-align: left; padding-right: 20px; }
+        .info-table th::after { content: ":"; }
+    </style>
+}
+
+<div id="layer-background"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        <h1>Planet: @Model.Planet.PlanetName - Erzmine</h1>
+        
+        <p>
+            Du betrachtest deine Erzmine.
+        </p>
+
+        @if (Model.InfoMessage != null)
+        {
+            <p class="message">@Model.InfoMessage</p>
+        }
+
+        <ul>
+            <li>
+                <!--back to system view -->
+                <a asp-controller="planet"
+                   asp-action="Index"
+                   asp-route-id="@Model.Planet.PlanetId">Zurück zum Kontrollzentrum des Planeten</a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <h2>Erzmine</h2>
+        <table class="info-table">
+            <tr><th>Ausbaustufe</th>        <td>@Model.Planet.PlanetOreMine</td></tr>            
+            <tr><th>Auslastung</th>         <td>@(Model.OreMine.Usage * 100)%</td></tr>
+            <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(Model.OreMine.IncomePerDay)</td></tr>
+        </table>
+
+        @if (!Model.OreMine.CanBuild)
+        {
+            <p class="message">Du kannst die Erzmine aktuell nicht weiter ausbauen.</p>
+        }
+        else {
+            <form 
+                method="post" 
+                asp-action="BuildOreMine" 
+                asp-controller="oremine" 
+                asp-route-id="@Model.Planet.PlanetId">
+                <input type="hidden" name="planetId" value="@Model.Planet.PlanetId" />
+                <button type="submit" @(Model.OreMine.CanBuild ? "" : "disabled")>
+                    Erzmine auf Stufe @(Model.Planet.PlanetOreMine + 1) ausbauen
+                </button>
+            </form>
+        }
+    </main>
+</div>

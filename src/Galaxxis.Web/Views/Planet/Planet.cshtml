@@ -13,8 +13,25 @@
         <p>
             Du befindest dich auf einem Planeten.
         </p>
+        <ul>
+            <li>
+                <!--back to system view -->
+                <a asp-controller="galaxxissystem"
+                   asp-action="Index"
+                   asp-route-id="@Model.Planet.PlanetSystem.SystemId">Zurück zum Sternensystem</a>
+            </li>
+        </ul>
     </header>
+
     <main>
         <h2>Planetarisches Kontrollzentrum</h2>
+        <ul>
+            <li>
+                <!-- to ore mine -->
+                <a asp-controller="oremine"
+                   asp-action="Index"
+                   asp-route-id="@Model.Planet.PlanetId">Zur Erzmine</a>
+            </li>
+        </ul>
     </main>
 </div>

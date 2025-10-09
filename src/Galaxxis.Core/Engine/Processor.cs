@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Galaxxis.Core.Engine
@@ -24,7 +25,9 @@ namespace Galaxxis.Core.Engine
 
         #region Properties ------------------------------------------------------------------------
 
-        public bool IsWorking { get; set; }
+        // make IsWorking atomic via an int flag
+        private int _isWorkingFlag = 0;
+        public bool IsWorking => Interlocked.CompareExchange(ref _isWorkingFlag, 0, 0) == 1;
         public Queue<Event> EventQueue { get; set; } = new Queue<Event>();
 
         private static string DateStamp => DateTime.Now.ToString(_dateFormat);
@@ -111,66 +114,76 @@ namespace Galaxxis.Core.Engine
         private void Process(long universeTicks)
         {
             // skip if task is still running
-            if (this.IsWorking)
+            // mark processing, block another run simultaniously
+            // try to atomically set working flag; if already 1 -> skip
+            if (Interlocked.Exchange(ref _isWorkingFlag, 1) == 1)
             {
                 Debug.WriteLine(
                     $"{DateStamp}: Still processing... Tick {universeTicks} is queued.");
                 return;
             }
 
-            // mark processing, block another run simultaniously
-            this.IsWorking = true;
-
             // log time started processing all ticks
             DateTime tStartProcessing = DateTime.Now;
 
-            // process db objects
-            using (GalaxxisContext context = new GalaxxisContext())
+            try
             {
-                // get universe (for now only one universe supported)
-                Universe universe = context.Universe.First();
 
-                // process all ticks gone until last processed tick
-                while (universe.UniverseTicks < universeTicks)
+                // process db objects
+                using (GalaxxisContext context = new GalaxxisContext())
                 {
-                    // log time started processing a single tick
-                    DateTime tStartTick = DateTime.Now;
+                    // get universe (for now only one universe supported)
+                    Universe universe = context.Universe.First();
 
-                    // raise universe ticks for next tick to be processed
-                    universe.UniverseTicks++;
-
-                    // read queued events and add new Events to Database
-                    while (EventQueue.Any())
+                    // process all ticks gone until last processed tick
+                    while (universe.UniverseTicks < universeTicks)
                     {
-                        Event @event = EventQueue.Dequeue();
-                        Add_EventAction(@event, context, universe.UniverseTicks);
+                        // log time started processing a single tick
+                        DateTime tStartTick = DateTime.Now;
+
+                        // raise universe ticks for next tick to be processed
+                        universe.UniverseTicks++;
+
+                        // read queued events and add new Events to Database
+                        while (EventQueue.Any())
+                        {
+                            Event @event = EventQueue.Dequeue();
+                            Add_EventAction(@event, context, universe.UniverseTicks);
+                        }
+
+                        // process all events in the database for the current tick
+                        List<Event> events = EventProvider
+                            .GetEvents(universe.UniverseTicks, context);
+                        foreach (Event @event in events)
+                        {
+                            Do_EventAction(@event, context);
+                            context.Event.Remove(@event);
+                        }
+
+                        // save changes processing the tick has made to the context to database
+                        context.SaveChanges();
+
+                        // write log for the single tick processed
+                        Debug.WriteLine($"{DateStamp}: Tick {universe.UniverseTicks} done in "
+                            + $"{tStartTick.MsGone()} ms.");
                     }
-
-                    // process all events in the database for the current tick
-                    List<Event> events = EventProvider
-                        .GetEvents(universe.UniverseTicks, context);
-                    foreach (Event @event in events)
-                    {
-                        Do_EventAction(@event, context);
-                        context.Event.Remove(@event);
-                    }
-
-                    // save changes processing the tick has made to the context to database
-                    context.SaveChanges();
-
-                    // write log for the single tick processed
-                    Debug.WriteLine($"{DateStamp}: Tick {universe.UniverseTicks} done in "
-                        + $"{tStartTick.MsGone()} ms.");
                 }
             }
-
-            // mark not processing, unlock processor
-            this.IsWorking = false;
-
-            // write log for all ticks processed
-            Debug.WriteLine($"{DateStamp}: Processing completely done in "
-                + $"{tStartProcessing.MsGone()} ms.");
-            Debug.WriteLine("");
+            catch (Exception ex)
+            {
+                // TODO: replace with injected logging, for now Debug.Write
+                Debug.WriteLine($"{DateStamp}: ERROR processing ticks: {ex}");
+            }
+            finally
+            {
+                // release working flag
+                // mark not processing, unlock processor
+                Interlocked.Exchange(ref _isWorkingFlag, 0);
+                // write log for all ticks processed
+                Debug.WriteLine(
+                    $"{DateStamp}: Processing completely done in {tStartProcessing.MsGone()} ms.");
+                Debug.WriteLine("");
+            }
         }
 
         /// <summary>

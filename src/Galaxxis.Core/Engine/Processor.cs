@@ -5,6 +5,7 @@ using Galaxxis.Data.Enums;
 using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Models;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace Galaxxis.Core.Engine
         // make IsWorking atomic via an int flag
         private int _isWorkingFlag = 0;
         public bool IsWorking => Interlocked.CompareExchange(ref _isWorkingFlag, 0, 0) == 1;
-        public Queue<Event> EventQueue { get; set; } = new Queue<Event>();
+        public ConcurrentQueue<Event> EventQueue { get; set; } = new ConcurrentQueue<Event>();
 
         private static string DateStamp => DateTime.Now.ToString(_dateFormat);
 
@@ -145,10 +146,9 @@ namespace Galaxxis.Core.Engine
                         universe.UniverseTicks++;
 
                         // read queued events and add new Events to Database
-                        while (EventQueue.Any())
+                        while (EventQueue.TryDequeue(out Event queuedEvent))
                         {
-                            Event @event = EventQueue.Dequeue();
-                            Add_EventAction(@event, context, universe.UniverseTicks);
+                            Add_EventAction(queuedEvent, context, universe.UniverseTicks);
                         }
 
                         // process all events in the database for the current tick

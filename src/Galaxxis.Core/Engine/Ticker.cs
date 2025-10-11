@@ -1,5 +1,6 @@
 ﻿using Galaxxis.Core.Provider;
 using Galaxxis.Data.Models;
+using System.Threading;
 using System.Timers;
 
 namespace Galaxxis.Core.Engine
@@ -10,14 +11,18 @@ namespace Galaxxis.Core.Engine
 
         // singleton instance
         private static Ticker _instance = null;
-        private Timer _timer;
+        private System.Timers.Timer _timer;
+
+        // atomic tick storage used by Interlocked
+        private long _ticks;
 
         #endregion
 
 
         #region Properties ------------------------------------------------------------------------
 
-        public long Ticks { get; set; }
+        // expose ticks safely (reads use Interlocked.Read)
+        public long Ticks => Interlocked.Read(ref _ticks);
 
         public string Status { get; set; }
 
@@ -33,7 +38,7 @@ namespace Galaxxis.Core.Engine
 
                     // init instance
                     _instance = new Ticker(universe.UniverseTicks);
-                    _instance._timer = new Timer(universe.UniverseTimePerTick);
+                    _instance._timer = new System.Timers.Timer(universe.UniverseTimePerTick);
                     _instance._timer.Elapsed += OnTickerElapsed;
                     _instance._timer.AutoReset = true;
                     _instance._timer.Enabled = true;
@@ -50,7 +55,8 @@ namespace Galaxxis.Core.Engine
 
         private Ticker(long tick)
         {
-            this.Ticks = tick;
+            // set backing field directly
+            _ticks = tick;
         }
 
         #endregion
@@ -77,7 +83,9 @@ namespace Galaxxis.Core.Engine
 
         private static void OnTickerElapsed(object source, ElapsedEventArgs e)
         {
-            Processor.Instance.ProcessAsync(Instance.Ticks++);
+            // increment backing field atomically and pass the new target tick to the processor
+            long targetTick = Interlocked.Increment(ref Instance._ticks);
+            Processor.Instance.ProcessAsync(targetTick);
         }
 
         #endregion

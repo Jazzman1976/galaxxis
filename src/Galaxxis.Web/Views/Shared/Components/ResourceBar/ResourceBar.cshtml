@@ -1,0 +1,80 @@
+﻿@using Core.Classes.Buildings.RessourceBuildings;
+@model Galaxxis.Web.Views.Shared.Components.ResourceBar.ResourceBarModel
+
+@{
+    Guid id = Guid.NewGuid();
+    OreMine oreMine = new (Model.Planet);
+    long ticksGone = Core.Engine.Ticker.Instance.Ticks - Model.Planet.PlanetDataTick;
+    long timePerTick = Model.Planet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick;
+}
+
+<div id="gx-resource-bar-@id" class="gx-resource-bar">
+    <div class="gx-resource-bar__item gx-resource-bar__item--ore">
+        <div class="gx-resource-bar__name">Erz</div>
+        <div class="gx-resource-bar__value" data-raw="@(Model.Planet.PlanetOre + oreMine.AmountPerTick * ticksGone)">@Math.Floor(Model.Planet.PlanetOre + oreMine.AmountPerTick * ticksGone)</div>
+    </div>
+    <div class="gx-resource-bar__item">
+        <div class="gx-resource-bar__name">Energie</div>
+        <div class="gx-resource-bar__value">@Math.Floor(Model.Planet.PlanetEnergy)</div>
+    </div>
+    <div class="gx-resource-bar__item">
+        <div class="gx-resource-bar__name">Werkzeuge</div>
+        <div class="gx-resource-bar__value">@Math.Floor(Model.Planet.PlanetTools)</div>
+    </div>
+    <div class="gx-resource-bar__item">
+        <div class="gx-resource-bar__name">Mana</div>
+        <div class="gx-resource-bar__value">@Math.Floor(Model.Planet.PlanetMana)</div>
+    </div>
+    <div class="gx-resource-bar__item">
+        <div class="gx-resource-bar__name">Kristalle</div>
+        <div class="gx-resource-bar__value">@Math.Floor(Model.Planet.PlanetCrystals)</div>
+    </div>
+    <div class="gx-resource-bar__item">
+        <div class="gx-resource-bar__name">Antimaterie</div>
+        <div class="gx-resource-bar__value">@Math.Floor(Model.Planet.PlanetAntimatter)</div>
+    </div>
+    <div class="gx-resource-bar__item">
+        <div class="gx-resource-bar__name">Elementium</div>
+        <div class="gx-resource-bar__value">@Math.Floor(Model.Planet.PlanetElementium)</div>
+    </div>
+</div>
+
+<script>
+    (() => {
+        function onResourceBarReady() {
+            const resourceBar = document.getElementById('gx-resource-bar-@id');
+            if (!resourceBar) return;
+            
+            const resourceBarItemOre = resourceBar.querySelector('.gx-resource-bar__item--ore');
+            if (!resourceBarItemOre) return;
+
+            const oreValueElement = resourceBarItemOre.querySelector('.gx-resource-bar__value');
+            if (!oreValueElement) return;
+
+            // normalize decimal separator and parse tick value
+            const orePerTick = parseFloat('@oreMine.AmountPerTick'.replace(',', '.')) || 0;
+
+            // start from the existing data-raw value
+            let currentOre = parseFloat(oreValueElement.dataset.raw.replace(',', '.')) || 0;
+            let displayedOre = Math.floor(currentOre);
+
+            // re-calculate value every second
+            setInterval(() => {
+                currentOre += orePerTick;
+                oreValueElement.dataset.raw = currentOre.toString().replace('.', ',');
+                const newDisplayedOre = Math.floor(currentOre);
+                if (newDisplayedOre !== displayedOre) {
+                    displayedOre = newDisplayedOre;
+                    oreValueElement.textContent = displayedOre.toString();
+                }
+            }, @timePerTick); // replace with time per tick from universe
+        }
+
+        document.addEventListener('DOMContentLoaded', onResourceBarReady);
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) { 
+                onResourceBarReady(); 
+            };
+        });
+    })();
+</script>

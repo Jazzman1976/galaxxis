@@ -14,7 +14,9 @@
 <div id="layer-interface">
     <main>
         <h1>@Model.System.SystemName System</h1>
-        <p><a href="/galaxy">Zurück</a> zur @Model.System.SystemGalaxy.GalaxyName Galaxie</p>
+        <p><a asp-controller="galaxy"
+        asp-action="index"
+        asp-route-id="@Model.System.SystemGalaxy.GalaxyId">Zurück</a> zur Galaxie</p>
         <h2>Planeten in diesem System:</h2>
         <form asp-action="GoPlanet" method="post">
             <div class="location-selection">

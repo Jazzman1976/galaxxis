@@ -10,9 +10,11 @@
 <div id="layer-interface">
     <header>
         <h1>Planet: @Model.Planet.PlanetName</h1>
+        
         <p>
             Du befindest dich auf einem Planeten.
         </p>
+        
         <ul>
             <li>
                 <!--back to system view -->
@@ -21,6 +23,8 @@
                    asp-route-id="@Model.Planet.PlanetSystem.SystemId">Zurück zum Sternensystem</a>
             </li>
         </ul>
+
+        @await Component.InvokeAsync("ResourceBar", new { planet = Model.Planet })
     </header>
 
     <main>

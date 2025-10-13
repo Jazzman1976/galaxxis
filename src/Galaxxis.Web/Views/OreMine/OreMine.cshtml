@@ -57,6 +57,15 @@
             <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(Model.OreMine.IncomePerDay)</td></tr>
         </table>
 
+        <h3>Kosten für den Ausbau auf die nächste Stufe</h3>
+        <table class="info-table">
+            <tr><th>Erz</th><td>@Model.OreMine.BuildCosts[0]</td></tr>
+            <tr><th>Mana</th><td>@Model.OreMine.BuildCosts[1]</td></tr>
+            <tr><th>Kristalle</th><td>@Model.OreMine.BuildCosts[2]</td></tr>
+            <tr><th>Elementium</th><td>@Model.OreMine.BuildCosts[3]</td></tr>
+            <tr><th>Ticks</th><td>@Model.OreMine.BuildCosts[4]</td></tr>
+        </table>
+
         @if (!Model.OreMine.CanBuild)
         {
             <p class="message">Du kannst die Erzmine aktuell nicht weiter ausbauen.</p>

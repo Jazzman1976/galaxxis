@@ -1,0 +1,72 @@
+﻿@using Galaxxis.Core.Classes.Buildings.Interfaces
+@{
+    Layout = "_Game";
+    ViewBag.Title = "Power Supply";
+}
+@model PowerSupplyViewModel;
+
+<div id="layer-background"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        @await Component.InvokeAsync("ResourceBar", new { planet = Model.Planet })
+
+        <h1>Planet: @Model.Planet.PlanetName - Kraftwerk</h1>
+        
+        <p>
+            Du betrachtest dein Kraftwerk.
+        </p>
+
+        @if (Model.InfoMessage != null)
+        {
+            <p class="message">@Model.InfoMessage</p>
+        }
+
+        <ul>
+            <li>
+                <!--back to system view -->
+                <a asp-controller="planet"
+                   asp-action="Index"
+                   asp-route-id="@Model.Planet.PlanetId">
+                   Zurück zum Planetarischen Kontrollzentrum
+               </a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <h2>Kraftwerk</h2>
+        <table class="info-table">
+            <tr><th>Ausbaustufe</th>        <td>@Model.Planet.PlanetPowerSupply</td></tr>            
+            <tr><th>Auslastung</th>         <td>@(Model.PowerSupply.Usage * 100)%</td></tr>
+            <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(Model.PowerSupply.IncomePerDay)</td></tr>
+        </table>
+
+        <h3>Kosten für den Ausbau auf die nächste Stufe</h3>
+        <table class="info-table">
+            <tr><th>Erz</th><td>@Model.PowerSupply.BuildCosts[0]</td></tr>
+            <tr><th>Mana</th><td>@Model.PowerSupply.BuildCosts[1]</td></tr>
+            <tr><th>Kristalle</th><td>@Model.PowerSupply.BuildCosts[2]</td></tr>
+            <tr><th>Elementium</th><td>@Model.PowerSupply.BuildCosts[3]</td></tr>
+            <tr><th>Ticks</th><td>@Model.PowerSupply.BuildCosts[4]</td></tr>
+        </table>
+
+        @if (!Model.PowerSupply.CanBuild)
+        {
+            <p class="message">Du kannst dein Kraftwerk aktuell nicht weiter ausbauen.</p>
+        }
+        else {
+            <form
+                method="post"
+                asp-controller="powersupply"
+                asp-action="BuildPowerSupply"
+                asp-route-id="@Model.Planet.PlanetId">
+                    <input type="hidden" name="planetId" value="@Model.Planet.PlanetId" />
+                    <button type="submit" @(Model.PowerSupply.CanBuild ? "" : "disabled")>
+                        Kraftwerk auf Stufe @(Model.Planet.PlanetPowerSupply + 1) ausbauen
+                    </button>
+            </form>
+        }
+    </main>
+</div>

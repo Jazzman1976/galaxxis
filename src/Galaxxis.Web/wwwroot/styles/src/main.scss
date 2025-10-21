@@ -12,6 +12,9 @@
 @import "partials/_html-elements.scss";
 @import "partials/_layer-background.scss";
 
+/* blocks */
+@import "blocks/info-table";
+
 #content, 
 #layer-background, 
 #layer-foreground {

@@ -14,11 +14,11 @@
             {
                 if (p.PlanetId == planetId)
                 {
-                    Planet = p;
+                    this.Planet = p;
                     break;
                 }
             }
-            if (Planet != null)
+            if (this.Planet != null)
             {
                 this.OreMine = new Core.Classes.Buildings.RessourceBuildings.OreMine(Planet);
             }

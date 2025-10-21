@@ -237,6 +237,28 @@ hr {
   left: 0;
 }
 
+/* blocks */
+.info-table,
+.info-table th,
+.info-table td {
+  border-collapse: collapse;
+  border: 1px solid #49fb35;
+  padding: 5px;
+}
+
+.info-table {
+  margin-bottom: 20px;
+}
+
+.info-table th {
+  text-align: left;
+  padding-right: 20px;
+}
+
+.info-table th::after {
+  content: ":";
+}
+
 #content,
 #layer-background,
 #layer-foreground {

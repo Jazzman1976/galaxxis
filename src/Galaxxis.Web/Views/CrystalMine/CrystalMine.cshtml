@@ -1,0 +1,71 @@
+﻿@using Galaxxis.Core.Classes.Buildings.Interfaces
+@{
+    Layout = "_Game";
+    ViewBag.Title = "Crystal Mine";
+}
+@model CrystalMineViewModel;
+
+<div id="layer-background"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        @await Component.InvokeAsync("ResourceBar", new { planet = Model.Planet })
+        <h1>Planet: @Model.Planet.PlanetName - Kristallmine</h1>
+        
+        <p>
+            Du betrachtest deine Kristallmine.
+        </p>
+
+        @if (Model.InfoMessage != null)
+        {
+            <p class="message">@Model.InfoMessage</p>
+        }
+
+        <ul>
+            <li>
+                <!--back to system view -->
+                <a asp-controller="planet"
+                   asp-action="Index"
+                   asp-route-id="@Model.Planet.PlanetId">
+                    Zurück zum Planetarischen Kontrollzentrum
+               </a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <h2>Kristallmine</h2>
+        <table class="info-table">
+            <tr><th>Ausbaustufe</th>        <td>@Model.Planet.PlanetCrystalMine</td></tr>
+            <tr><th>Auslastung</th>         <td>@(Model.CrystalMine.Usage * 100)%</td></tr>
+            <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(Model.CrystalMine.IncomePerDay)</td></tr>
+        </table>
+
+        <h3>Kosten für den Ausbau auf die nächste Stufe</h3>
+        <table class="info-table">
+            <tr><th>Erz</th><td>@Model.CrystalMine.BuildCosts[0]</td></tr>
+            <tr><th>Mana</th><td>@Model.CrystalMine.BuildCosts[1]</td></tr>
+            <tr><th>Kristalle</th><td>@Model.CrystalMine.BuildCosts[2]</td></tr>
+            <tr><th>Elementium</th><td>@Model.CrystalMine.BuildCosts[3]</td></tr>
+            <tr><th>Ticks</th><td>@Model.CrystalMine.BuildCosts[4]</td></tr>
+        </table>
+
+        @if (!Model.CrystalMine.CanBuild)
+        {
+            <p class="message">Du kannst die Kristallmine aktuell nicht weiter ausbauen.</p>
+        }
+        else
+        {
+            <form method="post"
+                    asp-action="BuildCrystalMine"
+                    asp-controller="crystalmine"
+                    asp-route-id="@Model.Planet.PlanetId">
+                <input type="hidden" name="planetId" value="@Model.Planet.PlanetId" />
+                <button type="submit" @(Model.CrystalMine.CanBuild ? "" : "disabled")>
+                    Kristallmine auf Stufe @(Model.Planet.PlanetCrystalMine + 1) ausbauen
+                </button>
+            </form>
+        }
+    </main>
+</div>

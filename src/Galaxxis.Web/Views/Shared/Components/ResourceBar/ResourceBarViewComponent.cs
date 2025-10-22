@@ -8,7 +8,8 @@ namespace Galaxxis.Web.Views.Shared.Components.ResourceBar
     {
         public async Task<IViewComponentResult> InvokeAsync(Data.Models.Planet planet)
         {
-            ResourceBarModel model = new() { Planet = planet };
+            await Task.Run(() => { /* do asynchon things here */ });
+            ResourceBarModel model = new() { Planet = planet };            
             return View("ResourceBar", model);
         }
     }

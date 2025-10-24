@@ -16,10 +16,10 @@ namespace Galaxxis.Web.Views.CrystalMine
 
         public ActionResult Index(string id) 
         {
-            int planetId = 0;
-            if (int.TryParse(id, out planetId))
+            if (int.TryParse(id, out int planetId))
             {
-                return View("CrystalMine", new CrystalMineViewModel(planetId, _currentUserService));
+                CrystalMineViewModel model = new(planetId, _currentUserService);
+                return View("CrystalMine", model);
             }
             else
             {
@@ -28,12 +28,13 @@ namespace Galaxxis.Web.Views.CrystalMine
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult BuildCrystalMine(int planetId)
         {
-            CrystalMineViewModel model = new CrystalMineViewModel(planetId, _currentUserService);
-            model.Planet.GetCrystalMine().Build(out string info);
-            model.InfoMessage = info;
-            return View("CrystalMine", model);
+            CrystalMineViewModel model = new(planetId, _currentUserService);
+            model.Planet.GetCrystalMine(true).Build(out string info);
+            TempData["InfoMessage"] = info ?? string.Empty;
+            return RedirectToAction(nameof(Index), new { id = planetId });
         }
     }
 }

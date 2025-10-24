@@ -1,5 +1,6 @@
 ﻿using Galaxxis.Core.Engine;
 using Galaxxis.Core.Provider;
+using Galaxxis.Core.Static;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Events.BuildEvents;
 using Galaxxis.Data.EventTypeData;
@@ -22,10 +23,19 @@ namespace Galaxxis.Core.Classes.Buildings
             Planet planet, double[] buildCosts, long ticksToEventTick, out string info) 
             where TBuildEvent : BaseBuildEvent
         {
+            // log build attempt
+            System.Diagnostics.Debug.WriteLine(
+                $"{DateTime.Now.ToString(Constants.DEBUG_TIME_FORMAT)}: "
+                + $"Attempt to build on planet {planet.PlanetName} started.");
+
             // check conditions
             if (EventProvider
-                .GetEvents(planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
-                .Any())
+                    .GetEvents(planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
+                    .Count != 0
+                || Processor.Instance.EventQueue
+                    .Any(e => e.EventLocation == EventLocationEnum.Planet.ToString()
+                           && e.EventLocationId == planet.PlanetId
+                           && e.EventType == EventTypeEnum.Build.ToString()))
             {
                 info = "A build is still in progress!";
                 return false;
@@ -52,7 +62,7 @@ namespace Galaxxis.Core.Classes.Buildings
             }
 
             // get event
-            BuildEventTypeData data = new BuildEventTypeData(
+            BuildEventTypeData data = new (
                 buildCosts[0],
                 buildCosts[1],
                 buildCosts[2],
@@ -60,12 +70,15 @@ namespace Galaxxis.Core.Classes.Buildings
             int id = planet.PlanetId;
             TBuildEvent @event = (TBuildEvent)Activator.CreateInstance(
                 typeof(TBuildEvent),
-                new object[] { EventLocationEnum.Planet, id, ticksToEventTick, data });
+                [EventLocationEnum.Planet, id, ticksToEventTick, data]);
 
             // queue event
             if (@event != null)
             {
                 Processor.Instance.EventQueue.Enqueue(@event);
+                System.Diagnostics.Debug.WriteLine(
+                    $"{DateTime.Now.ToString(Constants.DEBUG_TIME_FORMAT)}: "
+                    + $"Build on planet {planet.PlanetName} enqueued.");
             }
 
             // exit

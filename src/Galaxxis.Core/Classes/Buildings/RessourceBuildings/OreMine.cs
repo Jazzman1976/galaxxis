@@ -122,8 +122,8 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public OreMine(Planet planet) : base(planet)
         {
             System.Diagnostics.Debug.WriteLine(
-                $"{DateTime.Now.ToString(_timeFormat)}: "
-                + "A new Ore Mine object has been created.");
+                $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
+                + $"A new Ore Mine object has been created on planet {planet.PlanetName}.");
         }
 
         #endregion

@@ -40,5 +40,11 @@
         public const int BASEINCOME_CAT3_RESSOURCE = 10;
 
         #endregion
+
+        #region Other Constants -------------------------------------------------------------------
+
+        public const string DEBUG_TIME_FORMAT = "HH.mm.ss.fffffff";
+
+        #endregion
     }
 }

@@ -142,8 +142,8 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public PowerSupply(Planet planet) : base(planet)
         {
             System.Diagnostics.Debug.WriteLine(
-                $"{DateTime.Now.ToString(_timeFormat)}: "
-                + "A new Power Supply object has been created.");
+                $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
+                + $"A new Power Supply object has been created on planet {planet.PlanetName}.");
         }
 
         #endregion

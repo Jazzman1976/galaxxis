@@ -1,0 +1,75 @@
+﻿@using Galaxxis.Core.Classes.Buildings.Interfaces
+@using Galaxxis.Core.Extensions.PlanetExtensions;
+@using Galaxxis.Core.Classes.Buildings.RessourceBuildings;
+@{
+    Layout = "_Game";
+    ViewBag.Title = "Neutron Accelerator";
+    string infoMessage = TempData["InfoMessage"] as string;
+    NeutronAccelerator neutronAccelerator = Model.Planet.GetNeutronAccelerator(true);
+}
+@model NeutronAcceleratorViewModel;
+
+<div id="layer-background"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        @await Component.InvokeAsync("ResourceBar", new { planet = Model.Planet })
+
+        <h1>Planet: @Model.Planet.PlanetName - Neutronenbeschleuniger</h1>
+        
+        <p>Du betrachtest deinen Neutronenbeschleuniger.</p>
+
+        @if (infoMessage != null)
+        {
+            <p class="message">@infoMessage</p>
+        }
+
+        <ul>
+            <li>
+                <!--back to system view -->
+                <a asp-controller="planet"
+                   asp-action="Index"
+                   asp-route-id="@Model.Planet.PlanetId">
+                    Zurück zum Planetarischen Kontrollzentrum
+                </a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <h2>Neutronenbeschleuniger</h2>
+        <table class="info-table">
+            <tr><th>Ausbaustufe</th>        <td>@Model.Planet.PlanetNeutronAccelerator</td></tr>            
+            <tr><th>Auslastung</th>         <td>@(neutronAccelerator.Usage * 100)%</td></tr>
+            <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(neutronAccelerator.IncomePerDay)</td></tr>
+        </table>
+
+        <h3>Kosten für den Ausbau auf die nächste Stufe</h3>
+        <table class="info-table">
+            <tr><th>Erz</th><td>@neutronAccelerator.BuildCosts[0]</td></tr>
+            <tr><th>Mana</th><td>@neutronAccelerator.BuildCosts[1]</td></tr>
+            <tr><th>Kristalle</th><td>@neutronAccelerator.BuildCosts[2]</td></tr>
+            <tr><th>Elementium</th><td>@neutronAccelerator.BuildCosts[3]</td></tr>
+            <tr><th>Ticks</th><td>@neutronAccelerator.BuildCosts[4]</td></tr>
+        </table>
+
+        @if (!neutronAccelerator.CanBuild)
+        {
+            <p class="message">Du kannst den Neutronenbeschleuniger aktuell nicht weiter ausbauen.</p>
+        }
+        else 
+        {
+            <form 
+                method="post"
+                asp-controller="neutronaccelerator"
+                asp-action="BuildNeutronAccelerator"
+                asp-route-id="@Model.Planet.PlanetId">
+                <input type="hidden" name="planetId" value="@Model.Planet.PlanetId" />
+                <button type="submit">
+                    Neutronenbeschleuniger auf Stufe @(Model.Planet.PlanetNeutronAccelerator + 1) ausbauen
+                </button>
+            </form>
+        }
+    </main>
+</div>

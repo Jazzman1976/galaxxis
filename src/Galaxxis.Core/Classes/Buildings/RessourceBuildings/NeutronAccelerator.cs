@@ -148,8 +148,8 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public NeutronAccelerator(Planet planet) : base(planet)
         {
             System.Diagnostics.Debug.WriteLine(
-                $"{DateTime.Now.ToString(_timeFormat)}: "
-                + "A new Neutron Accelerator object has been created.");
+                $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
+                + $"A new Neutron Accelerator object has been created on planet {planet.PlanetName}.");
         }
 
         #endregion

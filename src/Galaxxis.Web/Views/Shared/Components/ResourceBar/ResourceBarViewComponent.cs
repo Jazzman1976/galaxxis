@@ -1,5 +1,6 @@
-﻿using Galaxxis.Core.Extensions.PlanetExtensions;
+﻿using Galaxxis.Core.Static;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Galaxxis.Web.Views.Shared.Components.ResourceBar
@@ -9,7 +10,12 @@ namespace Galaxxis.Web.Views.Shared.Components.ResourceBar
         public async Task<IViewComponentResult> InvokeAsync(Data.Models.Planet planet)
         {
             await Task.Run(() => { /* do asynchon things here */ });
-            ResourceBarModel model = new() { Planet = planet };            
+            ResourceBarModel model = new() { Planet = planet };
+
+            System.Diagnostics.Debug.WriteLine(
+                $"{DateTime.Now.ToString(Constants.DEBUG_TIME_FORMAT)}: "
+                + $"RessourceBar invoked on planet {planet.PlanetName}.");
+
             return View("ResourceBar", model);
         }
     }

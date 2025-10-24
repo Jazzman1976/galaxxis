@@ -128,8 +128,8 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public CrystalMine(Planet planet) : base(planet)
         {
             System.Diagnostics.Debug.WriteLine(
-                $"{DateTime.Now.ToString(_timeFormat)}: "
-                + "A new Crystal Mine object has been created.");
+                $"{DateTime.Now.ToString(Constants.DEBUG_TIME_FORMAT)}: "
+                + $"A new Crystal Mine object has been created on planet {planet.PlanetName}.");
         }
 
         #endregion

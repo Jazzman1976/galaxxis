@@ -1,14 +1,15 @@
 ﻿@using Core.Classes.Buildings.RessourceBuildings;
+@using Core.Extensions.PlanetExtensions;
 @model Galaxxis.Web.Views.Shared.Components.ResourceBar.ResourceBarModel
 
 @{
-    OreMine oreMine = new (Model.Planet);
-    PowerSupply powerSupply = new(Model.Planet);
-    Factory factory = new(Model.Planet);
-    MageAcademy mageAcademy = new(Model.Planet);
-    CrystalMine crystalMine = new(Model.Planet);
-    NeutronAccelerator neutronAccelerator = new(Model.Planet);
-    ElementiumSynthesizer elementiumSynthesizer = new(Model.Planet);
+    OreMine oreMine = Model.Planet.GetOreMine();
+    PowerSupply powerSupply = Model.Planet.GetPowerSupply();
+    Factory factory = Model.Planet.GetFactory();
+    MageAcademy mageAcademy = Model.Planet.GetMageAcademy();
+    CrystalMine crystalMine = Model.Planet.GetCrystalMine();
+    NeutronAccelerator neutronAccelerator = Model.Planet.GetNeutronAccelerator();
+    ElementiumSynthesizer elementiumSynthesizer = Model.Planet.GetElementiumSynthesizer();
 
     long ticksGone = Core.Engine.Ticker.Instance.Ticks - Model.Planet.PlanetDataTick;
     long timePerTick = Model.Planet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick;

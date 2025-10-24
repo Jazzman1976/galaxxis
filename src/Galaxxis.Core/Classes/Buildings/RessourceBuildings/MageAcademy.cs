@@ -115,8 +115,8 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public MageAcademy(Planet planet) : base(planet)
         {
             System.Diagnostics.Debug.WriteLine(
-                $"{DateTime.Now.ToString(_timeFormat)}: "
-                + "A new Mage Academy object has been created.");
+                $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
+                + $"A new Mage Academy object has been created on planet {planet.PlanetName}.");
         }
 
         #endregion

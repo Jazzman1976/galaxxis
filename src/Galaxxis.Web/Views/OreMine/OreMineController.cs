@@ -16,10 +16,10 @@ namespace Galaxxis.Web.Views.OreMine
 
         public ActionResult Index(string id) 
         {
-            int planetId = 0;
-            if (int.TryParse(id, out planetId))
+            if (int.TryParse(id, out int planetId))
             {
-                return View("OreMine", new OreMineViewModel(planetId, _currentUserService));
+                OreMineViewModel model = new(planetId, _currentUserService);
+                return View("OreMine", model);
             }
             else
             {
@@ -28,12 +28,13 @@ namespace Galaxxis.Web.Views.OreMine
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult BuildOreMine(int planetId)
         {
-            OreMineViewModel model = new OreMineViewModel(planetId, _currentUserService);
-            model.Planet.GetOreMine().Build(out string info);
-            model.InfoMessage = info;
-            return View("OreMine", model);
+            OreMineViewModel model = new(planetId, _currentUserService);
+            model.Planet.GetOreMine(true).Build(out string info);
+            TempData["InfoMessage"] = info ?? string.Empty;            
+            return RedirectToAction(nameof(Index), new { id = planetId });
         }
     }
 }

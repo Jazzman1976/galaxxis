@@ -23,7 +23,6 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         protected double _incomePerDay = -1;
         protected double _incomePerTick = -1;
         protected double? _costsPerTick;
-        protected string _timeFormat = "HH.mm.ss.fffffff";
         protected GrowthRate _consumptionEnergyRate;
         protected GrowthRate _consumptionManaRate;
         protected GrowthRate _consupmtionAntimatter;

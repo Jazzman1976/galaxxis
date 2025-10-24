@@ -16,10 +16,10 @@ namespace Galaxxis.Web.Views.PowerSupply
 
         public ActionResult Index(string id) 
         {
-            int planetId = 0;
-            if (int.TryParse(id, out planetId))
+            if (int.TryParse(id, out int planetId))
             {
-                return View("PowerSupply", new PowerSupplyViewModel(planetId, _currentUserService));
+                PowerSupplyViewModel model = new(planetId, _currentUserService);
+                return View("PowerSupply", model);
             }
             else
             {
@@ -28,12 +28,14 @@ namespace Galaxxis.Web.Views.PowerSupply
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult BuildPowerSupply(int planetId)
         {
-            PowerSupplyViewModel model = new PowerSupplyViewModel(planetId, _currentUserService);
-            model.Planet.GetPowerSupply().Build(out string info);
-            model.InfoMessage = info;
-            return View("PowerSupply", model);
+            PowerSupplyViewModel model = new(planetId, _currentUserService);
+            model.Planet.GetPowerSupply(true).Build(out string info);
+            TempData["InfoMessage"] = info ?? string.Empty;
+            TempData["Status"] = "Building";
+            return RedirectToAction(nameof(Index), new { id = planetId });
         }
     }
 }

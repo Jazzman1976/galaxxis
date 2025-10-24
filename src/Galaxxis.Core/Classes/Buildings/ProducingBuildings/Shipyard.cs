@@ -199,7 +199,7 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
         public Shipyard(Planet planet) : base(planet) 
         {
             System.Diagnostics.Debug.WriteLine(
-                $"{DateTime.Now.ToString(_timeFormat)}: "
+                $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
                 + "A new Shipyard object has been created.");
         }
     }

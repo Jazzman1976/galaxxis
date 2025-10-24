@@ -1,7 +1,11 @@
 ﻿@using Galaxxis.Core.Classes.Buildings.Interfaces
+@using Galaxxis.Core.Extensions.PlanetExtensions;
+@using Galaxxis.Core.Classes.Buildings.RessourceBuildings;
 @{
     Layout = "_Game";
     ViewBag.Title = "Power Supply";
+    string infoMessage = TempData["InfoMessage"] as string;
+    PowerSupply powerSupply = Model.Planet.GetPowerSupply(true);
 }
 @model PowerSupplyViewModel;
 
@@ -14,13 +18,11 @@
 
         <h1>Planet: @Model.Planet.PlanetName - Kraftwerk</h1>
         
-        <p>
-            Du betrachtest dein Kraftwerk.
-        </p>
+        <p>Du betrachtest dein Kraftwerk.</p>
 
-        @if (Model.InfoMessage != null)
+        @if (infoMessage != null)
         {
-            <p class="message">@Model.InfoMessage</p>
+            <p class="message">@infoMessage</p>
         }
 
         <ul>
@@ -39,20 +41,20 @@
         <h2>Kraftwerk</h2>
         <table class="info-table">
             <tr><th>Ausbaustufe</th>        <td>@Model.Planet.PlanetPowerSupply</td></tr>            
-            <tr><th>Auslastung</th>         <td>@(Model.PowerSupply.Usage * 100)%</td></tr>
-            <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(Model.PowerSupply.IncomePerDay)</td></tr>
+            <tr><th>Auslastung</th>         <td>@(powerSupply.Usage * 100)%</td></tr>
+            <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(powerSupply.IncomePerDay)</td></tr>
         </table>
 
         <h3>Kosten für den Ausbau auf die nächste Stufe</h3>
         <table class="info-table">
-            <tr><th>Erz</th><td>@Model.PowerSupply.BuildCosts[0]</td></tr>
-            <tr><th>Mana</th><td>@Model.PowerSupply.BuildCosts[1]</td></tr>
-            <tr><th>Kristalle</th><td>@Model.PowerSupply.BuildCosts[2]</td></tr>
-            <tr><th>Elementium</th><td>@Model.PowerSupply.BuildCosts[3]</td></tr>
-            <tr><th>Ticks</th><td>@Model.PowerSupply.BuildCosts[4]</td></tr>
+            <tr><th>Erz</th><td>@powerSupply.BuildCosts[0]</td></tr>
+            <tr><th>Mana</th><td>@powerSupply.BuildCosts[1]</td></tr>
+            <tr><th>Kristalle</th><td>@powerSupply.BuildCosts[2]</td></tr>
+            <tr><th>Elementium</th><td>@powerSupply.BuildCosts[3]</td></tr>
+            <tr><th>Ticks</th><td>@powerSupply.BuildCosts[4]</td></tr>
         </table>
 
-        @if (!Model.PowerSupply.CanBuild)
+        @if (!powerSupply.CanBuild)
         {
             <p class="message">Du kannst dein Kraftwerk aktuell nicht weiter ausbauen.</p>
         }
@@ -63,7 +65,7 @@
                 asp-action="BuildPowerSupply"
                 asp-route-id="@Model.Planet.PlanetId">
                     <input type="hidden" name="planetId" value="@Model.Planet.PlanetId" />
-                    <button type="submit" @(Model.PowerSupply.CanBuild ? "" : "disabled")>
+                    <button type="submit">
                         Kraftwerk auf Stufe @(Model.Planet.PlanetPowerSupply + 1) ausbauen
                     </button>
             </form>

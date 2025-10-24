@@ -1,0 +1,76 @@
+﻿@using Galaxxis.Core.Classes.Buildings.Interfaces
+@using Galaxxis.Core.Extensions.PlanetExtensions;
+@using Galaxxis.Core.Classes.Buildings.RessourceBuildings;
+@{
+    Layout = "_Game";
+    ViewBag.Title = "Factory";
+    string infoMessage = TempData["InfoMessage"] as string;
+    Factory factory = Model.Planet.GetFactory(true);
+}
+@model FactoryViewModel;
+
+<div id="layer-background"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        @await Component.InvokeAsync("ResourceBar", new { planet = Model.Planet })
+
+        <h1>Planet: @Model.Planet.PlanetName - Factory</h1>
+        
+        <p>
+            Du betrachtest deine Fabrik.
+        </p>
+        @if (infoMessage != null)
+        {
+            <p class="message">@infoMessage</p>
+        }
+
+        <ul>
+            <li>
+                <!--back to system view -->
+                <a asp-controller="planet"
+                   asp-action="Index"
+                   asp-route-id="@Model.Planet.PlanetId">
+                    Zurück zum Planetarischen Kontrollzentrum
+               </a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <h2>Fabrik</h2>
+        
+        <table class="info-table">
+            <tr><th>Ausbaustufe</th>        <td>@Model.Planet.PlanetFactory</td></tr>            
+            <tr><th>Auslastung</th>         <td>@(factory.Usage * 100)%</td></tr>
+            <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(factory.IncomePerDay)</td></tr>
+        </table>
+
+        <h3>Kosten für den Ausbau auf die nächste Stufe</h3>
+
+        <table class="info-table">
+            <tr><th>Erz</th><td>@factory.BuildCosts[0]</td></tr>
+            <tr><th>Mana</th><td>@factory.BuildCosts[1]</td></tr>
+            <tr><th>Kristalle</th><td>@factory.BuildCosts[2]</td></tr>
+            <tr><th>Elementium</th><td>@factory.BuildCosts[3]</td></tr>
+            <tr><th>Ticks</th><td>@factory.BuildCosts[4]</td></tr>
+        </table>
+
+        @if (!factory.CanBuild)
+        {
+            <p class="message">Du kannst die Fabrik aktuell nicht weiter ausbauen.</p>
+        }
+        else {
+            <form method="post" 
+                asp-controller="Factory"
+                asp-action="BuildFactory"
+                asp-route-id="@Model.Planet.PlanetId">
+                <input type="hidden" name="planetId" value="@Model.Planet.PlanetId" />
+                <button type="submit">
+                    Fabrik auf Stufe @(Model.Planet.PlanetFactory + 1) ausbauen
+                </button>
+            </form>
+        }
+    </main>
+</div>

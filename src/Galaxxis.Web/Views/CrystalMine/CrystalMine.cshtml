@@ -1,7 +1,11 @@
 ﻿@using Galaxxis.Core.Classes.Buildings.Interfaces
+@using Galaxxis.Core.Extensions.PlanetExtensions;
+@using Galaxxis.Core.Classes.Buildings.RessourceBuildings;
 @{
     Layout = "_Game";
     ViewBag.Title = "Crystal Mine";
+    string infoMessage = TempData["InfoMessage"] as string;
+    CrystalMine crystalMine = Model.Planet.GetCrystalMine(true);
 }
 @model CrystalMineViewModel;
 
@@ -11,15 +15,14 @@
 <div id="layer-interface">
     <header>
         @await Component.InvokeAsync("ResourceBar", new { planet = Model.Planet })
+
         <h1>Planet: @Model.Planet.PlanetName - Kristallmine</h1>
         
-        <p>
-            Du betrachtest deine Kristallmine.
-        </p>
+        <p>Du betrachtest deine Kristallmine.</p>
 
-        @if (Model.InfoMessage != null)
+        @if (infoMessage != null)
         {
-            <p class="message">@Model.InfoMessage</p>
+            <p class="message">@infoMessage</p>
         }
 
         <ul>
@@ -38,31 +41,32 @@
         <h2>Kristallmine</h2>
         <table class="info-table">
             <tr><th>Ausbaustufe</th>        <td>@Model.Planet.PlanetCrystalMine</td></tr>
-            <tr><th>Auslastung</th>         <td>@(Model.CrystalMine.Usage * 100)%</td></tr>
-            <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(Model.CrystalMine.IncomePerDay)</td></tr>
+            <tr><th>Auslastung</th>         <td>@(crystalMine.Usage * 100)%</td></tr>
+            <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(crystalMine.IncomePerDay)</td></tr>
         </table>
 
         <h3>Kosten für den Ausbau auf die nächste Stufe</h3>
         <table class="info-table">
-            <tr><th>Erz</th><td>@Model.CrystalMine.BuildCosts[0]</td></tr>
-            <tr><th>Mana</th><td>@Model.CrystalMine.BuildCosts[1]</td></tr>
-            <tr><th>Kristalle</th><td>@Model.CrystalMine.BuildCosts[2]</td></tr>
-            <tr><th>Elementium</th><td>@Model.CrystalMine.BuildCosts[3]</td></tr>
-            <tr><th>Ticks</th><td>@Model.CrystalMine.BuildCosts[4]</td></tr>
+            <tr><th>Erz</th><td>@crystalMine.BuildCosts[0]</td></tr>
+            <tr><th>Mana</th><td>@crystalMine.BuildCosts[1]</td></tr>
+            <tr><th>Kristalle</th><td>@crystalMine.BuildCosts[2]</td></tr>
+            <tr><th>Elementium</th><td>@crystalMine.BuildCosts[3]</td></tr>
+            <tr><th>Ticks</th><td>@crystalMine.BuildCosts[4]</td></tr>
         </table>
 
-        @if (!Model.CrystalMine.CanBuild)
+        @if (!crystalMine.CanBuild)
         {
             <p class="message">Du kannst die Kristallmine aktuell nicht weiter ausbauen.</p>
         }
         else
         {
-            <form method="post"
-                    asp-action="BuildCrystalMine"
-                    asp-controller="crystalmine"
-                    asp-route-id="@Model.Planet.PlanetId">
+            <form 
+                method="post"
+                asp-controller="crystalmine"
+                asp-action="BuildCrystalMine"                
+                asp-route-id="@Model.Planet.PlanetId">
                 <input type="hidden" name="planetId" value="@Model.Planet.PlanetId" />
-                <button type="submit" @(Model.CrystalMine.CanBuild ? "" : "disabled")>
+                <button type="submit">
                     Kristallmine auf Stufe @(Model.Planet.PlanetCrystalMine + 1) ausbauen
                 </button>
             </form>

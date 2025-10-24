@@ -148,7 +148,7 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
         public DefenseSystem(Planet planet) : base(planet)
         {
             System.Diagnostics.Debug.WriteLine(
-                $"{DateTime.Now.ToString(_timeFormat)}: "
+                $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
                 + "A new DefenseSystem object has been created.");
         }
     }

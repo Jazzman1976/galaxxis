@@ -19,7 +19,6 @@ namespace Galaxxis.Core.Engine
         #region Fields ----------------------------------------------------------------------------
 
         private static Processor _instance = null;
-        private static readonly string _dateFormat = "HH.mm.ss.fffffff";
 
         #endregion
 
@@ -31,7 +30,7 @@ namespace Galaxxis.Core.Engine
         public bool IsWorking => Interlocked.CompareExchange(ref _isWorkingFlag, 0, 0) == 1;
         public ConcurrentQueue<Event> EventQueue { get; set; } = new ConcurrentQueue<Event>();
 
-        private static string DateStamp => DateTime.Now.ToString(_dateFormat);
+        private static string DateStamp => DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT);
 
 
         /****************************************************************************

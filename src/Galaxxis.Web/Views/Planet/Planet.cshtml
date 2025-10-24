@@ -50,6 +50,18 @@
                    asp-action="Index"
                    asp-route-id="@Model.Planet.PlanetId">Zum Kraftwerk</a>
             </li>
+            <li>
+                <!-- to factory -->
+                <a asp-controller="factory"
+                   asp-action="Index"
+                   asp-route-id="@Model.Planet.PlanetId">Zur Fabrik</a>
+            </li>
+            <li>
+                <!-- to neutron accelerator -->
+                <a asp-controller="neutronaccelerator"
+                   asp-action="Index"
+                   asp-route-id="@Model.Planet.PlanetId">Zum Neutronenbeschleuniger</a>
+            </li>
         </ul>
     </main>
 </div>

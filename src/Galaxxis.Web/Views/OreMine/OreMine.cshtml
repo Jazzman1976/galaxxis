@@ -1,7 +1,11 @@
 ﻿@using Galaxxis.Core.Classes.Buildings.Interfaces
+@using Galaxxis.Core.Extensions.PlanetExtensions;
+@using Galaxxis.Core.Classes.Buildings.RessourceBuildings;
 @{
     Layout = "_Game";
     ViewBag.Title = "Ore Mine";
+    string infoMessage = TempData["InfoMessage"] as string;
+    OreMine oreMine = Model.Planet.GetOreMine(true);
 }
 @model OreMineViewModel;
 
@@ -14,13 +18,11 @@
 
         <h1>Planet: @Model.Planet.PlanetName - Erzmine</h1>
         
-        <p>
-            Du betrachtest deine Erzmine.
-        </p>
+        <p>Du betrachtest deine Erzmine.</p>
 
-        @if (Model.InfoMessage != null)
+        @if (infoMessage != null)
         {
-            <p class="message">@Model.InfoMessage</p>
+            <p class="message">@infoMessage</p>
         }
 
         <ul>
@@ -39,31 +41,32 @@
         <h2>Erzmine</h2>
         <table class="info-table">
             <tr><th>Ausbaustufe</th>        <td>@Model.Planet.PlanetOreMine</td></tr>            
-            <tr><th>Auslastung</th>         <td>@(Model.OreMine.Usage * 100)%</td></tr>
-            <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(Model.OreMine.IncomePerDay)</td></tr>
+            <tr><th>Auslastung</th>         <td>@(oreMine.Usage * 100)%</td></tr>
+            <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(oreMine.IncomePerDay)</td></tr>
         </table>
 
         <h3>Kosten für den Ausbau auf die nächste Stufe</h3>
         <table class="info-table">
-            <tr><th>Erz</th><td>@Model.OreMine.BuildCosts[0]</td></tr>
-            <tr><th>Mana</th><td>@Model.OreMine.BuildCosts[1]</td></tr>
-            <tr><th>Kristalle</th><td>@Model.OreMine.BuildCosts[2]</td></tr>
-            <tr><th>Elementium</th><td>@Model.OreMine.BuildCosts[3]</td></tr>
-            <tr><th>Ticks</th><td>@Model.OreMine.BuildCosts[4]</td></tr>
+            <tr><th>Erz</th><td>@oreMine.BuildCosts[0]</td></tr>
+            <tr><th>Mana</th><td>@oreMine.BuildCosts[1]</td></tr>
+            <tr><th>Kristalle</th><td>@oreMine.BuildCosts[2]</td></tr>
+            <tr><th>Elementium</th><td>@oreMine.BuildCosts[3]</td></tr>
+            <tr><th>Ticks</th><td>@oreMine.BuildCosts[4]</td></tr>
         </table>
 
-        @if (!Model.OreMine.CanBuild)
+        @if (!oreMine.CanBuild)
         {
             <p class="message">Du kannst die Erzmine aktuell nicht weiter ausbauen.</p>
         }
-        else {
+        else 
+        {
             <form 
                 method="post" 
-                asp-action="BuildOreMine" 
                 asp-controller="oremine" 
+                asp-action="BuildOreMine" 
                 asp-route-id="@Model.Planet.PlanetId">
                 <input type="hidden" name="planetId" value="@Model.Planet.PlanetId" />
-                <button type="submit" @(Model.OreMine.CanBuild ? "" : "disabled")>
+                <button type="submit">
                     Erzmine auf Stufe @(Model.Planet.PlanetOreMine + 1) ausbauen
                 </button>
             </form>

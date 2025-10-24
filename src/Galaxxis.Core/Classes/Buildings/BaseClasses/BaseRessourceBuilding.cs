@@ -1,6 +1,7 @@
 ﻿using Galaxxis.Core.Classes.Buildings.Interfaces;
 using Galaxxis.Core.Engine;
 using Galaxxis.Core.Provider;
+using Galaxxis.Core.Static;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Events;
 using Galaxxis.Data.Events.BuildEvents;
@@ -8,6 +9,7 @@ using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Models;
 using System;
 using System.Linq;
+using System.Numerics;
 
 namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 {
@@ -28,7 +30,6 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         protected double _incomePerDay = -1;
         protected double _incomePerTick = -1;
         protected double? _costsPerTick;
-        protected string _timeFormat = "HH.mm.ss.fffffff";
         protected GrowthRate _consumptionEnergyRate;
         protected GrowthRate _consumptionManaRate;
         protected GrowthRate _consupmtionAntimatter;
@@ -87,15 +88,39 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
             {
                 if (_canBuild == null)
                 {
-                    _canBuild = BuildCosts[0] <= _planet.PlanetOre
+                    _canBuild
+                         // check ressources
+                         = BuildCosts[0] <= _planet.PlanetOre
                         && BuildCosts[1] <= _planet.PlanetMana
                         && BuildCosts[2] <= _planet.PlanetCrystals
                         && BuildCosts[3] <= _planet.PlanetElementium
-                        && !EventProvider
-                            .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
-                            .Any();
+
+                        // check for existing build events in database
+                        && EventProvider
+                            .GetEvents(_planet.PlanetId,
+                                       EventLocationEnum.Planet,
+                                       EventTypeEnum.Build)
+                            .Count == 0
+
+                        // check for existing build events in event queue
+                        && !Processor.Instance.EventQueue.Any(e
+                                   => e.EventLocation == EventLocationEnum.Planet.ToString()
+                                   && e.EventLocationId == _planet.PlanetId
+                                   && e.EventType == EventTypeEnum.Build.ToString());
+
+                    System.Diagnostics.Debug.WriteLine(
+                        $"{DateTime.Now.ToString(Constants.DEBUG_TIME_FORMAT)}: "
+                        + $"_canBuild={_canBuild} checked on {_planet.PlanetName}.");
                 }
+                else 
+                {
+                    System.Diagnostics.Debug.WriteLine(
+                        $"{DateTime.Now.ToString(Constants.DEBUG_TIME_FORMAT)}: "
+                        + $"_canBuild={_canBuild} taken from cache on {_planet.PlanetName}.");
+                }
+
                 return _canBuild == true;
+                
             }
         }
 
@@ -130,7 +155,12 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         /// </summary>
         protected bool Build<TBuildEvent>(out string info) where TBuildEvent : BaseBuildEvent
         {
-            return BuildingsHelper.BuildOnPlanet<TBuildEvent>(
+            System.Diagnostics.Debug.WriteLine(
+                $"{DateTime.Now.ToString(Constants.DEBUG_TIME_FORMAT)}: "
+                + $"Ressource building build on planet {_planet.PlanetName} initiated.");
+
+            info = "Can't build right now.";
+            return CanBuild && BuildingsHelper.BuildOnPlanet<TBuildEvent>(
                 _planet, BuildCosts, BuildTimeRate.ValueLong, out info);
         }
 
@@ -168,8 +198,6 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
             info = "Usage of the building has been changed.";
             return true;
         }
-
-        private string DateStamp => DateTime.Now.ToString("HH.mm.ss.fffffff");
 
         #endregion
 

@@ -115,8 +115,8 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
         public ElementiumSynthesizer(Planet planet) : base(planet)
         {
             System.Diagnostics.Debug.WriteLine(
-                $"{DateTime.Now.ToString(_timeFormat)}: "
-                + "A new Elementium Synthesizer object has been created.");
+                $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
+                + $"A new Elementium Synthesizer object has been created on planet {planet.PlanetName}.");
         }
 
         #endregion

@@ -1,8 +1,9 @@
-﻿using Galaxxis.Core.Provider;
-using Galaxxis.Core.Classes.Buildings.RessourceBuildings;
+﻿using Galaxxis.Core.Classes.Buildings.RessourceBuildings;
 using Galaxxis.Core.Engine;
+using Galaxxis.Core.Provider;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,6 +11,8 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
 {
     public static partial class PlanetCache
     {
+        private static bool _isVerboseLog = false;
+
         /// <summary>
         /// Removes all resource buildings from their dictionaries. 
         /// All data is updated with new data if accessed.
@@ -37,7 +40,14 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
             {
                 _planetOreMine[planet.PlanetId] = new OreMine(planet);
             }
-            return _planetOreMine[planet.PlanetId];
+            else if (_isVerboseLog)
+            {
+                // log access from cache
+                System.Diagnostics.Debug.WriteLine(
+                    $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
+                    + $"Ore Mine object from cache is used on planet {planet.PlanetName}.");
+            }
+                return _planetOreMine[planet.PlanetId];
         }
 
         /// <summary>
@@ -64,6 +74,13 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
             if (!_planetPowerSupply.ContainsKey(planet.PlanetId) || forceReload)
             {
                 _planetPowerSupply[planet.PlanetId] = new PowerSupply(planet);
+            }
+            else if (_isVerboseLog)
+            {
+                // log access from cache
+                System.Diagnostics.Debug.WriteLine(
+                    $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
+                    + $"Power Supply object from cache is used on planet {planet.PlanetName}.");
             }
             return _planetPowerSupply[planet.PlanetId];
         }
@@ -93,6 +110,13 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
             {
                 _planetFactory[planet.PlanetId] = new Factory(planet);
             }
+            else if (_isVerboseLog)
+            {
+                // log access from cache
+                System.Diagnostics.Debug.WriteLine(
+                    $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
+                    + $"Factory object from cache is used on planet {planet.PlanetName}.");
+            }
             return _planetFactory[planet.PlanetId];
         }
 
@@ -121,6 +145,13 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
             {
                 _planetMageAcademy[planet.PlanetId] = new MageAcademy(planet);
             }
+            else if (_isVerboseLog)
+            {
+                // log access from cache
+                System.Diagnostics.Debug.WriteLine(
+                    $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
+                    + $"Mage Academy object from cache is used on planet {planet.PlanetName}.");
+            }
             return _planetMageAcademy[planet.PlanetId];
         }
 
@@ -148,6 +179,13 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
             if (!_planetCrystalMine.ContainsKey(planet.PlanetId) || forceReload)
             {
                 _planetCrystalMine[planet.PlanetId] = new CrystalMine(planet);
+            }
+            else if (_isVerboseLog)
+            {
+                // log access from cache
+                System.Diagnostics.Debug.WriteLine(
+                    $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
+                    + $"Crystal Mine object from cache is used on planet {planet.PlanetName}.");
             }
             return _planetCrystalMine[planet.PlanetId];
         }
@@ -178,6 +216,13 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
             {
                 _planetNeutronAccelerator[planet.PlanetId] = new NeutronAccelerator(planet);
             }
+            else if (_isVerboseLog)
+            {
+                // log access from cache
+                System.Diagnostics.Debug.WriteLine(
+                    $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
+                    + $"Neutron Accelerator object from cache is used on planet {planet.PlanetName}.");
+            }
             return _planetNeutronAccelerator[planet.PlanetId];
         }
 
@@ -206,6 +251,13 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
             if (!_planetElementiumSynthesizer.ContainsKey(planet.PlanetId) || forceReload)
             {
                 _planetElementiumSynthesizer[planet.PlanetId] = new ElementiumSynthesizer(planet);
+            }
+            else if (_isVerboseLog)
+            {
+                // log access from cache
+                System.Diagnostics.Debug.WriteLine(
+                    $"{DateTime.Now.ToString(Static.Constants.DEBUG_TIME_FORMAT)}: "
+                    + $"Elementium Synthesizer object from cache is used on planet {planet.PlanetName}.");
             }
             return _planetElementiumSynthesizer[planet.PlanetId];
         }
@@ -248,7 +300,7 @@ namespace Galaxxis.Core.Extensions.PlanetExtensions
                     planet.PlanetId,
                     EventLocationEnum.Planet,
                     EventTypeEnum.Build)
-                .Any();
+                .Count != 0;
         }
 
         /// <summary>

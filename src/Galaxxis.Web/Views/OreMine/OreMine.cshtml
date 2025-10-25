@@ -45,31 +45,34 @@
             <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(oreMine.IncomePerDay)</td></tr>
         </table>
 
-        <h3>Kosten für den Ausbau auf die nächste Stufe</h3>
-        <table class="info-table">
-            <tr><th>Erz</th><td>@oreMine.BuildCosts[0]</td></tr>
-            <tr><th>Mana</th><td>@oreMine.BuildCosts[1]</td></tr>
-            <tr><th>Kristalle</th><td>@oreMine.BuildCosts[2]</td></tr>
-            <tr><th>Elementium</th><td>@oreMine.BuildCosts[3]</td></tr>
-            <tr><th>Ticks</th><td>@oreMine.BuildCosts[4]</td></tr>
-        </table>
-
-        @if (!oreMine.CanBuild)
-        {
-            <p class="message">Du kannst die Erzmine aktuell nicht weiter ausbauen.</p>
-        }
-        else 
-        {
-            <form 
-                method="post" 
-                asp-controller="oremine" 
-                asp-action="BuildOreMine" 
-                asp-route-id="@Model.Planet.PlanetId">
-                <input type="hidden" name="planetId" value="@Model.Planet.PlanetId" />
-                <button type="submit">
-                    Erzmine auf Stufe @(Model.Planet.PlanetOreMine + 1) ausbauen
-                </button>
-            </form>
-        }
+        <div id="oreMine-buildPanel">
+            @await Html.PartialAsync("_OreMineBuildPanel", Model)
+        </div>
     </main>
 </div>
+
+@section Scripts {
+    <script>
+        document.getElementById('oreMine-buildForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            if (response.ok) {
+                const html = await response.text();
+                document.getElementById('oreMine-buildPanel').innerHTML = html;
+            } else {
+                // Optionally handle errors here
+                console.log('An error occurred while building the Ore Mine.');
+            }
+        });
+    </script>
+}

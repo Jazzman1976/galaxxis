@@ -32,9 +32,9 @@ namespace Galaxxis.Web.Views.OreMine
         public IActionResult BuildOreMine(int planetId)
         {
             OreMineViewModel model = new(planetId, _currentUserService);
-            model.Planet.GetOreMine(true).Build(out string info);
-            TempData["InfoMessage"] = info ?? string.Empty;            
-            return RedirectToAction(nameof(Index), new { id = planetId });
+            model.IsBuilding = model.Planet.GetOreMine(true).Build(out string info);            
+            model.InfoMessage = info ?? string.Empty;            
+            return PartialView("_OreMineBuildPanel", model);
         }
     }
 }

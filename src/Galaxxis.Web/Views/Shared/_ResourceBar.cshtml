@@ -1,26 +1,26 @@
 ﻿@using Core.Classes.Buildings.RessourceBuildings;
 @using Core.Extensions.PlanetExtensions;
-@model Galaxxis.Web.Views.Shared.Components.ResourceBar.ResourceBarModel
+@model Galaxxis.Data.Models.Planet;
 
 @{
-    OreMine oreMine = Model.Planet.GetOreMine();
-    PowerSupply powerSupply = Model.Planet.GetPowerSupply();
-    Factory factory = Model.Planet.GetFactory();
-    MageAcademy mageAcademy = Model.Planet.GetMageAcademy();
-    CrystalMine crystalMine = Model.Planet.GetCrystalMine();
-    NeutronAccelerator neutronAccelerator = Model.Planet.GetNeutronAccelerator();
-    ElementiumSynthesizer elementiumSynthesizer = Model.Planet.GetElementiumSynthesizer();
+    OreMine oreMine = Model.GetOreMine();
+    PowerSupply powerSupply = Model.GetPowerSupply();
+    Factory factory = Model.GetFactory();
+    MageAcademy mageAcademy = Model.GetMageAcademy();
+    CrystalMine crystalMine = Model.GetCrystalMine();
+    NeutronAccelerator neutronAccelerator = Model.GetNeutronAccelerator();
+    ElementiumSynthesizer elementiumSynthesizer = Model.GetElementiumSynthesizer();
 
-    long ticksGone = Core.Engine.Ticker.Instance.Ticks - Model.Planet.PlanetDataTick;
-    long timePerTick = Model.Planet.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick;
+    long ticksGone = Core.Engine.Ticker.Instance.Ticks - Model.PlanetDataTick;
+    long timePerTick = Model.PlanetSystem.SystemGalaxy.GalaxyUniverse.UniverseTimePerTick;
 
-    double currentOre = Model.Planet.PlanetOre + oreMine.AmountPerTick * ticksGone;
-    double currentEnergy = Model.Planet.PlanetEnergy + powerSupply.AmountPerTick * ticksGone;
-    double currentTools = Model.Planet.PlanetTools + factory.AmountPerTick * ticksGone;
-    double currentMana = Model.Planet.PlanetMana + mageAcademy.AmountPerTick * ticksGone;
-    double currentCrystals = Model.Planet.PlanetCrystals + crystalMine.AmountPerTick * ticksGone;
-    double currentAntimatter = Model.Planet.PlanetAntimatter + neutronAccelerator.AmountPerTick * ticksGone;
-    double currentElementium = Model.Planet.PlanetElementium + elementiumSynthesizer.AmountPerTick * ticksGone;
+    double currentOre = Model.PlanetOre + oreMine.AmountPerTick * ticksGone;
+    double currentEnergy = Model.PlanetEnergy + powerSupply.AmountPerTick * ticksGone;
+    double currentTools = Model.PlanetTools + factory.AmountPerTick * ticksGone;
+    double currentMana = Model.PlanetMana + mageAcademy.AmountPerTick * ticksGone;
+    double currentCrystals = Model.PlanetCrystals + crystalMine.AmountPerTick * ticksGone;
+    double currentAntimatter = Model.PlanetAntimatter + neutronAccelerator.AmountPerTick * ticksGone;
+    double currentElementium = Model.PlanetElementium + elementiumSynthesizer.AmountPerTick * ticksGone;
 }
 
 <div class="gx-resource-bar">

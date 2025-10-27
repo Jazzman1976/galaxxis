@@ -14,7 +14,9 @@
 <div id="layer-inferface-background"></div>
 <div id="layer-interface">
     <header>
-        @await Component.InvokeAsync("ResourceBar", new { planet = Model.Planet })
+        <div id="resourcePanel">
+            @await Html.PartialAsync("_ResourceBar", Model.Planet)
+        </div>
 
         <h1>Planet: @Model.Planet.PlanetName - Factory</h1>
         

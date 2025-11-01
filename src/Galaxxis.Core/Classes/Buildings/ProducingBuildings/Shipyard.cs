@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
 {
-    public class Shipyard : BaseProducingBuilding
+    public class Shipyard : BaseProducingBuilding<BuildShipyardEvent>
     {
         public override GrowthRate BuildTimeRate
             => _buildTimeRate
@@ -82,11 +82,6 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
                     Constants.BASEVALUE_NORMAL,
                     Constants.FACTOR_SUPPLY,
                     _planet.PlanetShipyard);
-
-        public override bool Build(out string info)
-        {
-            return base.Build<BuildShipyardEvent>(out info);
-        }
 
         public bool ProduceShipExplorer(out string info)
         {

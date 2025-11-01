@@ -293,7 +293,7 @@
                 </table>
                 <form asp-controller="Home" asp-action="BuildOreMine" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                    <input type="submit" value="Build" @(!oreMine.CanBuild ? "disabled" : "") />
+                    <input type="submit" value="Build" @(!oreMine.CanUpgradeToNextLevel ? "disabled" : "") />
                 </form>
                 <form asp-controller="Home" asp-action="ChangeOreMineUsage">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
@@ -313,7 +313,7 @@
                 </table>
                 <form asp-controller="Home" asp-action="BuildPowerSupply" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                    <input type="submit" value="Build" @(!powerSupply.CanBuild ? "disabled" : "") />
+                    <input type="submit" value="Build" @(!powerSupply.CanUpgradeToNextLevel ? "disabled" : "") />
                 </form>
                 <form asp-controller="Home" asp-action="ChangePowerSupplyUsage">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
@@ -333,7 +333,7 @@
                 </table>
                 <form asp-controller="Home" asp-action="BuildFactory" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                    <input type="submit" value="Build" @(!factory.CanBuild ? "disabled" : "") />
+                    <input type="submit" value="Build" @(!factory.CanUpgradeToNextLevel ? "disabled" : "") />
                 </form>
                 <form asp-controller="Home" asp-action="ChangeFactoryUsage">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
@@ -353,7 +353,7 @@
                 </table>
                 <form asp-controller="Home" asp-action="BuildMageAcademy" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                    <input type="submit" value="Build" @(!mageAcademy.CanBuild ? "disabled" : "") />
+                    <input type="submit" value="Build" @(!mageAcademy.CanUpgradeToNextLevel ? "disabled" : "") />
                 </form>
                 <form asp-controller="Home" asp-action="ChangeMageAcademyUsage">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
@@ -373,7 +373,7 @@
                 </table>
                 <form asp-controller="Home" asp-action="BuildCrystalMine" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                    <input type="submit" value="Build" @(!crystalMine.CanBuild ? "disabled" : "") />
+                    <input type="submit" value="Build" @(!crystalMine.CanUpgradeToNextLevel ? "disabled" : "") />
                 </form>
                 <form asp-controller="Home" asp-action="ChangeCrystalMineUsage">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
@@ -393,7 +393,7 @@
                 </table>
                 <form asp-controller="Home" asp-action="BuildNeutronAccelerator" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                    <input type="submit" value="Build" @(!neutronAccelerator.CanBuild ? "disabled" : "") />
+                    <input type="submit" value="Build" @(!neutronAccelerator.CanUpgradeToNextLevel ? "disabled" : "") />
                 </form>
                 <form asp-controller="Home" asp-action="ChangeNeutronAcceleratorUsage">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
@@ -413,7 +413,7 @@
                 </table>
                 <form asp-controller="Home" asp-action="BuildElementiumSynthesizer" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                    <input type="submit" value="Build" @(!elementiumSynthesizer.CanBuild ? "disabled" : "") />
+                    <input type="submit" value="Build" @(!elementiumSynthesizer.CanUpgradeToNextLevel ? "disabled" : "") />
                 </form>
                 <form asp-controller="Home" asp-action="ChangeElementiumSynthesizerUsage">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
@@ -445,7 +445,7 @@
                 </table>
                 <form asp-controller="Home" asp-action="BuildShipyard" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                    <input type="submit" value="Build" @(!shipyard.CanBuild ? "disabled" : "") />
+                    <input type="submit" value="Build" @(!shipyard.CanUpgradeToNextLevel ? "disabled" : "") />
                 </form>
             </td>
 
@@ -498,7 +498,7 @@
                 </table>
                 <form asp-controller="Home" asp-action="BuildDefenseSystem" method="post">
                     <input type="hidden" name="planetId" value="@thePlanet.PlanetId" />
-                    <input type="submit" value="Build" @(!defenseSystem.CanBuild ? "disabled" : "") />
+                    <input type="submit" value="Build" @(!defenseSystem.CanUpgradeToNextLevel ? "disabled" : "") />
                 </form>
             </td>
             <td>

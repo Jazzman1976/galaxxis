@@ -2,6 +2,7 @@
 @using Galaxxis.Core.Extensions.PlanetExtensions;
 @{
     OreMine oreMine = Model.Planet.GetOreMine(true);
+    bool isBuildAllowed = !oreMine.IsUnderConstruction && oreMine.CanUpgradeToNextLevel;
 }
 @model OreMineViewModel;
 
@@ -11,15 +12,11 @@
     <tr><th>Erz</th><td>@oreMine.BuildCosts[0]</td></tr>
     <tr><th>Mana</th><td>@oreMine.BuildCosts[1]</td></tr>
     <tr><th>Kristalle</th><td>@oreMine.BuildCosts[2]</td></tr>
-    <tr><th>Elementium</th><td>@oreMine.BuildCosts[3]</td></tr>
-    <tr><th>Ticks</th><td>@oreMine.BuildCosts[4]</td></tr>
+    <tr><th>Elementium</th><td>@oreMine.BuildCosts[2]</td></tr>
+    <tr><th>Ticks</th><td>@oreMine.BuildCosts[3]</td></tr>
 </table>
 
-@if (Model.IsBuilding)
-{
-    <p class="message">Du kannst die Erzmine aktuell nicht weiter ausbauen.</p>
-}
-else
+@if (isBuildAllowed)
 {
     <form id="buildForm"
           method="post"
@@ -31,6 +28,18 @@ else
             Erzmine auf Stufe @(Model.Planet.PlanetOreMine + 1) ausbauen
         </button>
     </form>
+}
+else if (oreMine.IsUnderConstruction)
+{
+    <p class="message">Die Erzmine wird aktuell ausgebaut.</p>
+}
+else if (!oreMine.CanUpgradeToNextLevel)
+{
+    <p class="message">Du hast nicht genügend Ressourcen, um die Erzmine auszubauen.</p>
+}
+else
+{
+    <p class="message">Du kannst die Erzmine nicht ausbauen.</p>
 }
 
 <p class="message">@Model.InfoMessage</p>

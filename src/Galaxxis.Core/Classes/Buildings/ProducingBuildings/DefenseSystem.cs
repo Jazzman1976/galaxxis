@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
 {
-    public class DefenseSystem : BaseProducingBuilding
+    public class DefenseSystem : BaseProducingBuilding<BuildDefenseSystemEvent>
     {
         public override GrowthRate BuildTimeRate
             => _buildTimeRate
@@ -82,11 +82,6 @@ namespace Galaxxis.Core.Classes.Buildings.ProducingBuildings
                     Constants.BASEVALUE_NORMAL,
                     Constants.FACTOR_SUPPLY,
                     _planet.PlanetDefenseSystem);
-
-        public override bool Build(out string info)
-        {
-            return base.Build<BuildDefenseSystemEvent>(out info);
-        }
 
         public bool ProduceDefenseLightManualCannon(out string info)
         {

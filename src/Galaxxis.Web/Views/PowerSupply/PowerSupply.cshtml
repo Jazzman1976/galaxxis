@@ -56,7 +56,7 @@
             <tr><th>Ticks</th><td>@powerSupply.BuildCosts[4]</td></tr>
         </table>
 
-        @if (!powerSupply.CanBuild)
+        @if (!powerSupply.CanUpgradeToNextLevel)
         {
             <p class="message">Du kannst dein Kraftwerk aktuell nicht weiter ausbauen.</p>
         }

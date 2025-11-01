@@ -1,5 +1,4 @@
 ﻿using Galaxxis.Core.Classes.Buildings.Interfaces;
-using Galaxxis.Core.Engine;
 using Galaxxis.Core.Provider;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Events.BuildEvents;
@@ -8,7 +7,9 @@ using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 {
-    public abstract class BaseProducingBuilding : IBuilding, IProducingBuilding, IConsumingBuilding
+    public abstract class BaseProducingBuilding<TBuildEvent> 
+        : IBuilding<TBuildEvent>, IProducingBuilding, IConsumingBuilding 
+            where TBuildEvent : BaseBuildEvent
     {
         protected Planet _planet;
         protected User _owner;
@@ -49,14 +50,23 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
                     BuildTimeRate.Value
                 };
 
-        public bool CanBuild
+        public bool CanUpgradeToNextLevel
             => BuildCosts[0] <= _planet.PlanetOre
             && BuildCosts[1] <= _planet.PlanetMana
             && BuildCosts[2] <= _planet.PlanetCrystals
             && BuildCosts[3] <= _planet.PlanetElementium
-            && !EventProvider
+            && EventProvider
                 .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
-                .Any();
+                .Count == 0;
+
+        public bool IsUnderConstruction
+        {
+            get =>
+                EventProvider
+                    .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
+                    .Any(e => e is TBuildEvent);
+            set { }
+        }
 
         public abstract bool IsProducing { get; }
 
@@ -68,13 +78,11 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         public abstract GrowthRate ConsumptionElementium { get; }
 
-        public abstract bool Build(out string info);
-
         /// <summary>
         /// Use this in the Build method of derived classes to build the next building level 
         /// using the correct event name.
         /// </summary>
-        protected bool Build<TBuildEvent>(out string info) where TBuildEvent : BaseBuildEvent
+        public bool Build(out string info)
         {
             return BuildingsHelper.BuildOnPlanet<TBuildEvent>(
                 _planet, BuildCosts, BuildTimeRate.ValueLong, out info);

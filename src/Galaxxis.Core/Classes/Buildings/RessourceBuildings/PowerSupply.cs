@@ -1,15 +1,17 @@
 ﻿using Galaxxis.Core.Classes.Buildings.BaseClasses;
 using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions.PlanetExtensions;
+using Galaxxis.Core.Provider;
 using Galaxxis.Core.Static;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Events.BuildEvents;
 using Galaxxis.Data.Models;
 using System;
+using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 {
-    public class PowerSupply : BaseRessourceBuilding
+    public class PowerSupply : BaseRessourceBuilding<BuildPowerSupplyEvent>
     {
         #region Properties ------------------------------------------------------------------------
 
@@ -111,11 +113,6 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 
 
         #region Methods ---------------------------------------------------------------------------
-
-        public override bool Build(out string info)
-        {
-            return base.Build<BuildPowerSupplyEvent>(out info);
-        }
 
         public override double ApplyRaceFactor(double value)
         {

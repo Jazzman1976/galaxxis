@@ -1,14 +1,16 @@
 ﻿using Galaxxis.Core.Classes.Buildings.BaseClasses;
 using Galaxxis.Core.Engine;
+using Galaxxis.Core.Provider;
 using Galaxxis.Core.Static;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Events.BuildEvents;
 using Galaxxis.Data.Models;
 using System;
+using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 {
-    public class CrystalMine : BaseRessourceBuilding
+    public class CrystalMine : BaseRessourceBuilding<BuildCrystalMineEvent>
     {
         #region Properties ------------------------------------------------------------------------
 
@@ -92,11 +94,6 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 
 
         #region Methods ---------------------------------------------------------------------------
-
-        public override bool Build(out string info)
-        {
-            return base.Build<BuildCrystalMineEvent>(out info);
-        }
 
         public override double ApplyRaceFactor(double value)
         {

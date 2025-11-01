@@ -59,7 +59,7 @@
             <tr><th>Ticks</th><td>@factory.BuildCosts[4]</td></tr>
         </table>
 
-        @if (!factory.CanBuild)
+        @if (!factory.CanUpgradeToNextLevel)
         {
             <p class="message">Du kannst die Fabrik aktuell nicht weiter ausbauen.</p>
         }

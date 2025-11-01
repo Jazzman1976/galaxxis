@@ -4,7 +4,6 @@ namespace Galaxxis.Web.Views.OreMine
     public class OreMineViewModel
     {
         public Data.Models.Planet Planet { get; set; }
-        public bool IsBuilding { get; set; } = false;
         public string InfoMessage { get; set; } = string.Empty;
 
         public OreMineViewModel(
@@ -21,7 +20,6 @@ namespace Galaxxis.Web.Views.OreMine
                 if (p.PlanetId == planetId)
                 {
                     this.Planet = p;
-                    this.IsBuilding = !p.GetOreMine().CanBuild;
                     break;
                 }
             }

@@ -69,8 +69,9 @@
             });
 
             if (response.ok) {
-                const html = await response.text();
-                document.getElementById('buildPanel').innerHTML = html;
+                const data = await response.json();
+                document.getElementById('buildPanel').innerHTML = data.buildPanelHtml;
+                document.getElementById('resourcePanel').innerHTML = data.resourceBarHtml;
             } else {
                 // Optionally handle errors here
                 console.log('An error occurred while building the Ore Mine.');

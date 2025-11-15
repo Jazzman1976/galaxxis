@@ -2,17 +2,25 @@
 using Galaxxis.Web.Code.Services.CurrentUserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Galaxxis.Web.Views.OreMine
 {
     [Authorize]
-    public class OreMineController(ICurrentUserService currentUserService) : Controller
+    public class OreMineController(
+        ICurrentUserService _currentUserService, 
+        ICompositeViewEngine _viewEngine) : Controller
     {
         public ActionResult Index(string id) 
         {
             if (int.TryParse(id, out int planetId))
             {
-                OreMineViewModel model = new(planetId, currentUserService);
+                OreMineViewModel model = new(planetId, _currentUserService);
                 return View("OreMine", model);
             }
             else
@@ -23,12 +31,43 @@ namespace Galaxxis.Web.Views.OreMine
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult BuildOreMine(int planetId)
+        public async Task<IActionResult> BuildOreMine(int planetId)
         {
-            OreMineViewModel model = new(planetId, currentUserService);
+            OreMineViewModel model = new(planetId, _currentUserService);
             model.Planet.GetOreMine().Build(out string info);
             model.InfoMessage = info;
-            return PartialView("_OreMineBuildPanel", model);
+
+            string buildPanelHtml = await RenderPartialViewToString("_OreMineBuildPanel", model);
+            string resourceBarHtml = await RenderPartialViewToString("_ResourceBar", model.Planet);
+
+            return Json(new 
+            { 
+                BuildPanelHtml = buildPanelHtml, 
+                ResourceBarHtml = resourceBarHtml
+            });
+        }
+
+        // Helper method to render partial view to string
+        private async Task<string> RenderPartialViewToString(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using var writer = new StringWriter();
+            var viewResult = _viewEngine.FindView(ControllerContext, viewName, false);
+
+            if (viewResult.View == null)
+                throw new ArgumentNullException($"{viewName} does not match any available view");
+
+            var viewContext = new ViewContext(
+                ControllerContext,
+                viewResult.View,
+                ViewData,
+                TempData,
+                writer,
+                new HtmlHelperOptions()
+            );
+
+            await viewResult.View.RenderAsync(viewContext);
+            return writer.GetStringBuilder().ToString();
         }
     }
 }

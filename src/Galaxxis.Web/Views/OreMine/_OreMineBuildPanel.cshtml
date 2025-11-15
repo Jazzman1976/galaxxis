@@ -6,40 +6,44 @@
 }
 @model OreMineViewModel;
 
-<h3>Kosten für den Ausbau auf die nächste Stufe</h3>
-
-<table class="info-table">
-    <tr><th>Erz</th><td>@oreMine.BuildCosts[0]</td></tr>
-    <tr><th>Mana</th><td>@oreMine.BuildCosts[1]</td></tr>
-    <tr><th>Kristalle</th><td>@oreMine.BuildCosts[2]</td></tr>
-    <tr><th>Elementium</th><td>@oreMine.BuildCosts[2]</td></tr>
-    <tr><th>Ticks</th><td>@oreMine.BuildCosts[3]</td></tr>
-</table>
-
-@if (isBuildAllowed)
-{
-    <form id="buildForm"
-          method="post"
-          asp-controller="oremine"
-          asp-action="BuildOreMine"
-          asp-route-id="@Model.Planet.PlanetId">
-        <input type="hidden" name="planetId" value="@Model.Planet.PlanetId" />
-        <button type="submit">
-            Erzmine auf Stufe @(Model.Planet.PlanetOreMine + 1) ausbauen
-        </button>
-    </form>
-}
-else if (oreMine.IsUnderConstruction)
+@if (oreMine.IsUnderConstruction)
 {
     <p class="message">Die Erzmine wird aktuell ausgebaut.</p>
 }
-else if (!oreMine.CanUpgradeToNextLevel)
+
+else 
 {
-    <p class="message">Du hast nicht genügend Ressourcen, um die Erzmine auszubauen.</p>
-}
-else
-{
-    <p class="message">Du kannst die Erzmine nicht ausbauen.</p>
+    <h3>Kosten für den Ausbau auf die nächste Stufe</h3>
+
+    <table class="info-table">
+        <tr><th>Erz</th><td>@oreMine.BuildCosts[0]</td></tr>
+        <tr><th>Mana</th><td>@oreMine.BuildCosts[1]</td></tr>
+        <tr><th>Kristalle</th><td>@oreMine.BuildCosts[2]</td></tr>
+        <tr><th>Elementium</th><td>@oreMine.BuildCosts[3]</td></tr>
+        <tr><th>Ticks</th><td>@oreMine.BuildCosts[4]</td></tr>
+    </table>
+
+    if (isBuildAllowed)
+    {
+        <form id="buildForm"
+              method="post"
+              asp-controller="oremine"
+              asp-action="BuildOreMine"
+              asp-route-id="@Model.Planet.PlanetId">
+            <input type="hidden" name="planetId" value="@Model.Planet.PlanetId" />
+            <button type="submit">
+                Erzmine auf Stufe @(Model.Planet.PlanetOreMine + 1) ausbauen
+            </button>
+        </form>
+    }
+    else if (!oreMine.CanUpgradeToNextLevel)
+    {
+        <p class="message">Du hast nicht genügend Ressourcen, um die Erzmine auszubauen.</p>
+    }
+    else
+    {
+        <p class="message">Du kannst die Erzmine nicht ausbauen.</p>
+    }
 }
 
 <p class="message">@Model.InfoMessage</p>

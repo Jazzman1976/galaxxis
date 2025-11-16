@@ -47,7 +47,7 @@
             <tr><th>Einkommen pro Tag</th>  <td>@System.Math.Floor(oreMine.IncomePerDay)</td></tr>
         </table>
 
-        <div id="oreMine-buildPanel">
+        <div id="buildPanel">
             @await Html.PartialAsync("_OreMineBuildPanel", Model)
         </div>
     </main>
@@ -72,6 +72,7 @@
                 const data = await response.json();
                 document.getElementById('buildPanel').innerHTML = data.buildPanelHtml;
                 document.getElementById('resourcePanel').innerHTML = data.resourceBarHtml;
+                window.galaxxis.resourceBar.setup();
             } else {
                 // Optionally handle errors here
                 console.log('An error occurred while building the Ore Mine.');

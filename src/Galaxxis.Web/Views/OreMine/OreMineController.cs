@@ -9,6 +9,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
+
 namespace Galaxxis.Web.Views.OreMine
 {
     [Authorize]
@@ -33,13 +34,18 @@ namespace Galaxxis.Web.Views.OreMine
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> BuildOreMine(int planetId)
         {
+            // init new model
             OreMineViewModel model = new(planetId, _currentUserService);
-            model.Planet.GetOreMine().Build(out string info);
+
+            // attempt to build ore mine
+            model.Planet
+                .GetOreMine(true) // needs to use the same planet instance as the model for partial view rendering
+                .Build(out string info);
             model.InfoMessage = info;
 
+            // return updated partial views
             string buildPanelHtml = await RenderPartialViewToString("_OreMineBuildPanel", model);
             string resourceBarHtml = await RenderPartialViewToString("_ResourceBar", model.Planet);
-
             return Json(new 
             { 
                 BuildPanelHtml = buildPanelHtml, 

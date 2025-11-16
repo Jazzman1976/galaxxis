@@ -2,7 +2,6 @@
 @using Galaxxis.Core.Extensions.PlanetExtensions;
 @{
     OreMine oreMine = Model.Planet.GetOreMine(true);
-    bool isBuildAllowed = !oreMine.IsUnderConstruction && oreMine.CanUpgradeToNextLevel;
 }
 @model OreMineViewModel;
 
@@ -23,7 +22,7 @@ else
         <tr><th>Ticks</th><td>@oreMine.BuildCosts[4]</td></tr>
     </table>
 
-    if (isBuildAllowed)
+    if (oreMine.CanUpgradeToNextLevel)
     {
         <form id="buildForm"
               method="post"
@@ -36,13 +35,9 @@ else
             </button>
         </form>
     }
-    else if (!oreMine.CanUpgradeToNextLevel)
-    {
-        <p class="message">Du hast nicht genügend Ressourcen, um die Erzmine auszubauen.</p>
-    }
     else
     {
-        <p class="message">Du kannst die Erzmine nicht ausbauen.</p>
+        <p class="message">Du hast nicht genügend Ressourcen, um die Erzmine auszubauen.</p>
     }
 }
 

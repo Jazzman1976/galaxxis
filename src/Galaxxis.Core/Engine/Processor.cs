@@ -130,7 +130,7 @@ namespace Galaxxis.Core.Engine
             {
 
                 // process db objects
-                using (GalaxxisContext context = new GalaxxisContext())
+                using (GalaxxisContext context = new ())
                 {
                     // get universe (for now only one universe supported)
                     Universe universe = context.Universe.First();

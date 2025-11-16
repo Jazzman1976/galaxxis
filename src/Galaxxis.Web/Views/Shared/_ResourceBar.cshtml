@@ -23,7 +23,7 @@
     double currentElementium = Model.PlanetElementium + elementiumSynthesizer.AmountPerTick * ticksGone;
 }
 
-<div class="gx-resource-bar">
+<div class="gx-resource-bar" data-instance-id="@Guid.NewGuid()">
     <div class="gx-resource-bar__item gx-resource-bar__item--ore">
         <div class="gx-resource-bar__name">Erz</div>
         <div class="gx-resource-bar__value" data-raw="@currentOre">@Math.Floor(currentOre)</div>
@@ -60,8 +60,10 @@
     </div>
 
     <script>
-        (() => {
-          const initBar = (amountPerTick, itemClass) => {
+        window.galaxxis = window.galaxxis || {};
+        window.galaxxis.resourceBar = window.galaxxis.resourceBar || {};
+        
+        window.galaxxis.resourceBar.initBar = (amountPerTick, itemClass) => {
             const el = document.querySelector(`.gx-resource-bar ${itemClass} .gx-resource-bar__value`);
             if (!el) return;
 
@@ -70,28 +72,29 @@
             let shown = Math.floor(val);
 
             setInterval(() => {
-              val += perTick;
-              const v = Math.floor(val);
-              if (v !== shown) {
+                val += perTick;
+                const v = Math.floor(val);
+                if (v !== shown) {
                 shown = v;
                 el.textContent = v;
-              }
-              el.dataset.raw = val.toString().replace('.', ',');
+                }
+                el.dataset.raw = val.toString().replace('.', ',');
             }, @timePerTick);
-          };
+        };
 
-          const setup = () => {
-            initBar('@oreMine.AmountPerTick', '.gx-resource-bar__item--ore');
-            initBar('@powerSupply.AmountPerTick', '.gx-resource-bar__item--energy');
-            initBar('@factory.AmountPerTick', '.gx-resource-bar__item--tools');
-            initBar('@mageAcademy.AmountPerTick', '.gx-resource-bar__item--mana');
-            initBar('@crystalMine.AmountPerTick', '.gx-resource-bar__item--crystals');
-            initBar('@neutronAccelerator.AmountPerTick', '.gx-resource-bar__item--antimatter');
-            initBar('@elementiumSynthesizer.AmountPerTick', '.gx-resource-bar__item--elementium');
-          };
+        window.galaxxis.resourceBar.setup = () => {
+            window.galaxxis.resourceBar.initBar('@oreMine.AmountPerTick', '.gx-resource-bar__item--ore');
+            window.galaxxis.resourceBar.initBar('@powerSupply.AmountPerTick', '.gx-resource-bar__item--energy');
+            window.galaxxis.resourceBar.initBar('@factory.AmountPerTick', '.gx-resource-bar__item--tools');
+            window.galaxxis.resourceBar.initBar('@mageAcademy.AmountPerTick', '.gx-resource-bar__item--mana');
+            window.galaxxis.resourceBar.initBar('@crystalMine.AmountPerTick', '.gx-resource-bar__item--crystals');
+            window.galaxxis.resourceBar.initBar('@neutronAccelerator.AmountPerTick', '.gx-resource-bar__item--antimatter');
+            window.galaxxis.resourceBar.initBar('@elementiumSynthesizer.AmountPerTick', '.gx-resource-bar__item--elementium');
+        };
 
-          addEventListener('DOMContentLoaded', setup);
-          addEventListener('pageshow', e => e.persisted && setup());
+        (() => {
+          addEventListener('DOMContentLoaded', window.galaxxis.resourceBar.setup);
+          addEventListener('pageshow', e => e.persisted && window.galaxxis.resourceBar.setup());
         })();
     </script>
 

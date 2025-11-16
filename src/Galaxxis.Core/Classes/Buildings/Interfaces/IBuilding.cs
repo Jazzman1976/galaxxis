@@ -24,7 +24,7 @@ namespace Galaxxis.Core.Classes.Buildings.Interfaces
         /// <summary>
         /// Checks if this building is currently under construction.
         /// </summary>
-        public bool IsUnderConstruction { get; set; }
+        public bool IsUnderConstruction { get; }
 
         /// <summary>
         /// Start construction of the building's next level.

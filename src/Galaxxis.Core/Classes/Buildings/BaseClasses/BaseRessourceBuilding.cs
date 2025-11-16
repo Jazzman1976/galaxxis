@@ -6,6 +6,7 @@ using Galaxxis.Data.Events;
 using Galaxxis.Data.Events.BuildEvents;
 using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Models;
+using System;
 using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.BaseClasses
@@ -55,8 +56,6 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         public abstract double Usage { get; }
 
-        // IConsumingBuilding
-
         public abstract GrowthRate ConsumptionEnergyRate { get; }
 
         public abstract GrowthRate ConsumptionManaRate { get; }
@@ -92,11 +91,32 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         public bool IsUnderConstruction
         {
-            get =>
-                EventProvider
-                    .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
-                    .Any(e => e is TBuildEvent);
-            set { }
+            get
+            {
+                string eventLocation = EventLocationEnum.Planet.ToString();
+                int eventLocationId = _planet.PlanetId;
+                string eventType = EventTypeEnum.Build.ToString();
+                string eventName = typeof(TBuildEvent).Name.Replace("Event", "").Trim(); // via naming convention!
+                //TODO: maybe use attribute instead of naming convention?
+
+                bool hasEventInMemoryQueue =
+                    Processor.Instance.EventQueue.Any(e
+                        => e.EventLocation == eventLocation
+                        && e.EventLocationId == eventLocationId
+                        && e.EventType == eventType
+                        && e is TBuildEvent); // works in memory, because here we have the type
+
+                bool hasEventInDatabase =
+                    EventProvider
+                        .GetEvents(
+                            eventLocationId, 
+                            EventLocationEnum.Planet, 
+                            EventTypeEnum.Build)
+                        .Any(evnt
+                            => evnt.EventName.Trim() == eventName); // when parsed from DB, we have to check the name because we dont have the type
+
+                return hasEventInMemoryQueue || hasEventInDatabase;
+            }
         }
 
         public double IncomePerDay => _incomePerDay < 0 

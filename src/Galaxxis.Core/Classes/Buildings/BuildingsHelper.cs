@@ -1,4 +1,5 @@
 ﻿using Galaxxis.Core.Engine;
+using Galaxxis.Core.Extensions.PlanetExtensions;
 using Galaxxis.Core.Provider;
 using Galaxxis.Core.Static;
 using Galaxxis.Data.Enums;
@@ -75,7 +76,16 @@ namespace Galaxxis.Core.Classes.Buildings
             // queue event
             if (@event != null)
             {
+                // add to processor
                 Processor.Instance.EventQueue.Enqueue(@event);
+
+                // reduce resources in current context
+                planet.PlanetOre -= buildCosts[0];
+                planet.PlanetMana -= buildCosts[1];
+                planet.PlanetCrystals -= buildCosts[2];
+                planet.PlanetElementium -= buildCosts[3];
+
+                // log build enqueue
                 System.Diagnostics.Debug.WriteLine(
                     $"{DateTime.Now.ToString(Constants.DEBUG_TIME_FORMAT)}: "
                     + $"Build on planet {planet.PlanetName} enqueued.");

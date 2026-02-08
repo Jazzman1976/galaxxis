@@ -5,13 +5,14 @@ using Galaxxis.Core.Provider;
 using Galaxxis.Core.Static;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Events.BuildEvents;
+using Galaxxis.Data.Events.ChangeUsageEvents;
 using Galaxxis.Data.Models;
 using System;
 using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 {
-    public class PowerSupply : BaseRessourceBuilding<BuildPowerSupplyEvent>
+    public class PowerSupply : BaseRessourceBuilding<BuildPowerSupplyEvent, ChangePowerSupplyUsageEvent>
     {
         #region Properties ------------------------------------------------------------------------
 
@@ -126,10 +127,10 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
             return value;
         }
 
-        public override bool ChangeUsage(double newValue, out string info)
-        {
-            return base.ChangeUsage(EventNameEnum.ChangePowerSupplyUsage, newValue, out info);
-        }
+        //public override bool ChangeUsage(double newValue, out string info)
+        //{
+        //    return base.ChangeUsage(EventNameEnum.ChangePowerSupplyUsage, newValue, out info);
+        //}
 
         #endregion
 

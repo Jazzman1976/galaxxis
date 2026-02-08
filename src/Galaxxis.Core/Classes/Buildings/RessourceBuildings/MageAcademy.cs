@@ -1,17 +1,15 @@
 ﻿using Galaxxis.Core.Classes.Buildings.BaseClasses;
-using Galaxxis.Core.Engine;
 using Galaxxis.Core.Extensions.PlanetExtensions;
-using Galaxxis.Core.Provider;
 using Galaxxis.Core.Static;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Events.BuildEvents;
+using Galaxxis.Data.Events.ChangeUsageEvents;
 using Galaxxis.Data.Models;
 using System;
-using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
 {
-    public class MageAcademy : BaseRessourceBuilding<BuildMageAcademyEvent>
+    public class MageAcademy : BaseRessourceBuilding<BuildMageAcademyEvent, ChangeMageAcademyUsageEvent>
     {
         #region Properties ------------------------------------------------------------------------
 
@@ -143,10 +141,10 @@ namespace Galaxxis.Core.Classes.Buildings.RessourceBuildings
             return value;
         }
 
-        public override bool ChangeUsage(double newValue, out string info)
-        {
-            return base.ChangeUsage(EventNameEnum.ChangeMageAcademyUsage, newValue, out info);
-        }
+        //public override bool ChangeUsage(double newValue, out string info)
+        //{
+        //    return base.ChangeUsage(EventNameEnum.ChangeMageAcademyUsage, newValue, out info);
+        //}
 
         #endregion
     }

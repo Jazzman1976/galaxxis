@@ -29,7 +29,7 @@ namespace Galaxxis.Core.Classes.Buildings
                 $"{DateTime.Now.ToString(Constants.DEBUG_TIME_FORMAT)}: "
                 + $"Attempt to build on planet {planet.PlanetName} started.");
 
-            // check conditions
+            // check build in progress
             if (EventProvider
                     .GetEvents(planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
                     .Count != 0
@@ -41,6 +41,9 @@ namespace Galaxxis.Core.Classes.Buildings
                 info = "A build is still in progress!";
                 return false;
             }
+
+            // check ressources
+            planet.UpdateRessources();
             if (buildCosts[0] > planet.PlanetOre)
             {
                 info = "Not enough ore!";
@@ -71,7 +74,7 @@ namespace Galaxxis.Core.Classes.Buildings
             int id = planet.PlanetId;
             TBuildEvent @event = (TBuildEvent)Activator.CreateInstance(
                 typeof(TBuildEvent),
-                [EventLocationEnum.Planet, id, ticksToEventTick, data]);
+                EventLocationEnum.Planet, id, ticksToEventTick, data);
 
             // queue event
             if (@event != null)

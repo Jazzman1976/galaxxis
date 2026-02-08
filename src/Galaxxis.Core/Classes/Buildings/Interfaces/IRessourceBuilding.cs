@@ -1,6 +1,4 @@
-﻿using Galaxxis.Core.Engine;
-
-namespace Galaxxis.Core.Classes.Buildings.Interfaces
+﻿namespace Galaxxis.Core.Classes.Buildings.Interfaces
 {
     public interface IRessourceBuilding
     {

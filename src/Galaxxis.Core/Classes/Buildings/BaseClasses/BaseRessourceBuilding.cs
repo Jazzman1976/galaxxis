@@ -1,25 +1,19 @@
 ﻿using Galaxxis.Core.Classes.Buildings.Interfaces;
 using Galaxxis.Core.Engine;
-using Galaxxis.Core.Provider;
 using Galaxxis.Data.Enums;
 using Galaxxis.Data.Events;
 using Galaxxis.Data.Events.BuildEvents;
 using Galaxxis.Data.EventTypeData;
 using Galaxxis.Data.Models;
-using System;
-using System.Linq;
 
 namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 {
     public abstract class BaseRessourceBuilding<TBuildEvent> 
-        : IBuilding<TBuildEvent>, IRessourceBuilding, IConsumingBuilding
+        : BaseBuilding<TBuildEvent>, IRessourceBuilding, IConsumingBuilding
             where TBuildEvent : BaseBuildEvent
     {
         #region Protected Fields ------------------------------------------------------------------
 
-        protected Planet _planet;
-        protected User _owner;
-        protected double[] _buildCosts;
         protected bool? _canBuild;
         protected GrowthRate _ressourceGrowthRate;
         protected GrowthRate _buildTimeRate;
@@ -42,16 +36,6 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         public abstract GrowthRate RessourceGrowthRate { get; }
 
-        public abstract GrowthRate BuildTimeRate { get; }
-
-        public abstract GrowthRate BuildCostOreRate { get; }
-
-        public abstract GrowthRate BuildCostManaRate { get; }
-
-        public abstract GrowthRate BuildCostCrystalsRate { get; }
-
-        public abstract GrowthRate BuildCostElementiumRate { get; }
-
         public abstract double RessourceCostsPerTick { get; }
 
         public abstract double Usage { get; }
@@ -68,56 +52,6 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
 
         #region Public Properties -----------------------------------------------------------------
-
-        public double[] BuildCosts
-            => _buildCosts
-            ??= new double[]
-                {
-                    BuildCostOreRate.Value,
-                    BuildCostManaRate.Value,
-                    BuildCostCrystalsRate.Value,
-                    BuildCostElementiumRate.Value,
-                    BuildTimeRate.Value
-                };
-
-        public bool CanUpgradeToNextLevel
-            => BuildCosts[0] <= _planet.PlanetOre
-            && BuildCosts[1] <= _planet.PlanetMana
-            && BuildCosts[2] <= _planet.PlanetCrystals
-            && BuildCosts[3] <= _planet.PlanetElementium
-            && EventProvider
-                .GetEvents(_planet.PlanetId, EventLocationEnum.Planet, EventTypeEnum.Build)
-                .Count == 0;
-
-        public bool IsUnderConstruction
-        {
-            get
-            {
-                string eventLocation = EventLocationEnum.Planet.ToString();
-                int eventLocationId = _planet.PlanetId;
-                string eventType = EventTypeEnum.Build.ToString();
-                string eventName = typeof(TBuildEvent).Name.Replace("Event", "").Trim(); // via naming convention!
-                //TODO: maybe use attribute instead of naming convention?
-
-                bool hasEventInMemoryQueue =
-                    Processor.Instance.EventQueue.Any(e
-                        => e.EventLocation == eventLocation
-                        && e.EventLocationId == eventLocationId
-                        && e.EventType == eventType
-                        && e is TBuildEvent); // works in memory, because here we have the type
-
-                bool hasEventInDatabase =
-                    EventProvider
-                        .GetEvents(
-                            eventLocationId, 
-                            EventLocationEnum.Planet, 
-                            EventTypeEnum.Build)
-                        .Any(evnt
-                            => evnt.EventName.Trim() == eventName); // when parsed from DB, we have to check the name because we dont have the type
-
-                return hasEventInMemoryQueue || hasEventInDatabase;
-            }
-        }
 
         public double IncomePerDay => _incomePerDay < 0 
             ? (_incomePerDay = ApplyRaceFactor(
@@ -141,16 +75,6 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
         public abstract double ApplyRaceFactor(double value);
 
         public abstract bool ChangeUsage(double newValue, out string info);
-
-        /// <summary>
-        /// Use this in the Build method of derived classes to build the next building level 
-        /// using the correct event name.
-        /// </summary>
-        public bool Build(out string info)
-        {
-            return BuildingsHelper.BuildOnPlanet<TBuildEvent>(
-                _planet, BuildCosts, BuildTimeRate.ValueLong, out info);
-        }
 
         /// <summary>
         /// Use this in the ChangeUsage method of derived classes to change the building's usage
@@ -192,10 +116,8 @@ namespace Galaxxis.Core.Classes.Buildings.BaseClasses
 
         #region Constructors ----------------------------------------------------------------------
 
-        public BaseRessourceBuilding(Planet planet)
+        public BaseRessourceBuilding(Planet planet) : base(planet)
         {
-            _planet = planet;
-            _owner = planet.PlanetUser ?? UserProvider.GetUser(planet.PlanetUserId);
         }
 
         #endregion

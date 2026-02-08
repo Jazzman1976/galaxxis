@@ -1,8 +1,6 @@
-﻿using Galaxxis.Data.Events.BuildEvents;
-
-namespace Galaxxis.Core.Classes.Buildings.Interfaces
+﻿namespace Galaxxis.Core.Classes.Buildings.Interfaces
 {
-    public interface IBuilding<TBuildEvent> where TBuildEvent : BaseBuildEvent
+    public interface IBuilding
     {
         public GrowthRate BuildTimeRate { get; }
         public GrowthRate BuildCostOreRate { get; }

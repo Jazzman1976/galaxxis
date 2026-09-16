@@ -13,7 +13,7 @@ replaces them; the sections under "Legacy code" describe them.
 | Step | Content | State |
 | --- | --- | --- |
 | 1 | Foundation: new projects, central build/package settings, configuration template, tests, docs | done |
-| 2 | Domain: pure game rules, O(1) resource settlement, seeded universe generation | open |
+| 2 | Domain: pure game rules, O(1) resource settlement, seeded universe generation | done |
 | 3 | Persistence: Code-First (`GameDbContext`, `AccountDbContext`), `UniverseGenerator` tool | open |
 | 4 | Engine: wall-clock universe time, per-event transactions, handlers via DI, single-instance lock | open |
 | 5 | Application services + web switch-over; remove Home, AddAdmin, `Galaxxis.Core`, `Galaxxis.Data` | open |
@@ -131,6 +131,18 @@ Core formula (implemented in `GrowthRate.Value`):
 4 = construction, 5 = build time. Base values: very few 5, few 10, normal 15, much 20, very much 25.
 
 Resources: category I Ore/Energy/Tools, category II Mana/Crystals/Antimatter, category III Elementium.
+
+**Economy rules not written down in the concept** (confirmed by the user 2026-09-16, implemented in
+`Galaxxis.Domain/Economy`): **every building that works consumes supply resources** (energy, mana,
+antimatter, elementium), and only while it works: resource buildings (mines etc.) continuously, order
+buildings (shipyard, defense system, later research and processing) while an order is in progress. A new
+building must define consumption values. The player sets each resource building's production speed in
+10 % steps; consumption scales in the same ratio. Running everything at maximum is deliberately not
+sustainable, to force specialisation and trading. When a supply resource is empty and demand exceeds
+production, its consumers are throttled proportionally. The game never lowers a speed on its own, stocks
+never go below 0, and the base income is never throttled, so a bad decision can never lock a player out.
+Shipyard and DefenseSystem are order buildings. The legacy code differs (auto-reduction loop, no
+throttling, production-building upkeep never charged); the new rules win.
 
 The concept is far larger than the implementation. Not yet built: combat resolution, points and
 levels, trading, quests, research, equipment sockets, special buildings (storage, research lab,

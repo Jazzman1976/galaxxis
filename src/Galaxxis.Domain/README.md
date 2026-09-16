@@ -18,18 +18,35 @@ Enforced by `tests/Galaxxis.Architecture.Tests`.
 
 None. Domain classes are plain objects created with `new`; there are no services to register.
 
-## Structure (grows with step 2 of the foundation refactoring)
+## Structure
 
 Organised by game feature, not by technical type:
 
-| Folder | Content |
-| --- | --- |
-| `Resources/` | Resource types, resource amounts, the O(1) resource settlement formula |
-| `Buildings/` | One rule class per building (costs, durations, production, consumption) |
-| `Races/` | Race bonuses and penalties |
-| `Universe/Generation/` | Seeded, reproducible universe generation |
+| Folder | Content | Start reading at |
+| --- | --- | --- |
+| `Growth/` | The growth formula every cost, production and duration is based on | `GrowthRate` |
+| `Resources/` | The seven resources, amounts of all resources at once, base income | `ResourceAmounts` |
+| `Races/` | The six races: production factors, strategy, weapons, armor | `RaceProfiles` |
+| `Buildings/` | One rule class per building, production speed, a planet's building state | `BuildingRules`, `OreMine` |
+| `Economy/` | Daily production/consumption with shortage throttling; settling stocks over time | `PlanetEconomy`, `ResourceSettlement` |
+| `Ships/`, `Defenses/`, `Combat/` | Costs and attributes of ships and defenses | `ShipCatalog`, `DefenseCatalog` |
+| `Planets/` | Starting stock and plots of a new planet | `PlanetDefaults` |
+| `Universes/` | Coordinates and seeded, reproducible universe generation | `Generation/UniverseGenerator` |
 
-Later features (`Quests/`, `Trading/`, `Combat/`) get their own folders.
+Later features (`Quests/`, `Trading/`, combat resolution) get their own folders.
+
+## The economy in five sentences
+
+Every planet receives a base income that nothing can reduce. Every building that works consumes supply
+resources (energy, mana, antimatter, elementium): resource buildings work continuously and scale production
+and consumption with the speed the player sets in 10 % steps; order buildings (shipyard, defense system,
+later research) consume while an order is in progress. When a supply
+resource is empty and demanded more than produced, all its consumers run proportionally slower. Stocks
+are settled lazily with one formula per period instead of a loop per tick, and never become negative.
+Because the base income always flows, a planet can always recover from a bad decision.
+
+Time is expressed as `TimeSpan` (production per day, durations in seconds). The Domain knows nothing about
+ticks; converting universe time is the Engine's job.
 
 ## Conventions
 

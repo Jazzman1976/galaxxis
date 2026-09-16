@@ -90,6 +90,17 @@ public class UniverseGeneratorTests
     }
 
     [Fact]
+    public void Choosing_a_name_does_not_change_the_map_of_a_seed()
+    {
+        UniverseBlueprint random = UniverseGenerator.Generate(DefaultSettings, seed: 9);
+        UniverseBlueprint named = UniverseGenerator.Generate(DefaultSettings with { Name = "Andromeda" }, seed: 9);
+
+        Assert.Equal(
+            AllPlanets(random).Select(planet => planet.Coordinate),
+            AllPlanets(named).Select(planet => planet.Coordinate));
+    }
+
+    [Fact]
     public void A_chosen_name_is_used_for_the_universe()
     {
         UniverseBlueprint universe = UniverseGenerator.Generate(DefaultSettings with { Name = "  Andromeda  " }, seed: 1);

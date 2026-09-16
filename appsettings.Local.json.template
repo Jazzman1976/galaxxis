@@ -1,0 +1,129 @@
+// =====================================================================================================================
+//  appsettings.Local.json.template  -  copy template for "appsettings.Local.json"
+// =====================================================================================================================
+//
+//  WHAT THIS FILE IS
+//    A checked-in copy template. It is never read by any Galaxxis program. The real file "appsettings.Local.json"
+//    holds the settings of ONE machine (connection strings, passwords) and is git-ignored, so secrets never end up
+//    in the repository. This template makes sure the file can always be recreated, for example after a disk failure.
+//
+//  HOW TO USE IT
+//    1. Copy this file in the repository root and remove the ".template" suffix:
+//           appsettings.Local.json.template  ->  appsettings.Local.json
+//    2. Adjust the values below. Every setting is explained right above it.
+//    3. Build the solution. Every Galaxxis host (tools, later web and engine) copies appsettings.Local.json next to
+//       its executable automatically.
+//    Nothing else is needed: with the defaults below everything runs on SQL Server LocalDB (installed with
+//    Visual Studio); only the admin password must be filled in before "bootstrap-admin" is run.
+//
+//  WHERE SETTINGS COME FROM (a later source overrides an earlier one)
+//    1. appsettings.json of the host project (checked in, no secrets, general defaults)
+//    2. appsettings.Local.json (this file, machine-specific)
+//    3. Environment variables. The ":" of a key becomes "__", e.g. ConnectionStrings:Game -> ConnectionStrings__Game
+//    On Azure App Service, the same keys are entered as "Application settings" and "Connection strings" instead.
+//
+//  FORMAT RULES
+//    - JSON with comments: "//" and "/* */" comments are allowed (the .NET configuration reader skips them).
+//    - Keys are case-insensitive.
+//    - A backslash inside a string must be written twice: "(localdb)\\MSSQLLocalDB".
+//    - true / false and numbers are written WITHOUT quotes.
+//    - Any key of a host's appsettings.json can also be overridden here (see the example at the end).
+//
+//  Changing this template: when a new setting becomes required, add it here with the same kind of explanation.
+//  The test "The_local_settings_template_contains_every_required_setting" fails if the template is incomplete.
+// =====================================================================================================================
+{
+  // -------------------------------------------------------------------------------------------------------------------
+  //  ConnectionStrings: where the two Galaxxis databases are.            REQUIRED - hosts refuse to start without them.
+  // -------------------------------------------------------------------------------------------------------------------
+  //  Galaxxis uses two separate databases on purpose: "Game" for the game world, "Accounts" for login accounts.
+  //  They may live on the same SQL Server, but must be two different databases.
+  //
+  //  Format: an ADO.NET SQL Server connection string, "Key=Value" pairs separated by ";".
+  //    Server=...                 SQL Server instance. LocalDB: (localdb)\\MSSQLLocalDB, Express: .\\SQLEXPRESS,
+  //                               network: myserver.example.com,1433, Azure SQL: tcp:myserver.database.windows.net,1433
+  //    Database=...               Database name. It does not have to exist: with ApplyMigrationsOnStartup = true it is
+  //                               created on the first start (the login then needs the right to create databases).
+  //    Trusted_Connection=True    Windows authentication with the current Windows user (LocalDB, local servers).
+  //    User Id=...;Password=...   SQL authentication instead of Trusted_Connection (typical for Azure SQL).
+  //    TrustServerCertificate=True  Accepts the self-signed certificate of LocalDB / local servers. Development only:
+  //                               for a server reachable over a network use Encrypt=True with a valid certificate.
+  //
+  //  Required permissions of the login: read and write data; for automatic migrations also create/alter tables
+  //  (db_owner on the database, or dbcreator on the server when the database does not exist yet).
+  //
+  //  Examples:
+  //    LocalDB:    Server=(localdb)\\MSSQLLocalDB;Database=GalaxxisGame;Trusted_Connection=True;TrustServerCertificate=True
+  //    SQL login:  Server=myserver,1433;Database=GalaxxisGame;User Id=galaxxis;Password=<secret>;Encrypt=True
+  //    Azure SQL:  Server=tcp:myserver.database.windows.net,1433;Database=GalaxxisGame;User Id=galaxxis;Password=<secret>;Encrypt=True
+  "ConnectionStrings": {
+    // Game world: universes, galaxies, planets, players, ships, game events. Schema created by EF Core migrations.
+    "Game": "Server=(localdb)\\MSSQLLocalDB;Database=GalaxxisGame;Trusted_Connection=True;TrustServerCertificate=True",
+
+    // Login accounts and roles (ASP.NET Core Identity). Must be a different database than "Game".
+    "Accounts": "Server=(localdb)\\MSSQLLocalDB;Database=GalaxxisAccounts;Trusted_Connection=True;TrustServerCertificate=True"
+  },
+
+  // -------------------------------------------------------------------------------------------------------------------
+  //  Persistence: behaviour of the database layer.                                                          OPTIONAL
+  // -------------------------------------------------------------------------------------------------------------------
+  "Persistence": {
+    // true  = when a host starts, both databases are created if missing and all pending schema migrations are
+    //         applied. Convenient on a developer machine.
+    // false = the schema is not touched. Use this on servers and Azure, where migrations are deployed as a SQL
+    //         script (see src/Galaxxis.Persistence/README.md), so several instances never migrate at the same time.
+    // Format: true or false, without quotes. Default when omitted: false.
+    "ApplyMigrationsOnStartup": true
+  },
+
+  // -------------------------------------------------------------------------------------------------------------------
+  //  BootstrapAdmin: the first administrator account.             REQUIRED ONLY for the command "bootstrap-admin"
+  // -------------------------------------------------------------------------------------------------------------------
+  //  Used by: dotnet run --project src/Galaxxis.Tools.UniverseGenerator -- bootstrap-admin
+  //  The command creates the "Admin" role and this account, or gives an existing account with this e-mail address the
+  //  role. It is safe to run repeatedly. All other programs ignore this section, so it can be removed (or the password
+  //  emptied) after the admin exists. Changing the password here later does NOT change the password of an existing
+  //  account.
+  "BootstrapAdmin": {
+    // E-mail address of the admin. Required, must be a valid address and is unique among all accounts.
+    // An account with this address is reused instead of created.
+    "Email": "admin@example.com",
+
+    // Name used to sign in. Required and unique. Allowed characters: letters a-z A-Z, digits 0-9 and - . _ @ +
+    // (no spaces).
+    "UserName": "Administrator",
+
+    // Initial password. Required for "bootstrap-admin"; an empty value is reported as missing.
+    // Rules (ASP.NET Core Identity defaults): at least 6 characters, at least one lowercase letter, one uppercase
+    // letter, one digit and one symbol (e.g. ! ? - _ #).  Example of the format: "Galaxxis-Admin-2026!"
+    // Never commit a real password: this template must keep an empty value.
+    "Password": "",
+
+    // Optional, up to 100 characters each. May be empty.
+    "FirstName": "",
+    "LastName": ""
+  }
+
+  // -------------------------------------------------------------------------------------------------------------------
+  //  OPTIONAL OVERRIDES (example, commented out)
+  // -------------------------------------------------------------------------------------------------------------------
+  //  Any setting of a host's appsettings.json can be overridden for this machine. To use the example, remove the
+  //  comment markers and add a comma after the closing brace of "BootstrapAdmin" above.
+  //
+  //  "Logging": {
+  //    "LogLevel": {
+  //      // Show more detail, e.g. the SQL statements EF Core sends. Levels: Trace, Debug, Information, Warning, Error.
+  //      "Microsoft.EntityFrameworkCore.Database.Command": "Information"
+  //    }
+  //  },
+  //  "UniverseGeneration": {
+  //    // Real time per tick of newly generated universes. Format hh:mm:ss or hh:mm:ss.fff, between 00:00:00.100 and 1.00:00:00.
+  //    "TickLength": "00:00:01",
+  //    "Map": {
+  //      // Whole numbers of at least 1. The default map has 10 x 10 x 10 = 1,000 planets.
+  //      "GalaxyCount": 10,
+  //      "StarSystemsPerGalaxy": 10,
+  //      "PlanetsPerStarSystem": 10
+  //    }
+  //  }
+}

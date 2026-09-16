@@ -42,4 +42,4 @@ Umsetzung nach dem Muster der Erzmine (Application-Dienst + Controller + AJAX-St
 
 ## 6. Admin-Oberfläche für Universen
 
-- [ ] Universen im Web generieren, prüfen und freigeben (nutzt `IUniverseGenerationService`)
+- [ ] Universen im Web generieren, prüfen und freigeben (nutzt `IUniverseAdminService`)

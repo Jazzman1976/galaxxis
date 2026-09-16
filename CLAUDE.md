@@ -14,7 +14,7 @@ replaces them; the sections under "Legacy code" describe them.
 | --- | --- | --- |
 | 1 | Foundation: new projects, central build/package settings, configuration template, tests, docs | done |
 | 2 | Domain: pure game rules, O(1) resource settlement, seeded universe generation | done |
-| 3 | Persistence: Code-First (`GameDbContext`, `AccountDbContext`), `UniverseGenerator` tool | open |
+| 3 | Persistence: Code-First (`GameDbContext`, `AccountDbContext`), `UniverseGenerator` tool | done |
 | 4 | Engine: wall-clock universe time, per-event transactions, handlers via DI, single-instance lock | open |
 | 5 | Application services + web switch-over; remove Home, AddAdmin, `Galaxxis.Core`, `Galaxxis.Data` | open |
 | 6 | Acceptance: load test (1000 players), failure drills | open |
@@ -23,7 +23,8 @@ Decisions: wall-clock universe time (runs while the server is down, explicit pau
 the only component that changes game state and decides whether a command is accepted; engine hosted
 in the web process for now; two separate databases (game, accounts); fresh start without data
 migration; multiple universes; quests and player trading must fit in later without changing the engine.
-Open work after the refactoring: `docs/TODO.md`. Findings that motivated it: `docs/AUDIT-2026-09-16.md`.
+Full approved plan: `docs/FOUNDATION-REFACTORING-PLAN.md`. Open work after the refactoring: `docs/TODO.md`.
+Findings that motivated it: `docs/AUDIT-2026-09-16.md`.
 
 ## Solution layout (`src/Galaxxis.sln`)
 
@@ -38,6 +39,8 @@ New modules (`net10.0`):
 | `src/Galaxxis.Tools.UniverseGenerator` | Console: generate universes, bootstrap admin | Application, Persistence |
 | `src/Galaxxis.Tools.LoadTest` | Console: simulate many players, measure the engine | Application, Engine, Persistence |
 | `tests/Galaxxis.Domain.Tests` | Rules vs. concept spreadsheet | |
+| `tests/Galaxxis.Persistence.Tests` | Migrations match the model; mappings and constraints (LocalDB) | |
+| `tests/Galaxxis.Application.Tests` | Application services against LocalDB | |
 | `tests/Galaxxis.Engine.Tests` | Event processing against SQL Server LocalDB | |
 | `tests/Galaxxis.Architecture.Tests` | Enforces the "May use" column | |
 
@@ -57,20 +60,33 @@ Not part of the build: `src/Dummy` (old static HTML/Vue prototype, reference onl
 ## Build, test, configure
 
 ```
+dotnet tool restore                              # once: installs dotnet-ef from dotnet-tools.json
 dotnet build src/Galaxxis.sln
-dotnet test --solution src/Galaxxis.sln          # xUnit v3 on Microsoft.Testing.Platform (global.json)
-dotnet run --project src/Galaxxis.Tools.UniverseGenerator
+dotnet test --solution src/Galaxxis.sln          # xUnit v3 on Microsoft.Testing.Platform (global.json); needs LocalDB
+dotnet run --project src/Galaxxis.Tools.UniverseGenerator -- help
 ```
+
+**Fresh installation (new modules):** copy `appsettings.Local.json.template` to `appsettings.Local.json` and set
+the admin password → `UniverseGenerator -- bootstrap-admin` (creates both databases via migrations on first run)
+→ `UniverseGenerator -- generate` → `UniverseGenerator -- resume <id>`. Schema changes and migration commands:
+`src/Galaxxis.Persistence/README.md`.
 
 - `global.json` pins the .NET 10 SDK and the test runner.
 - `Directory.Build.props` holds the shared settings of all new projects (net10.0, nullable warnings as
   errors, XML documentation required). `Directory.Packages.props` holds **all** package versions;
   `.csproj` files reference packages without a version. Both exclude the legacy projects.
-- **Configuration:** secrets never go into checked-in files. Copy `appsettings.Local.Template.json`
+- **Configuration:** secrets never go into checked-in files. Copy `appsettings.Local.json.template`
   (repository root) to `appsettings.Local.json` (git-ignored); every host copies it next to its
   executable. Priority: host `appsettings.json` < `appsettings.Local.json` < environment variables <
   command line. Every settings class is validated at startup (`ValidateDataAnnotations().ValidateOnStart()`);
   invalid configuration stops the host with a readable message.
+- **Nothing essential may exist only on one machine.** Every git-ignored file a program needs has a checked-in
+  copy template `<original file name>.template` (e.g. `appsettings.Local.json.template`): secrets removed, every
+  setting explained (purpose, requirements, allowed format, examples). Templates are never read by code;
+  removing the `.template` suffix and adjusting the values must give a working file. When a new required setting
+  or ignored file is added, extend the template in the same change. `Galaxxis.Architecture.Tests` checks that the
+  template satisfies all startup validations, contains no password, and that every ignored file has a template.
+  The same applies to plans and design decisions: they belong in `docs/`, not only in local notes.
 
 ## Rules for new code
 
@@ -82,8 +98,11 @@ fails otherwise. The web project and tools are hosts: they wire modules together
 gets its own folder in each module it touches and should not require changes to existing features.
 
 **Dependency injection.**
-- Each module has exactly one registration method: `AddGalaxxisPersistence(configuration)`,
-  `AddGalaxxisApplication()`, `AddGalaxxisEngine(configuration)` in `<Module>Module.cs`. Domain has none.
+- Each module has one registration method: `AddGalaxxisPersistence(configuration)`,
+  `AddGalaxxisApplication(configuration)`, `AddGalaxxisEngine(configuration)` in `<Module>Module.cs`. Domain has
+  none. Persistence additionally offers `AddGalaxxisAccounts()` (Identity), which `AddGalaxxisApplication` calls.
+  A module registers everything its services need, so a host cannot forget a dependency; database test fixtures
+  build providers with `ValidateOnBuild` to catch gaps.
 - Interfaces only for services that cross module boundaries or need a test double (application
   services, event handlers, clock). No interfaces for pure rule classes or records.
 - No generic repository layer: use the `DbContext` directly (it is the unit of work).

@@ -32,7 +32,10 @@ public static class UniverseGenerator
         Random random = new(seed);
         NameGenerator names = new(random);
 
-        string universeName = string.IsNullOrWhiteSpace(settings.Name) ? names.Next() : settings.Name.Trim();
+        // A random name is always drawn, even when a name was chosen: otherwise choosing a name would shift the
+        // random sequence and the same seed would produce a different map.
+        string randomName = names.Next();
+        string universeName = string.IsNullOrWhiteSpace(settings.Name) ? randomName : settings.Name.Trim();
         names.Reserve(universeName);
 
         List<GalaxyBlueprint> galaxies = [];

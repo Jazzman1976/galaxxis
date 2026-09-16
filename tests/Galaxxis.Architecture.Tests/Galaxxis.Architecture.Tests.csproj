@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <!-- Guards the module dependency rules (see CLAUDE.md) so the architecture cannot erode unnoticed. -->
+  <!-- Guards the module dependency rules and the configuration template rule (see CLAUDE.md), so they cannot erode unnoticed. -->
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Galaxxis.Domain\Galaxxis.Domain.csproj" />
@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="xunit.v3" />
   </ItemGroup>
 

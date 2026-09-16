@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <None Update="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
-    <!-- Machine-specific secrets from the repository root (see appsettings.Local.Template.json). -->
+    <!-- Machine-specific secrets from the repository root (see appsettings.Local.json.template). -->
     <None Include="..\..\appsettings.Local.json" Link="appsettings.Local.json" CopyToOutputDirectory="PreserveNewest" Condition="Exists('..\..\appsettings.Local.json')" />
   </ItemGroup>
 

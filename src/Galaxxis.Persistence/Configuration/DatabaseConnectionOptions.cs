@@ -26,13 +26,13 @@ public sealed class DatabaseConnectionOptions
 
     /// <summary>Connection string of the game database (configuration key <c>ConnectionStrings:Game</c>).</summary>
     [Required(ErrorMessage =
-        "ConnectionStrings:Game is missing. Copy appsettings.Local.Template.json in the repository root " +
+        "ConnectionStrings:Game is missing. Copy appsettings.Local.json.template in the repository root " +
         "to appsettings.Local.json and fill it in, or set the value via environment variable.")]
     public string Game { get; set; } = string.Empty;
 
     /// <summary>Connection string of the accounts database (configuration key <c>ConnectionStrings:Accounts</c>).</summary>
     [Required(ErrorMessage =
-        "ConnectionStrings:Accounts is missing. Copy appsettings.Local.Template.json in the repository root " +
+        "ConnectionStrings:Accounts is missing. Copy appsettings.Local.json.template in the repository root " +
         "to appsettings.Local.json and fill it in, or set the value via environment variable.")]
     public string Accounts { get; set; } = string.Empty;
 }

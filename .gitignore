@@ -6,5 +6,9 @@
 *.user
 
 # Machine-specific configuration containing secrets such as connection strings and passwords.
-# Create it by copying appsettings.Local.Template.json (checked in) and filling in your values.
+# Create it by copying appsettings.Local.json.template (checked in) and filling in your values.
+#
+# RULE: every ignored file that a program needs must have a checked-in copy template named
+# "<original file name>.template" (secrets removed, every setting explained). Templates are never ignored.
 appsettings.Local.json
+!*.template

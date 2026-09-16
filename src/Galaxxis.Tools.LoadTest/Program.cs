@@ -34,7 +34,7 @@ builder.Configuration
 
 builder.Services
     .AddGalaxxisPersistence(builder.Configuration)
-    .AddGalaxxisApplication()
+    .AddGalaxxisApplication(builder.Configuration)
     .AddGalaxxisEngine(builder.Configuration);
 
 using IHost host = builder.Build();

@@ -1,10 +1,47 @@
 # Galaxxis
 
 Browser-based space strategy game (OGame-style): players own planets, upgrade buildings,
-produce ships/defense and act against other players. ASP.NET Core MVC on .NET 8, server-rendered
-Razor with a few AJAX/Vue sprinkles. Single developer, early-stage hobby project.
+produce ships/defense and act against other players. ASP.NET Core MVC, server-rendered Razor with a
+few AJAX/Vue sprinkles. Single developer hobby project, target ~1000 concurrent players, later on Azure.
+
+## Status: foundation refactoring in progress (branch `feature/stable-foundation`)
+
+The base architecture is being rebuilt in six steps. **New code goes into the new modules and
+follows "Rules for new code" below.** The legacy projects keep running unchanged until step 5
+replaces them; the sections under "Legacy code" describe them.
+
+| Step | Content | State |
+| --- | --- | --- |
+| 1 | Foundation: new projects, central build/package settings, configuration template, tests, docs | done |
+| 2 | Domain: pure game rules, O(1) resource settlement, seeded universe generation | open |
+| 3 | Persistence: Code-First (`GameDbContext`, `AccountDbContext`), `UniverseGenerator` tool | open |
+| 4 | Engine: wall-clock universe time, per-event transactions, handlers via DI, single-instance lock | open |
+| 5 | Application services + web switch-over; remove Home, AddAdmin, `Galaxxis.Core`, `Galaxxis.Data` | open |
+| 6 | Acceptance: load test (1000 players), failure drills | open |
+
+Decisions: wall-clock universe time (runs while the server is down, explicit pause); the engine is
+the only component that changes game state and decides whether a command is accepted; engine hosted
+in the web process for now; two separate databases (game, accounts); fresh start without data
+migration; multiple universes; quests and player trading must fit in later without changing the engine.
+Open work after the refactoring: `docs/TODO.md`. Findings that motivated it: `docs/AUDIT-2026-09-16.md`.
 
 ## Solution layout (`src/Galaxxis.sln`)
+
+New modules (`net10.0`):
+
+| Project | Role | May use |
+| --- | --- | --- |
+| `src/Galaxxis.Domain` | Game rules only: growth rates, buildings, resources, races, universe generation | nothing |
+| `src/Galaxxis.Persistence` | EF Core Code-First: `GameDbContext`, `AccountDbContext`, migrations | Domain |
+| `src/Galaxxis.Application` | Use cases for UI and tools; ownership checks; records commands | Domain, Persistence |
+| `src/Galaxxis.Engine` | Universe clock, event processor, one handler per event type, background service | Domain, Persistence |
+| `src/Galaxxis.Tools.UniverseGenerator` | Console: generate universes, bootstrap admin | Application, Persistence |
+| `src/Galaxxis.Tools.LoadTest` | Console: simulate many players, measure the engine | Application, Engine, Persistence |
+| `tests/Galaxxis.Domain.Tests` | Rules vs. concept spreadsheet | |
+| `tests/Galaxxis.Engine.Tests` | Event processing against SQL Server LocalDB | |
+| `tests/Galaxxis.Architecture.Tests` | Enforces the "May use" column | |
+
+Legacy projects (`net8.0`, replaced in step 5):
 
 | Project | Type | Role |
 | --- | --- | --- |
@@ -12,10 +49,68 @@ Razor with a few AJAX/Vue sprinkles. Single developer, early-stage hobby project
 | `Galaxxis.Core` | Library | Game rules: buildings, ships, defense, growth math, providers, tick engine |
 | `Galaxxis.Web` | ASP.NET Core MVC | UI, controllers, Identity-based login |
 
-Dependency direction: `Web` → `Core` → `Data`. Nothing references `Web`.
+Legacy dependency direction: `Web` → `Core` → `Data`. Nothing references `Web`.
 
 Not part of the build: `src/Dummy` (old static HTML/Vue prototype, reference only),
 `src/Backup`, `src/DebugWebRoot`, `docs/` (game design concept, see below).
+
+## Build, test, configure
+
+```
+dotnet build src/Galaxxis.sln
+dotnet test --solution src/Galaxxis.sln          # xUnit v3 on Microsoft.Testing.Platform (global.json)
+dotnet run --project src/Galaxxis.Tools.UniverseGenerator
+```
+
+- `global.json` pins the .NET 10 SDK and the test runner.
+- `Directory.Build.props` holds the shared settings of all new projects (net10.0, nullable warnings as
+  errors, XML documentation required). `Directory.Packages.props` holds **all** package versions;
+  `.csproj` files reference packages without a version. Both exclude the legacy projects.
+- **Configuration:** secrets never go into checked-in files. Copy `appsettings.Local.Template.json`
+  (repository root) to `appsettings.Local.json` (git-ignored); every host copies it next to its
+  executable. Priority: host `appsettings.json` < `appsettings.Local.json` < environment variables <
+  command line. Every settings class is validated at startup (`ValidateDataAnnotations().ValidateOnStart()`);
+  invalid configuration stops the host with a readable message.
+
+## Rules for new code
+
+**Modules and dependencies.** Respect the "May use" column above; `Galaxxis.Architecture.Tests`
+fails otherwise. The web project and tools are hosts: they wire modules together and contain no game logic.
+
+**Feature folders inside every module.** Organise by game feature (`Buildings/`, `Fleets/`,
+`Universe/`, `Players/`), not by technical type. A new feature (for example `Quests/`, `Trading/`)
+gets its own folder in each module it touches and should not require changes to existing features.
+
+**Dependency injection.**
+- Each module has exactly one registration method: `AddGalaxxisPersistence(configuration)`,
+  `AddGalaxxisApplication()`, `AddGalaxxisEngine(configuration)` in `<Module>Module.cs`. Domain has none.
+- Interfaces only for services that cross module boundaries or need a test double (application
+  services, event handlers, clock). No interfaces for pure rule classes or records.
+- No generic repository layer: use the `DbContext` directly (it is the unit of work).
+- Lifetimes: `DbContext` scoped in web requests; `IDbContextFactory` in the engine (one context per
+  event); services and handlers scoped; `TimeProvider` singleton.
+- No static state: no static providers, no `static Instance` singletons, no static caches,
+  no `Activator.CreateInstance`.
+
+**Readability over DRY.** Repetition is fine when it keeps code obvious: one explicit handler class
+per event type, one rule class per building. Only mechanical repetition (the same block for all seven
+resources) is folded into a type such as `ResourceAmounts`.
+
+**Comments: thorough, in English.** This deliberately overrides a minimal-comment style.
+- Every public type and member has an XML doc comment (enforced: warning CS1591).
+- Class summaries say what the class is for, who uses it, and which module it belongs to.
+- Inline comments explain game rules and non-obvious decisions, referencing the concept
+  (`// Concept: KonzeptWord §6 growth rates`, `// Concept: ConzeptExcel "Kosten und Erträge"`).
+- Every project has a `README.md`: purpose, allowed dependencies, registration, configuration.
+- Settings classes carry a `SectionName` constant and error messages that tell the reader how to fix the problem.
+
+**Naming.** New code spells "resource" correctly (`ResourceAmounts`). The legacy misspelling
+`Ressource` stays confined to the legacy projects.
+
+**Extensibility for quests and trading.** Game events belong to a universe; player and planet are
+optional. Event types are strings, handlers are discovered via DI. System-triggered recurring events
+reschedule themselves inside their own transaction. Trades reserve goods when accepted and transfer
+them when completed.
 
 ## Game design concept (`docs/`, German)
 
@@ -43,9 +138,14 @@ sensor phalanx, bunker, construction base, terraformer). `ShipTypeEnum` and `Def
 already list all eight classes each, but only `Explorer`, `Carrier` and `LightManualCannon` have
 classes.
 
-## Two databases, two contexts — read this before touching data access
+# Legacy code (`Galaxxis.Core`, `Galaxxis.Data`, `Galaxxis.Web`)
 
-This is the single most surprising thing about the project.
+Everything below describes the legacy projects as they are until step 5 of the foundation
+refactoring. Do not extend them; they are kept only so the game keeps running during the rebuild.
+
+## Legacy: two databases, two contexts — read this before touching legacy data access
+
+This is the single most surprising thing about the legacy code.
 
 1. **`GalaxxisIdentity`** — ASP.NET Identity (logins, passwords). Accessed through
    `IdentityAppContext`, registered via DI in `Startup.ConfigureServices`, connection string from
@@ -65,7 +165,7 @@ An Identity account without a matching game `User` row makes `UserProvider` thro
 are **excluded from compilation** (`<Compile Remove="Migrations\**" />`), so `dotnet ef database update`
 does not work here.
 
-## Setup from scratch
+## Legacy: setup from scratch
 
 1. SQL Server instance; run `dist/db/create-galaxxis-db.sql` to create the `Galaxxis` game database.
 2. Create the `GalaxxisIdentity` database (schema currently only exists inside `src/Backup/Databases.zip`).
@@ -78,15 +178,14 @@ does not work here.
    resources accrue and no build finishes.
 
 ```
-dotnet build src/Galaxxis.sln
 dotnet run --project src/Galaxxis.Web        # https://localhost:5001 (default route → Start)
 dotnet run --project src/Galaxxis.Data       # universe seeder CLI
 cd src/Galaxxis.Web && npx gulp              # SCSS/JS build (gulp 4 + node-sass)
 ```
 
-There is no test project and no CI pipeline.
+There is no CI pipeline yet.
 
-## Conventions
+## Legacy: conventions
 
 **Feature folders, not `Controllers/`.** Controller, view model and views live together in
 `Galaxxis.Web/Views/<Feature>/` — e.g. `Views/OreMine/OreMineController.cs`,

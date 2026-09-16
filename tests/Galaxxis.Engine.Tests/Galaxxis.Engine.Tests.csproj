@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Tests for event processing in Galaxxis.Engine. Later steps run these against SQL Server LocalDB. -->
+
+  <PropertyGroup>
+    <!--
+      TEMPORARY: this project has no tests yet, and Microsoft.Testing.Platform reports
+      "zero tests ran" as exit code 8. Remove this property when the first tests arrive
+      (step 4 of the foundation refactoring).
+    -->
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --ignore-exit-code 8</TestingPlatformCommandLineArguments>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Galaxxis.Engine\Galaxxis.Engine.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

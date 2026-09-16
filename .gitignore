@@ -1,0 +1,10 @@
+# Build output and IDE state
+**/bin/
+**/obj/
+**/.vs/
+**/.vscode/
+*.user
+
+# Machine-specific configuration containing secrets such as connection strings and passwords.
+# Create it by copying appsettings.Local.Template.json (checked in) and filling in your values.
+appsettings.Local.json

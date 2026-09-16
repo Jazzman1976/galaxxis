@@ -1,0 +1,26 @@
+<Project>
+
+  <!--
+    Central package version management: every NuGet package version used by the new Galaxxis
+    projects is defined exactly once, here. Project files reference packages without a version.
+
+    Legacy projects (see Directory.Build.props) still carry their own versions and are excluded.
+  -->
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally Condition="'$(IsGalaxxisLegacyProject)' != 'true'">true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <!-- Configuration, options and dependency injection -->
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.12" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.12" />
+    <PackageVersion Include="Microsoft.Extensions.Options.DataAnnotations" Version="10.0.12" />
+  </ItemGroup>
+
+  <!-- Tests -->
+  <ItemGroup>
+    <PackageVersion Include="xunit.v3" Version="4.0.1" />
+  </ItemGroup>
+
+</Project>

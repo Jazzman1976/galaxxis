@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Unit tests for the pure game rules in Galaxxis.Domain. No database required. -->
+
+  <PropertyGroup>
+    <!--
+      TEMPORARY: this project has no tests yet, and Microsoft.Testing.Platform reports
+      "zero tests ran" as exit code 8. Remove this property when the first tests arrive
+      (step 2 of the foundation refactoring).
+    -->
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --ignore-exit-code 8</TestingPlatformCommandLineArguments>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Galaxxis.Domain\Galaxxis.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

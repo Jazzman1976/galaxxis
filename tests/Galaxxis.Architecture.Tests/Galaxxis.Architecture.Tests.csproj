@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Guards the module dependency rules (see CLAUDE.md) so the architecture cannot erode unnoticed. -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Galaxxis.Domain\Galaxxis.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Galaxxis.Persistence\Galaxxis.Persistence.csproj" />
+    <ProjectReference Include="..\..\src\Galaxxis.Application\Galaxxis.Application.csproj" />
+    <ProjectReference Include="..\..\src\Galaxxis.Engine\Galaxxis.Engine.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

@@ -160,6 +160,18 @@ public class ResourceSettlementTests
     }
 
     [Fact]
+    public void An_unclaimed_planet_produces_exactly_its_base_income_without_race_factors()
+    {
+        var plundered = new ResourceAmounts { Ore = 3 };
+
+        ResourceAmounts settled = ResourceSettlement.SettleUnclaimed(plundered, TimeSpan.FromDays(2));
+
+        // Concept "Grundertrag (pro 24h)": 50 / 30 / 10 per day.
+        AssertEqual(new ResourceAmounts { Ore = 103, Energy = 100, Tools = 100, Mana = 60, Crystals = 60, Antimatter = 60, Elementium = 20 }, settled);
+        Assert.Throws<ArgumentOutOfRangeException>(() => ResourceSettlement.SettleUnclaimed(plundered, TimeSpan.FromSeconds(-1)));
+    }
+
+    [Fact]
     public void Settling_in_one_step_or_in_many_small_steps_gives_the_same_result_without_shortage()
     {
         var buildings = PlanetBuildings.Empty with

@@ -115,6 +115,13 @@ public readonly record struct ResourceAmounts
         return ResourceTypes.All.All(type => available[type] >= required[type]);
     }
 
+    /// <summary>
+    /// Calculates how much of each resource is missing to pay <paramref name="required"/> from these amounts.
+    /// </summary>
+    /// <param name="required">The amounts that are needed, for example a build cost.</param>
+    /// <returns>The shortfall per resource; 0 for every resource that is sufficient.</returns>
+    public ResourceAmounts MissingFor(ResourceAmounts required) => (required - this).ClampedToZero();
+
     /// <summary>Multiplies each resource with the matching resource of <paramref name="factors"/>.</summary>
     /// <param name="factors">One factor per resource, for example race production factors.</param>
     /// <returns>The multiplied amounts.</returns>

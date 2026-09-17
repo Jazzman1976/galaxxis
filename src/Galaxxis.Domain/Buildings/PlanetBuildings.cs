@@ -97,4 +97,47 @@ public sealed record PlanetBuildings
     public int LevelOf(BuildingType type) => BuildingCatalog.IsResourceBuilding(type)
         ? ResourceBuilding(type).Level
         : OrderBuilding(type).Level;
+
+    /// <summary>Returns a copy in which one building has a different level. Everything else stays unchanged.</summary>
+    /// <param name="type">The building.</param>
+    /// <param name="level">The new level.</param>
+    /// <returns>The changed copy.</returns>
+    public PlanetBuildings WithLevel(BuildingType type, int level) => BuildingCatalog.IsResourceBuilding(type)
+        ? WithResourceBuilding(type, ResourceBuilding(type) with { Level = level })
+        : WithOrderBuilding(type, OrderBuilding(type) with { Level = level });
+
+    /// <summary>Returns a copy in which a resource building runs at a different production speed.</summary>
+    /// <param name="type">A resource building.</param>
+    /// <param name="speed">The new speed.</param>
+    /// <returns>The changed copy.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="type"/> is not a resource building.</exception>
+    public PlanetBuildings WithSpeed(BuildingType type, ProductionSpeed speed) =>
+        WithResourceBuilding(type, ResourceBuilding(type) with { Speed = speed });
+
+    /// <summary>Returns a copy in which an order building is working (or idle).</summary>
+    /// <param name="type">An order building.</param>
+    /// <param name="isWorking">Whether an order is in progress.</param>
+    /// <returns>The changed copy.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="type"/> is not an order building.</exception>
+    public PlanetBuildings WithWorking(BuildingType type, bool isWorking) =>
+        WithOrderBuilding(type, OrderBuilding(type) with { IsWorking = isWorking });
+
+    private PlanetBuildings WithResourceBuilding(BuildingType type, ResourceBuildingState state) => type switch
+    {
+        BuildingType.OreMine => this with { OreMine = state },
+        BuildingType.PowerSupply => this with { PowerSupply = state },
+        BuildingType.Factory => this with { Factory = state },
+        BuildingType.MageAcademy => this with { MageAcademy = state },
+        BuildingType.CrystalMine => this with { CrystalMine = state },
+        BuildingType.NeutronAccelerator => this with { NeutronAccelerator = state },
+        BuildingType.ElementiumSynthesizer => this with { ElementiumSynthesizer = state },
+        _ => throw new ArgumentOutOfRangeException(nameof(type), type, "Not a resource building."),
+    };
+
+    private PlanetBuildings WithOrderBuilding(BuildingType type, OrderBuildingState state) => type switch
+    {
+        BuildingType.Shipyard => this with { Shipyard = state },
+        BuildingType.DefenseSystem => this with { DefenseSystem = state },
+        _ => throw new ArgumentOutOfRangeException(nameof(type), type, "Not an order building."),
+    };
 }

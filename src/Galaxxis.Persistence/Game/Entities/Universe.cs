@@ -1,3 +1,5 @@
+using Galaxxis.Domain.Universes;
+
 namespace Galaxxis.Persistence.Game.Entities;
 
 /// <summary>
@@ -43,6 +45,12 @@ public sealed class Universe
 
     /// <summary>Whether the universe is currently paused. Not stored; derived from <see cref="PausedSince"/>.</summary>
     public bool IsPaused => PausedSince is not null;
+
+    /// <summary>
+    /// The universe clock (Domain) built from the time columns: current tick, tick/duration conversion.
+    /// Not stored itself.
+    /// </summary>
+    public UniverseTimeline Timeline => new(Epoch, TickLength, TotalPausedDuration, PausedSince);
 
     /// <summary>The galaxies of the universe.</summary>
     public List<Galaxy> Galaxies { get; set; } = [];

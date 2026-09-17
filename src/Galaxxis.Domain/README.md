@@ -31,7 +31,8 @@ Organised by game feature, not by technical type:
 | `Economy/` | Daily production/consumption with shortage throttling; settling stocks over time | `PlanetEconomy`, `ResourceSettlement` |
 | `Ships/`, `Defenses/`, `Combat/` | Costs and attributes of ships and defenses | `ShipCatalog`, `DefenseCatalog` |
 | `Planets/` | Starting stock and plots of a new planet | `PlanetDefaults` |
-| `Universes/` | Coordinates and seeded, reproducible universe generation | `Generation/UniverseGenerator` |
+| `Fleets/` | Mission travel time, plunder calculation | `FleetRules` |
+| `Universes/` | Coordinates, universe clock, seeded and reproducible universe generation | `UniverseTimeline`, `Generation/UniverseGenerator` |
 
 Later features (`Quests/`, `Trading/`, combat resolution) get their own folders.
 
@@ -43,10 +44,12 @@ and consumption with the speed the player sets in 10 % steps; order buildings (s
 later research) consume while an order is in progress. When a supply
 resource is empty and demanded more than produced, all its consumers run proportionally slower. Stocks
 are settled lazily with one formula per period instead of a loop per tick, and never become negative.
-Because the base income always flows, a planet can always recover from a bad decision.
+Because the base income always flows, a planet can always recover from a bad decision. Unclaimed planets produce
+only their base income (no race factors, no buildings), so there is always something to plunder.
 
-Time is expressed as `TimeSpan` (production per day, durations in seconds). The Domain knows nothing about
-ticks; converting universe time is the Engine's job.
+Time is expressed as `TimeSpan` (production per day, durations in seconds). `Universes/UniverseTimeline` is the
+universe clock: it derives the current tick from the wall clock (minus pauses) and converts durations to ticks.
+Fleet missions (`Fleets/FleetRules`) still use the legacy placeholders: fixed travel time, plunder without combat.
 
 ## Conventions
 

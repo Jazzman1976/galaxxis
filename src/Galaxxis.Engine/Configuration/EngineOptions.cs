@@ -21,4 +21,11 @@ public sealed class EngineOptions
     [Range(typeof(TimeSpan), "00:00:00.100", "00:01:00",
         ErrorMessage = "Engine:PollInterval must be between 100 milliseconds and 1 minute.")]
     public TimeSpan PollInterval { get; set; } = TimeSpan.FromSeconds(1);
+
+    /// <summary>
+    /// The maximum number of events processed for one universe in one wake-up. When more events are due (for example
+    /// after a long outage), the rest follows in the next wake-ups, so no single universe can block the others.
+    /// </summary>
+    [Range(1, 100_000, ErrorMessage = "Engine:MaxEventsPerUniversePerCycle must be between 1 and 100000.")]
+    public int MaxEventsPerUniversePerCycle { get; set; } = 1000;
 }

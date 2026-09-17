@@ -38,7 +38,30 @@ namespace Galaxxis.Domain.Economy;
 public static class ResourceSettlement
 {
     /// <summary>
-    /// Calculates the resource stock after <paramref name="elapsed"/> time.
+    /// Calculates the stock of an <b>unclaimed</b> planet (no owner) after <paramref name="elapsed"/> time.
+    /// </summary>
+    /// <remarks>
+    /// Game design (confirmed 2026-09-17): unclaimed planets produce their base income and nothing else. They have no
+    /// owner, so no race factors apply, and their buildings neither produce nor consume. This guarantees there is always
+    /// something to plunder, and plundered planets slowly fill up again.
+    /// Concept: ConzeptExcel "Kosten und Erträge", column "Grundertrag (pro 24h)" (see <see cref="BaseIncome"/>).
+    /// </remarks>
+    /// <param name="stock">The stock at the start of the period. Negative values are treated as 0.</param>
+    /// <param name="elapsed">Length of the period. Must not be negative.</param>
+    /// <returns>The stock at the end of the period.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="elapsed"/> is negative.</exception>
+    public static ResourceAmounts SettleUnclaimed(ResourceAmounts stock, TimeSpan elapsed)
+    {
+        if (elapsed < TimeSpan.Zero)
+        {
+            throw new ArgumentOutOfRangeException(nameof(elapsed), elapsed, "The settlement period must not be negative.");
+        }
+
+        return stock.ClampedToZero() + BaseIncome.PerDay * elapsed.TotalDays;
+    }
+
+    /// <summary>
+    /// Calculates the resource stock of a planet owned by a player after <paramref name="elapsed"/> time.
     /// </summary>
     /// <param name="stock">The stock at the start of the period. Negative values are treated as 0.</param>
     /// <param name="buildings">Levels, speeds and production state, constant during the period.</param>

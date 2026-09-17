@@ -394,6 +394,9 @@ namespace Galaxxis.Persistence.Game.Migrations
                     b.Property<int>("ElementiumPerDistanceUnit")
                         .HasColumnType("int");
 
+                    b.Property<long?>("MissionEventId")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("PlanetId")
                         .HasColumnType("int");
 

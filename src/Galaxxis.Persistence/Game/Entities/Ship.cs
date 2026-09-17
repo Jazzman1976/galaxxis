@@ -27,6 +27,12 @@ public sealed class Ship
     /// <summary>Navigation to the planet the ship is stationed at.</summary>
     public Planet Planet { get; set; } = null!;
 
+    /// <summary>
+    /// The fleet mission (attack or scan event) the ship is currently on; <see langword="null"/> while it is available
+    /// at <see cref="PlanetId"/>. A ship on a mission cannot be sent on another one.
+    /// </summary>
+    public long? MissionEventId { get; set; }
+
     /// <summary>The ship class.</summary>
     public ShipType Type { get; set; }
 

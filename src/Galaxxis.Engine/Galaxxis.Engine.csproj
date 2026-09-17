@@ -8,8 +8,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
     <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The engine tests exercise internal processing classes directly. -->
+    <InternalsVisibleTo Include="Galaxxis.Engine.Tests" />
   </ItemGroup>
 
 </Project>

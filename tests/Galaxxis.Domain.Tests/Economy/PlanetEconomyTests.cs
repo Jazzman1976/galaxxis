@@ -123,4 +123,13 @@ public class PlanetEconomyTests
         // Energy: base income 50 minus the shipyard's 495; the throttled mage academy consumes nothing.
         Assert.Equal(50 - 495, net.Energy, Precision);
     }
+
+    [Fact]
+    public void The_missing_resources_of_a_payment_are_reported_per_resource()
+    {
+        var stock = new ResourceAmounts { Ore = 100, Mana = 5 };
+        var cost = new ResourceAmounts { Ore = 60, Mana = 20, Crystals = 3 };
+
+        Assert.Equal(new ResourceAmounts { Mana = 15, Crystals = 3 }, stock.MissingFor(cost));
+    }
 }

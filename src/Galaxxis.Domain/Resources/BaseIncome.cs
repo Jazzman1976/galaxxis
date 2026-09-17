@@ -14,6 +14,10 @@ namespace Galaxxis.Domain.Resources;
 /// always recover from an empty stock, so a bad economic decision can never lock a player out.
 /// The race production factors still apply to it.
 /// </para>
+/// <para>
+/// Unclaimed planets (without owner) receive the base income too, without race factors, so there is always
+/// something to plunder and plundered planets fill up again (confirmed 2026-09-17).
+/// </para>
 /// </remarks>
 public static class BaseIncome
 {

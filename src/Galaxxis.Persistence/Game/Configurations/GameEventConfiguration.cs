@@ -7,12 +7,6 @@ namespace Galaxxis.Persistence.Game.Configurations;
 /// <summary>Table <c>GameEvents</c>.</summary>
 internal sealed class GameEventConfiguration : IEntityTypeConfiguration<GameEvent>
 {
-    /// <summary>
-    /// Name of the unique index that allows only one scheduled event per planet and queue.
-    /// Code that inserts or schedules events can recognise a violation of this rule by this name.
-    /// </summary>
-    public const string OneScheduledEventPerQueueIndex = "UX_GameEvents_OneScheduledPerPlanetQueue";
-
     /// <inheritdoc />
     public void Configure(EntityTypeBuilder<GameEvent> builder)
     {
@@ -31,11 +25,11 @@ internal sealed class GameEventConfiguration : IEntityTypeConfiguration<GameEven
         builder.HasIndex(gameEvent => new { gameEvent.UniverseId, gameEvent.State, gameEvent.ProcessAtTick, gameEvent.Id });
 
         // Safety net against double execution: at most one scheduled event per planet and queue, enforced
-        // by the database itself. Even if two engine instances ever raced, the second insert would fail.
+        // by the database itself. Even if two engine instances ever raced, scheduling the second one would fail.
         builder.HasIndex(gameEvent => new { gameEvent.PlanetId, gameEvent.Queue })
             .IsUnique()
             .HasFilter("[State] = N'Scheduled' AND [PlanetId] IS NOT NULL AND [Queue] IS NOT NULL")
-            .HasDatabaseName(OneScheduledEventPerQueueIndex);
+            .HasDatabaseName(GameEvent.OneScheduledPerQueueIndexName);
 
         // A player's event history.
         builder.HasIndex(gameEvent => new { gameEvent.PlayerId, gameEvent.CreatedAt });

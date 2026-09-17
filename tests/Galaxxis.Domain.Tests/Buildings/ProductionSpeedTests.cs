@@ -26,4 +26,19 @@ public class ProductionSpeedTests
     {
         Assert.Throws<ArgumentOutOfRangeException>(() => new ProductionSpeed(percent));
     }
+
+    [Fact]
+    public void Building_state_can_be_changed_one_building_at_a_time()
+    {
+        PlanetBuildings buildings = PlanetBuildings.Empty
+            .WithLevel(BuildingType.OreMine, 4)
+            .WithSpeed(BuildingType.OreMine, new ProductionSpeed(30))
+            .WithLevel(BuildingType.Shipyard, 2)
+            .WithWorking(BuildingType.Shipyard, true);
+
+        Assert.Equal(new ResourceBuildingState(4, new ProductionSpeed(30)), buildings.OreMine);
+        Assert.Equal(new OrderBuildingState(2, IsWorking: true), buildings.Shipyard);
+        Assert.Equal(PlanetBuildings.Empty.Factory, buildings.Factory);
+        Assert.Throws<ArgumentOutOfRangeException>(() => buildings.WithSpeed(BuildingType.Shipyard, ProductionSpeed.Full));
+    }
 }

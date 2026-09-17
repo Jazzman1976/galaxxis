@@ -24,6 +24,12 @@ namespace Galaxxis.Persistence.Game.Entities;
 /// </remarks>
 public sealed class GameEvent
 {
+    /// <summary>
+    /// Name of the database index that allows only one <see cref="GameEventState.Scheduled"/> event per planet and
+    /// <see cref="Queue"/>. Code that schedules events recognises a violation of this rule by this name.
+    /// </summary>
+    public const string OneScheduledPerQueueIndexName = "UX_GameEvents_OneScheduledPerPlanetQueue";
+
     /// <summary>Primary key. Also the tie-breaker for events due at the same tick: lower ids run first.</summary>
     public long Id { get; set; }
 

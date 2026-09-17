@@ -1,4 +1,6 @@
 using Galaxxis.Domain.Buildings;
+using Galaxxis.Domain.Economy;
+using Galaxxis.Domain.Races;
 using Galaxxis.Domain.Resources;
 using Galaxxis.Domain.Universes;
 
@@ -150,6 +152,56 @@ public sealed class Planet
 
     /// <summary>Whether the defense system is working on an order (it consumes resources only then).</summary>
     public bool DefenseSystemIsWorking { get; set; }
+
+    #endregion
+
+    #region Resource settlement --------------------------------------------------------------------
+
+    /// <summary>
+    /// Brings <see cref="Stock"/> up to date for the given universe tick, using the economy rules of the Domain.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Call this before changing anything that affects production or consumption (a building level, a speed, the
+    /// stock itself), so the time before the change is accounted with the old values. The engine always settles
+    /// to the tick of the event it handles, never to "now": that way an event processed late (for example after
+    /// the server was down) still affects production from the tick it actually happened.
+    /// </para>
+    /// <para>
+    /// Settling to a tick at or before <see cref="ResourcesSettledTick"/> changes nothing, so calling it twice for the
+    /// same tick is safe. Unclaimed planets (no owner) produce only their base income, without race factors.
+    /// </para>
+    /// </remarks>
+    /// <param name="tick">The universe tick to settle to.</param>
+    /// <param name="timeline">The universe clock, to convert ticks into real time.</param>
+    /// <exception cref="InvalidOperationException">The planet has an owner, but <see cref="Owner"/> was not loaded.</exception>
+    public void SettleResourcesTo(long tick, UniverseTimeline timeline)
+    {
+        if (tick <= ResourcesSettledTick)
+        {
+            return;
+        }
+
+        TimeSpan elapsed = timeline.DurationOf(tick - ResourcesSettledTick);
+
+        if (OwnerPlayerId is null)
+        {
+            // Unclaimed: base income only, so plundered planets fill up again.
+            Stock = ResourceSettlement.SettleUnclaimed(Stock, elapsed);
+        }
+        else
+        {
+            if (Owner is null)
+            {
+                throw new InvalidOperationException(
+                    $"Planet {Id} cannot be settled: load its owner (Include(planet => planet.Owner)) to know the race.");
+            }
+
+            Stock = ResourceSettlement.Settle(Stock, Buildings, RaceProfiles.For(Owner.Race), elapsed);
+        }
+
+        ResourcesSettledTick = tick;
+    }
 
     #endregion
 

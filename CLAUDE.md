@@ -15,7 +15,7 @@ replaces them; the sections under "Legacy code" describe them.
 | 1 | Foundation: new projects, central build/package settings, configuration template, tests, docs | done |
 | 2 | Domain: pure game rules, O(1) resource settlement, seeded universe generation | done |
 | 3 | Persistence: Code-First (`GameDbContext`, `AccountDbContext`), `UniverseGenerator` tool | done |
-| 4 | Engine: wall-clock universe time, per-event transactions, handlers via DI, single-instance lock | open |
+| 4 | Engine: wall-clock universe time, per-event transactions, handlers via DI, single-instance lock | done |
 | 5 | Application services + web switch-over; remove Home, AddAdmin, `Galaxxis.Core`, `Galaxxis.Data` | open |
 | 6 | Acceptance: load test (1000 players), failure drills | open |
 
@@ -126,10 +126,16 @@ resources) is folded into a type such as `ResourceAmounts`.
 **Naming.** New code spells "resource" correctly (`ResourceAmounts`). The legacy misspelling
 `Ressource` stays confined to the legacy projects.
 
+**Game state changes only through events.** The web application and tools record commands as
+`GameEvent` rows (`Requested`); only the engine accepts and applies them (see `src/Galaxxis.Engine/README.md`
+for the processing rules and how to add an event type). Handlers never call `SaveChanges`, always settle
+planets to the event's tick (`planet.SettleResourcesTo(tick, universe.Timeline)`), and schedule follow-ups through
+`GameEventContext`. Durations in rules are `TimeSpan`; `UniverseTimeline` converts them to ticks.
+
 **Extensibility for quests and trading.** Game events belong to a universe; player and planet are
 optional. Event types are strings, handlers are discovered via DI. System-triggered recurring events
 reschedule themselves inside their own transaction. Trades reserve goods when accepted and transfer
-them when completed.
+them when completed. `Galaxxis.Engine.Tests/ExtensibilityTests.cs` proves both work without engine changes.
 
 ## Game design concept (`docs/`, German)
 
@@ -160,7 +166,8 @@ building must define consumption values. The player sets each resource building'
 sustainable, to force specialisation and trading. When a supply resource is empty and demand exceeds
 production, its consumers are throttled proportionally. The game never lowers a speed on its own, stocks
 never go below 0, and the base income is never throttled, so a bad decision can never lock a player out.
-Shipyard and DefenseSystem are order buildings. The legacy code differs (auto-reduction loop, no
+Shipyard and DefenseSystem are order buildings. Unclaimed planets produce their base income (no race factors, no
+buildings), so there is always something to plunder and plundered planets refill. The legacy code differs (auto-reduction loop, no
 throttling, production-building upkeep never charged); the new rules win.
 
 The concept is far larger than the implementation. Not yet built: combat resolution, points and

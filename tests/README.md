@@ -5,7 +5,7 @@
 | `Galaxxis.Domain.Tests` | Game rules and formulas, checked against the concept spreadsheet | No |
 | `Galaxxis.Persistence.Tests` | Migrations match the model; mappings, indexes and constraints | SQL Server LocalDB |
 | `Galaxxis.Application.Tests` | Universe administration, admin bootstrap | SQL Server LocalDB |
-| `Galaxxis.Engine.Tests` | Event processing: failure isolation, double requests, restarts, extensibility (step 4) | SQL Server LocalDB |
+| `Galaxxis.Engine.Tests` | Event processing: order, failure isolation, double requests, outages, pauses, single instance, extensibility | SQL Server LocalDB |
 | `Galaxxis.Architecture.Tests` | Module dependency rules | No |
 
 Run all tests:

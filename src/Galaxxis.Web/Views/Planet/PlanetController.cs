@@ -1,53 +1,22 @@
-﻿using Galaxxis.Core.Provider;
-using Galaxxis.Core.Static;
-using Galaxxis.Data.Models;
-using Galaxxis.Web.Code.Services.CurrentUserService;
-using Microsoft.AspNetCore.Authorization;
+using Galaxxis.Application.Planets;
+using Galaxxis.Web.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Numerics;
-using Models = Galaxxis.Data.Models;
 
-namespace Galaxxis.Web.Views.Planet
+namespace Galaxxis.Web.Views.Planet;
+
+/// <summary>
+/// The planetary control center: resources and buildings of an own planet.
+/// </summary>
+public sealed class PlanetController(IPlanetViewService planets) : Controller
 {
-    [Authorize]
-    public class PlanetController : Controller
+    /// <summary>Shows an own planet.</summary>
+    /// <param name="id">The planet.</param>
+    /// <param name="cancellationToken">Aborted when the request is aborted.</param>
+    /// <returns>The planet page, or 404 if the planet does not exist or belongs to someone else.</returns>
+    public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
     {
-        ICurrentUserService _currentUserService;
-        public PlanetController(ICurrentUserService currentUserService)
-        {
-            _currentUserService = currentUserService;
-        }
-
-        public IActionResult Index(int id = 0)
-        {
-            User user = _currentUserService
-                .GetGalaxxisUserAsync()
-                .GetAwaiter()
-                .GetResult();
-            bool isValidPlanet = false;
-            foreach (Models.Planet p in user.Planet)
-            {
-                if (p.PlanetId == id)
-                {
-                    isValidPlanet = true;
-                    break;
-                }
-            }
-
-            if (isValidPlanet)
-            {
-                Models.Planet planet = PlanetProvider.GetPlanet(id);
-                PlanetViewModel model = new() { Planet = planet };
-
-                System.Diagnostics.Debug.WriteLine(
-                    $"{DateTime.Now.ToString(Constants.DEBUG_TIME_FORMAT)}: "
-                    + $"Planet view opened for planet {planet.PlanetName}");
-
-                return View("Planet", model);
-            }
-
-            return new EmptyResult();
-        }
+        // Planets of other players are reported as not found, never revealed.
+        PlanetView? planet = await planets.GetOwnPlanetAsync(User.AccountId(), id, cancellationToken);
+        return planet is null ? NotFound() : View("Planet", planet);
     }
 }

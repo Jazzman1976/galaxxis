@@ -30,9 +30,14 @@ services.AddGalaxxisApplication(configuration);   // also registers account mana
 | --- | --- |
 | `Universes/IUniverseAdminService` | Generate a universe (one transaction, starts paused), list, pause, resume |
 | `Accounts/IAdminAccountBootstrapper` | Create the first admin account and role from configuration; safe to repeat |
+| `Players/IPlayerService` | List universes for an account; enter a universe (creates the player, assigns a random free home planet exactly once) |
+| `Map/IMapService` | Universe, galaxy and star system maps, marking places with own planets |
+| `Planets/IPlanetViewService` | An own planet as of now: stock, net rates, resource buildings, pending orders (settled for display only, never saved) |
+| `Commands/ICommandService` | Record build and production speed commands as `Requested` events after quick pre-checks; report their status |
 
-Callers are responsible for permissions: only administrators may reach these services.
-Player-facing services (commands, planet views, onboarding) arrive in step 5 of the foundation refactoring.
+The administration services do not check permissions: callers (admin page, generator tool) must allow only
+administrators. All player services take the signed-in `accountId` and check ownership themselves; planets and
+commands of other players are reported as not found.
 
 ## Configuration
 
@@ -44,5 +49,5 @@ Player-facing services (commands, planet views, onboarding) arrive in step 5 of 
 
 ## Structure
 
-Organised by feature (`Universes/`, `Accounts/`, later `Buildings/`, `Players/`, `Quests/`, `Trading/`).
+Organised by feature (`Universes/`, `Accounts/`, `Players/`, `Map/`, `Planets/`, `Commands/`; later `Quests/`, `Trading/`).
 The system clock is injected as `TimeProvider`, so tests can control time.

@@ -4,9 +4,10 @@
 | --- | --- | --- |
 | `Galaxxis.Domain.Tests` | Game rules and formulas, checked against the concept spreadsheet | No |
 | `Galaxxis.Persistence.Tests` | Migrations match the model; mappings, indexes and constraints | SQL Server LocalDB |
-| `Galaxxis.Application.Tests` | Universe administration, admin bootstrap | SQL Server LocalDB |
+| `Galaxxis.Application.Tests` | Universe administration, admin bootstrap, entering a universe, map, planet view, recording commands | SQL Server LocalDB |
 | `Galaxxis.Engine.Tests` | Event processing: order, failure isolation, double requests, outages, pauses, single instance, extensibility | SQL Server LocalDB |
-| `Galaxxis.Architecture.Tests` | Module dependency rules | No |
+| `Galaxxis.Web.Tests` | The web application over HTTP (in-memory server, engine disabled): sign-in, lockout, joining, commands, ownership (404), admin role, antiforgery, error pages | SQL Server LocalDB |
+| `Galaxxis.Architecture.Tests` | Module dependency rules, configuration template | No |
 
 Run all tests:
 

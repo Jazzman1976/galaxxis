@@ -5,18 +5,13 @@
 
     MSBuild imports this file automatically into each project, so the individual .csproj files
     only contain what is specific to them (package and project references).
-
-    The legacy projects Galaxxis.Core, Galaxxis.Data and Galaxxis.Web are excluded on purpose:
-    they keep their original settings (net8.0, no nullable checks) until step 5 of the foundation
-    refactoring replaces them. Remove the exclusion together with those projects.
   -->
 
   <PropertyGroup>
-    <IsGalaxxisLegacyProject Condition="'$(MSBuildProjectName)' == 'Galaxxis.Core' Or '$(MSBuildProjectName)' == 'Galaxxis.Data' Or '$(MSBuildProjectName)' == 'Galaxxis.Web'">true</IsGalaxxisLegacyProject>
     <IsGalaxxisTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsGalaxxisTestProject>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(IsGalaxxisLegacyProject)' != 'true'">
+  <PropertyGroup>
     <!-- .NET 10 is the LTS release supported until November 2028. -->
     <TargetFramework>net10.0</TargetFramework>
     <LangVersion>latest</LangVersion>

@@ -31,13 +31,13 @@ internal sealed class ChangeProductionSpeedHandler : IGameEventHandler
 
         if (payload.SpeedPercent is < 0 or > 100 || payload.SpeedPercent % ProductionSpeed.StepPercent != 0)
         {
-            return AcceptResult.Reject("The production speed must be a multiple of 10 between 0 and 100 percent.");
+            return AcceptResult.Reject(GameEventMessages.InvalidProductionSpeed);
         }
 
         Planet? planet = await context.LoadOwnedPlanetAsync(cancellationToken);
         if (planet is null)
         {
-            return AcceptResult.Reject("The planet does not exist or does not belong to you.");
+            return AcceptResult.Reject(GameEventMessages.PlanetNotOwned);
         }
 
         // The stock is settled to this tick (LoadOwnedPlanetAsync), so the old speed applied until now.

@@ -1,9 +1,8 @@
-﻿@{
+@model Galaxxis.Web.Views.Account.RegisterViewModel
+@{
     Layout = "_Game";
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Registrieren";
 }
-
-@model RegisterViewModel
 
 <div id="layer-background"></div>
 <div id="layer-foreground"></div>
@@ -11,54 +10,43 @@
 <div id="layer-interface">
     <header>
         <h1>Registrieren</h1>
+        <div asp-validation-summary="All" class="message"></div>
     </header>
     <main>
         <p>
-            Dein Passwort muss mindestens einen großen Buchstaben enthalten.
-            Dein Passwort muss mindestens einen kleinen Buchstaben enthalten.
-            Dein Passwort muss mindestens ein Zeichen enthalten.
+            Dein Passwort muss mindestens 6 Zeichen lang sein und mindestens einen Großbuchstaben,
+            einen Kleinbuchstaben, eine Ziffer und ein Sonderzeichen enthalten.
         </p>
-        <form id="my-form" asp-controller="Account" asp-action="Register" method="post">
-            <label class="gx-form__label" asp-for="Username">
-                <span>Username:</span>
-                <input class="gx-form__textbox" asp-for="Username" />
+        <form id="form-register" asp-controller="Account" asp-action="Register" method="post">
+            <label class="gx-form__label">
+                <span>Benutzername:</span>
+                <input class="gx-form__textbox" asp-for="UserName" autocomplete="username" />
             </label>
-            <label class="gx-form__label" asp-for="Firstname">
-                <span>Firstname:</span>
-                <input class="gx-form__textbox" asp-for="Firstname" />
+            <label class="gx-form__label">
+                <span>Vorname:</span>
+                <input class="gx-form__textbox" asp-for="FirstName" autocomplete="given-name" />
             </label>
-            <label class="gx-form__label" asp-for="Lastname">
-                <span>Lastname:</span>
-                <input class="gx-form__textbox" asp-for="Lastname" />
+            <label class="gx-form__label">
+                <span>Nachname:</span>
+                <input class="gx-form__textbox" asp-for="LastName" autocomplete="family-name" />
             </label>
-            <label class="gx-form__label" asp-for="Email">
-                <span>Email:</span>
-                <input class="gx-form__textbox" asp-for="Email" />
+            <label class="gx-form__label">
+                <span>E-Mail:</span>
+                <input class="gx-form__textbox" asp-for="Email" autocomplete="email" />
             </label>
-            <label class="gx-form__label" asp-for="Password">
-                <span>Password:</span>
-                <input class="gx-form__textbox" asp-for="Password" />
+            <label class="gx-form__label">
+                <span>Passwort:</span>
+                <input class="gx-form__textbox" asp-for="Password" autocomplete="new-password" />
             </label>
-            <label class="gx-form__label" asp-for="Password2">
-                <span>Password2:</span>
-                <input class="gx-form__textbox" asp-for="Password2" />
+            <label class="gx-form__label">
+                <span>Wiederholen:</span>
+                <input class="gx-form__textbox" asp-for="ConfirmPassword" autocomplete="new-password" />
             </label>
             <span class="gx-form__label">
                 <span></span>
-                <input 
-                    class="gx-form__textbox" 
-                    type="submit" 
-                    value="Registrieren" 
-                    style="margin-right: 0.5rem" />
-                <button
-                    class="gx-form__textbox" 
-                    type="button"
-                    onclick='window.location.href = "/"'>
-                    Zurück
-                </button>
+                <input class="gx-form__textbox" type="submit" value="Registrieren" style="margin-right: 0.5rem" />
+                <a class="button-link" asp-controller="Start" asp-action="Index">Zurück</a>
             </span>
         </form>
-
-        <div>@Html.Raw(ViewBag.Message)</div>
     </main>
 </div>

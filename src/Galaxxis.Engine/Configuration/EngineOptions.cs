@@ -11,6 +11,17 @@ public sealed class EngineOptions
     public const string SectionName = "Engine";
 
     /// <summary>
+    /// Whether this host processes game events. Default: <see langword="true"/>.
+    /// </summary>
+    /// <remarks>
+    /// Set it to <see langword="false"/> for hosts that should only serve players, for example additional web
+    /// instances behind a load balancer while another instance (or a dedicated engine host) processes events, or
+    /// automated web tests. Several enabled instances are safe as well: only one processes a universe at a time
+    /// (see the universe lease), the others stand by. The health check reports a disabled engine as healthy.
+    /// </remarks>
+    public bool Enabled { get; set; } = true;
+
+    /// <summary>
     /// How often the engine wakes up to look for due events.
     /// </summary>
     /// <remarks>

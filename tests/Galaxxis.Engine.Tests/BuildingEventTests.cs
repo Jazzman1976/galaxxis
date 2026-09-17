@@ -72,7 +72,7 @@ public class BuildingEventTests(TestDatabases databases) : IClassFixture<TestDat
 
         List<GameEvent> events = await world.EventsAsync(universe);
         Assert.Single(events, e => e.State == GameEventState.Scheduled);
-        Assert.Equal(19, events.Count(e => e.State == GameEventState.Rejected && e.Error == GameEventExecutor.QueueBusyMessage));
+        Assert.Equal(19, events.Count(e => e.State == GameEventState.Rejected && e.Error == GameEventMessages.QueueBusy));
         Assert.Equal(Plenty - OreMine.Rules.BuildCostFor(1), (await world.PlanetAsync(planet.Id)).Stock);
     }
 

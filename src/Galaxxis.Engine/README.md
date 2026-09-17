@@ -74,18 +74,20 @@ services.AddGalaxxisEngine(configuration);
 
 Registers the handlers, the processing classes, the background service (starts with the host) and the health
 check `engine`. The engine currently runs inside the web application. To run it as its own service (for example on
-Azure), a new host only needs these two calls. A host that must not process events should not call
-`AddGalaxxisEngine`.
+Azure), a new host only needs these two calls. A host that must not process events either does not call
+`AddGalaxxisEngine` or sets `Engine:Enabled` to `false` (the web application keeps its health endpoint that way).
 
 ## Configuration
 
 | Key | Meaning |
 | --- | --- |
+| `Engine:Enabled` | Whether this host processes events (default `true`). `false` for additional web instances that only serve players, and for web tests. Several enabled instances are safe: only one processes a universe at a time. |
 | `Engine:PollInterval` | How often the engine looks for due events (100 ms to 1 min, default 1 s). Does not affect game time. |
 | `Engine:MaxEventsPerUniversePerCycle` | Events per universe per wake-up before moving on to the next universe (default 1000). |
 
 ## Health check `engine`
 
+Healthy when the engine is disabled in this host (`Engine:Enabled = false`); otherwise:
 Healthy when a cycle completed recently and no universe has a backlog; Degraded while starting or when due events
 pile up; Unhealthy when no cycle completed for ten poll intervals (at least one minute). The data includes the
 processed universes, events in the last cycle and the last error.

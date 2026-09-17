@@ -51,6 +51,14 @@ public readonly record struct UniverseTimeline(
     public long TicksFor(TimeSpan duration) =>
         duration <= TimeSpan.Zero ? 0 : (duration.Ticks + TickLength.Ticks - 1) / TickLength.Ticks;
 
+    /// <summary>
+    /// Estimates the real time at which a tick is reached, assuming no further pause. Used to show players when an
+    /// order completes.
+    /// </summary>
+    /// <param name="tick">The universe tick.</param>
+    /// <returns>The estimated real time. While paused, the estimate moves further into the future every moment.</returns>
+    public DateTimeOffset RealTimeOf(long tick) => Epoch + TotalPausedDuration + DurationOf(tick);
+
     /// <summary>Converts a number of ticks into the real time they represent.</summary>
     /// <param name="ticks">The number of ticks.</param>
     /// <returns>The duration; zero for zero or negative tick counts.</returns>

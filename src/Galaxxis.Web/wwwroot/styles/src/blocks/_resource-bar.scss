@@ -1,0 +1,30 @@
+@import "../processor/_variables.scss";
+
+// The resource bar at the top of planet and building pages (see Views/Shared/_ResourceBar.cshtml).
+.resource-bar {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: calc(0.625rem + 1px);
+
+    &__item {
+        border: 1px solid $color-neon;
+        flex: 1 0 0;
+        margin-bottom: -1px;
+    }
+
+    &__name,
+    &__value,
+    &__rate {
+        padding: 0.25rem 0.75rem;
+        text-align: right;
+    }
+
+    &__name {
+        border-bottom: 1px solid $color-neon;
+    }
+
+    &__rate {
+        font-size: 12px;
+        opacity: 0.8;
+    }
+}

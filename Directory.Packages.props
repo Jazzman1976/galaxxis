@@ -1,14 +1,12 @@
 <Project>
 
   <!--
-    Central package version management: every NuGet package version used by the new Galaxxis
-    projects is defined exactly once, here. Project files reference packages without a version.
-
-    Legacy projects (see Directory.Build.props) still carry their own versions and are excluded.
+    Central package version management: every NuGet package version used by Galaxxis projects is
+    defined exactly once, here. Project files reference packages without a version.
   -->
 
   <PropertyGroup>
-    <ManagePackageVersionsCentrally Condition="'$(IsGalaxxisLegacyProject)' != 'true'">true</ManagePackageVersionsCentrally>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 
   <!-- Configuration, options, hosting and dependency injection -->
@@ -30,6 +28,7 @@
 
   <!-- Tests -->
   <ItemGroup>
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.12" />
     <PackageVersion Include="Microsoft.Extensions.TimeProvider.Testing" Version="10.10.0" />
     <PackageVersion Include="xunit.v3" Version="4.0.1" />
   </ItemGroup>

@@ -11,7 +11,7 @@
 //    1. Copy this file in the repository root and remove the ".template" suffix:
 //           appsettings.Local.json.template  ->  appsettings.Local.json
 //    2. Adjust the values below. Every setting is explained right above it.
-//    3. Build the solution. Every Galaxxis host (tools, later web and engine) copies appsettings.Local.json next to
+//    3. Build the solution. Every Galaxxis host (web application, tools) copies appsettings.Local.json next to
 //       its executable automatically.
 //    Nothing else is needed: with the defaults below everything runs on SQL Server LocalDB (installed with
 //    Visual Studio); only the admin password must be filled in before "bootstrap-admin" is run.

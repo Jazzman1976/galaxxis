@@ -48,6 +48,15 @@ public class UniverseTimelineTests
     }
 
     [Fact]
+    public void The_real_time_of_a_future_tick_includes_finished_pauses()
+    {
+        var timeline = new UniverseTimeline(Epoch, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), PausedSince: null);
+
+        Assert.Equal(Epoch.AddMinutes(5).AddSeconds(125), timeline.RealTimeOf(125));
+        Assert.Equal(125, timeline.TickAt(timeline.RealTimeOf(125)));
+    }
+
+    [Fact]
     public void Ticks_convert_back_to_real_time()
     {
         var timeline = new UniverseTimeline(Epoch, TimeSpan.FromMilliseconds(500), TimeSpan.Zero, null);

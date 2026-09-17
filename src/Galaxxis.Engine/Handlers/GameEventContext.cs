@@ -1,4 +1,3 @@
-using Galaxxis.Domain.Resources;
 using Galaxxis.Persistence.Game;
 using Galaxxis.Persistence.Game.Entities;
 using Galaxxis.Persistence.Game.Events;
@@ -122,21 +121,5 @@ public sealed class GameEventContext
 
         Database.GameEvents.Add(followUp);
         return followUp;
-    }
-
-    /// <summary>
-    /// Builds the standard rejection message for a payment that cannot be made, naming only what is missing.
-    /// </summary>
-    /// <param name="stock">What is available.</param>
-    /// <param name="cost">What is needed.</param>
-    /// <returns>A message such as "Not enough resources: 12 ore, 3 mana missing."</returns>
-    public static string NotEnoughResourcesMessage(ResourceAmounts stock, ResourceAmounts cost)
-    {
-        ResourceAmounts missing = stock.MissingFor(cost);
-        IEnumerable<string> parts = ResourceTypes.All
-            .Where(resource => missing[resource] > 0)
-            .Select(resource => $"{Math.Ceiling(missing[resource]):0} {resource.ToString().ToLowerInvariant()}");
-
-        return $"Not enough resources: {string.Join(", ", parts)} missing.";
     }
 }

@@ -31,6 +31,12 @@ internal sealed class UniverseProcessorService(
     /// <returns>A task that completes when the loop has stopped and all leases are released.</returns>
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        if (!options.Value.Enabled)
+        {
+            logger.LogInformation("The engine is disabled in this host (Engine:Enabled = false); no events are processed here.");
+            return;
+        }
+
         logger.LogInformation("The engine is starting; it checks for due events every {Interval}.", options.Value.PollInterval);
         using PeriodicTimer timer = new(options.Value.PollInterval, timeProvider);
 

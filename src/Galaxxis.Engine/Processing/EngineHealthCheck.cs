@@ -20,6 +20,12 @@ internal sealed class EngineHealthCheck(EngineStatus status, IOptions<EngineOpti
     /// <inheritdoc />
     public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
     {
+        if (!options.Value.Enabled)
+        {
+            // Not a problem: this host deliberately leaves event processing to another host.
+            return Task.FromResult(HealthCheckResult.Healthy("The engine is disabled in this host."));
+        }
+
         EngineStatusSnapshot snapshot = status.Current;
         TimeSpan allowedSilence = TimeSpan.FromTicks(Math.Max(options.Value.PollInterval.Ticks * 10, TimeSpan.FromMinutes(1).Ticks));
 

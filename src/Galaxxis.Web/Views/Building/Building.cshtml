@@ -1,0 +1,116 @@
+@using Galaxxis.Application.Planets
+@model Galaxxis.Web.Views.Building.BuildingViewModel
+@{
+    Layout = "_Game";
+    string name = GameTexts.Name(Model.Type);
+    ViewBag.Title = name;
+    ResourceBuildingView building = Model.Building;
+    List<ResourceType> upkeep = ResourceTypes.All.Where(resource => building.UpkeepPerDay[resource] > 0).ToList();
+    List<ResourceType> costs = ResourceTypes.All.Where(resource => building.NextLevelCost[resource] > 0).ToList();
+}
+
+<div id="layer-background"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        <partial name="_ResourceBar" model="Model.Planet" />
+
+        <h1>Planet: @Model.Planet.Name - @name</h1>
+
+        @if (Model.Planet.IsUniversePaused)
+        {
+            <p class="message">Das Universum ist pausiert: Befehle werden erst nach dem Fortsetzen ausgeführt.</p>
+        }
+
+        @* Answers to commands appear here (from commands.js, or from the server after a plain form post). *@
+        <p class="message" data-command-message>@Model.Message</p>
+
+        <ul>
+            <li>
+                <a asp-controller="Planet" asp-action="Index" asp-route-id="@Model.Planet.PlanetId">Zurück zum Planetarischen Kontrollzentrum</a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <h2>@name</h2>
+        <table class="info-table">
+            <tr><th>Ausbaustufe</th><td>@building.Level</td></tr>
+            <tr><th>Produktionsgeschwindigkeit</th><td>@building.SpeedPercent %</td></tr>
+            <tr><th>Produktion pro Tag</th><td>@GameTexts.RatePerDay(building.ProductionPerDay) @GameTexts.Name(building.Produces)</td></tr>
+            <tr>
+                <th>Verbrauch pro Tag</th>
+                <td>
+                    @if (upkeep.Count == 0)
+                    {
+                        <text>keiner</text>
+                    }
+                    @foreach (ResourceType resource in upkeep)
+                    {
+                        <div>@GameTexts.RatePerDay(building.UpkeepPerDay[resource]) @GameTexts.Name(resource)</div>
+                    }
+                </td>
+            </tr>
+        </table>
+
+        <h3>Produktionsgeschwindigkeit</h3>
+        <p>
+            Produktion und Verbrauch ändern sich im gleichen Verhältnis. Geht ein Versorgungsrohstoff
+            (Energie, Mana, Antimaterie, Elementium) zur Neige, wird die Produktion anteilig gedrosselt.
+        </p>
+        <form method="post" data-command-form
+              asp-action="ChangeSpeed" asp-route-id="@Model.Planet.PlanetId" asp-route-type="@Model.Type">
+            <div class="location-selection">
+                <div class="select-wrapper">
+                    <select name="speedPercent">
+                        @for (int percent = 100; percent >= 0; percent -= ProductionSpeed.StepPercent)
+                        {
+                            <option value="@percent" selected="@(percent == building.SpeedPercent)">@percent %</option>
+                        }
+                    </select>
+                </div>
+                <button type="submit" style="width:auto" class="button-link">Einstellen</button>
+            </div>
+        </form>
+
+        <h3>Ausbau auf Stufe @(building.Level + 1)</h3>
+        @if (Model.Construction is not null)
+        {
+            @if (Model.ConstructionRemaining is TimeSpan remaining)
+            {
+                <p class="message">Das Gebäude wird ausgebaut. Fertig in <partial name="_Countdown" model="remaining" />.</p>
+            }
+            else
+            {
+                <p class="message">Der Ausbau ist beauftragt und wird in Kürze gestartet.</p>
+            }
+        }
+        else
+        {
+            <table class="info-table">
+                @foreach (ResourceType resource in costs)
+                {
+                    <tr><th>@GameTexts.Name(resource)</th><td>@GameTexts.Amount(building.NextLevelCost[resource])</td></tr>
+                }
+                <tr><th>Bauzeit</th><td>@GameTexts.Duration(building.NextLevelDuration)</td></tr>
+            </table>
+
+            @if (Model.IsOtherConstructionBusy)
+            {
+                <p class="message">Auf diesem Planeten wird bereits ein anderes Gebäude ausgebaut.</p>
+            }
+            else if (!building.CanAffordNextLevel)
+            {
+                <p class="message">Du hast nicht genügend Ressourcen, um das Gebäude auszubauen.</p>
+            }
+            else
+            {
+                <form method="post" data-command-form
+                      asp-action="Build" asp-route-id="@Model.Planet.PlanetId" asp-route-type="@Model.Type">
+                    <button type="submit">@name auf Stufe @(building.Level + 1) ausbauen</button>
+                </form>
+            }
+        }
+    </main>
+</div>

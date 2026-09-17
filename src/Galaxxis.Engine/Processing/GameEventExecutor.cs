@@ -1,6 +1,7 @@
 using Galaxxis.Engine.Handlers;
 using Galaxxis.Persistence.Game;
 using Galaxxis.Persistence.Game.Entities;
+using Galaxxis.Persistence.Game.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,9 +34,6 @@ internal sealed class GameEventExecutor(
     TimeProvider timeProvider,
     ILogger<GameEventExecutor> logger)
 {
-    /// <summary>Message used when a queue is occupied by another scheduled event.</summary>
-    internal const string QueueBusyMessage = "Another order of this kind is already in progress on this planet.";
-
     /// <summary>Processes one event.</summary>
     /// <param name="eventId">The event to process. Must be due; events in a final state are skipped.</param>
     /// <param name="cancellationToken">Signals shutdown. A cancelled event stays unchanged and is processed later.</param>
@@ -59,7 +57,7 @@ internal sealed class GameEventExecutor(
         catch (DbUpdateException exception) when (IsQueueBusyViolation(exception))
         {
             // The database's safety net caught a second scheduled order in the same queue.
-            await FinishWithoutHandlerAsync(eventId, GameEventState.Rejected, QueueBusyMessage, cancellationToken);
+            await FinishWithoutHandlerAsync(eventId, GameEventState.Rejected, GameEventMessages.QueueBusy, cancellationToken);
         }
         catch (Exception exception)
         {
@@ -129,7 +127,7 @@ internal sealed class GameEventExecutor(
 
             if (queueBusy)
             {
-                Finish(gameEvent, GameEventState.Rejected, QueueBusyMessage, now);
+                Finish(gameEvent, GameEventState.Rejected, GameEventMessages.QueueBusy, now);
                 return;
             }
         }

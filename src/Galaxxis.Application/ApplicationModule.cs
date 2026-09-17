@@ -1,4 +1,8 @@
 using Galaxxis.Application.Accounts;
+using Galaxxis.Application.Commands;
+using Galaxxis.Application.Map;
+using Galaxxis.Application.Planets;
+using Galaxxis.Application.Players;
 using Galaxxis.Application.Universes;
 using Galaxxis.Persistence.Accounts;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +16,7 @@ namespace Galaxxis.Application;
 /// </summary>
 /// <remarks>
 /// The Application module holds the use cases the web UI and the tools call, such as generating a universe
-/// or (from step 5 of the foundation refactoring on) submitting a build command and showing a planet.
+/// entering a universe, showing the map and a planet, and recording commands for the engine.
 /// Requires <c>AddGalaxxisPersistence</c>. Account management is registered here as well, because some use cases
 /// (creating the admin, later registration) need it; the web application's cookie-based Identity setup can be
 /// added on top without conflicts.
@@ -45,8 +49,15 @@ public static class ApplicationModule
             .Bind(configuration.GetSection(BootstrapAdminOptions.SectionName))
             .ValidateDataAnnotations();
 
+        // Administration
         services.AddScoped<IUniverseAdminService, UniverseAdminService>();
         services.AddScoped<IAdminAccountBootstrapper, AdminAccountBootstrapper>();
+
+        // Players
+        services.AddScoped<IPlayerService, PlayerService>();
+        services.AddScoped<IMapService, MapService>();
+        services.AddScoped<IPlanetViewService, PlanetViewService>();
+        services.AddScoped<ICommandService, CommandService>();
 
         return services;
     }

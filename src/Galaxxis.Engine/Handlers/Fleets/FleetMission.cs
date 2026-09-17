@@ -22,7 +22,7 @@ internal static class FleetMission
         Planet? origin = await context.LoadOwnedPlanetAsync(cancellationToken);
         if (origin is null)
         {
-            return "The planet does not exist or does not belong to you.";
+            return GameEventMessages.PlanetNotOwned;
         }
 
         Planet? target = await context.LoadPlanetAsync(payload.TargetPlanetId, cancellationToken);

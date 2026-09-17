@@ -1,0 +1,41 @@
+@model Galaxxis.Web.Views.Universe.JoinViewModel
+@{
+    Layout = "_Game";
+    ViewBag.Title = "Universum betreten";
+    ViewBag.Description = "Wähle deine Rasse";
+}
+
+<div id="layer-background" class="layer-background-universe"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        <h1>@Model.UniverseName Universum betreten</h1>
+        @if (Model.Message is not null)
+        {
+            <p class="message">@Model.Message</p>
+        }
+    </header>
+    <main>
+        <p>
+            Wähle die Rasse, mit der du in diesem Universum spielst. Jede Rasse hat eigene Vor- und Nachteile
+            bei der Produktion. Die Wahl gilt für dieses Universum und lässt sich nicht mehr ändern.
+            Du erhältst einen zufälligen freien Planeten als Heimatplaneten.
+        </p>
+        <form asp-action="Join" asp-route-id="@Model.UniverseId" method="post">
+            <div class="location-selection">
+                <button type="button" class="location-selection__prev" data-for="race">&lt;</button>
+                <div class="select-wrapper">
+                    <select id="race" name="race">
+                        @foreach (Race race in Enum.GetValues<Race>())
+                        {
+                            <option value="@race" selected="@(race == Model.Race)">@GameTexts.Name(race)</option>
+                        }
+                    </select>
+                </div>
+                <button type="button" class="location-selection__next" data-for="race">&gt;</button>
+                <button type="submit" style="width:auto" class="button-link">Beitreten</button>
+            </div>
+        </form>
+    </main>
+</div>

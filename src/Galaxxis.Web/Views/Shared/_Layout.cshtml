@@ -1,36 +1,41 @@
-﻿<!DOCTYPE html>
-
-<html class="gx-html">
+@using Galaxxis.Persistence.Accounts
+@*
+    Plain layout of the administration pages (no game graphics).
+*@
+<!DOCTYPE html>
+<html class="gx-html" lang="de">
 <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="~/css/galaxxis.css" />
+    <title>Galaxxis - @ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/galaxxis.css" asp-append-version="true" />
     @RenderSection("Styles", required: false)
 </head>
 <body>
 
 <header class="gx-header">
     <div class="gx-header__left">
-        <a class="gx-header__link" href="/">Start</a>
-        @if(User.Identity.IsAuthenticated)
+        <a class="gx-header__link" asp-controller="Start" asp-action="Index">Start</a>
+        @if (User.IsInRole(AccountRoles.Admin))
         {
-            <a class="gx-header__link" href="/home">Home</a>
+            <a class="gx-header__link" asp-controller="Admin" asp-action="Index">Admin</a>
         }
     </div>
     <div class="gx-header__right">
-        @if(User.Identity.IsAuthenticated)
+        @if (User.Identity?.IsAuthenticated == true)
         {
             <span class="gx-header__text">@User.Identity.Name</span>
-            <a class="gx-header__link" href="/admin">Admin</a>
-            <a class="gx-header__link" href="/account/logout">Logout</a>
+            <form class="gx-header__form" method="post" asp-controller="Account" asp-action="Logout">
+                <button class="gx-header__button" type="submit">Logout</button>
+            </form>
         }
         else
         {
-            <a class="gx-header__link" href="/account/login">Login</a>
+            <a class="gx-header__link" asp-controller="Account" asp-action="Login">Login</a>
         }
     </div>
 </header>
-    
+
 <main>
     <h1 class="gx-h1">Galaxxis</h1>
 
@@ -38,6 +43,6 @@
 
     @RenderBody()
 </main>
-    
+
 </body>
 </html>

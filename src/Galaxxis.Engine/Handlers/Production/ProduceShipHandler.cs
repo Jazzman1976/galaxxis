@@ -39,7 +39,7 @@ internal sealed class ProduceShipHandler : IGameEventHandler
         Planet? planet = await context.LoadOwnedPlanetAsync(cancellationToken);
         if (planet is null)
         {
-            return AcceptResult.Reject("The planet does not exist or does not belong to you.");
+            return AcceptResult.Reject(GameEventMessages.PlanetNotOwned);
         }
 
         if (planet.Buildings.Shipyard.Level < 1)
@@ -53,7 +53,7 @@ internal sealed class ProduceShipHandler : IGameEventHandler
 
         if (!planet.Stock.Covers(cost))
         {
-            return AcceptResult.Reject(GameEventContext.NotEnoughResourcesMessage(planet.Stock, cost));
+            return AcceptResult.Reject(GameEventMessages.NotEnoughResources(planet.Stock, cost));
         }
 
         planet.Stock -= cost;

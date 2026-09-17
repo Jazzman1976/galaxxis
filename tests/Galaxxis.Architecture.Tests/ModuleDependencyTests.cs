@@ -15,7 +15,7 @@ public class ModuleDependencyTests
 {
     /// <summary>
     /// For each module: the other Galaxxis modules it is allowed to use.
-    /// Everything not listed here is forbidden, including the legacy projects Core, Data and Web.
+    /// Everything not listed here is forbidden; above all, no module may use the web application.
     /// </summary>
     public static TheoryData<string, string[]> AllowedModuleReferences => new()
     {
@@ -23,6 +23,10 @@ public class ModuleDependencyTests
         { "Galaxxis.Persistence", ["Galaxxis.Domain"] },
         { "Galaxxis.Application", ["Galaxxis.Domain", "Galaxxis.Persistence"] },
         { "Galaxxis.Engine", ["Galaxxis.Domain", "Galaxxis.Persistence"] },
+
+        // The web application calls Application services and shows Domain types (resources, buildings, races).
+        // Persistence and Engine are only used for registration (and Identity's account types).
+        { "Galaxxis.Web", ["Galaxxis.Domain", "Galaxxis.Persistence", "Galaxxis.Application", "Galaxxis.Engine"] },
     };
 
     [Theory]

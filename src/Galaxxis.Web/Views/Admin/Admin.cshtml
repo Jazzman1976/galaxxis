@@ -1,19 +1,61 @@
-﻿@using Galaxxis.Web.Views.Admin
-
-@{ 
+@using Galaxxis.Application.Universes
+@model IReadOnlyList<UniverseSummary>
+@{
     Layout = "_Layout";
     ViewBag.Title = "Admin";
 }
 
-@model AdminViewModel
+<h3>Universen</h3>
 
-@using (Html.BeginForm("Index", "Admin", FormMethod.Post)) {
-    <div>
-        @Html.RadioButtonFor(m => m.TickerStatus, "running", new { id = "rbStatusRunning" })
-        @Html.Label("rbStatusRunning", "running")
-        @Html.RadioButtonFor(m => m.TickerStatus, "stopped", new { id = "rbStatusStopped" })
-        @Html.Label("rbStatusStopped","stopped")
-    </div>
-
-    <input type="submit" value="Submit" />
+@if (Model.Count == 0)
+{
+    <p>
+        Es gibt noch kein Universum. Erzeugen mit:
+        <code>dotnet run --project src/Galaxxis.Tools.UniverseGenerator -- generate</code>
+    </p>
 }
+else
+{
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Ticklänge</th>
+            <th>Galaxien</th>
+            <th>Planeten (besetzt)</th>
+            <th>Seed</th>
+            <th>Erzeugt</th>
+            <th></th>
+        </tr>
+        @foreach (UniverseSummary universe in Model)
+        {
+            <tr>
+                <td>@universe.Id</td>
+                <td>@universe.Name</td>
+                <td>@(universe.IsPaused ? "pausiert" : "läuft")</td>
+                <td>@universe.TickLength</td>
+                <td>@universe.GalaxyCount</td>
+                <td>@universe.PlanetCount (@universe.ClaimedPlanetCount)</td>
+                <td>@universe.Seed</td>
+                <td>@universe.CreatedAt.ToString("g")</td>
+                <td>
+                    @if (universe.IsPaused)
+                    {
+                        <form method="post" asp-action="Resume" asp-route-id="@universe.Id">
+                            <button type="submit">Fortsetzen</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post" asp-action="Pause" asp-route-id="@universe.Id">
+                            <button type="submit">Pausieren</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<p>Zustand der Engine: <a href="/health">/health</a></p>

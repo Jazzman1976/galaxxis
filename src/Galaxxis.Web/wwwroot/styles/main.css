@@ -259,6 +259,78 @@ hr {
   content: ":";
 }
 
+.game-nav {
+  position: absolute;
+  top: 10px;
+  right: 10%;
+  z-index: 200;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #49fb35;
+}
+
+.game-nav .button-link {
+  margin: 0 0 0 10px;
+}
+
+.game-nav__user {
+  font-style: italic;
+}
+
+.game-nav__form {
+  display: inline;
+  margin-left: 10px;
+}
+
+.message {
+  font-style: italic;
+}
+
+.message:empty {
+  display: none;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 12px 0 6px;
+}
+
+.resource-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-bottom: calc(0.625rem + 1px);
+}
+
+.resource-bar__item {
+  border: 1px solid #49fb35;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 0px;
+          flex: 1 0 0;
+  margin-bottom: -1px;
+}
+
+.resource-bar__name, .resource-bar__value, .resource-bar__rate {
+  padding: 0.25rem 0.75rem;
+  text-align: right;
+}
+
+.resource-bar__name {
+  border-bottom: 1px solid #49fb35;
+}
+
+.resource-bar__rate {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
 #content,
 #layer-background,
 #layer-foreground {

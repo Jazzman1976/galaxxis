@@ -29,7 +29,7 @@ internal sealed class BuildBuildingHandler : IGameEventHandler
         Planet? planet = await context.LoadOwnedPlanetAsync(cancellationToken);
         if (planet is null)
         {
-            return AcceptResult.Reject("The planet does not exist or does not belong to you.");
+            return AcceptResult.Reject(GameEventMessages.PlanetNotOwned);
         }
 
         BuildingRules rules = BuildingCatalog.For(payload.Building);
@@ -39,7 +39,7 @@ internal sealed class BuildBuildingHandler : IGameEventHandler
         // The stock is settled to the event's tick, so resources produced until the request count.
         if (!planet.Stock.Covers(cost))
         {
-            return AcceptResult.Reject(GameEventContext.NotEnoughResourcesMessage(planet.Stock, cost));
+            return AcceptResult.Reject(GameEventMessages.NotEnoughResources(planet.Stock, cost));
         }
 
         // Costs are paid when construction starts (Concept and legacy game alike).

@@ -1,22 +1,30 @@
 # Galaxxis — TODO
 
-Stand: 2026-09-16
+Stand: 2026-09-17
 
 Das aktuelle Ziel ist das **Refactoring der Basisarchitektur** (Schritte 1–6, siehe `CLAUDE.md`).
 Die folgenden Punkte kommen **danach**, in dieser Reihenfolge.
 
-## 1. Zeitnah: fehlende Gebäude-Oberflächen
+## 1. Zeitnah: fehlende Oberflächen
 
-Diese Gebäude und Befehle waren bisher nur über die alte Home-Seite bedienbar. Die Home-Seite fällt in
-Schritt 5 weg; die Engine-Handler bleiben erhalten, es fehlt nur die Oberfläche.
+Die alte Home-Seite ist in Schritt 5 entfallen. Alle sieben Ressourcengebäude (auch MageAcademy und
+ElementiumSynthesizer) haben jetzt eine gemeinsame Gebäudeseite (`Views/Building`): Ausbau und
+Produktionsgeschwindigkeit. Für die folgenden Befehle existieren die Engine-Handler, es fehlen Application-Dienst
+und Oberfläche:
 
-- [ ] MageAcademy
-- [ ] ElementiumSynthesizer
-- [ ] Shipyard (Schiffsproduktion)
-- [ ] DefenseSystem (Verteidigungsproduktion)
+- [x] MageAcademy, ElementiumSynthesizer (über die gemeinsame Gebäudeseite)
+- [ ] Shipyard: Ausbau und Schiffsproduktion
+- [ ] DefenseSystem: Ausbau und Verteidigungsproduktion
 - [ ] Flottenbefehle: Angriff, Scan, Bewegung
 
-Umsetzung nach dem Muster der Erzmine (Application-Dienst + Controller + AJAX-Statusanzeige).
+Umsetzung nach dem Muster der Gebäudeseite: Methode in `ICommandService`, Controller in `Views/<Feature>`,
+Formular mit `data-command-form` (Statusabfrage über `commands.js`).
+
+Kleinere Punkte der Oberfläche:
+
+- [ ] Ablehnungsgründe der Engine (`GameEventMessages`) sind noch englisch; für Spieler übersetzen
+- [ ] Liste der eigenen Planeten pro Universum (heute nur über die Karte mit * erreichbar)
+- [ ] Front-End-Build modernisieren: `node-sass` und `gulp 4` sind veraltet (z. B. auf `sass` umstellen)
 
 ## 2. Handel zwischen Spielern (zentrales Feature)
 

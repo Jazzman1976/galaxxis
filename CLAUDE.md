@@ -62,10 +62,10 @@ cd src/Galaxxis.Web && npx gulp all              # only after changing SCSS/JS s
 ```
 
 **CI (GitHub Actions):** `.github/workflows/build.yml` builds (Release) and runs all tests on every push to
-`master`/`develop` and on every pull request, against a SQL Server 2022 container on Linux (`GALAXXIS_TEST_SQLSERVER`,
+`main`/`develop` and on every pull request, against a SQL Server 2022 container on Linux (`GALAXXIS_TEST_SQLSERVER`,
 see `tests/README.md`). Dependabot (`.github/dependabot.yml`) opens weekly NuGet and Actions updates against `develop`.
 Repository: `https://github.com/Jazzman1976/galaxxis` (public), git-flow: `feature/*` → `develop` (pull request, CI must
-pass) → `release/x.y.z` → `master` with an annotated tag.
+pass) → `release/x.y.z` → `main` with an annotated tag.
 
 **VS Code debugging:** `.vscode/launch.json` and `tasks.json` are checked in (the rest of `.vscode/` is ignored).
 F5 configurations: `Galaxxis.Web` (logs in the Debug Console, opens the browser), `UniverseGenerator: Befehl`

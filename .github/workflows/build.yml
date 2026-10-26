@@ -1,4 +1,4 @@
-# Build and test Galaxxis on every push to master/develop and on every pull request.
+# Build and test Galaxxis on every push to main/develop and on every pull request.
 #
 # The tests need a real SQL Server (migrations, constraints, application locks). LocalDB exists only on Windows, so
 # the job starts SQL Server 2022 as a Linux container next to the runner and points the tests at it through
@@ -10,7 +10,7 @@ name: Build
 
 on:
   push:
-    branches: [master, develop]
+    branches: [main, develop]
   pull_request:
   workflow_dispatch:
 
@@ -50,10 +50,10 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: "true"
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       # The SDK version comes from global.json, like on a developer machine.
-      - uses: actions/setup-dotnet@v5
+      - uses: actions/setup-dotnet@v6
         with:
           global-json-file: global.json
 

@@ -16,7 +16,7 @@ dotnet run --project src/Galaxxis.Web                           # https://localh
 ```
 
 Als Admin anmelden und unter `/admin` ein Universum erzeugen und starten; danach mit einem zweiten Account
-registrieren und dem Universum beitreten. Tests: `dotnet test --solution src/Galaxxis.sln` (braucht LocalDB).
+registrieren und dem Universum beitreten. Tests: `dotnet test` im Repository-Root (braucht LocalDB).
 In VS Code genügt F5 (Konfigurationen in `.vscode/launch.json`).
 
 ## Wo was steht

@@ -1,0 +1,43 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="appsettings.Local.json.template" />
+    <File Path="CLAUDE.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="dotnet-tools.json" />
+    <File Path="global.json" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Docs/">
+    <File Path="docs/README.md" />
+    <File Path="docs/concept/ConzeptExcel.fods" />
+    <File Path="docs/concept/KonzeptWord.fodt" />
+    <File Path="docs/plans/TODO.md" />
+  </Folder>
+  <Folder Name="/Modules/">
+    <Project Path="src/Galaxxis.Application/Galaxxis.Application.csproj" />
+    <Project Path="src/Galaxxis.Domain/Galaxxis.Domain.csproj" />
+    <Project Path="src/Galaxxis.Engine/Galaxxis.Engine.csproj" />
+    <Project Path="src/Galaxxis.Persistence/Galaxxis.Persistence.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="tests/Galaxxis.Application.Tests/Galaxxis.Application.Tests.csproj" />
+    <Project Path="tests/Galaxxis.Architecture.Tests/Galaxxis.Architecture.Tests.csproj" />
+    <Project Path="tests/Galaxxis.Domain.Tests/Galaxxis.Domain.Tests.csproj" />
+    <Project Path="tests/Galaxxis.Engine.Tests/Galaxxis.Engine.Tests.csproj" />
+    <Project Path="tests/Galaxxis.Persistence.Tests/Galaxxis.Persistence.Tests.csproj" />
+    <Project Path="tests/Galaxxis.Web.Tests/Galaxxis.Web.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Tools/">
+    <Project Path="src/Galaxxis.Tools.LoadTest/Galaxxis.Tools.LoadTest.csproj" />
+    <Project Path="src/Galaxxis.Tools.UniverseGenerator/Galaxxis.Tools.UniverseGenerator.csproj" />
+  </Folder>
+  <Project Path="src/Galaxxis.Web/Galaxxis.Web.csproj" />
+</Solution>

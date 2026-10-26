@@ -1,9 +1,0 @@
-**/.vs
-**/.vscode
-**/bin
-**/obj
-**/wwwroot/dist
-**/node_modules
-
-**/*.user
-**/*.log

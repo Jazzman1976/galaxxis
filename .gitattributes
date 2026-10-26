@@ -1,0 +1,20 @@
+# Line endings: Git stores text files with LF and converts them for the working copy as configured on each machine
+# (core.autocrlf). This keeps diffs free of whitespace noise between Windows, Linux (CI) and macOS.
+* text=auto
+
+# Windows-only files keep CRLF in every working copy.
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary files are never converted or diffed as text.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.zip binary

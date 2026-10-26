@@ -34,3 +34,11 @@ In VS Code genügt F5 (Konfigurationen in `.vscode/launch.json`).
 | `src/<Projekt>/README.md` | Zweck, Abhängigkeiten und Konfiguration jedes Moduls |
 | `appsettings.Local.json.template` | Alle Einstellungen mit Erklärung; Kopie ohne `.template` ist die lokale Konfiguration |
 | `dist/` | Ausgabe des Publish-Profils (`dist/web`, nicht eingecheckt) |
+
+## Rechte
+
+© 2026 Elmar Höfinghoff. Alle Rechte vorbehalten.
+
+Der Quellcode und die Dokumente in diesem Repository dürfen gelesen werden. Ohne schriftliche Erlaubnis dürfen sie
+weder genutzt noch verändert oder weitergegeben werden, weder privat noch gewerblich. Es gibt bewusst keine
+Lizenzdatei. Anfragen bitte über die Issues auf GitHub.

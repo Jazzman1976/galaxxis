@@ -52,7 +52,7 @@ Kleinere Punkte der Oberfläche:
 - [ ] App Service (Web), Azure SQL (beide Datenbanken)
 - [ ] Engine als eigener Dienst (Container App oder WebJob)
 - [ ] Key Vault für Geheimnisse, Application Insights für Logging und die Engine-Metriken (Meter `Galaxxis.Engine`)
-- [ ] CI-Pipeline mit Build und Tests (Audit C1)
+- [x] CI-Pipeline mit Build und Tests (Audit C1): GitHub Actions, `.github/workflows/build.yml`
 - [ ] Lasttest gegen Azure SQL wiederholen (`Galaxxis.Tools.LoadTest`)
 - [ ] Data-Protection-Keys im Blob Storage (nötig bei mehreren Web-Instanzen)
 

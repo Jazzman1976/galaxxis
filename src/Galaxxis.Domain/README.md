@@ -53,6 +53,6 @@ Fleet missions (`Fleets/FleetRules`) still use the legacy placeholders: fixed tr
 
 ## Conventions
 
-- Every number comes from the concept (`docs/ConzeptExcel.fods` for values, `docs/KonzeptWord.fodt`
+- Every number comes from the concept (`docs/concept/ConzeptExcel.fods` for values, `docs/concept/KonzeptWord.fodt`
   for rules) and carries a comment pointing to its source.
 - Every public type and member has an XML documentation comment.

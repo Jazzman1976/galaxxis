@@ -23,8 +23,8 @@ Decisions: wall-clock universe time (runs while the server is down, explicit pau
 the only component that changes game state and decides whether a command is accepted; engine hosted
 in the web process for now; two separate databases (game, accounts); fresh start without data
 migration; multiple universes; quests and player trading must fit in later without changing the engine.
-Full approved plan: `docs/FOUNDATION-REFACTORING-PLAN.md`. Open work after the refactoring: `docs/TODO.md`.
-Findings that motivated it: `docs/AUDIT-2026-09-16.md`.
+Full approved plan: `docs/plans/FOUNDATION-REFACTORING-PLAN.md`. Open work after the refactoring: `docs/plans/TODO.md`.
+Findings that motivated it: `docs/audits/AUDIT-2026-09-16.md`.
 
 ## Solution layout (`src/Galaxxis.sln`)
 
@@ -47,7 +47,7 @@ All projects target `net10.0`.
 | `tests/Galaxxis.Architecture.Tests` | Enforces the "May use" column | |
 
 Not part of the build: `src/Dummy` (old static HTML/Vue prototype, reference only),
-`src/DebugWebRoot` (empty root folder for a local IIS site), `docs/` (game design concept, plans, audit, TODO).
+`src/DebugWebRoot` (empty root folder for a local IIS site), `docs/` (concept, plans, audits, TODO; see below).
 
 ## Build, test, configure
 
@@ -87,6 +87,15 @@ universe. Sign in with the bootstrap admin to reach `/admin`, where universes ca
   or ignored file is added, extend the template in the same change. `Galaxxis.Architecture.Tests` checks that the
   template satisfies all startup validations, contains no password, and that every ignored file has a template.
   The same applies to plans and design decisions: they belong in `docs/`, not only in local notes.
+
+**Where documents go.**
+- **`docs/`** — everything decided together and meant for other contributors, sorted into subfolders
+  (index: `docs/README.md`): `concept/` game design concept, `plans/` approved plans and the TODO list,
+  `audits/` reviews and their findings. A new kind of document gets its own subfolder and a line in the index.
+- **`.ignore/`** (repository root) — local-only working material: scratch notes, drafts, tool files that
+  should not be shared (e.g. `.ignore/.github/`). The folder is ignored by the developer's global git
+  excludes, not by the repository's `.gitignore`. Nothing in it may be needed to build, run or understand the
+  project; once something there becomes a decision, it moves to `docs/`.
 
 ## Rules for new code
 
@@ -143,7 +152,7 @@ optional. Event types are strings, handlers are discovered via DI. System-trigge
 reschedule themselves inside their own transaction. Trades reserve goods when accepted and transfer
 them when completed. `Galaxxis.Engine.Tests/ExtensibilityTests.cs` proves both work without engine changes.
 
-## Game design concept (`docs/`, German)
+## Game design concept (`docs/concept/`, German)
 
 All three files are flat XML (OpenDocument / SpreadsheetML) — extract text with a script, they are
 too verbose to read raw.
@@ -155,7 +164,7 @@ too verbose to read raw.
   weapon/armor types, points and player levels, full combat rules (hit chance, shields, initiative,
   capture chance, debris), resource buildings. Its per-building income numbers are **older** than the
   spreadsheet — when they disagree, the spreadsheet wins.
-- **`ConzeptExcel.xml`** (2015) — earlier version of the spreadsheet, superseded.
+- **`archive/ConzeptExcel.xml`** (2015) — earlier version of the spreadsheet, superseded.
 
 Core formula (implemented in `Galaxxis.Domain/Growth/GrowthRate.ValueAt`):
 `BASE * (FACTOR * (LEVEL - 1)^2 + 1)` with factor 1 = resources, 2 = upkeep, 3 = research,
@@ -180,6 +189,6 @@ The concept is far larger than the implementation. Not yet built: combat resolut
 levels, trading, quests, research, equipment sockets, special buildings (storage, research lab,
 sensor phalanx, bunker, construction base, terraformer). `ShipType` and `DefenseType`
 list all classes of the concept, but only `Explorer`, `Carrier` and `LightManualCannon` have rules in the
-catalogs. Web UIs for shipyard, defense system and fleets are still missing (`docs/TODO.md`).
+catalogs. Web UIs for shipyard, defense system and fleets are still missing (`docs/plans/TODO.md`).
 
-See `docs/AUDIT-2026-09-16.md` for the audit findings that motivated the rebuild.
+See `docs/audits/AUDIT-2026-09-16.md` for the audit findings that motivated the rebuild.

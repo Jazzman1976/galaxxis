@@ -8,7 +8,7 @@ namespace Galaxxis.Domain.Fleets;
 /// <remarks>
 /// This is the state of the legacy game, carried over unchanged: missions take a fixed time and an attack plunders
 /// resources without a fight. The concept's combat system (KonzeptWord §7) and travel times based on distance and
-/// drive strength are open work (docs/TODO.md) and will replace these placeholders.
+/// drive strength are open work (docs/plans/TODO.md) and will replace these placeholders.
 /// </remarks>
 public static class FleetRules
 {

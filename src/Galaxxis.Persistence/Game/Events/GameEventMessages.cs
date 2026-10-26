@@ -9,7 +9,7 @@ namespace Galaxxis.Persistence.Game.Events;
 /// </summary>
 /// <remarks>
 /// Messages are stored with rejected events (<c>GameEvent.Error</c>) and shown as they are. Translating them into
-/// the players' language is open work (see docs/TODO.md).
+/// the players' language is open work (see docs/plans/TODO.md).
 /// </remarks>
 public static class GameEventMessages
 {

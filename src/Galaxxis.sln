@@ -7,8 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Galaxxis.Web", "Galaxxis.We
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{00A977BD-B3A5-429C-B550-855018898C99}"
 	ProjectSection(SolutionItems) = preProject
-		..\docs\ConzeptExcel.fods = ..\docs\ConzeptExcel.fods
-		..\docs\KonzeptWord.fodt = ..\docs\KonzeptWord.fodt
+		..\docs\concept\ConzeptExcel.fods = ..\docs\concept\ConzeptExcel.fods
+		..\docs\concept\KonzeptWord.fodt = ..\docs\concept\KonzeptWord.fodt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dummy", "Dummy", "{0BEAB03C-B156-4A72-9F0E-A68150C20A4D}"

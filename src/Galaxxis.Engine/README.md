@@ -49,7 +49,7 @@ UniverseProcessorService (BackgroundService, wakes up every Engine:PollInterval)
 | `FleetReturn` | `Handlers/Fleets/FleetReturnHandler` | – | never requested | add loot, release ships |
 
 Payloads are JSON records in `Persistence/Game/Events/GameEventPayloads.cs`, shared with the Application module.
-Fleet missions still use the legacy placeholders (fixed travel time, plunder without combat); see `docs/TODO.md`.
+Fleet missions still use the legacy placeholders (fixed travel time, plunder without combat); see `docs/plans/TODO.md`.
 
 ## Adding an event type (for example for quests or trading)
 

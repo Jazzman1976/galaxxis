@@ -288,7 +288,7 @@ die Solution grün, die Tests laufen, und es folgt ein Commit nach deiner Freiga
 - Test-Projekte (xUnit) angelegt.
 - `CLAUDE.md`: Modulregeln, Feature-Ordner, DI-Regeln, Kommentar-Konventionen, Migrations-Prinzip,
   Erweiterungspunkte für neue Features.
-- `docs/TODO.md` mit der TODO-Liste (siehe unten) anlegen.
+- `docs/plans/TODO.md` mit der TODO-Liste (siehe unten) anlegen.
 
 **Fertig, wenn:** Die Solution baut, leere Tests laufen, Web startet wie bisher.
 
@@ -356,7 +356,7 @@ mit spielbarem Universum und Admin. Ein zweites Universum lässt sich daneben an
 - **Bewusste Folge:** MageAcademy, ElementiumSynthesizer, Shipyard, DefenseSystem und Flottenbefehle
   haben bis zum ersten Feature-Schritt nach der Basis keine Oberfläche mehr (bisher nur über Home
   erreichbar). Die Engine-Handler dafür existieren. Das steht als TODO mit hoher Priorität in
-  `docs/TODO.md` (siehe unten).
+  `docs/plans/TODO.md` (siehe unten).
 
 **Fertig, wenn:** Die Spielkette Login → Universe → Galaxy → System → Planet → Gebäude bauen funktioniert
 vollständig auf der neuen Basis. Audit-Befunde A1–A8, B1, B2 und C1–C10 sind erledigt.
@@ -366,7 +366,7 @@ vollständig auf der neuen Basis. Audit-Befunde A1–A8, B1, B2 und C1–C10 sin
   Ergebnisse festhalten.
 - Audit-Dokument mit Erledigt-Status aktualisieren; `CLAUDE.md` und Modul-READMEs auf Endstand bringen.
 
-### TODO — nach der Basis (wird in Schritt 1 als `docs/TODO.md` angelegt)
+### TODO — nach der Basis (wird in Schritt 1 als `docs/plans/TODO.md` angelegt)
 
 In dieser Reihenfolge:
 

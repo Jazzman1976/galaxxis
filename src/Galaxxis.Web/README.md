@@ -66,7 +66,7 @@ and number formats).
   which shows immediate refusals and then polls `Building/Status/{eventId}` until the engine has decided. Without
   JavaScript the forms fall back to a normal post with a redirect.
 - **Texts are German**, identifiers and comments English. Translations of game terms live in `GameTexts`.
-  Rejection reasons coming from the engine are still English (see `docs/TODO.md`).
+  Rejection reasons coming from the engine are still English (see `docs/plans/TODO.md`).
 
 ## Front-end build (SCSS and scripts)
 

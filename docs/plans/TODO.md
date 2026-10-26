@@ -39,7 +39,7 @@ Kleinere Punkte der Oberfläche:
 
 ## 4. Kampfsystem
 
-- [ ] Umsetzung laut `docs/KonzeptWord.fodt` §7 (Treffgenauigkeit, Schilde, Initiative, Kapern, Trümmer)
+- [ ] Umsetzung laut `docs/concept/KonzeptWord.fodt` §7 (Treffgenauigkeit, Schilde, Initiative, Kapern, Trümmer)
 
 ## 5. Azure-Deployment
 

@@ -1,0 +1,23 @@
+# Dependabot: weekly pull requests for outdated NuGet packages (Directory.Packages.props) and GitHub Actions.
+# Pull requests go to develop, as every change does in the git-flow workflow; minor and patch updates are grouped
+# into one pull request per ecosystem so they can be checked by the build together.
+# npm (src/Galaxxis.Web) is left out until the front-end build is modernised (docs/plans/TODO.md, point 1).
+version: 2
+updates:
+  - package-ecosystem: nuget
+    directory: /
+    target-branch: develop
+    schedule:
+      interval: weekly
+    groups:
+      nuget-minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: develop
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]

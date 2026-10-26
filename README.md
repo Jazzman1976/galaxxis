@@ -1,5 +1,7 @@
 # Galaxxis
 
+[![Build](https://github.com/Jazzman1976/galaxxis/actions/workflows/build.yml/badge.svg?branch=develop)](https://github.com/Jazzman1976/galaxxis/actions/workflows/build.yml)
+
 Browserbasiertes Weltraum-Strategiespiel im Stil von OGame: Spieler besitzen Planeten, bauen Gebäude aus, produzieren
 Schiffe und Verteidigung und treten gegen andere Spieler an. ASP.NET Core MVC auf .NET 10, serverseitig gerenderte
 Razor-Seiten, SQL Server.

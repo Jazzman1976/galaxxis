@@ -61,6 +61,12 @@ dotnet run --project src/Galaxxis.Web            # the game, https://localhost:5
 cd src/Galaxxis.Web && npx gulp all              # only after changing SCSS/JS sources (compiled files are checked in)
 ```
 
+**CI (GitHub Actions):** `.github/workflows/build.yml` builds (Release) and runs all tests on every push to
+`master`/`develop` and on every pull request, against a SQL Server 2022 container on Linux (`GALAXXIS_TEST_SQLSERVER`,
+see `tests/README.md`). Dependabot (`.github/dependabot.yml`) opens weekly NuGet and Actions updates against `develop`.
+Repository: `https://github.com/Jazzman1976/galaxxis` (public), git-flow: `feature/*` → `develop` (pull request, CI must
+pass) → `release/x.y.z` → `master` with an annotated tag.
+
 **VS Code debugging:** `.vscode/launch.json` and `tasks.json` are checked in (the rest of `.vscode/` is ignored).
 F5 configurations: `Galaxxis.Web` (logs in the Debug Console, opens the browser), `UniverseGenerator: Befehl`
 (e.g. `bootstrap-admin`) and `UniverseGenerator: interaktives Menü` (integrated terminal). Needs the extensions

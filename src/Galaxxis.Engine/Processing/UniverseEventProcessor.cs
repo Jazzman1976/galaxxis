@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Galaxxis.Persistence.Game;
 using Galaxxis.Persistence.Game.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ namespace Galaxxis.Engine.Processing;
 internal sealed class UniverseEventProcessor(
     IDbContextFactory<GameDbContext> contextFactory,
     GameEventExecutor executor,
+    EngineMetrics metrics,
     TimeProvider timeProvider)
 {
     /// <summary>Processes due events of one universe until none is due or the limit is reached.</summary>
@@ -36,6 +38,9 @@ internal sealed class UniverseEventProcessor(
 
         while (processed < maxEvents)
         {
+            // Measured from the lookup on: finding the next event is part of what every event costs.
+            long startTimestamp = Stopwatch.GetTimestamp();
+
             long? nextEventId = await NextDueEventIdAsync(universeId, cancellationToken);
             if (nextEventId is not long eventId)
             {
@@ -43,6 +48,7 @@ internal sealed class UniverseEventProcessor(
             }
 
             await executor.ExecuteAsync(eventId, cancellationToken);
+            metrics.EventProcessed(startTimestamp);
             processed++;
         }
 

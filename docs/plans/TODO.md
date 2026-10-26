@@ -1,9 +1,16 @@
 # Galaxxis — TODO
 
-Stand: 2026-09-17
+Stand: 2026-10-26
 
-Das aktuelle Ziel ist das **Refactoring der Basisarchitektur** (Schritte 1–6, siehe `CLAUDE.md`).
-Die folgenden Punkte kommen **danach**, in dieser Reihenfolge.
+Das **Refactoring der Basisarchitektur** (Schritte 1–6, siehe `CLAUDE.md`) ist abgeschlossen und am 2026-10-26
+abgenommen (`docs/audits/ACCEPTANCE-2026-10-26.md`). Die folgenden Punkte kommen jetzt, in dieser Reihenfolge.
+
+## 0. Rest aus der Abnahme
+
+- [ ] Frischen Aufbau einmal von Hand im Browser durchspielen (leere DB → `bootstrap-admin` → `generate --seed 42`
+  → `resume` → Admin-Login → registrieren → Universum betreten → Erzmine bauen → nach der Bauzeit Stufe 1)
+- [ ] Audit B1: Passwörter aus dem alten Git-Verlauf auf dem Server wechseln; vor einer Veröffentlichung den Verlauf
+  umschreiben
 
 ## 1. Zeitnah: fehlende Oberflächen
 
@@ -45,7 +52,9 @@ Kleinere Punkte der Oberfläche:
 
 - [ ] App Service (Web), Azure SQL (beide Datenbanken)
 - [ ] Engine als eigener Dienst (Container App oder WebJob)
-- [ ] Key Vault für Geheimnisse, Application Insights für Logging
+- [ ] Key Vault für Geheimnisse, Application Insights für Logging und die Engine-Metriken (Meter `Galaxxis.Engine`)
+- [ ] CI-Pipeline mit Build und Tests (Audit C1)
+- [ ] Lasttest gegen Azure SQL wiederholen (`Galaxxis.Tools.LoadTest`)
 - [ ] Data-Protection-Keys im Blob Storage (nötig bei mehreren Web-Instanzen)
 
 ## 6. Admin-Oberfläche für Universen

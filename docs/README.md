@@ -8,7 +8,7 @@ einzelnen Modulen stehen in den `README.md` der Projekte unter `src/`, die Arbei
 | --- | --- |
 | [`concept/`](concept/) | Spielkonzept (Deutsch, OpenDocument): `ConzeptExcel.fods` ist die verbindliche Quelle aller Zahlen, `KonzeptWord.fodt` beschreibt Spielablauf, Rassen und Kampf. In `archive/` liegen überholte Fassungen. |
 | [`plans/`](plans/) | Freigegebene Pläne und die Aufgabenliste: [`FOUNDATION-REFACTORING-PLAN.md`](plans/FOUNDATION-REFACTORING-PLAN.md) (Umbau der Basisarchitektur), [`TODO.md`](plans/TODO.md) (was danach kommt). |
-| [`audits/`](audits/) | Prüfberichte und ihre Befunde: [`AUDIT-2026-09-16.md`](audits/AUDIT-2026-09-16.md) (Anlass für den Umbau). |
+| [`audits/`](audits/) | Prüfberichte und ihre Befunde: [`AUDIT-2026-09-16.md`](audits/AUDIT-2026-09-16.md) (Anlass für den Umbau, mit Erledigt-Status), [`ACCEPTANCE-2026-10-26.md`](audits/ACCEPTANCE-2026-10-26.md) (Abnahme des Umbaus: Lasttest und Ausfallübungen). |
 
 ## Regeln
 

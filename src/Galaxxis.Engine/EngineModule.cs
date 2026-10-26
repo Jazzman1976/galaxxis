@@ -24,8 +24,9 @@ public static class EngineModule
     /// <param name="configuration">The host configuration the settings are read from.</param>
     /// <returns>The same service collection, to allow chaining.</returns>
     /// <remarks>
-    /// The background service starts processing as soon as the host runs. A host that must not process events
-    /// (for example a load test client) should not call this method.
+    /// The background service starts processing as soon as the host runs. A host that must not process events either
+    /// does not call this method or sets <c>Engine:Enabled</c> to <see langword="false"/> (then the health check and the
+    /// metrics stay available, for example in additional web instances or a load test that drives a separate engine).
     /// </remarks>
     public static IServiceCollection AddGalaxxisEngine(
         this IServiceCollection services,
@@ -41,6 +42,11 @@ public static class EngineModule
 
         AddBuiltInHandlers(services);
         services.AddHostedService<GameEventHandlerRegistrationCheck>();
+
+        // Measurements (System.Diagnostics.Metrics). AddMetrics provides IMeterFactory; it is idempotent, so hosts that
+        // already registered it (every generic or web host does) are not affected.
+        services.AddMetrics();
+        services.AddSingleton<EngineMetrics>();
 
         services.AddSingleton<EngineTickLog>();
         services.AddSingleton<GameEventExecutor>();

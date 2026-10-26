@@ -106,6 +106,19 @@ Azure), a new host only needs these two calls. A host that must not process even
   event that loaded it. There is no production step per tick: resources are settled only when an event needs the
   planet, so production becomes visible here.
 
+## Metrics
+
+`Processing/EngineMetrics` publishes two histograms with `System.Diagnostics.Metrics` under the meter
+`Galaxxis.Engine` (created through `IMeterFactory`, no static state):
+
+| Instrument | Unit | Meaning |
+| --- | --- | --- |
+| `galaxxis.engine.event.duration` | ms | Finding the next due event and processing it in its transaction: the full cost of one event |
+| `galaxxis.engine.cycle.duration` | ms | One cycle over all running universes |
+
+Watch them live with `dotnet-counters monitor -n Galaxxis.Web --counters Galaxxis.Engine`. The load test tool
+(`Galaxxis.Tools.LoadTest`) collects them for its report; later Application Insights can export them unchanged.
+
 ## Health check `engine`
 
 Healthy when the engine is disabled in this host (`Engine:Enabled = false`); otherwise:

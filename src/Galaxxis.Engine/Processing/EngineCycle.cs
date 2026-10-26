@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Galaxxis.Domain.Universes;
 using Galaxxis.Engine.Configuration;
 using Galaxxis.Persistence.Configuration;
@@ -24,6 +25,7 @@ internal sealed class EngineCycle(
     IOptions<DatabaseConnectionOptions> connectionOptions,
     TimeProvider timeProvider,
     EngineTickLog tickLog,
+    EngineMetrics metrics,
     ILogger<EngineCycle> logger) : IAsyncDisposable
 {
     // The leases this instance holds, by universe id. Only the single engine loop uses this dictionary.
@@ -37,6 +39,7 @@ internal sealed class EngineCycle(
     /// <returns>A task that completes when the cycle is done.</returns>
     public async Task RunOnceAsync(CancellationToken cancellationToken)
     {
+        long startTimestamp = Stopwatch.GetTimestamp();
         List<RunningUniverse> runningUniverses = await RunningUniversesAsync(cancellationToken);
         List<int> runningUniverseIds = runningUniverses.Select(universe => universe.Id).ToList();
         await ReleaseLeasesExceptAsync(runningUniverseIds);
@@ -67,6 +70,7 @@ internal sealed class EngineCycle(
         }
 
         status.RecordSuccess(timeProvider.GetUtcNow(), _leases.Keys.ToList(), processedEvents, backloggedUniverses);
+        metrics.CycleCompleted(startTimestamp);
 
         if (backloggedUniverses.Count > 0)
         {

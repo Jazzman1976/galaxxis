@@ -4,9 +4,9 @@ Browser-based space strategy game (OGame-style): players own planets, upgrade bu
 produce ships/defense and act against other players. ASP.NET Core MVC on .NET 10, server-rendered Razor with a
 few scripts. Single developer hobby project, target ~1000 concurrent players, later on Azure.
 
-## Status: foundation refactoring in progress (branch `feature/stable-foundation`)
+## Status: foundation refactoring done (branch `feature/stable-foundation`)
 
-The base architecture is being rebuilt in six steps. All code follows "Rules for new code" below.
+The base architecture was rebuilt in six steps and accepted on 2026-10-26. All code follows "Rules for new code" below.
 The legacy projects (`Galaxxis.Core`, `Galaxxis.Data`, the old Home page) were removed in step 5; the git history
 before that commit still contains them.
 
@@ -17,14 +17,15 @@ before that commit still contains them.
 | 3 | Persistence: Code-First (`GameDbContext`, `AccountDbContext`), `UniverseGenerator` tool | done |
 | 4 | Engine: wall-clock universe time, per-event transactions, handlers via DI, single-instance lock | done |
 | 5 | Application services + web switch-over; remove Home, AddAdmin, `Galaxxis.Core`, `Galaxxis.Data` | done |
-| 6 | Acceptance: load test (1000 players), failure drills | open |
+| 6 | Acceptance: load test (1000 players), failure drills, audit status | done |
 
 Decisions: wall-clock universe time (runs while the server is down, explicit pause); the engine is
 the only component that changes game state and decides whether a command is accepted; engine hosted
 in the web process for now; two separate databases (game, accounts); fresh start without data
 migration; multiple universes; quests and player trading must fit in later without changing the engine.
 Full approved plan: `docs/plans/FOUNDATION-REFACTORING-PLAN.md`. Open work after the refactoring: `docs/plans/TODO.md`.
-Findings that motivated it: `docs/audits/AUDIT-2026-09-16.md`.
+Findings that motivated it (with done status): `docs/audits/AUDIT-2026-09-16.md`. Acceptance results
+(load test, failure drills): `docs/audits/ACCEPTANCE-2026-10-26.md`.
 
 ## Solution layout (`src/Galaxxis.sln`)
 
@@ -38,7 +39,7 @@ All projects target `net10.0`.
 | `src/Galaxxis.Engine` | Universe clock, event processor, one handler per event type, background service | Domain, Persistence |
 | `src/Galaxxis.Web` | Browser game (MVC host): sign-in, map, planet, building pages, admin; hosts the engine | Application, Domain, Persistence and Engine (registration) |
 | `src/Galaxxis.Tools.UniverseGenerator` | Console: generate universes, bootstrap admin | Application, Persistence |
-| `src/Galaxxis.Tools.LoadTest` | Console: simulate many players, measure the engine | Application, Engine, Persistence |
+| `src/Galaxxis.Tools.LoadTest` | Console: simulate many players and measure the engine (`run`), check a universe after a restart (`verify`) | Application, Engine, Persistence |
 | `tests/Galaxxis.Domain.Tests` | Rules vs. concept spreadsheet | |
 | `tests/Galaxxis.Persistence.Tests` | Migrations match the model; mappings and constraints (LocalDB) | |
 | `tests/Galaxxis.Application.Tests` | Application services against LocalDB | |

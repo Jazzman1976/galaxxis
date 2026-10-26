@@ -1,6 +1,7 @@
 using Galaxxis.Persistence;
 using Galaxxis.Persistence.Accounts;
 using Galaxxis.Persistence.Game;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,15 +19,23 @@ namespace Galaxxis.Testing;
 /// look up the universe a test created by its id instead of counting all universes).
 /// </para>
 /// <para>
-/// By default SQL Server LocalDB is used, which is installed with Visual Studio. Set the environment variable
-/// <c>GALAXXIS_TEST_SQLSERVER</c> to use another server, for example in a CI pipeline.
+/// By default SQL Server LocalDB is used, which is installed with Visual Studio. The environment variable
+/// <c>GALAXXIS_TEST_SQLSERVER</c> selects another server, in one of two forms:
+/// </para>
+/// <list type="bullet">
+///   <item>a server name, used with Windows authentication: <c>localhost\SQLEXPRESS</c>;</item>
+///   <item>a connection string without database, for SQL authentication, for example the SQL Server container of the
+///   GitHub Actions build (<c>.github/workflows/build.yml</c>):
+///   <c>Server=localhost,1433;User Id=sa;Password=…;TrustServerCertificate=True</c>.</item>
+/// </list>
+/// <para>
+/// The login needs the right to create databases.
 /// </para>
 /// <para>This file is shared by several test projects through a linked compile item.</para>
 /// </remarks>
 public sealed class TestDatabases : IAsyncLifetime
 {
-    private readonly string _server =
-        Environment.GetEnvironmentVariable("GALAXXIS_TEST_SQLSERVER") ?? @"(localdb)\MSSQLLocalDB";
+    private readonly string _serverConnectionString = ServerConnectionString(Environment.GetEnvironmentVariable("GALAXXIS_TEST_SQLSERVER"));
 
     private readonly string _suffix = Guid.NewGuid().ToString("N")[..12];
 
@@ -97,6 +106,18 @@ public sealed class TestDatabases : IAsyncLifetime
         return services.BuildServiceProvider(new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true });
     }
 
+    /// <summary>The connection string of the test server without database, from the setting described in the remarks.</summary>
+    private static string ServerConnectionString(string? setting) => setting switch
+    {
+        null or "" => @"Server=(localdb)\MSSQLLocalDB;Trusted_Connection=True;TrustServerCertificate=True",
+
+        // "Key=Value" pairs: already a connection string (SQL authentication, e.g. in CI).
+        _ when setting.Contains('=', StringComparison.Ordinal) => setting,
+
+        // Only a server name: Windows authentication, as with LocalDB.
+        _ => $"Server={setting};Trusted_Connection=True;TrustServerCertificate=True",
+    };
+
     private string ConnectionString(string database) =>
-        $"Server={_server};Database={database};Trusted_Connection=True;TrustServerCertificate=True";
+        new SqlConnectionStringBuilder(_serverConnectionString) { InitialCatalog = database }.ConnectionString;
 }

@@ -9,8 +9,7 @@ abgenommen (`docs/audits/ACCEPTANCE-2026-10-26.md`). Die folgenden Punkte kommen
 
 - [ ] Frischen Aufbau einmal von Hand im Browser durchspielen (leere DB → `bootstrap-admin` → `generate --seed 42`
   → `resume` → Admin-Login → registrieren → Universum betreten → Erzmine bauen → nach der Bauzeit Stufe 1)
-- [ ] Audit B1: Passwörter aus dem alten Git-Verlauf auf dem Server wechseln; vor einer Veröffentlichung den Verlauf
-  umschreiben
+- [x] Audit B1: Verlauf vor der Veröffentlichung auf GitHub umgeschrieben (2026-10-26)
 
 ## 1. Zeitnah: fehlende Oberflächen
 

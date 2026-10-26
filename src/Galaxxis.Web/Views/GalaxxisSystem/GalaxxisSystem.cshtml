@@ -1,0 +1,42 @@
+@using Galaxxis.Application.Map
+@model StarSystemMapView
+@{
+    Layout = "_Game";
+    ViewBag.Title = "System";
+    ViewBag.Description = "Wähle einen Planeten";
+}
+
+<div id="layer-background" class="layer-background-system"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <main>
+        <h1>@Model.Name System</h1>
+        <p><a asp-controller="Galaxy" asp-action="Index" asp-route-id="@Model.GalaxyId">Zurück</a> zur @Model.GalaxyName Galaxie</p>
+        <h2>Planeten in diesem System:</h2>
+        @{
+            List<MapEntry> ownPlanets = Model.Planets.Where(planet => planet.ContainsOwnPlanet).ToList();
+        }
+        @if (ownPlanets.Count == 0)
+        {
+            <p>In diesem System besitzt du keinen Planeten.</p>
+        }
+        else
+        {
+            <p>Deine Planeten in diesem System:</p>
+            <ul>
+                @foreach (MapEntry planet in ownPlanets)
+                {
+                    <li><a asp-controller="Planet" asp-action="Index" asp-route-id="@planet.Id">@planet.Name</a></li>
+                }
+            </ul>
+        }
+        <p>Alle Planeten (eigene mit * markiert):</p>
+        <ul>
+            @foreach (MapEntry planet in Model.Planets)
+            {
+                <li>@planet.Name@(planet.ContainsOwnPlanet ? " *" : "")</li>
+            }
+        </ul>
+    </main>
+</div>

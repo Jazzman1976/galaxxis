@@ -1,0 +1,24 @@
+@model Galaxxis.Application.Planets.PlanetView
+@*
+    The seven resources of a planet with their net change per day.
+
+    The server renders the stock as of page load. The script "resource-bar.js" counts on from there every second using
+    data-rate-per-second, so the bar shows current amounts without reloading. That is a display estimate only: it keeps
+    amounts at zero or above, but does not model the throttling that starts when a supply resource runs out. The next
+    page load shows the exact values again. While the universe is paused, nothing changes, so the rate is zero.
+*@
+<div class="resource-bar">
+    @foreach (ResourceType resource in ResourceTypes.All)
+    {
+        double amount = Model.Stock[resource];
+        double ratePerDay = Model.IsUniversePaused ? 0 : Model.NetRatePerDay[resource];
+
+        <div class="resource-bar__item">
+            <div class="resource-bar__name">@GameTexts.Name(resource)</div>
+            <div class="resource-bar__value"
+                 data-amount="@GameTexts.ForScript(amount)"
+                 data-rate-per-second="@GameTexts.ForScript(ratePerDay / TimeSpan.FromDays(1).TotalSeconds)">@GameTexts.Amount(amount)</div>
+            <div class="resource-bar__rate">@GameTexts.RatePerDay(ratePerDay) / Tag</div>
+        </div>
+    }
+</div>

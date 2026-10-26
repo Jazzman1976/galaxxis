@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Tests for the database schema: migrations, mappings and constraints. Uses SQL Server LocalDB. -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Galaxxis.Persistence\Galaxxis.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\TestDatabases.cs" Link="Shared\TestDatabases.cs" />
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

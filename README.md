@@ -1,20 +1,30 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Galaxxis
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Browserbasiertes Weltraum-Strategiespiel im Stil von OGame: Spieler besitzen Planeten, bauen Gebäude aus, produzieren
+Schiffe und Verteidigung und treten gegen andere Spieler an. ASP.NET Core MVC auf .NET 10, serverseitig gerenderte
+Razor-Seiten, SQL Server.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## Schnellstart
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+Voraussetzungen: .NET 10 SDK (siehe `global.json`), SQL Server LocalDB.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+```
+dotnet tool restore
+copy appsettings.Local.json.template appsettings.Local.json     # dann das Admin-Passwort eintragen
+dotnet run --project src/Galaxxis.Tools.UniverseGenerator -- bootstrap-admin
+dotnet run --project src/Galaxxis.Web                           # https://localhost:5001
+```
+
+Als Admin anmelden und unter `/admin` ein Universum erzeugen und starten; danach mit einem zweiten Account
+registrieren und dem Universum beitreten. Tests: `dotnet test --solution src/Galaxxis.sln` (braucht LocalDB).
+In VS Code genügt F5 (Konfigurationen in `.vscode/launch.json`).
+
+## Wo was steht
+
+| Ort | Inhalt |
+| --- | --- |
+| [`CLAUDE.md`](CLAUDE.md) | Architektur, Projektaufbau, Build und die Regeln für neuen Code (Englisch) |
+| [`docs/`](docs/README.md) | Spielkonzept, freigegebene Pläne, TODO-Liste, Prüfberichte |
+| `src/<Projekt>/README.md` | Zweck, Abhängigkeiten und Konfiguration jedes Moduls |
+| `appsettings.Local.json.template` | Alle Einstellungen mit Erklärung; Kopie ohne `.template` ist die lokale Konfiguration |
+| `dist/` | Ausgabe des Publish-Profils (`dist/web`, nicht eingecheckt) |

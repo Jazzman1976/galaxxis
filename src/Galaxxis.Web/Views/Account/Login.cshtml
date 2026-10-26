@@ -1,23 +1,42 @@
-﻿
-@{ 
-    Layout = "_Layout";
+@model Galaxxis.Web.Views.Account.LoginViewModel
+@{
+    Layout = "_Game";
     ViewBag.Title = "Login";
 }
 
-<div>@ViewBag.Message</div>
+<div id="layer-background"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        <h1>Login</h1>
+        <div asp-validation-summary="All" class="message"></div>
+    </header>
 
-<form asp-controller="Account" asp-action="Login" method="post">
-    <table>
-        <tr>
-            <td><label for="user">User:</label></td>
-            <td><input id="user" name="user" type="text" /></td>
-        </tr>
-        <tr>
-            <td><label for="password">Password:</label></td>
-            <td><input id="password" name="password" type="password" /></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Login" style="width:100%" /></td>
-        </tr>
-    </table>
-</form>
+    <main>
+        <p>
+            Bitte log dich mit deinem Benutzernamen (oder deiner E-Mail-Adresse) und deinem Passwort ein.
+        </p>
+        <form id="form-login" asp-controller="Account" asp-action="Login" method="post">
+            <label class="gx-form__label">
+                <span>Benutzername:</span>
+                <input class="gx-form__textbox" asp-for="UserName" autocomplete="username" />
+            </label>
+            <label class="gx-form__label">
+                <span>Passwort:</span>
+                <input class="gx-form__textbox" asp-for="Password" autocomplete="current-password" />
+            </label>
+            <label class="gx-form__label">
+                <span></span>
+                <span><input asp-for="RememberMe" /> Angemeldet bleiben</span>
+            </label>
+            <input asp-for="ReturnUrl" type="hidden" />
+            <span class="gx-form__label">
+                <span></span>
+                <input class="gx-form__textbox" type="submit" value="Login" style="margin-right: 0.5rem" />
+                <a class="button-link" asp-controller="Start" asp-action="Index">Zurück</a>
+            </span>
+        </form>
+        <p>Noch kein Konto? <a asp-controller="Account" asp-action="Register">Jetzt registrieren</a></p>
+    </main>
+</div>

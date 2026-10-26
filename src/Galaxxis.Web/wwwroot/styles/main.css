@@ -237,7 +237,102 @@ hr {
   left: 0;
 }
 
+/* blocks */
+.info-table,
+.info-table th,
+.info-table td {
+  border-collapse: collapse;
+  border: 1px solid #49fb35;
+  padding: 5px;
+}
+
+.info-table {
+  margin-bottom: 20px;
+}
+
+.info-table th {
+  text-align: left;
+  padding-right: 20px;
+}
+
+.info-table th::after {
+  content: ":";
+}
+
+.game-nav {
+  position: absolute;
+  top: 10px;
+  right: 10%;
+  z-index: 200;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #49fb35;
+}
+
+.game-nav .button-link {
+  margin: 0 0 0 10px;
+}
+
+.game-nav__user {
+  font-style: italic;
+}
+
+.game-nav__form {
+  display: inline;
+  margin-left: 10px;
+}
+
+.message {
+  font-style: italic;
+}
+
+.message:empty {
+  display: none;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 12px 0 6px;
+}
+
+.resource-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-bottom: calc(0.625rem + 1px);
+}
+
+.resource-bar__item {
+  border: 1px solid #49fb35;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 0px;
+          flex: 1 0 0;
+  margin-bottom: -1px;
+}
+
+.resource-bar__name, .resource-bar__value, .resource-bar__rate {
+  padding: 0.25rem 0.75rem;
+  text-align: right;
+}
+
+.resource-bar__name {
+  border-bottom: 1px solid #49fb35;
+}
+
+.resource-bar__rate {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
 #content,
+#layer-background,
 #layer-foreground {
   position: absolute;
   top: 0;
@@ -260,29 +355,29 @@ hr {
 }
 
 #layer-background {
-  background-image: url("../images/planet_earth-wallpaper-1920x1080.jpg");
+  background-image: url("/images/planet_earth-wallpaper-1920x1080.jpg");
   background-size: cover;
   background-position: center;
 }
 
 #layer-background.layer-background-universe {
-  background-image: url("../images/galaxies.jpg");
+  background-image: url("/images/galaxies.jpg");
 }
 
 #layer-background.layer-background-galaxy {
-  background-image: url("../images/galaxy.jpg");
+  background-image: url("/images/galaxy.jpg");
 }
 
 #layer-background.layer-background-quadrant {
-  background-image: url("../images/quadrant.jpg");
+  background-image: url("/images/quadrant.jpg");
 }
 
 #layer-background.layer-background-system {
-  background-image: url("../images/system.jpg");
+  background-image: url("/images/system.jpg");
 }
 
 #layer-foreground {
-  background-image: url("../images/cockpit.svg");
+  background-image: url("/images/cockpit.svg");
   background-position: bottom center;
 }
 
@@ -467,6 +562,37 @@ legend {
   color: #49fb35;
   font-size: 12px;
   pointer-events: none;
+}
+
+.gx-form {
+  margin-bottom: -1rem;
+}
+
+.gx-form__label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 1rem;
+}
+
+.gx-form__label *:first-child {
+  min-width: 6rem;
+}
+
+.gx-form__textbox {
+  background-color: rgba(59, 64, 69, 0.5);
+  color: #49fb35;
+  border: 1px solid black;
+  padding: 3px 10px;
+  height: 30px;
+}
+
+.gx-form__textbox:focus {
+  outline: none;
+  border-color: #49fb35;
 }
 
 /*# sourceMappingURL=main.css.map */

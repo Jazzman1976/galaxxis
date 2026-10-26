@@ -1,0 +1,42 @@
+<Project>
+
+  <!--
+    Shared build settings for every Galaxxis project below this folder.
+
+    MSBuild imports this file automatically into each project, so the individual .csproj files
+    only contain what is specific to them (package and project references).
+  -->
+
+  <PropertyGroup>
+    <IsGalaxxisTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsGalaxxisTestProject>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- .NET 10 is the LTS release supported until November 2028. -->
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+
+    <!--
+      Nullable reference types: the compiler proves that nothing is null where it must not be.
+      Nullable warnings are treated as errors so that possible NullReferenceExceptions cannot slip in.
+    -->
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>$(WarningsAsErrors);nullable</WarningsAsErrors>
+
+    <!--
+      Every public type and member must carry an XML documentation comment (warning CS1591 otherwise).
+      This enforces the project convention that code is understandable from its comments alone.
+    -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsGalaxxisTestProject)' == 'true'">
+    <!-- xUnit v3 test projects are executables. -->
+    <OutputType>Exe</OutputType>
+    <!-- Test names describe the behaviour, so XML documentation is not enforced for tests. -->
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+</Project>

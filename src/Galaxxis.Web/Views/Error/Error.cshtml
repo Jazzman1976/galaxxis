@@ -1,0 +1,17 @@
+@{
+    Layout = "_Game";
+    ViewBag.Title = ViewBag.Heading;
+}
+
+<div id="layer-background"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        <h1>@ViewBag.Heading</h1>
+    </header>
+    <main>
+        <p>@ViewBag.Text</p>
+        <a class="button-link" asp-controller="Start" asp-action="Index">Zur Startseite</a>
+    </main>
+</div>

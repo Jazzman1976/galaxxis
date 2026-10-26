@@ -1,0 +1,71 @@
+@using Galaxxis.Application.Planets
+@model PlanetView
+@{
+    Layout = "_Game";
+    ViewBag.Title = "Planet";
+}
+
+<div id="layer-background"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        <partial name="_ResourceBar" model="Model" />
+
+        <h1>Planet: @Model.Name</h1>
+        <p>Du befindest dich auf deinem Planeten im @Model.UniverseName Universum. Rasse: @GameTexts.Name(Model.Race).</p>
+        @if (Model.IsUniversePaused)
+        {
+            <p class="message">Das Universum ist pausiert: Es wird nichts produziert und kein Auftrag fortgesetzt.</p>
+        }
+        <ul>
+            <li>
+                <a asp-controller="GalaxxisSystem" asp-action="Index" asp-route-id="@Model.StarSystemId">Zurück zum Sternensystem @Model.StarSystemName</a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <h2>Planetarisches Kontrollzentrum</h2>
+        <table class="info-table">
+            <tr>
+                <th>Gebäude</th>
+                <th>Stufe</th>
+                <th>Produktionsgeschwindigkeit</th>
+                <th>Produktion pro Tag</th>
+                <th>Ausbau</th>
+            </tr>
+            @foreach (ResourceBuildingView building in Model.ResourceBuildings)
+            {
+                PendingOrderView? construction = Model.PendingOrders.FirstOrDefault(order => order.Building == building.Type);
+                <tr>
+                    <td><a asp-controller="Building" asp-action="Index" asp-route-id="@Model.PlanetId" asp-route-type="@building.Type">@GameTexts.Name(building.Type)</a></td>
+                    <td>@building.Level</td>
+                    <td>@building.SpeedPercent %</td>
+                    <td>@GameTexts.RatePerDay(building.ProductionPerDay) @GameTexts.Name(building.Produces)</td>
+                    <td>
+                        @if (construction?.CompletesAt is DateTimeOffset completesAt)
+                        {
+                            <text>läuft, fertig in </text><partial name="_Countdown" model="completesAt - Model.CalculatedAt" />
+                        }
+                        else if (construction is not null)
+                        {
+                            <text>beauftragt</text>
+                        }
+                        else
+                        {
+                            <text>-</text>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <h2>Produktionsgebäude</h2>
+        <table class="info-table">
+            <tr><th>@GameTexts.Name(BuildingType.Shipyard)</th><td>Stufe @Model.Shipyard.Level</td></tr>
+            <tr><th>@GameTexts.Name(BuildingType.DefenseSystem)</th><td>Stufe @Model.DefenseSystem.Level</td></tr>
+        </table>
+        <p>Die Bedienung von Schiffswerft und Verteidigungsanlage folgt.</p>
+    </main>
+</div>

@@ -1,0 +1,16 @@
+@model TimeSpan
+@*
+    A countdown until an order completes, e.g. a building upgrade.
+
+    The class "clock" makes main.js count down every second (hours, minutes and seconds in data attributes).
+    data-reload-after-seconds makes commands.js reload the page shortly after the countdown ends, when the engine
+    has completed the order, so the player sees the result without clicking.
+*@
+@{
+    TimeSpan remaining = Model < TimeSpan.Zero ? TimeSpan.Zero : Model;
+}
+<span class="clock"
+      data-stunden="@((int)remaining.TotalHours)"
+      data-minuten="@remaining.Minutes"
+      data-sekunden="@remaining.Seconds"
+      data-reload-after-seconds="@((int)Math.Ceiling(remaining.TotalSeconds))">@GameTexts.Duration(remaining)</span>

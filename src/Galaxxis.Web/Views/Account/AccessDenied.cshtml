@@ -1,0 +1,17 @@
+@{
+    Layout = "_Game";
+    ViewBag.Title = "Kein Zugriff";
+}
+
+<div id="layer-background"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        <h1>Kein Zugriff</h1>
+    </header>
+    <main>
+        <p>Für diese Seite fehlt deinem Konto die Berechtigung.</p>
+        <a class="button-link" asp-controller="Start" asp-action="Index">Zur Startseite</a>
+    </main>
+</div>

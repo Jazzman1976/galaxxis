@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Galaxxis.Domain: the game rules (growth rates, buildings, resources, universe generation).
+    Must stay free of references to other modules, EF Core, hosting or configuration packages,
+    so the rules can be tested and reused everywhere. See README.md.
+  -->
+
+</Project>

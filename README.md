@@ -8,6 +8,9 @@ Razor-Seiten, SQL Server.
 
 ## Schnellstart
 
+Die ausführliche Schritt-für-Schritt-Anleitung, auch für andere Datenbankserver, den Server-Betrieb und häufige
+Probleme, steht in der **[Installationsanleitung](docs/guides/INSTALLATION.md)**.
+
 Voraussetzungen: .NET 10 SDK (siehe `global.json`), SQL Server LocalDB.
 
 ```
@@ -26,7 +29,16 @@ In VS Code genügt F5 (Konfigurationen in `.vscode/launch.json`).
 | Ort | Inhalt |
 | --- | --- |
 | [`CLAUDE.md`](CLAUDE.md) | Architektur, Projektaufbau, Build und die Regeln für neuen Code (Englisch) |
-| [`docs/`](docs/README.md) | Spielkonzept, freigegebene Pläne, TODO-Liste, Prüfberichte |
+| [`docs/guides/INSTALLATION.md`](docs/guides/INSTALLATION.md) | Installationsanleitung: von null bis zum laufenden Spiel |
+| [`docs/`](docs/README.md) | Spielkonzept, Anleitungen, freigegebene Pläne, TODO-Liste, Prüfberichte |
 | `src/<Projekt>/README.md` | Zweck, Abhängigkeiten und Konfiguration jedes Moduls |
 | `appsettings.Local.json.template` | Alle Einstellungen mit Erklärung; Kopie ohne `.template` ist die lokale Konfiguration |
 | `dist/` | Ausgabe des Publish-Profils (`dist/web`, nicht eingecheckt) |
+
+## Rechte
+
+© 2026 Elmar Höfinghoff. Alle Rechte vorbehalten.
+
+Der Quellcode und die Dokumente in diesem Repository dürfen gelesen werden. Ohne schriftliche Erlaubnis dürfen sie
+weder genutzt noch verändert oder weitergegeben werden, weder privat noch gewerblich. Es gibt bewusst keine
+Lizenzdatei. Anfragen bitte über die Issues auf GitHub.

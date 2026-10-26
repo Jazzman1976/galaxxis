@@ -5,13 +5,13 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://git.grunow-it.de/galaxxis/galaxxis.git"
+    "url": "https://github.com/Jazzman1976/galaxxis.git"
   },
   "keywords": [
     "galaxxis"
   ],
   "author": "Elmar Hoefinghoff",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "6.0.0",

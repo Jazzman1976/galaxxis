@@ -1,0 +1,40 @@
+@import "../processor/_variables.scss";
+
+// Navigation of signed-in players in the top right corner of every game page (see Views/Shared/_Game.cshtml).
+.game-nav {
+    position: absolute;
+    top: 10px;
+    right: 10%;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    color: $color-neon;
+
+    .button-link {
+        margin: 0 0 0 10px;
+    }
+
+    &__user {
+        font-style: italic;
+    }
+
+    &__form {
+        display: inline;
+        margin-left: 10px;
+    }
+}
+
+// Answers to player commands and hints such as "not enough resources".
+.message {
+    font-style: italic;
+
+    &:empty {
+        display: none;
+    }
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 12px 0 6px;
+}

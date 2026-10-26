@@ -1,34 +1,34 @@
-﻿@using Galaxxis.Data.Models
-
-@model UniverseViewmodel
-
+@using Galaxxis.Application.Map
+@model UniverseMapView
 @{
-    Layout = "~/Views/Shared/_Game.cshtml";
-    ViewBag.Title = "Universe";
-    ViewBag.Description = "Select a galaxy you want to go";
+    Layout = "_Game";
+    ViewBag.Title = "Universum";
+    ViewBag.Description = "Wähle eine Galaxie";
 }
 
 <div id="layer-background" class="layer-background-universe"></div>
 <div id="layer-foreground"></div>
 <div id="layer-inferface-background"></div>
-<div id="layer-interface">      
-    <main>      
-        <h1>@Model.Universe.UniverseName Universum</h1>
+<div id="layer-interface">
+    <main>
+        <h1>@Model.Name Universum</h1>
         <h2>Galaxien in diesem Universum:</h2>
-        <form asp-action="GoGalaxy" method="post">
+        <p>Galaxien mit eigenen Planeten sind mit * markiert.</p>
+        @* A GET form: choosing a galaxy only navigates, it changes nothing. *@
+        <form asp-controller="Galaxy" asp-action="Index" method="get">
             <div class="location-selection">
                 <button type="button" class="location-selection__prev" data-for="galaxy">&lt;</button>
                 <div class="select-wrapper">
-                    <select id="galaxy" name="galaxy">
-                        @foreach(Galaxy galaxy in Model.Universe.Galaxy)
+                    <select id="galaxy" name="id">
+                        @foreach (MapEntry galaxy in Model.Galaxies)
                         {
-                            <option value="@galaxy.GalaxyId">@galaxy.GalaxyName @(Model.PlayerGalaxies.Any(g => g.GalaxyId == galaxy.GalaxyId) ? " *" : "")</option>
+                            <option value="@galaxy.Id">@galaxy.Name@(galaxy.ContainsOwnPlanet ? " *" : "")</option>
                         }
                     </select>
                 </div>
                 <button type="button" class="location-selection__next" data-for="galaxy">&gt;</button>
-                <button style="width:auto" class="button-link">GO</button>
-            </div>                    
+                <button type="submit" style="width:auto" class="button-link">GO</button>
+            </div>
         </form>
-    </main>    
+    </main>
 </div>

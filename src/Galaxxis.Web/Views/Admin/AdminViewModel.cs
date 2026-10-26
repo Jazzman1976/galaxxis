@@ -1,12 +1,8 @@
-﻿namespace Galaxxis.Web.Views.Admin
-{
-    public class AdminViewModel
-    {
-        public string TickerStatus { get; set; }
+using Galaxxis.Application.Universes;
 
-        public AdminViewModel()
-        {
-            this.TickerStatus = Core.Engine.Ticker.Instance.Status;
-        }
-    }
-}
+namespace Galaxxis.Web.Views.Admin;
+
+/// <summary>Everything the admin page shows: the universes and the form for generating a new one.</summary>
+/// <param name="Universes">All universes, oldest first.</param>
+/// <param name="Generate">The "generate universe" form, pre-filled or with the values of a refused attempt.</param>
+public sealed record AdminViewModel(IReadOnlyList<UniverseSummary> Universes, GenerateUniverseViewModel Generate);

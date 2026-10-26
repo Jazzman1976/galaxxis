@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Tests for the web application through real HTTP requests (in-memory test server): sign-in, entering a universe,
+    commands, ownership checks, admin role and antiforgery protection. Uses SQL Server LocalDB; the engine is disabled.
+  -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Galaxxis.Web\Galaxxis.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\TestDatabases.cs" Link="Shared\TestDatabases.cs" />
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

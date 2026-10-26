@@ -1,14 +1,14 @@
 {
-  "name": "galaxxis-dummy",
+  "name": "galaxxis-web",
   "version": "1.0.0",
-  "description": "ideas and examples",
-  "main": "index.js",
+  "description": "Front-end build of the Galaxxis web application (SCSS and scripts)",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://git.grunow-it.de/galaxxis/galaxxis.git"
   },
   "keywords": [
-    "dummy"
+    "galaxxis"
   ],
   "author": "Elmar Hoefinghoff",
   "license": "ISC",

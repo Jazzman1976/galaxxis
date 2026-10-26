@@ -1,19 +1,115 @@
-﻿@using Galaxxis.Web.Views.Admin
-
-@{ 
+@using Galaxxis.Application.Universes
+@using Galaxxis.Web.Views.Admin
+@model AdminViewModel
+@{
     Layout = "_Layout";
     ViewBag.Title = "Admin";
 }
 
-@model AdminViewModel
-
-@using (Html.BeginForm("Index", "Admin", FormMethod.Post)) {
-    <div>
-        @Html.RadioButtonFor(m => m.TickerStatus, "running", new { id = "rbStatusRunning" })
-        @Html.Label("rbStatusRunning", "running")
-        @Html.RadioButtonFor(m => m.TickerStatus, "stopped", new { id = "rbStatusStopped" })
-        @Html.Label("rbStatusStopped","stopped")
-    </div>
-
-    <input type="submit" value="Submit" />
+@if (TempData[AdminController.MessageKey] is string message)
+{
+    <p class="gx-message">@message</p>
 }
+
+<h3>Universen</h3>
+
+@if (Model.Universes.Count == 0)
+{
+    <p>Es gibt noch kein Universum. Erzeuge unten das erste.</p>
+}
+else
+{
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Ticklänge</th>
+            <th>Galaxien</th>
+            <th>Planeten (besetzt)</th>
+            <th>Seed</th>
+            <th>Erzeugt</th>
+            <th></th>
+        </tr>
+        @foreach (UniverseSummary universe in Model.Universes)
+        {
+            <tr>
+                <td>@universe.Id</td>
+                <td>@universe.Name</td>
+                <td>@(universe.IsPaused ? "pausiert" : "läuft")</td>
+                <td>@universe.TickLength</td>
+                <td>@universe.GalaxyCount</td>
+                <td>@universe.PlanetCount (@universe.ClaimedPlanetCount)</td>
+                <td>@universe.Seed</td>
+                <td>@universe.CreatedAt.ToString("g")</td>
+                <td>
+                    @if (universe.IsPaused)
+                    {
+                        <form method="post" asp-action="Resume" asp-route-id="@universe.Id">
+                            <button type="submit">Starten</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post" asp-action="Pause" asp-route-id="@universe.Id">
+                            <button type="submit">Pausieren</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<h3>Neues Universum erzeugen</h3>
+
+<p>
+    Leere Felder bei Name und Seed werden zufällig gewählt. Die Vorgaben stammen aus der Konfiguration
+    (<code>UniverseGeneration</code>); dort stehen auch Koordinatenbereich, Mindestabstand und Mond-Wahrscheinlichkeiten.
+    Ein neues Universum ist pausiert, bis es gestartet wird.
+</p>
+
+<form class="gx-form" method="post" asp-action="Generate">
+    <div asp-validation-summary="All" class="gx-message gx-message--error"></div>
+
+    <label class="gx-form__row">
+        <span>Name</span>
+        <input asp-for="Generate.Name" placeholder="zufällig" />
+    </label>
+    <label class="gx-form__row">
+        <span>Seed</span>
+        <input asp-for="Generate.Seed" placeholder="zufällig" />
+    </label>
+    <label class="gx-form__row">
+        <span>Galaxien</span>
+        <input asp-for="Generate.GalaxyCount" min="1" max="100" />
+    </label>
+    <label class="gx-form__row">
+        <span>Sternensysteme pro Galaxie</span>
+        <input asp-for="Generate.StarSystemsPerGalaxy" min="1" max="100" />
+    </label>
+    <label class="gx-form__row">
+        <span>Planeten pro Sternensystem</span>
+        <input asp-for="Generate.PlanetsPerStarSystem" min="1" max="100" />
+    </label>
+    <label class="gx-form__row">
+        <span>Ticklänge (hh:mm:ss)</span>
+        <input asp-for="Generate.TickLength" placeholder="00:00:01" />
+    </label>
+    <label class="gx-form__row">
+        <span>Sofort starten</span>
+        <input asp-for="Generate.StartImmediately" />
+    </label>
+    <div class="gx-form__row">
+        <span></span>
+        <button type="submit">Erzeugen</button>
+    </div>
+</form>
+
+<p>
+    Höchstens @GenerateUniverseViewModel.MaximumPlanets.ToString("N0") Planeten; größere Universen mit
+    <code>dotnet run --project src/Galaxxis.Tools.UniverseGenerator -- generate</code>.
+    Das Erzeugen kann bei großen Karten einige Sekunden dauern.
+</p>
+
+<p>Zustand der Engine: <a href="/health">/health</a></p>

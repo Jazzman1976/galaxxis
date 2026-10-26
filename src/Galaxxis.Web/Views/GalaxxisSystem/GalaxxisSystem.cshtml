@@ -1,11 +1,9 @@
-﻿@using Galaxxis.Data.Models
-
-@model GalaxxisSystemViewModel
-
+@using Galaxxis.Application.Map
+@model StarSystemMapView
 @{
-    Layout = "~/Views/Shared/_Game.cshtml";
+    Layout = "_Game";
     ViewBag.Title = "System";
-    ViewBag.Description = "Select a planet you want to go";
+    ViewBag.Description = "Wähle einen Planeten";
 }
 
 <div id="layer-background" class="layer-background-system"></div>
@@ -13,25 +11,32 @@
 <div id="layer-inferface-background"></div>
 <div id="layer-interface">
     <main>
-        <h1>@Model.System.SystemName System</h1>
-        <p><a asp-controller="galaxy"
-        asp-action="index"
-        asp-route-id="@Model.System.SystemGalaxy.GalaxyId">Zurück</a> zur Galaxie</p>
+        <h1>@Model.Name System</h1>
+        <p><a asp-controller="Galaxy" asp-action="Index" asp-route-id="@Model.GalaxyId">Zurück</a> zur @Model.GalaxyName Galaxie</p>
         <h2>Planeten in diesem System:</h2>
-        <form asp-action="GoPlanet" method="post">
-            <div class="location-selection">
-                <button type="button" class="location-selection__prev" data-for="planet">&lt;</button>
-                <div class="select-wrapper">
-                    <select id="planet" name="planet">
-                        @foreach (Planet planet in Model.System.Planet)
-                        {
-                            <option value="@planet.PlanetId">@planet.PlanetName @(Model.UserPlanets.Any(p => p.PlanetId == planet.PlanetId) ? " *" : "")</option>
-                        }
-                    </select>
-                </div>
-                <button type="button" class="location-selection__next" data-for="planet">&gt;</button>
-                <button style="width:auto" class="button-link">GO</button>
-            </div>
-        </form>
+        @{
+            List<MapEntry> ownPlanets = Model.Planets.Where(planet => planet.ContainsOwnPlanet).ToList();
+        }
+        @if (ownPlanets.Count == 0)
+        {
+            <p>In diesem System besitzt du keinen Planeten.</p>
+        }
+        else
+        {
+            <p>Deine Planeten in diesem System:</p>
+            <ul>
+                @foreach (MapEntry planet in ownPlanets)
+                {
+                    <li><a asp-controller="Planet" asp-action="Index" asp-route-id="@planet.Id">@planet.Name</a></li>
+                }
+            </ul>
+        }
+        <p>Alle Planeten (eigene mit * markiert):</p>
+        <ul>
+            @foreach (MapEntry planet in Model.Planets)
+            {
+                <li>@planet.Name@(planet.ContainsOwnPlanet ? " *" : "")</li>
+            }
+        </ul>
     </main>
 </div>

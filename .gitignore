@@ -1,0 +1,17 @@
+# Build output and IDE state
+**/bin/
+**/obj/
+**/.vs/
+# VS Code: personal state is ignored, the shared debug configurations (F5) and build tasks are checked in.
+**/.vscode/*
+!/.vscode/launch.json
+!/.vscode/tasks.json
+*.user
+
+# Machine-specific configuration containing secrets such as connection strings and passwords.
+# Create it by copying appsettings.Local.json.template (checked in) and filling in your values.
+#
+# RULE: every ignored file that a program needs must have a checked-in copy template named
+# "<original file name>.template" (secrets removed, every setting explained). Templates are never ignored.
+appsettings.Local.json
+!*.template

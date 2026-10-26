@@ -1,0 +1,24 @@
+{
+    // Build tasks for VS Code. Used by the debug configurations in launch.json (preLaunchTask) and by
+    // "Terminal > Run Build Task" (Ctrl+Shift+B). Checked in, so every machine can debug without extra setup.
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // Builds the whole solution, so the web application and the tools always run with current modules.
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Galaxxis.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

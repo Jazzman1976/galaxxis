@@ -1,0 +1,57 @@
+@using Galaxxis.Application.Players
+@model IReadOnlyList<UniverseEntry>
+@{
+    Layout = "_Game";
+    ViewBag.Title = "Universen";
+    ViewBag.Description = "Wähle ein Universum";
+}
+
+<div id="layer-background" class="layer-background-universe"></div>
+<div id="layer-foreground"></div>
+<div id="layer-inferface-background"></div>
+<div id="layer-interface">
+    <header>
+        <h1>Universen</h1>
+        <p>
+            In jedem Universum spielst du mit einer eigenen Rasse und eigenen Planeten.
+            Beim ersten Betreten wählst du deine Rasse und erhältst einen zufälligen freien Heimatplaneten.
+        </p>
+    </header>
+    <main>
+        @if (Model.Count == 0)
+        {
+            <p class="message">Es gibt noch kein Universum. Ein Administrator muss zuerst eines erzeugen.</p>
+        }
+        else
+        {
+            <table class="info-table">
+                <tr>
+                    <th>Universum</th>
+                    <th>Status</th>
+                    <th>Deine Rasse</th>
+                    <th>Deine Planeten</th>
+                    <th></th>
+                </tr>
+                @foreach (UniverseEntry universe in Model)
+                {
+                    <tr>
+                        <td>@universe.Name</td>
+                        <td>@(universe.IsPaused ? "pausiert" : "läuft")</td>
+                        <td>@(universe.Race is Race race ? GameTexts.Name(race) : "-")</td>
+                        <td>@universe.PlanetCount</td>
+                        <td>
+                            @if (universe.HasJoined)
+                            {
+                                <a class="button-link" asp-controller="Universe" asp-action="Index" asp-route-id="@universe.UniverseId">Betreten</a>
+                            }
+                            else
+                            {
+                                <a class="button-link" asp-controller="Universe" asp-action="Join" asp-route-id="@universe.UniverseId">Beitreten</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </main>
+</div>

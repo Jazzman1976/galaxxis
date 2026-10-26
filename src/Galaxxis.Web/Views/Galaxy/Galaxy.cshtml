@@ -1,35 +1,34 @@
-﻿@using Galaxxis.Data.Models
-
-@model GalaxyViewModel
-
+@using Galaxxis.Application.Map
+@model GalaxyMapView
 @{
-    Layout = "~/Views/Shared/_Game.cshtml";
-    ViewBag.Title = "Galaxy";
-    ViewBag.Description = "Select a system you want to go";
+    Layout = "_Game";
+    ViewBag.Title = "Galaxie";
+    ViewBag.Description = "Wähle ein Sternensystem";
 }
 
 <div id="layer-background" class="layer-background-galaxy"></div>
 <div id="layer-foreground"></div>
 <div id="layer-inferface-background"></div>
-<div id="layer-interface">      
-    <main>      
-        <h1>@Model.Galaxy.GalaxyName Galaxie</h1>
-        <p><a href="/universe">Zurück</a> zum @Model.Galaxy.GalaxyUniverse.UniverseName Universum</p>
+<div id="layer-interface">
+    <main>
+        <h1>@Model.Name Galaxie</h1>
+        <p><a asp-controller="Universe" asp-action="Index" asp-route-id="@Model.UniverseId">Zurück</a> zum @Model.UniverseName Universum</p>
         <h2>Systeme in dieser Galaxie:</h2>
-        <form asp-action="GoSystem" method="post">
+        <p>Systeme mit eigenen Planeten sind mit * markiert.</p>
+        <form asp-controller="GalaxxisSystem" asp-action="Index" method="get">
             <div class="location-selection">
                 <button type="button" class="location-selection__prev" data-for="system">&lt;</button>
                 <div class="select-wrapper">
-                    <select id="system" name="system">
-                        @foreach(System system in Model.Galaxy.System)
+                    <select id="system" name="id">
+                        @foreach (MapEntry system in Model.StarSystems)
                         {
-                            <option value="@system.SystemId">@system.SystemName @(Model.UserSystems.Any(s => s.SystemId == system.SystemId) ? " *" : "")</option>
+                            <option value="@system.Id">@system.Name@(system.ContainsOwnPlanet ? " *" : "")</option>
                         }
                     </select>
                 </div>
                 <button type="button" class="location-selection__next" data-for="system">&gt;</button>
-                <button style="width:auto" class="button-link">GO</button>
+                <button type="submit" style="width:auto" class="button-link">GO</button>
             </div>
         </form>
-    </main>    
+    </main>
 </div>

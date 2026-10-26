@@ -9,10 +9,10 @@
 | `Galaxxis.Web.Tests` | The web application over HTTP (in-memory server, engine disabled): sign-in, lockout, joining, commands, ownership (404), admin role, antiforgery, error pages | SQL Server LocalDB |
 | `Galaxxis.Architecture.Tests` | Module dependency rules, configuration template | No |
 
-Run all tests:
+Run all tests (in the repository root, which holds `Galaxxis.slnx`):
 
 ```
-dotnet test --solution src/Galaxxis.sln
+dotnet test
 ```
 
 The tests use xUnit v3 on Microsoft.Testing.Platform (configured in `global.json`).

@@ -7,6 +7,11 @@
 !/.vscode/launch.json
 !/.vscode/tasks.json
 *.user
+*.log
+
+# Front-end packages (npm install) and generated bundles.
+**/node_modules/
+**/wwwroot/dist/
 
 # Machine-specific configuration containing secrets such as connection strings and passwords.
 # Create it by copying appsettings.Local.json.template (checked in) and filling in your values.
@@ -15,3 +20,6 @@
 # "<original file name>.template" (secrets removed, every setting explained). Templates are never ignored.
 appsettings.Local.json
 !*.template
+
+# Test results written by the test runner (dotnet test) next to the solution.
+TestResults/

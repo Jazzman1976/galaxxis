@@ -27,7 +27,7 @@ Full approved plan: `docs/plans/FOUNDATION-REFACTORING-PLAN.md`. Open work after
 Findings that motivated it (with done status): `docs/audits/AUDIT-2026-09-16.md`. Acceptance results
 (load test, failure drills): `docs/audits/ACCEPTANCE-2026-10-26.md`.
 
-## Solution layout (`src/Galaxxis.sln`)
+## Solution layout (`Galaxxis.slnx` in the repository root)
 
 All projects target `net10.0`.
 
@@ -47,15 +47,15 @@ All projects target `net10.0`.
 | `tests/Galaxxis.Web.Tests` | Web application over HTTP (in-memory server): sign-in, join, commands, ownership, admin role, antiforgery | |
 | `tests/Galaxxis.Architecture.Tests` | Enforces the "May use" column | |
 
-Not part of the build: `src/Dummy` (old static HTML/Vue prototype, reference only),
-`src/DebugWebRoot` (empty root folder for a local IIS site), `docs/` (concept, plans, audits, TODO; see below).
+Not part of the build: `src/DebugWebRoot` (empty root folder for a local IIS site), `docs/` (concept, plans, audits,
+TODO, and `docs/archive/dummy-prototype`, the old static HTML/Vue prototype kept for reference; see below).
 
 ## Build, test, configure
 
 ```
 dotnet tool restore                              # once: installs dotnet-ef from dotnet-tools.json
-dotnet build src/Galaxxis.sln
-dotnet test --solution src/Galaxxis.sln          # xUnit v3 on Microsoft.Testing.Platform (global.json); needs LocalDB
+dotnet build                                     # in the repository root: builds Galaxxis.slnx
+dotnet test                                      # xUnit v3 on Microsoft.Testing.Platform (global.json); needs LocalDB
 dotnet run --project src/Galaxxis.Tools.UniverseGenerator -- help
 dotnet run --project src/Galaxxis.Web            # the game, https://localhost:5001
 cd src/Galaxxis.Web && npx gulp all              # only after changing SCSS/JS sources (compiled files are checked in)

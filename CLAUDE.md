@@ -4,7 +4,7 @@ Browser-based space strategy game (OGame-style): players own planets, upgrade bu
 produce ships/defense and act against other players. ASP.NET Core MVC on .NET 10, server-rendered Razor with a
 few scripts. Single developer hobby project, target ~1000 concurrent players, later on Azure.
 
-## Status: foundation refactoring done (branch `feature/stable-foundation`)
+## Status: foundation refactoring done (released as 0.1.0)
 
 The base architecture was rebuilt in six steps and accepted on 2026-10-26. All code follows "Rules for new code" below.
 The legacy projects (`Galaxxis.Core`, `Galaxxis.Data`, the old Home page) were removed in step 5; the git history

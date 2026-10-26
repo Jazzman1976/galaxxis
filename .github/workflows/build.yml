@@ -1,0 +1,68 @@
+# Build and test Galaxxis on every push to master/develop and on every pull request.
+#
+# The tests need a real SQL Server (migrations, constraints, application locks). LocalDB exists only on Windows, so
+# the job starts SQL Server 2022 as a Linux container next to the runner and points the tests at it through
+# GALAXXIS_TEST_SQLSERVER (see tests/README.md, "Database tests").
+#
+# The SA password is not a secret: the container lives only for this job and is reachable only from the runner.
+# It is derived from the run id, so no password is written into the repository.
+name: Build
+
+on:
+  push:
+    branches: [master, develop]
+  pull_request:
+  workflow_dispatch:
+
+# A newer push to the same branch or pull request cancels the run that is still going.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          ACCEPT_EULA: "Y"
+          MSSQL_SA_PASSWORD: Ci-${{ github.run_id }}-Sql!
+        ports:
+          - 1433:1433
+        # The job waits until SQL Server accepts logins before the first step runs.
+        options: >-
+          --health-cmd "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P $MSSQL_SA_PASSWORD -Q 'SELECT 1' -b -o /dev/null"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 12
+          --health-start-period 20s
+
+    env:
+      GALAXXIS_TEST_SQLSERVER: Server=localhost,1433;User Id=sa;Password=Ci-${{ github.run_id }}-Sql!;TrustServerCertificate=True
+      DOTNET_NOLOGO: "true"
+      DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+
+    steps:
+      - uses: actions/checkout@v5
+
+      # The SDK version comes from global.json, like on a developer machine.
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore
+
+      # Warnings are part of the result: nullable warnings are errors (Directory.Build.props).
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test --no-build --configuration Release

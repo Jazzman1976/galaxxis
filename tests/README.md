@@ -21,8 +21,11 @@ The tests use xUnit v3 on Microsoft.Testing.Platform (configured in `global.json
 
 `Shared/TestDatabases.cs` (linked into each database test project) creates a fresh pair of databases with the
 real migrations per test class and deletes them afterwards. It uses SQL Server LocalDB, which comes with
-Visual Studio. To use another SQL Server with Windows authentication, set the environment variable
-`GALAXXIS_TEST_SQLSERVER` to its server name, for example `GALAXXIS_TEST_SQLSERVER=localhost\SQLEXPRESS`.
+Visual Studio. To use another SQL Server, set the environment variable
+`GALAXXIS_TEST_SQLSERVER` to its server name, for example `GALAXXIS_TEST_SQLSERVER=localhost\SQLEXPRESS`
+(Windows authentication), or to a connection string without database for SQL authentication, for example
+`Server=localhost,1433;User Id=sa;Password=...;TrustServerCertificate=True`. The GitHub Actions build
+(`.github/workflows/build.yml`) does the latter with a SQL Server container on Linux.
 
 Tests in one class share the databases, so each test works with the data it created itself (for example by id)
 instead of counting everything in a table.

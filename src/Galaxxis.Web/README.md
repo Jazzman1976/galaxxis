@@ -21,8 +21,9 @@ dotnet run --project src/Galaxxis.Web        # https://localhost:5001
 ```
 
 Needs `appsettings.Local.json` in the repository root (copy of `appsettings.Local.json.template`). With
-`Persistence:ApplyMigrationsOnStartup = true` both databases are created on the first start. A universe and the
-admin account come from the generator tool (see the root `CLAUDE.md`, "Fresh installation").
+`Persistence:ApplyMigrationsOnStartup = true` both databases are created on the first start. The admin account comes
+from the generator tool (`bootstrap-admin`, deliberately not a web page); universes are generated and started either
+with the generator tool or on the admin page `/admin` (see the root `CLAUDE.md`, "Fresh installation").
 
 ## Game flow
 
@@ -34,7 +35,7 @@ Start (introduction / universe list)
          └─ Planet/Index/{planetId}                     resources, buildings, running constructions
              └─ Building/Index/{planetId}?type=OreMine  one page for all 7 resource buildings:
                                                         upgrade, production speed (10 % steps)
-Admin (role "Admin")                                    universes: pause / resume
+Admin (role "Admin")                                    universes: generate, start / pause
 /health                                                 engine state for monitoring
 ```
 
@@ -86,6 +87,8 @@ npx gulp all         # or "npx gulp" to rebuild on every change
 | `ConnectionStrings:Game`, `ConnectionStrings:Accounts` | The two databases (from `appsettings.Local.json` or environment variables) |
 | `Persistence:ApplyMigrationsOnStartup` | Create/migrate the databases on start (development) |
 | `Engine:Enabled`, `Engine:PollInterval` | Event processing in this host (see `src/Galaxxis.Engine/README.md`) |
+| `Logging:LogLevel:Galaxxis.Engine.TickLog` | `Debug` shows the engine's tick log (set in `appsettings.Development.json`, see `src/Galaxxis.Engine/README.md`) |
+| `UniverseGeneration` | Defaults of the "generate universe" form on the admin page (same keys as in the generator tool) |
 
 ## IIS
 

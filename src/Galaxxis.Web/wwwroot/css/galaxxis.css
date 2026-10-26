@@ -53,3 +53,34 @@ th, td {
 .gx-h1, .gx-h2 { 
     color: darkviolet;
 }
+
+/* Confirmation after an admin action, and the validation summary of admin forms. */
+.gx-message {
+    border: 1px solid white;
+    padding: 0.5rem 1rem;
+}
+.gx-message--error {
+    border-color: orangered;
+}
+/* The validation summary renders an empty, "valid" element when there are no errors: hide it. */
+.gx-message.validation-summary-valid {
+    display: none;
+}
+
+/* Admin forms: one label and input per row. */
+.gx-form {
+    max-width: 40rem;
+}
+.gx-form__row {
+    display: grid;
+    grid-template-columns: 16rem 1fr;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+.gx-form__row input:not([type="checkbox"]) {
+    font: inherit;
+}
+.input-validation-error {
+    border: 2px solid orangered;
+}

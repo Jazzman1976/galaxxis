@@ -2,7 +2,10 @@
 **/bin/
 **/obj/
 **/.vs/
-**/.vscode/
+# VS Code: personal state is ignored, the shared debug configurations (F5) and build tasks are checked in.
+**/.vscode/*
+!/.vscode/launch.json
+!/.vscode/tasks.json
 *.user
 
 # Machine-specific configuration containing secrets such as connection strings and passwords.

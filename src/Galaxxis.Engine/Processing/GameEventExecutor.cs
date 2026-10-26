@@ -32,6 +32,7 @@ internal sealed class GameEventExecutor(
     IDbContextFactory<GameDbContext> contextFactory,
     IServiceScopeFactory scopeFactory,
     TimeProvider timeProvider,
+    EngineTickLog tickLog,
     ILogger<GameEventExecutor> logger)
 {
     /// <summary>Processes one event.</summary>
@@ -82,6 +83,10 @@ internal sealed class GameEventExecutor(
         Universe universe = await database.Universes.SingleAsync(u => u.Id == gameEvent.UniverseId, cancellationToken);
         DateTimeOffset now = timeProvider.GetUtcNow();
 
+        // Remembered for the tick log: accepting moves a scheduled event to its completion tick.
+        GameEventState previousState = gameEvent.State;
+        long handledAtTick = gameEvent.ProcessAtTick;
+
         IGameEventHandler? handler = GameEventHandlers.Find(services.GetServices<IGameEventHandler>(), gameEvent.Type);
         if (handler is null)
         {
@@ -93,19 +98,18 @@ internal sealed class GameEventExecutor(
         }
         else
         {
-            await handler.CompleteAsync(new GameEventContext(database, gameEvent, universe, now), cancellationToken);
+            await handler.CompleteAsync(new GameEventContext(database, gameEvent, universe, now, tickLog), cancellationToken);
             Finish(gameEvent, GameEventState.Done, error: null, now);
         }
 
         await database.SaveChangesAsync(cancellationToken);
         await transaction.CommitAsync(cancellationToken);
 
-        logger.LogDebug(
-            "Game event {EventId} ({Type}) at tick {Tick}: {State}.",
-            gameEvent.Id, gameEvent.Type, gameEvent.ProcessAtTick, gameEvent.State);
+        // Written only after the commit, so the log never shows an outcome that was rolled back.
+        tickLog.EventHandled(gameEvent, previousState, handledAtTick);
     }
 
-    private static async Task AcceptAsync(
+    private async Task AcceptAsync(
         GameDbContext database,
         IGameEventHandler handler,
         GameEvent gameEvent,
@@ -132,7 +136,7 @@ internal sealed class GameEventExecutor(
             }
         }
 
-        AcceptResult result = await handler.AcceptAsync(new GameEventContext(database, gameEvent, universe, now), cancellationToken);
+        AcceptResult result = await handler.AcceptAsync(new GameEventContext(database, gameEvent, universe, now, tickLog), cancellationToken);
 
         switch (result.Outcome)
         {
@@ -165,8 +169,10 @@ internal sealed class GameEventExecutor(
             GameEvent? gameEvent = await database.GameEvents.SingleOrDefaultAsync(e => e.Id == eventId, token);
             if (gameEvent is not null)
             {
+                GameEventState previousState = gameEvent.State;
                 Finish(gameEvent, state, error, timeProvider.GetUtcNow());
                 await database.SaveChangesAsync(token);
+                tickLog.EventHandled(gameEvent, previousState, gameEvent.ProcessAtTick);
             }
         }, cancellationToken);
     }

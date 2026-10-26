@@ -163,6 +163,63 @@ public class WebApplicationTests(WebTestServer server) : IClassFixture<WebTestSe
     }
 
     [Fact]
+    public async Task Admins_generate_and_start_a_universe_on_the_admin_page()
+    {
+        string adminName = "admin" + Guid.NewGuid().ToString("N")[..8];
+        await server.CreateAdminAsync(adminName, Browser.Password);
+        using Browser admin = server.OpenBrowser();
+        await admin.LoginAsync(adminName, Browser.Password);
+
+        string universeName = "Web" + Guid.NewGuid().ToString("N")[..8];
+        Dictionary<string, string> form = new()
+        {
+            ["Generate.Name"] = universeName,
+            ["Generate.Seed"] = "42",
+            ["Generate.GalaxyCount"] = "1",
+            ["Generate.StarSystemsPerGalaxy"] = "2",
+            ["Generate.PlanetsPerStarSystem"] = "3",
+            ["Generate.TickLength"] = "00:00:00.500",
+            ["Generate.StartImmediately"] = "true",
+        };
+
+        // Invalid values are shown on the page and generate nothing.
+        HttpResponseMessage refused = await admin.PostFormAsync("/admin/generate", "/admin",
+            new Dictionary<string, string>(form) { ["Generate.TickLength"] = "eine Sekunde" });
+        Assert.Equal(HttpStatusCode.OK, refused.StatusCode);
+        Assert.Contains("Ticklänge", await refused.Content.ReadAsStringAsync(Cancellation));
+
+        HttpResponseMessage created = await admin.PostFormAsync("/admin/generate", "/admin", form);
+        Assert.Equal(HttpStatusCode.Redirect, created.StatusCode);
+        Assert.Contains(universeName, await admin.GetPageAsync("/admin"));
+
+        await using AsyncServiceScope scope = server.Application.Services.CreateAsyncScope();
+        IReadOnlyList<UniverseSummary> universes = await scope.ServiceProvider.GetRequiredService<IUniverseAdminService>().ListAsync(Cancellation);
+        UniverseSummary universe = Assert.Single(universes, u => u.Name == universeName);
+        Assert.Equal(6, universe.PlanetCount);
+        Assert.Equal(42, universe.Seed);
+        Assert.Equal(TimeSpan.FromMilliseconds(500), universe.TickLength);
+        Assert.False(universe.IsPaused);
+    }
+
+    [Fact]
+    public async Task Players_cannot_generate_universes()
+    {
+        using Browser player = server.OpenBrowser();
+        await player.RegisterAsync();
+
+        HttpResponseMessage response = await player.PostFormAsync("/admin/generate", "/", new Dictionary<string, string>
+        {
+            ["Generate.GalaxyCount"] = "1",
+            ["Generate.StarSystemsPerGalaxy"] = "1",
+            ["Generate.PlanetsPerStarSystem"] = "1",
+            ["Generate.TickLength"] = "00:00:01",
+        });
+
+        Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+        Assert.Contains("/account/accessdenied", response.Headers.Location!.OriginalString);
+    }
+
+    [Fact]
     public async Task Repeated_wrong_passwords_lock_the_account()
     {
         using Browser owner = server.OpenBrowser();

@@ -42,6 +42,7 @@ public static class EngineModule
         AddBuiltInHandlers(services);
         services.AddHostedService<GameEventHandlerRegistrationCheck>();
 
+        services.AddSingleton<EngineTickLog>();
         services.AddSingleton<GameEventExecutor>();
         services.AddSingleton<UniverseEventProcessor>();
         services.AddSingleton<EngineStatus>();

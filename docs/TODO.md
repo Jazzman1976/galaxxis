@@ -50,4 +50,5 @@ Kleinere Punkte der Oberfläche:
 
 ## 6. Admin-Oberfläche für Universen
 
-- [ ] Universen im Web generieren, prüfen und freigeben (nutzt `IUniverseAdminService`)
+- [x] Universen im Web generieren, starten und pausieren (`/admin`, nutzt `IUniverseAdminService`)
+- [ ] Ein pausiertes Universum vor der Freigabe ansehen (Karte ohne Beitritt)

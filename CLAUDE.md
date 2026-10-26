@@ -60,10 +60,15 @@ dotnet run --project src/Galaxxis.Web            # the game, https://localhost:5
 cd src/Galaxxis.Web && npx gulp all              # only after changing SCSS/JS sources (compiled files are checked in)
 ```
 
+**VS Code debugging:** `.vscode/launch.json` and `tasks.json` are checked in (the rest of `.vscode/` is ignored).
+F5 configurations: `Galaxxis.Web` (logs in the Debug Console, opens the browser), `UniverseGenerator: Befehl`
+(e.g. `bootstrap-admin`) and `UniverseGenerator: interaktives Menü` (integrated terminal). Needs the extensions
+C# Dev Kit and C#.
+
 **Fresh installation:** copy `appsettings.Local.json.template` to `appsettings.Local.json` and set
 the admin password → `UniverseGenerator -- bootstrap-admin` (creates both databases via migrations on first run)
 → `UniverseGenerator -- generate` → `UniverseGenerator -- resume <id>` → start `Galaxxis.Web`, register, enter the
-universe. Sign in with the bootstrap admin to reach `/admin`. Schema changes and migration commands:
+universe. Sign in with the bootstrap admin to reach `/admin`, where universes can also be generated, started and paused. Schema changes and migration commands:
 `src/Galaxxis.Persistence/README.md`.
 
 - `global.json` pins the .NET 10 SDK and the test runner.

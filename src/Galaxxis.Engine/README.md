@@ -84,6 +84,27 @@ Azure), a new host only needs these two calls. A host that must not process even
 | `Engine:Enabled` | Whether this host processes events (default `true`). `false` for additional web instances that only serve players, and for web tests. Several enabled instances are safe: only one processes a universe at a time. |
 | `Engine:PollInterval` | How often the engine looks for due events (100 ms to 1 min, default 1 s). Does not affect game time. |
 | `Engine:MaxEventsPerUniversePerCycle` | Events per universe per wake-up before moving on to the next universe (default 1000). |
+| `Logging:LogLevel:Galaxxis.Engine.TickLog` | `Debug` switches the tick log on (see below). The web application does this in `appsettings.Development.json`. |
+
+## Tick log (watching the engine work)
+
+`Processing/EngineTickLog` writes a running protocol at `Debug` level under its own logging category
+`Galaxxis.Engine.TickLog`, so it costs nothing when switched off (production):
+
+```
+12:00:01.004 dbug: Galaxxis.Engine.TickLog[0] === Universe 1 "Andromeda" | tick 1234 ===
+12:00:01.012 dbug: Galaxxis.Engine.TickLog[0]       planet 12 "Kepler" settled ticks 1100-1234 | stock Ore=5230, Energy=812, ...
+12:00:01.020 dbug: Galaxxis.Engine.TickLog[0]     tick 1234 | event #17 BuildBuilding | player 3, planet 12 | Requested -> Scheduled | completes at tick 1259 | {"building":"OreMine"}
+```
+
+- **Tick line**: once per new tick of every running universe this instance processes. When the engine wakes up less
+  often than ticks pass, the line shows a range (`ticks 1231-1234`); the events of those ticks are still processed,
+  each at its own tick.
+- **Event line**: every handled event with its state change and the completion tick, rejection reason or error.
+  Written after the commit, so it never shows a rolled-back outcome.
+- **Settled line**: every planet a handler loads, with its stock at the event's tick. It appears before the line of the
+  event that loaded it. There is no production step per tick: resources are settled only when an event needs the
+  planet, so production becomes visible here.
 
 ## Health check `engine`
 

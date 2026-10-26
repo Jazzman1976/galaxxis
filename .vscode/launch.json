@@ -1,0 +1,79 @@
+{
+    // Debug configurations for VS Code. Requires the extensions "C# Dev Kit" (ms-dotnettools.csdevkit) and "C#"
+    // (ms-dotnettools.csharp), which bring the .NET debugger ("coreclr").
+    //
+    // Start: Run and Debug view (Ctrl+Shift+D), pick a configuration, F5. Log output appears in the Debug Console
+    // (Ctrl+Shift+Y); breakpoints work in all modules. Every configuration builds the solution first (tasks.json).
+    // Settings come from appsettings.Local.json in the repository root, which the build copies next to each program.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // The browser game with the engine inside. Opens https://localhost:5001 in the default browser once the
+            // server listens. Stop any other running instance first: the port and the build output would be in use.
+            "name": "Galaxxis.Web",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Galaxxis.Web/bin/Debug/net10.0/Galaxxis.Web.dll",
+            // The project folder is the content root: static files (wwwroot) are served from there.
+            "cwd": "${workspaceFolder}/src/Galaxxis.Web",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000"
+            },
+            // Log output goes to the Debug Console.
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            // Keep the Debug Console readable: no line for every loaded assembly.
+            "logging": {
+                "moduleLoad": false
+            }
+        },
+        {
+            // The universe generator with one command, e.g. "bootstrap-admin" to create the first admin account.
+            // Output appears in the Debug Console.
+            "name": "UniverseGenerator: Befehl",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Galaxxis.Tools.UniverseGenerator/bin/Debug/net10.0/Galaxxis.Tools.UniverseGenerator.dll",
+            "args": ["${input:generatorCommand}"],
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "logging": {
+                "moduleLoad": false
+            }
+        },
+        {
+            // The interactive menu of the universe generator. It reads keyboard input, which the Debug Console cannot
+            // provide, so it runs in the integrated terminal.
+            "name": "UniverseGenerator: interaktives Menü",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Galaxxis.Tools.UniverseGenerator/bin/Debug/net10.0/Galaxxis.Tools.UniverseGenerator.dll",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "logging": {
+                "moduleLoad": false
+            }
+        }
+    ],
+    "inputs": [
+        {
+            // Commands without further arguments. Generating, starting and pausing universes is easier on the admin
+            // page of the web application or in the interactive menu.
+            "id": "generatorCommand",
+            "type": "pickString",
+            "description": "Befehl des Universe Generators",
+            "options": ["bootstrap-admin", "list", "help"],
+            "default": "bootstrap-admin"
+        }
+    ]
+}

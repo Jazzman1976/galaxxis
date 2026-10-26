@@ -1,3 +1,4 @@
+using Galaxxis.Engine.Processing;
 using Galaxxis.Persistence.Game;
 using Galaxxis.Persistence.Game.Entities;
 using Galaxxis.Persistence.Game.Events;
@@ -15,13 +16,17 @@ namespace Galaxxis.Engine.Handlers;
 /// </remarks>
 public sealed class GameEventContext
 {
+    private readonly EngineTickLog _tickLog;
+
     /// <summary>Creates the context. Only the engine does this.</summary>
     /// <param name="database">The database context of the event's transaction.</param>
     /// <param name="gameEvent">The event being handled (tracked).</param>
     /// <param name="universe">The universe of the event (tracked).</param>
     /// <param name="now">The real time the engine uses for this event.</param>
-    internal GameEventContext(GameDbContext database, GameEvent gameEvent, Universe universe, DateTimeOffset now)
+    /// <param name="tickLog">The tick log, which shows the stock of every planet the handler loads.</param>
+    internal GameEventContext(GameDbContext database, GameEvent gameEvent, Universe universe, DateTimeOffset now, EngineTickLog tickLog)
     {
+        _tickLog = tickLog;
         Database = database;
         Event = gameEvent;
         Universe = universe;
@@ -87,7 +92,13 @@ public sealed class GameEventContext
             .Include(p => p.Owner)
             .SingleOrDefaultAsync(p => p.Id == planetId && p.UniverseId == Universe.Id, cancellationToken);
 
-        planet?.SettleResourcesTo(Tick, Universe.Timeline);
+        if (planet is not null)
+        {
+            long previousSettledTick = planet.ResourcesSettledTick;
+            planet.SettleResourcesTo(Tick, Universe.Timeline);
+            _tickLog.PlanetSettled(planet, previousSettledTick);
+        }
+
         return planet;
     }
 

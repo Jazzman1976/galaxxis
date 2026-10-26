@@ -6,7 +6,7 @@ namespace Galaxxis.Application.Universes;
 /// Administrative operations on universes: generating new ones, listing them, pausing and resuming.
 /// </summary>
 /// <remarks>
-/// Used by the universe generator tool today and by an admin web page later. Callers must make sure only
+/// Used by the universe generator tool and the admin page of the web application. Callers must make sure only
 /// administrators reach these operations; the service itself does not check permissions.
 /// </remarks>
 public interface IUniverseAdminService

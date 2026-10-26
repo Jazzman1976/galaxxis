@@ -7,7 +7,7 @@ namespace Galaxxis.Application.Universes;
 /// Default values for generating a universe, bound from the configuration section <c>UniverseGeneration</c>.
 /// </summary>
 /// <remarks>
-/// The universe generator tool (and later an admin page) starts from these defaults and lets the
+/// The universe generator tool and the admin page of the web application start from these defaults and let the
 /// administrator override single values.
 /// </remarks>
 public sealed class UniverseGenerationOptions

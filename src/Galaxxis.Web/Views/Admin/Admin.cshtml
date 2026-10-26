@@ -1,18 +1,21 @@
 @using Galaxxis.Application.Universes
-@model IReadOnlyList<UniverseSummary>
+@using Galaxxis.Web.Views.Admin
+@model AdminViewModel
 @{
     Layout = "_Layout";
     ViewBag.Title = "Admin";
 }
 
+@if (TempData[AdminController.MessageKey] is string message)
+{
+    <p class="gx-message">@message</p>
+}
+
 <h3>Universen</h3>
 
-@if (Model.Count == 0)
+@if (Model.Universes.Count == 0)
 {
-    <p>
-        Es gibt noch kein Universum. Erzeugen mit:
-        <code>dotnet run --project src/Galaxxis.Tools.UniverseGenerator -- generate</code>
-    </p>
+    <p>Es gibt noch kein Universum. Erzeuge unten das erste.</p>
 }
 else
 {
@@ -28,7 +31,7 @@ else
             <th>Erzeugt</th>
             <th></th>
         </tr>
-        @foreach (UniverseSummary universe in Model)
+        @foreach (UniverseSummary universe in Model.Universes)
         {
             <tr>
                 <td>@universe.Id</td>
@@ -43,7 +46,7 @@ else
                     @if (universe.IsPaused)
                     {
                         <form method="post" asp-action="Resume" asp-route-id="@universe.Id">
-                            <button type="submit">Fortsetzen</button>
+                            <button type="submit">Starten</button>
                         </form>
                     }
                     else
@@ -57,5 +60,56 @@ else
         }
     </table>
 }
+
+<h3>Neues Universum erzeugen</h3>
+
+<p>
+    Leere Felder bei Name und Seed werden zufällig gewählt. Die Vorgaben stammen aus der Konfiguration
+    (<code>UniverseGeneration</code>); dort stehen auch Koordinatenbereich, Mindestabstand und Mond-Wahrscheinlichkeiten.
+    Ein neues Universum ist pausiert, bis es gestartet wird.
+</p>
+
+<form class="gx-form" method="post" asp-action="Generate">
+    <div asp-validation-summary="All" class="gx-message gx-message--error"></div>
+
+    <label class="gx-form__row">
+        <span>Name</span>
+        <input asp-for="Generate.Name" placeholder="zufällig" />
+    </label>
+    <label class="gx-form__row">
+        <span>Seed</span>
+        <input asp-for="Generate.Seed" placeholder="zufällig" />
+    </label>
+    <label class="gx-form__row">
+        <span>Galaxien</span>
+        <input asp-for="Generate.GalaxyCount" min="1" max="100" />
+    </label>
+    <label class="gx-form__row">
+        <span>Sternensysteme pro Galaxie</span>
+        <input asp-for="Generate.StarSystemsPerGalaxy" min="1" max="100" />
+    </label>
+    <label class="gx-form__row">
+        <span>Planeten pro Sternensystem</span>
+        <input asp-for="Generate.PlanetsPerStarSystem" min="1" max="100" />
+    </label>
+    <label class="gx-form__row">
+        <span>Ticklänge (hh:mm:ss)</span>
+        <input asp-for="Generate.TickLength" placeholder="00:00:01" />
+    </label>
+    <label class="gx-form__row">
+        <span>Sofort starten</span>
+        <input asp-for="Generate.StartImmediately" />
+    </label>
+    <div class="gx-form__row">
+        <span></span>
+        <button type="submit">Erzeugen</button>
+    </div>
+</form>
+
+<p>
+    Höchstens @GenerateUniverseViewModel.MaximumPlanets.ToString("N0") Planeten; größere Universen mit
+    <code>dotnet run --project src/Galaxxis.Tools.UniverseGenerator -- generate</code>.
+    Das Erzeugen kann bei großen Karten einige Sekunden dauern.
+</p>
 
 <p>Zustand der Engine: <a href="/health">/health</a></p>

@@ -1,3 +1,4 @@
+using Galaxxis.Domain.Universes;
 using Galaxxis.Engine.Configuration;
 using Galaxxis.Persistence.Configuration;
 using Galaxxis.Persistence.Game;
@@ -22,29 +23,38 @@ internal sealed class EngineCycle(
     IOptions<EngineOptions> engineOptions,
     IOptions<DatabaseConnectionOptions> connectionOptions,
     TimeProvider timeProvider,
+    EngineTickLog tickLog,
     ILogger<EngineCycle> logger) : IAsyncDisposable
 {
     // The leases this instance holds, by universe id. Only the single engine loop uses this dictionary.
     private readonly Dictionary<int, UniverseLease> _leases = [];
+
+    // For the tick log: the last tick written per universe, so every tick line appears once. Only the engine loop uses it.
+    private readonly Dictionary<int, long> _lastLoggedTicks = [];
 
     /// <summary>Runs one cycle over all running universes.</summary>
     /// <param name="cancellationToken">Signals shutdown.</param>
     /// <returns>A task that completes when the cycle is done.</returns>
     public async Task RunOnceAsync(CancellationToken cancellationToken)
     {
-        List<int> runningUniverseIds = await RunningUniverseIdsAsync(cancellationToken);
+        List<RunningUniverse> runningUniverses = await RunningUniversesAsync(cancellationToken);
+        List<int> runningUniverseIds = runningUniverses.Select(universe => universe.Id).ToList();
         await ReleaseLeasesExceptAsync(runningUniverseIds);
 
         int processedEvents = 0;
         List<int> backloggedUniverses = [];
 
-        foreach (int universeId in runningUniverseIds)
+        foreach (RunningUniverse universe in runningUniverses)
         {
+            int universeId = universe.Id;
             if (!await EnsureLeaseAsync(universeId, cancellationToken))
             {
                 // Another instance processes this universe; this instance is its standby.
+                _lastLoggedTicks.Remove(universeId);
                 continue;
             }
+
+            LogTickReached(universe);
 
             UniverseProcessingResult result = await processor.ProcessDueEventsAsync(
                 universeId, engineOptions.Value.MaxEventsPerUniversePerCycle, cancellationToken);
@@ -70,14 +80,46 @@ internal sealed class EngineCycle(
     /// <returns>A task that completes when all leases are released.</returns>
     public async ValueTask DisposeAsync() => await ReleaseLeasesExceptAsync([]);
 
-    private async Task<List<int>> RunningUniverseIdsAsync(CancellationToken cancellationToken)
+    private async Task<List<RunningUniverse>> RunningUniversesAsync(CancellationToken cancellationToken)
     {
         await using GameDbContext database = await contextFactory.CreateDbContextAsync(cancellationToken);
-        return await database.Universes
+        List<RunningUniverse> universes = await database.Universes
+            .AsNoTracking()
             .Where(universe => universe.PausedSince == null)
             .OrderBy(universe => universe.Id)
-            .Select(universe => universe.Id)
+            .Select(universe => new RunningUniverse(
+                universe.Id, universe.Name, universe.Epoch, universe.TickLength, universe.TotalPausedDuration))
             .ToListAsync(cancellationToken);
+
+        // A paused or removed universe starts with a fresh tick line when it runs again.
+        foreach (int universeId in _lastLoggedTicks.Keys.Where(id => universes.All(universe => universe.Id != id)).ToList())
+        {
+            _lastLoggedTicks.Remove(universeId);
+        }
+
+        return universes;
+    }
+
+    /// <summary>Writes the tick line of a universe once per new tick (only when the tick log is switched on).</summary>
+    private void LogTickReached(RunningUniverse universe)
+    {
+        if (!tickLog.IsEnabled)
+        {
+            return;
+        }
+
+        long tick = new UniverseTimeline(universe.Epoch, universe.TickLength, universe.TotalPausedDuration, PausedSince: null)
+            .TickAt(timeProvider.GetUtcNow());
+
+        bool known = _lastLoggedTicks.TryGetValue(universe.Id, out long lastLoggedTick);
+        if (known && tick <= lastLoggedTick)
+        {
+            // Still the same tick: the engine wakes up more often than ticks pass.
+            return;
+        }
+
+        tickLog.TickReached(universe.Id, universe.Name, known ? lastLoggedTick + 1 : tick, tick);
+        _lastLoggedTicks[universe.Id] = tick;
     }
 
     private async Task<bool> EnsureLeaseAsync(int universeId, CancellationToken cancellationToken)
@@ -114,4 +156,7 @@ internal sealed class EngineCycle(
             await lease.DisposeAsync();
         }
     }
+
+    /// <summary>The columns of a running universe the cycle needs: its id, and name and clock for the tick log.</summary>
+    private sealed record RunningUniverse(int Id, string Name, DateTimeOffset Epoch, TimeSpan TickLength, TimeSpan TotalPausedDuration);
 }

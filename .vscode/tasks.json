@@ -10,7 +10,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/Galaxxis.sln",
+                "${workspaceFolder}/Galaxxis.slnx",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

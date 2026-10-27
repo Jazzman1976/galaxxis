@@ -170,7 +170,8 @@ too verbose to read raw.
 - **`KonzeptWord.fodt`** (V1.1, 2015) — game design prose: six races with production bonuses and
   weapon/armor types, points and player levels, full combat rules (hit chance, shields, initiative,
   capture chance, debris), resource buildings. Its per-building income numbers are **older** than the
-  spreadsheet — when they disagree, the spreadsheet wins.
+  spreadsheet — when they disagree, the spreadsheet wins. **`concept.md`** is a verbatim Markdown copy of it
+  with Mermaid diagrams; additions are marked "Ergänzung". Read that instead of the XML.
 - **`archive/ConzeptExcel.xml`** (2015) — earlier version of the spreadsheet, superseded.
 
 Core formula (implemented in `Galaxxis.Domain/Growth/GrowthRate.ValueAt`):
